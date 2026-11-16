@@ -1,2 +1,3 @@
 timestamp_utc,behavior,model_tier,input_tokens,output_tokens,usd,note
 2026-11-16T00:00:00Z,phase0-scaffold,n/a,,,,"Token counts and spend were not available to the run. Supervisor to confirm how costs are captured."
+2026-11-16T00:00:00Z,scout,n/a,,,,"San Francisco scout, two web searches. Token counts and spend not available."
