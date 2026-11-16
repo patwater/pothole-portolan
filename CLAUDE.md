@@ -10,7 +10,7 @@ Pothole Portolan goes city by city around the world and assembles what is public
 
 ## Current phase
 
-**Phase 0: scaffold and verify.** Update this line when the supervisor advances the phase. The phases are listed at the bottom of this file. Do not perform any action that belongs to a later phase.
+**Phase 1: supervised pilot.** Update this line when the supervisor advances the phase. The phases are listed at the bottom of this file. Do not perform any action that belongs to a later phase.
 
 ## Non-negotiable rules
 
