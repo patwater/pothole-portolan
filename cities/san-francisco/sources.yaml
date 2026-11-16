@@ -1,1 +1,117 @@
-[]
+# Discover, 2026-11-16. Every entry is status "listed": found in web search results, not yet fetched,
+# archived or read. URLs are as they appeared in results; Fetch must confirm each resolves, check
+# robots.txt, and record the canonical URL. See notes.md for open issues.
+
+# ---- Condition (measured_condition) ------------------------------------------------
+
+- id: sf-publicworks-pci-release-2026-01
+  name: "San Francisco's road conditions improve, ranked highest among large Bay Area cities (annual roads release)"
+  publisher: San Francisco Public Works
+  source_type: agency_page
+  url: https://www.sf.gov/news/san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads
+  status: listed
+  notes: "City release dated 2026-01-02 on sf.gov. A Public Works copy appears at https://sfpublicworks.org/node/35600 and looks like the same release; Fetch should confirm and archive one."
+
+- id: mtc-vital-signs-street-pavement
+  name: "Vital Signs: street pavement condition"
+  publisher: Metropolitan Transportation Commission
+  source_type: pavement_report
+  url: https://vitalsigns.mtc.ca.gov/indicators/street-pavement-condition
+  status: listed
+  notes: "Regional indicator page with, per the result, graph and raw-data downloads. Likely the primary source for the county and city PCI series. The page says regional, county and city PCI use a three-year moving average. Raw data file format and terms are unconfirmed."
+
+- id: mtc-pci-program-page
+  name: "Pavement Condition Index (PCI), MTC streets and roads program"
+  publisher: Metropolitan Transportation Commission
+  source_type: agency_page
+  url: https://mtc.ca.gov/operations/programs-projects/streets-roads-arterials/pavement-condition-index
+  status: listed
+  notes: "Expected to define the index, rating bands and the StreetSaver survey method. Needed for the condition_index fields on any PCI claim."
+
+- id: sf-scorecard-pci-data-story
+  name: "Pavement Condition Index (PCI), city performance scorecard data story"
+  publisher: San Francisco Controller's Office
+  source_type: agency_page
+  url: https://www.sf.gov/data/pavement-condition-index-pci
+  status: listed
+  notes: "City's own description of the measure, apparently covering more than 12,000 blocks and a 0 to 100 score. Its band thresholds differ from the MTC page; see notes.md."
+
+# ---- Demand (reported_demand) -----------------------------------------------------
+
+- id: datasf-311-cases-faq
+  name: "311 case data FAQ"
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://support.datasf.org/help/311-case-data-faq
+  status: listed
+  notes: "Documents the 311 Cases dataset (id vw6y-z8j6 per search results), including known limits such as non-unique reports and missing coordinates. The canonical dataset landing page on the city's open data portal was not seen in results and must be resolved by Fetch."
+
+- id: datagov-311-cases
+  name: "311 Cases (catalog entry)"
+  publisher: DataSF, via the federal catalog
+  source_type: open_data_portal
+  url: https://catalog.data.gov/dataset/311-cases
+  status: listed
+  notes: "Catalog mirror of the dataset record. Use to find the canonical download or API route; prefer the city's own portal for the archived copy. Record-level data: archive only aggregates (rule 7)."
+
+- id: sf311-open311-api
+  name: "Open311 API for City and County of San Francisco (production)"
+  publisher: San Francisco 311
+  source_type: open311
+  url: https://mobile311.sfgov.org/open311
+  status: listed
+  notes: "GeoReport v2 style endpoint. The page reportedly asks for an API key request, so access terms and rate limits must be read before any call (rule 8). The bulk dataset is likely the better route for counts."
+
+# ---- Response time (response_time) ------------------------------------------------
+
+- id: sf-pothole-response-measure
+  name: "Pothole response, city performance scorecard data story"
+  publisher: San Francisco Controller's Office
+  source_type: agency_page
+  url: https://www.sf.gov/data/pothole-response
+  status: listed
+  notes: "Measure of the share of pothole requests addressed within 72 hours, sourced from the Scorecards dataset on DataSF with about a one-month lag. The underlying dataset URL was not seen and must be resolved. A 2021 audit gives the departmental goal as 90 percent within 72 hours; confirm the target in the primary text."
+
+# ---- Spending, program and audit --------------------------------------------------
+
+- id: bla-street-resurfacing-audit-2021
+  name: "Performance audit of the Department of Public Works Street Resurfacing Program and StreetTreeSF Program"
+  publisher: San Francisco Board of Supervisors, Budget and Legislative Analyst
+  source_type: audit
+  url: https://sfbos.org/sites/default/files/061421_PA_of_DPW_Street_Resurfacing_Prog_%26_StreetTreeSF%20Prog.pdf
+  status: listed
+  notes: "File name dated June 2021. Reported to find that the program has a citywide PCI goal but no breakdown by supervisorial district or neighborhood. The URL as seen in results contained a raw space, encoded here as %20; Fetch should confirm."
+
+- id: publicworks-commission-resurfacing-update-2025-11
+  name: "Public Works Commission, street resurfacing capital update, Item 5, 2025-11-13"
+  publisher: San Francisco Public Works
+  source_type: council_document
+  url: https://sfpublicworks.org/sites/default/files/Commissions/Nov%2013%202025/Item%205_PWC%20Street%20Resurfacing%20Capital%20Update%202025-11-13.pdf
+  status: listed
+  notes: "Candidate for blocks resurfaced and program spending. Contents unread."
+
+- id: publicworks-cpc-budget-fy2627
+  name: "Public Works Capital Planning Committee presentation, FY26-27"
+  publisher: San Francisco Public Works, posted on onesanfrancisco.org
+  source_type: budget
+  url: https://onesanfrancisco.org/sites/default/files/2025-03/Item%205%20-%20Public%20Works%20CPC%20Presentation%20FY2627_final.pdf
+  status: listed
+  notes: "Reported to state a PCI maintenance goal and a minimum blocks-per-year target for FY26 and FY27. Contents unread."
+
+- id: sfcta-prop-l-resurfacing-5ypp-2023
+  name: "Street Resurfacing, Prop L 5-Year Prioritization Program, approved 2023-07-25"
+  publisher: San Francisco County Transportation Authority
+  source_type: budget
+  url: https://www.sfcta.org/sites/default/files/2023-08/EP%2015%20Street%20Resurfacing%20Prop%20L%202023%205YPP%20Approved%207.25.23.pdf
+  status: listed
+  notes: "Dedicated sales tax funding program for resurfacing. Candidate for funding amounts; contents unread."
+
+# ---- Statewide context ------------------------------------------------------------
+
+- id: ca-statewide-local-streets-needs-assessment-2020
+  name: "2020 California Statewide Local Streets and Roads Needs Assessment report"
+  publisher: California State Association of Counties and partners
+  source_type: statistics_body
+  url: https://www.counties.org/?p=1527
+  status: listed
+  notes: "Statewide biennial study. A San Francisco figure was not seen in the results, and its index and survey method may not match the MTC series. Low priority; do not compare across indices without a published crosswalk."

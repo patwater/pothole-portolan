@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `scouted` (2026-11-16); next behavior is Discover. See `cities/san-francisco/notes.md`.
+1. san-francisco: status `discovered` (2026-11-16), 13 sources listed; next behavior is Fetch. See `cities/san-francisco/notes.md`.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`

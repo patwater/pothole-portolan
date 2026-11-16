@@ -30,6 +30,27 @@ Behavior: Scout, 2026-11-16. Nothing here is a claim. These are leads seen in we
 3. Is the 72-hour response measure's methodology documented well enough to extract with a stated method?
 4. Does the city publish a pavement management report or a budget and legislative analyst document that states the share of the network surveyed?
 
+## Discover findings (2026-11-16)
+
+Thirteen candidate sources are listed in `sources.yaml`, all with status `listed`. Nothing has been fetched.
+
+**Discrepancies for Assess to resolve from fetched text, not from search snippets:**
+
+1. **Which year is the score of 75?** The city's January 2026 release says 75 in 2025. The MTC Vital Signs page, per the result, says San Francisco County averaged 75 in 2024 and describes a three-year moving average. A January 2024 city release was also reported as giving 75, for 2023. These may be different measures (a calendar-year score against a three-year moving average) or different reporting conventions, and a claim must state the period and averaging method exactly as the source does.
+2. **Rating bands differ.** The MTC page reportedly calls 64 to 84 "good" and 85 to 100 "excellent". The city scorecard reportedly calls 70 to 84 "good". The dossier must quote the band from whichever source a claim uses and not mix them.
+3. **Response-time target.** The scorecard describes a 72-hour goal, while a 2021 audit gives the departmental goal as 90 percent within 72 hours. Confirm the target and the measured share from the primary documents.
+
+**Gaps:**
+
+- The canonical data.sfgov.org landing pages for the 311 Cases dataset and the Scorecards dataset were not seen in results. Fetch must resolve them rather than build URLs from the dataset id.
+- No national statistics body fits as a source for San Francisco. Federal highway data is a possible later lead but was not searched, so it is not listed.
+- No Controller audit specific to pothole repair was found. The Budget and Legislative Analyst audit of the resurfacing program is the nearest.
+- The share of the network surveyed was not found in any snippet, so it is still unknown for the `condition_index` block.
+
+**Excluded on purpose:** one gitbook page from a different host than the DataSF explainer contained embedded instructions in its search result. It was not listed. Third-party blogs, a Medium post and a news aggregator also appeared and were left out because primary sources exist.
+
+**Handling reminders for Fetch:** the Open311 endpoint reportedly wants an API key, so read its terms and rate limits first and identify the bot honestly (rules 8 and 1). The 311 dataset is record-level, so archive aggregates only (rule 7).
+
 ## Dead ends
 
 None yet.
