@@ -1,0 +1,27 @@
+# Supervisor-owned. The agent may not edit this file after Phase 0 scaffolding.
+# Created in the Phase 0 scaffold; every value below is a placeholder for the
+# supervisor to confirm or replace.
+
+phase: 0
+
+spend:
+  daily_cap_usd: null        # PLACEHOLDER: supervisor to set. Runs stop when this is reached (rule 9).
+  ledger: ledger/costs.csv
+
+publish:
+  # Phases in which the agent itself may call the Blygger write path.
+  # Phases 1 and 2 publish by hand or by supervisor approval, so they are absent here.
+  agent_may_publish_in_phases: [3, 4]
+  required_checks: checks/publish.md
+  findings_require_approval: true
+  public_replies_require_approval: true
+
+identities:
+  owner: null                # PLACEHOLDER: supervisor's blyg identity
+  trusted: []                # allowlist, empty until the supervisor adds identities
+  public: default            # everyone else
+
+agenda_rules:
+  owner: apply_directly
+  trusted: append_normal_priority
+  public: queue_for_approval

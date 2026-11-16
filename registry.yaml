@@ -1,0 +1,66 @@
+# Supervisor-owned. Behaviors, triggers, model tier, and permitted tools.
+# Scaffolded in Phase 0. Triggers are all "manual" until Phase 2.
+# model_tier values are placeholders (small | medium | large); the supervisor maps tiers to models.
+# Credentials are injected by the scheduler as environment variables. Names only here, never values.
+
+behaviors:
+  scout:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Write, Edit, Bash, WebFetch]
+    credentials: []
+  discover:
+    trigger: manual
+    model_tier: medium
+    tools: [Read, Write, Edit, Bash, WebFetch, WebSearch]
+    credentials: []
+  fetch:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Write, Bash, WebFetch]
+    credentials: []
+  extract:
+    trigger: manual
+    model_tier: medium
+    tools: [Read, Write, Edit, Bash]
+    credentials: []
+  assess:
+    trigger: manual
+    model_tier: large
+    tools: [Read, Edit, Bash]
+    credentials: []
+  draft:
+    trigger: manual
+    model_tier: large
+    tools: [Read, Write, Edit]
+    credentials: []
+  publish:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Bash]
+    credentials: [BLYGGER_WRITE_TOKEN]   # PLACEHOLDER: no write operation is documented yet, see docs/blygger.md
+  monitor:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Bash, WebFetch]
+    credentials: [BLYGGER_READ_TOKEN]
+  reader_intake:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Write]
+    credentials: [BLYGGER_READ_TOKEN]    # read-only, no publish scope
+  agenda:
+    trigger: manual
+    model_tier: small
+    tools: [Read, Edit]
+    credentials: []
+  induct:
+    trigger: manual
+    model_tier: large
+    tools: [Read, Write]
+    credentials: []
+  weekly_review:
+    trigger: manual
+    model_tier: medium
+    tools: [Read, Write, Bash]
+    credentials: []
