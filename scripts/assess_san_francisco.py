@@ -18,10 +18,12 @@ Usage: python3 -I scripts/assess_san_francisco.py [--root DIR] [--dry-run]
 """
 import argparse
 import hashlib
+import json
 import re
+import sqlite3
 import subprocess
 import sys
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -42,6 +44,10 @@ JUDGMENT = {
     "sf-blocks-resurfaced-as-of-2025-11": "The slide gives no start year or period, so whether 9,148 is cumulative, annual or since a program start is unknown.",
     "sf-blocks-planned-as-of-2025-11": "A lower bound ('2,500+') with no planning horizon stated.",
     "sf-resurfacing-investment-15-plus-years": "The period is only '15-plus years': no start year, funding sources or price basis is stated.",
+    "sf311-pavement-defect-routed-to-street-sewer-repair": "The grouping is my own, by matching agency label text; labels changed over time and routing is not the same as being a pothole.",
+    "sf311-pavement-defect-routed-to-other-sewer-queues": "The grouping is my own, by matching agency label text; labels changed over time and routing is not the same as being a pothole.",
+    "sf-pothole-response-72h-2026-07": "One of the two latest months. The source states about a one-month data lag, so it may be provisional, and a value of 39 percent against a 90 percent target should not be read as settled.",
+    "sf-pothole-response-72h-2026-08": "One of the two latest months. The source states about a one-month data lag, so it may be provisional, and a value of 39 percent against a 90 percent target should not be read as settled.",
 }
 
 
@@ -229,6 +235,136 @@ def rd_dec31(c, t):
     return ("re-derived", "text says the annual evaluation findings are 'released Dec. 31 of every year'") if a and c["value"] == "December 31" else ("failed", "not reproduced")
 
 
+CTX = {"root": None, "sources": {}}
+OPEN_CONNECTIONS = []
+
+
+def rows_of(source_id):
+    s = CTX["sources"][source_id]
+    return json.loads((Path(CTX["root"]) / s["archive"]).read_text(encoding="utf-8"))
+
+
+def table(rows, columns):
+    """Load rows into an in-memory SQLite table with every column as text, so SQL does the arithmetic."""
+    con = sqlite3.connect(":memory:")
+    OPEN_CONNECTIONS.append(con)
+    con.execute("CREATE TABLE t (" + ", ".join(columns) + ")")
+    con.executemany("INSERT INTO t VALUES (" + ",".join("?" * len(columns)) + ")", [tuple(r.get(c) for c in columns) for r in rows])
+    return con
+
+
+def cells_tolerance(rows, keys):
+    """Suppressed cells hold at most 9 cases each, so a total can exceed the sum of returned cells by at most 9 per possible cell."""
+    return 9 * max(1, len({tuple(r.get(k) for k in keys) for r in rows}))
+
+
+def rd_year_cases(c, t):
+    y = str(c["period"])
+    chan = rows_of("sf311-pavement-defect-by-year-channel")
+    con = table(chan, ["year", "service_name", "service_subtype", "source", "cases"])
+    s = con.execute("SELECT COALESCE(SUM(CAST(cases AS INTEGER)), 0) FROM t WHERE year = ?", (y,)).fetchone()[0]
+    exact = table(rows_of("sf311-pavement-defect-by-year"), ["year", "cases"]).execute("SELECT SUM(CAST(cases AS INTEGER)), COUNT(*) FROM t WHERE year = ?", (y,)).fetchone()
+    if exact[1] != 1 or exact[0] != c["value"]:
+        return "failed", f"SQL over the year-total archive gives {exact[0]} from {exact[1]} row(s), not the claim's {c['value']:,}"
+    allc = table(rows_of("sf311-all-cases-by-year"), ["year", "cases"]).execute("SELECT CAST(cases AS INTEGER) FROM t WHERE year = ?", (y,)).fetchone()
+    tol = cells_tolerance(chan, ["service_name", "service_subtype", "source"])
+    diff = c["value"] - s
+    if not (0 <= diff <= tol):
+        return "failed", f"the separate by-channel query sums to {s:,} for {y}, which does not fit the claim's {c['value']:,} (allowed shortfall {tol} for suppressed cells)"
+    if allc is None or c["value"] > allc[0]:
+        return "failed", "the claim exceeds the all-cases total for the year"
+    return "re-derived", f"SQL over the year-total archive gives exactly {exact[0]:,}; a separate query by channel sums to {s:,} ({diff} short, from groups under 10 cases); it is {c['value'] / allc[0]:.2%} of all {allc[0]:,} cases that year"
+
+
+def rd_channel_2025(c, t):
+    ch = re.search(r"reporting channel is '(.*)'\.$", c["statement"]).group(1)
+    chan = rows_of("sf311-pavement-defect-by-year-channel")
+    con = table(chan, ["year", "source", "cases"])
+    q = "SELECT COALESCE(SUM(CAST(cases AS INTEGER)), 0) FROM t WHERE year = '2025' AND " + ("source IS NULL" if ch == "no channel recorded" else "source = ?")
+    got = con.execute(q, () if ch == "no channel recorded" else (ch,)).fetchone()[0]
+    total = con.execute("SELECT SUM(CAST(cases AS INTEGER)) FROM t WHERE year = '2025'").fetchone()[0]
+    yr = table(rows_of("sf311-pavement-defect-by-year"), ["year", "cases"]).execute("SELECT CAST(cases AS INTEGER) FROM t WHERE year = '2025'").fetchone()[0]
+    if got != c["value"]:
+        return "failed", f"SQL gives {got:,} for channel {ch!r}"
+    if not (0 <= yr - total <= cells_tolerance(chan, ["source"]) * 4):
+        return "failed", f"channel cells sum to {total:,} against the separate year total {yr:,}"
+    return "re-derived", f"SQL gives {got:,}; all 2025 channel cells sum to {total:,} against a year total of {yr:,}"
+
+
+def rd_label_search(c, t):
+    pot, ctl = rows_of("sf311-pothole-label-search"), rows_of("sf311-label-search-control")
+    others = []
+    for sid in ("sf311-pavement-defect-by-year-channel", "sf311-pavement-defect-by-agency", "sf311-pavement-defect-details-counts", "sf311-street-defect-subtype-counts"):
+        others += rows_of(sid)
+    con = table(others, ["service_name", "service_subtype"])
+    n = con.execute("SELECT COUNT(*) FROM t WHERE lower(COALESCE(service_name,'') || ' ' || COALESCE(service_subtype,'')) LIKE '%pothole%' OR lower(COALESCE(service_name,'') || ' ' || COALESCE(service_subtype,'')) LIKE '%pot hole%'").fetchone()[0]
+    if len(pot) != c["value"] or n != 0 or not ctl:
+        return "failed", f"search result {len(pot)}, pothole labels in four other archives {n}, control groups {len(ctl)}"
+    return "re-derived", f"the search returns {len(pot)} groups, none of the {len(others)} groups in four other 311 archives mentions pothole, and the control returns {len(ctl)} groups"
+
+
+def rd_details(c, t):
+    det = rows_of("sf311-pavement-defect-details-counts")
+    con = table(det, ["service_subtype", "service_details", "cases"])
+    n = con.execute("SELECT COUNT(DISTINCT service_details) FROM t WHERE service_details IS NOT NULL AND service_details <> ''").fetchone()[0]
+    same = con.execute("SELECT COUNT(*) FROM t WHERE service_details IS NOT NULL AND service_details = service_subtype").fetchone()[0]
+    if n == c["value"] and same == 1:
+        return "re-derived", f"SQL finds {n} distinct non-empty value among {len(det)} groups, and it equals the subtype name"
+    return "failed", f"SQL finds {n} distinct values and {same} equal to the subtype"
+
+
+def make_rd_agency(kind):
+    def rd(c, t):
+        ag = rows_of("sf311-pavement-defect-by-agency")
+        con = table(ag, ["agency_responsible", "cases"])
+        repair = "(agency_responsible LIKE '%BSSR%' OR agency_responsible LIKE '%Street and Sewer Repair%')"
+        q = {"repair": f"SELECT COALESCE(SUM(CAST(cases AS INTEGER)),0) FROM t WHERE {repair}",
+             "sewer": f"SELECT COALESCE(SUM(CAST(cases AS INTEGER)),0) FROM t WHERE agency_responsible LIKE '%Sewer%' AND NOT {repair}",
+             "total": "SELECT COALESCE(SUM(CAST(cases AS INTEGER)),0) FROM t"}[kind]
+        got = con.execute(q).fetchone()[0]
+        fam = sum(int(r["cases"]) for r in rows_of("sf311-pavement-defect-by-year"))
+        if got != c["value"]:
+            return "failed", f"SQL gives {got:,}"
+        gap = fam - con.execute("SELECT SUM(CAST(cases AS INTEGER)) FROM t").fetchone()[0]
+        return "re-derived", f"SQL with LIKE patterns gives {got:,}; the agency cells cover all but {gap:,} of the {fam:,} family cases (groups under 10)"
+    return rd
+
+
+def month_table(code):
+    sc = rows_of("sf-scorecard-pothole-measure-rows")
+    con = table([r for r in sc if r.get("measure_code") == code], ["measure_code", "measure_title", "calendar_month", "actual"])
+    return con
+
+
+def rd_orders(c, t):
+    y = str(c["period"])
+    con = month_table("7075")
+    s, n, bad = con.execute("SELECT SUM(CAST(actual AS REAL)), COUNT(actual), SUM(CAST(actual AS REAL) = -9999) FROM t WHERE substr(calendar_month,1,4) = ? AND actual IS NOT NULL", (y,)).fetchone()
+    title = con.execute("SELECT DISTINCT measure_title FROM t").fetchone()[0]
+    if n == 12 and not bad and int(round(s)) == c["value"] and title in c["statement"]:
+        return "re-derived", f"SQL sums 12 monthly values to {int(round(s)):,}; the measure title in the statement matches the data"
+    return "failed", f"SQL: {n} months, sum {s}, sentinel count {bad}"
+
+
+def rd_share_mean(c, t):
+    y = str(c["period"])
+    # Integer path: each monthly value is a two-decimal fraction, so work in hundredths of a percent and round half up exactly.
+    hund, n, bad = month_table("7072").execute("SELECT SUM(CAST(ROUND(CAST(actual AS REAL) * 10000) AS INTEGER)), COUNT(actual), SUM(CAST(actual AS REAL) = -9999) FROM t WHERE substr(calendar_month,1,4) = ? AND actual IS NOT NULL", (y,)).fetchone()
+    mean = (Decimal(hund) / 12 / 100).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP) if n == 12 else None
+    if n == 12 and not bad and float(mean) == c["value"]:
+        return "re-derived", f"integer arithmetic over 12 monthly values gives {Decimal(hund) / 12 / 100:.4f} percent, rounding half up to the claim's {c['value']}"
+    return "failed", f"integer path: {n} months, mean {mean}"
+
+
+def rd_share_month(c, t):
+    ym = str(c["period"])
+    row = month_table("7072").execute("SELECT CAST(ROUND(CAST(actual AS REAL) * 10000) AS INTEGER) FROM t WHERE substr(calendar_month,1,7) = ?", (ym,)).fetchone()
+    got = (Decimal(row[0]) / 100).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP) if row else None
+    if got is not None and float(got) == c["value"]:
+        return "re-derived", f"the data row for {ym} reads {got} percent"
+    return "failed", f"data row gives {row}"
+
+
 DERIVE = {
     "sf-pci-citywide-2023": rd_release_2023,
     "sf-pci-county-2024-mtc": rd_mtc_county,
@@ -251,6 +387,22 @@ DERIVE = {
 for _year in (2014, 2024):
     for _i, _slug in enumerate(("very-poor", "poor-atrisk", "good-excellent")):
         DERIVE[f"sf-blocks-{_slug}-{_year}"] = make_rd_block(_i)
+
+
+for _y in range(2009, 2026):
+    DERIVE[f"sf311-pavement-defect-cases-{_y}"] = rd_year_cases
+for _slug in ("mobile", "web", "phone", "integrated-agency", "no-channel-recorded"):
+    DERIVE[f"sf311-pavement-defect-cases-2025-{_slug}"] = rd_channel_2025
+DERIVE["sf311-pothole-labeled-case-type-groups"] = rd_label_search
+DERIVE["sf311-pavement-defect-details-distinct-values"] = rd_details
+DERIVE["sf311-pavement-defect-routed-to-street-sewer-repair"] = make_rd_agency("repair")
+DERIVE["sf311-pavement-defect-routed-to-other-sewer-queues"] = make_rd_agency("sewer")
+DERIVE["sf311-pavement-defect-agency-cells-total"] = make_rd_agency("total")
+for _y in range(2013, 2026):
+    DERIVE[f"sf-pothole-service-orders-{_y}"] = rd_orders
+    DERIVE[f"sf-pothole-response-72h-mean-{_y}"] = rd_share_mean
+for _ym in ("2026-07", "2026-08"):
+    DERIVE[f"sf-pothole-response-72h-{_ym}"] = rd_share_month
 
 
 # ---- mechanical checks -----------------------------------------------------------------------
@@ -292,6 +444,7 @@ def main(argv=None):
     args = ap.parse_args(argv)
     root = Path(args.root)
     sources = validate.load_yaml(root / "cities" / SLUG / "sources.yaml")
+    CTX["root"], CTX["sources"] = root, {s["id"]: s for s in sources}
     path = root / "cities" / SLUG / "claims.yaml"
     claims = validate.load_yaml(path)
     cache, report = {}, []
@@ -322,6 +475,9 @@ def main(argv=None):
             new, why = "supported", detail
         c["confidence"] = new
         report.append((c["id"], before, new, why))
+    for con in OPEN_CONNECTIONS:
+        con.close()
+    OPEN_CONNECTIONS.clear()
     for cid, before, new, why in report:
         print(f"{cid:46} {before:11} -> {new:11} {why}")
     tally = {k: sum(1 for r in report if r[2] == k) for k in ("supported", "provisional", "speculative")}

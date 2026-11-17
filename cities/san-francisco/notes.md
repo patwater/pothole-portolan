@@ -278,6 +278,51 @@ This is a rule 7 failure that I caused, and the record should say so plainly.
 - No 311 response-time figures. Response time exists only through the scorecard measure 7072; the 311 `closed_date` was not queried.
 - No 311 counts by neighborhood or district, deliberately.
 
+## Extract and Assess: aggregate sources (2026-11-17)
+
+Fifty-five claims were added from the 311 aggregates and the scorecard rows, so `claims.yaml` now has 78 claims: **70 supported and 8 provisional**, none demoted. Every claim has an Assess derivation, and a test enforces that.
+
+**What the new claims say.**
+
+| Family | Claims | What they are |
+|--------|--------|---------------|
+| Pavement defect requests, 311 | 17 | Cases per calendar year, 2009 to 2025, in the pavement defect subtype. Partial years (2008, 2026) are left out. The family is 0.6 to 2 percent of all 311 cases in any year. |
+| By channel, 2025 | 5 | Mobile, web, phone, integrated agency and no channel recorded. They sum to 5,292 against the year total of 5,307. |
+| What 311 cannot say | 2 | No service name or subtype of 10 or more cases is labeled pothole (with a control search that proves the method), and `service_details` adds no finer level. |
+| Routing | 3 | How many pavement defect cases go to street and sewer repair bureau queues (58,867), to other sewer-named queues (6,051), and the denominator (100,314). |
+| Pothole service orders, scorecard | 13 | Annual sums for 2013 to 2025 of measure 7075, with 2025 at 847. |
+| Response within 72 hours, scorecard | 15 | Calendar-year means of the monthly percentages for 2013 to 2025, plus the two latest months. |
+
+**The response means, as arithmetic on the claims.** The calendar-year means run from 96.6 percent (2013) to 91.3 (2017), 92.3 (2019), 89.3 (2023), 89.2 (2024) and 87.3 (2025), against a stated target of 90 percent. They are my unweighted means of monthly values, not the city's published fiscal-year figure, and the claims say so.
+
+**Provisional, and why.**
+
+| Claim | Why it was not promoted |
+|-------|-------------------------|
+| Blocks resurfaced (9,148) and planned (2,500+) | No period or planning horizon on the slide. |
+| Award total ($133.0M) | Stated total does not re-derive exactly from its rounded rows. |
+| $979 million investment | Period only "15-plus years", no start year or price basis. |
+| Two routing claims | The grouping is mine, by matching label text, and labels changed over time. |
+| Response share, July and August 2026 | 39 percent against a 90 percent target. The page states a one-month data lag, so they may be provisional and should not be read as settled. |
+
+**How the assessment worked.** The new derivations use SQL in an in-memory SQLite database, where Extract used Python loops. For the yearly 311 totals, Assess checks the exact value from the year-total archive, then cross-checks against a separate query by channel (which can fall short only by the small cells that were suppressed, 0 to 28 cases a year). Scorecard values are re-derived from the rows, with the response means computed in integer hundredths and rounded half up. The label finding is checked against four other 311 archives as well as its control.
+
+**Limits.**
+
+- Same author for Extract and Assess. The independence is in the method and in the cross-archive checks, not in a second reader.
+- The two 311 queries that cross-check each other come from the same portal and the same dataset. They guard against my arithmetic and query errors, not against an error in the portal's data.
+- The scorecard claims have a single source. Nothing outside the scorecard confirms the monthly values.
+- "Supported" here means faithfully derived from the archive with a stated method. It does not mean the underlying measurement is validated. The 2025 service-order total (847) is far below the other years and the data gives no reason.
+- Retrieval was on 2026-11-17. The 311 dataset refreshes nightly, so a re-run later will differ slightly.
+
+**Defects found and fixed in my own work during this step.**
+
+- The response means were first rounded with Python's `round`, which rounds exact halves inconsistently (it made 2023 and 2024 both look like 89.2). Extract now uses exact decimals, rounding half up, which moves 2019 to 92.3, 2023 to 89.3 and 2025 to 87.3. Assess recomputes them in integers.
+- The first yearly 311 check allowed a tolerance for suppressed cells, so a value wrong by one would have passed. Assess now also re-derives each yearly value exactly from its own archive, and the mutation test includes an off-by-one.
+- Extract used to keep an old confidence for any claim with the same id, even if its value had changed. It now keeps confidence only for claims that are otherwise identical.
+
+**Where the ledger stands for a dossier.** It now covers condition (PCI 2023, 2024, 2025 and block counts), program output and spending, pavement defect requests from 311 (with the no-pothole-category finding), pothole-specific service orders and response from the scorecard, and policy statements. What it cannot say is how many pothole reports residents made, because 311 does not isolate potholes. The dossier has to say that plainly.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.

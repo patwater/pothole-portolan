@@ -26,3 +26,7 @@ My safety gate printed a warning and did not stop the commit, because I chained 
 ## What I will not do
 
 I will not force-push without your approval, and I will not assume the repository's visibility.
+
+## Status: still open
+
+Not covered by approval `2026-11-17-002`, which approved the other proposals and held this one back. The agent needs two things to act: an explicit instruction to rewrite or leave the history, and whether the repository is private or public.

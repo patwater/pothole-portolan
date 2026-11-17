@@ -12,3 +12,4 @@ timestamp_utc,behavior,model_tier,input_tokens,output_tokens,usd,note
 2026-11-17T00:00:00Z,fetch,n/a,,,,"San Francisco fetch (311 plan step 1): 4 metadata sources archived after sanitizing; hosts approved. Token counts and spend not available."
 2026-11-17T00:00:00Z,fetch,n/a,,,,"San Francisco fetch (311 plan step 2): 6 aggregate sources archived after threshold re-fetch. Token counts and spend not available."
 2026-11-17T00:00:00Z,fetch,n/a,,,,"San Francisco fetch step 2 correction: removed typed-text taxonomy file, narrower queries, response guard, blocking staged gate. Token counts and spend not available."
+2026-11-17T00:00:00Z,assess,n/a,,,,"San Francisco extract and assess: 55 new claims, 78 total (70 supported, 8 provisional); checks fix; program_output kind; service_details check. Token counts and spend not available."

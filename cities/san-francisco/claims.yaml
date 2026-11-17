@@ -405,3 +405,921 @@
   confidence: supported
   caveats: Regional program statement, not specific to San Francisco. Conflicts with the Public Works statement
     of a two-year inspection cycle.
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2009
+  statement: The SF311 Cases dataset records 2,980 cases in the pavement defect subtype with a requested date in
+    calendar year 2009.
+  value: 2980
+  unit: cases
+  period: 2009
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2010
+  statement: The SF311 Cases dataset records 3,608 cases in the pavement defect subtype with a requested date in
+    calendar year 2010.
+  value: 3608
+  unit: cases
+  period: 2010
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2011
+  statement: The SF311 Cases dataset records 3,372 cases in the pavement defect subtype with a requested date in
+    calendar year 2011.
+  value: 3372
+  unit: cases
+  period: 2011
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2012
+  statement: The SF311 Cases dataset records 3,312 cases in the pavement defect subtype with a requested date in
+    calendar year 2012.
+  value: 3312
+  unit: cases
+  period: 2012
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2013
+  statement: The SF311 Cases dataset records 3,983 cases in the pavement defect subtype with a requested date in
+    calendar year 2013.
+  value: 3983
+  unit: cases
+  period: 2013
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2014
+  statement: The SF311 Cases dataset records 5,290 cases in the pavement defect subtype with a requested date in
+    calendar year 2014.
+  value: 5290
+  unit: cases
+  period: 2014
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2015
+  statement: The SF311 Cases dataset records 5,678 cases in the pavement defect subtype with a requested date in
+    calendar year 2015.
+  value: 5678
+  unit: cases
+  period: 2015
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2016
+  statement: The SF311 Cases dataset records 7,926 cases in the pavement defect subtype with a requested date in
+    calendar year 2016.
+  value: 7926
+  unit: cases
+  period: 2016
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2017
+  statement: The SF311 Cases dataset records 8,570 cases in the pavement defect subtype with a requested date in
+    calendar year 2017.
+  value: 8570
+  unit: cases
+  period: 2017
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2018
+  statement: The SF311 Cases dataset records 6,762 cases in the pavement defect subtype with a requested date in
+    calendar year 2018.
+  value: 6762
+  unit: cases
+  period: 2018
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2019
+  statement: The SF311 Cases dataset records 7,943 cases in the pavement defect subtype with a requested date in
+    calendar year 2019.
+  value: 7943
+  unit: cases
+  period: 2019
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2020
+  statement: The SF311 Cases dataset records 4,582 cases in the pavement defect subtype with a requested date in
+    calendar year 2020.
+  value: 4582
+  unit: cases
+  period: 2020
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2021
+  statement: The SF311 Cases dataset records 4,706 cases in the pavement defect subtype with a requested date in
+    calendar year 2021.
+  value: 4706
+  unit: cases
+  period: 2021
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2022
+  statement: The SF311 Cases dataset records 5,277 cases in the pavement defect subtype with a requested date in
+    calendar year 2022.
+  value: 5277
+  unit: cases
+  period: 2022
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2023
+  statement: The SF311 Cases dataset records 7,538 cases in the pavement defect subtype with a requested date in
+    calendar year 2023.
+  value: 7538
+  unit: cases
+  period: 2023
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2024
+  statement: The SF311 Cases dataset records 6,004 cases in the pavement defect subtype with a requested date in
+    calendar year 2024.
+  value: 6004
+  unit: cases
+  period: 2024
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  id: sf311-pavement-defect-cases-2025
+  statement: The SF311 Cases dataset records 5,307 cases in the pavement defect subtype with a requested date in
+    calendar year 2025.
+  value: 5307
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime,
+    from the aggregate portal query archived as this source (groups of 10 or more cases only).
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  id: sf311-pavement-defect-cases-2025-mobile
+  statement: In calendar year 2025 the SF311 Cases dataset records 2,857 pavement defect cases whose reporting channel
+    is 'Mobile'.
+  value: 2857
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime
+    and by the source field, summed across the service-name spellings; groups of 10 or more cases only.
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly. The channels listed for 2025
+    sum to 5,292 against a year total of 5,307, the difference being cells under 10 cases. The channel mix has changed
+    over time, so channel shares are not comparable across years without checking.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  id: sf311-pavement-defect-cases-2025-web
+  statement: In calendar year 2025 the SF311 Cases dataset records 1,165 pavement defect cases whose reporting channel
+    is 'Web'.
+  value: 1165
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime
+    and by the source field, summed across the service-name spellings; groups of 10 or more cases only.
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly. The channels listed for 2025
+    sum to 5,292 against a year total of 5,307, the difference being cells under 10 cases. The channel mix has changed
+    over time, so channel shares are not comparable across years without checking.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  id: sf311-pavement-defect-cases-2025-phone
+  statement: In calendar year 2025 the SF311 Cases dataset records 1,108 pavement defect cases whose reporting channel
+    is 'Phone'.
+  value: 1108
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime
+    and by the source field, summed across the service-name spellings; groups of 10 or more cases only.
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly. The channels listed for 2025
+    sum to 5,292 against a year total of 5,307, the difference being cells under 10 cases. The channel mix has changed
+    over time, so channel shares are not comparable across years without checking.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  id: sf311-pavement-defect-cases-2025-integrated-agency
+  statement: In calendar year 2025 the SF311 Cases dataset records 119 pavement defect cases whose reporting channel
+    is 'Integrated Agency'.
+  value: 119
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime
+    and by the source field, summed across the service-name spellings; groups of 10 or more cases only.
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly. The channels listed for 2025
+    sum to 5,292 against a year total of 5,307, the difference being cells under 10 cases. The channel mix has changed
+    over time, so channel shares are not comparable across years without checking.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  id: sf311-pavement-defect-cases-2025-no-channel-recorded
+  statement: In calendar year 2025 the SF311 Cases dataset records 43 pavement defect cases whose reporting channel
+    is 'no channel recorded'.
+  value: 43
+  unit: cases
+  period: 2025
+  kind: reported_demand
+  method: Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime
+    and by the source field, summed across the service-name spellings; groups of 10 or more cases only.
+  confidence: supported
+  caveats: 'Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311
+    case types have no pothole value. The family spans three service-name spellings, including a sidewalk-and-curb
+    variant, is routed to many agencies, and is not de-duplicated. Groups under 10 cases are not returned by the
+    query. The dataset refreshes nightly, so a later retrieval may differ slightly. The channels listed for 2025
+    sum to 5,292 against a year total of 5,307, the difference being cells under 10 cases. The channel mix has changed
+    over time, so channel shares are not comparable across years without checking.'
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=lower(service_name)%20like%20'%25pothole%25'%20or%20lower(service_subtype)%20like%20'%25pothole%25'%20or%20lower(service_name)%20like%20'%25pot%20hole%25'%20or%20lower(service_subtype)%20like%20'%25pot%20hole%25'&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570.json
+  id: sf311-pothole-labeled-case-type-groups
+  statement: The SF311 Cases dataset has no service name or subtype group of 10 or more cases whose label contains
+    'pothole' or 'pot hole'.
+  value: 0
+  unit: case-type groups
+  period: all cases through retrieval
+  kind: reported_demand
+  method: Portal query for groups of cases whose lower-cased service_name or service_subtype contains 'pothole'
+    or 'pot hole', groups of 10 or more only; it returned 0 groups. A control query of the same form with 'pavement'
+    returned 4 groups (source sf311-label-search-control), so the empty result is not an artifact of the query form.
+  confidence: supported
+  caveats: Groups smaller than 10 cases are not returned, so this says no pothole-labeled type has 10 or more cases,
+    not that none exists. It is a statement about the dataset's labels. It does not say potholes were not reported.
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,service_details,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,service_details&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/60ae4ea7161ba927deb17186f25c7c0cb33e58da40c2fc01c76f251d5a10ce11.json
+  id: sf311-pavement-defect-details-distinct-values
+  statement: Within the pavement defect subtype, the SF311 Cases service_details field has 1 distinct non-empty
+    value among groups of 10 or more cases, and it repeats the subtype name.
+  value: 1
+  unit: distinct values
+  period: all cases through retrieval
+  kind: reported_demand
+  method: Portal query grouping pavement_defect cases by service_name, service_subtype and service_details (groups
+    of 10 or more); one group has a non-empty service_details, equal to its subtype 'Pavement_Defect', and the other
+    2 groups have none.
+  confidence: supported
+  caveats: So the third taxonomy level cannot separate potholes from other pavement defects. Groups smaller than
+    10 cases are not returned.
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,agency_responsible,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,agency_responsible&$having=count(*)%3E%3D10&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  id: sf311-pavement-defect-routed-to-street-sewer-repair
+  statement: 58,867 of the 100,314 pavement defect cases in agency groups of 10 or more are routed to street and
+    sewer repair bureau queues.
+  value: 58867
+  unit: cases
+  period: all cases through retrieval
+  kind: reported_demand
+  method: 'Portal query counting pavement_defect cases by agency_responsible (groups of 10 or more); cases summed
+    over the labels: DPW - Bureau of Street and Sewer Repair - G; DPW BSSR Queue; PW - Street and Sewer Repair.'
+  confidence: provisional
+  caveats: The agency labels changed over time (67 distinct values) and the grouping below is mine, by matching
+    label text, not the city's. Groups under 10 cases are not returned. Routing says who handled a case, not whether
+    it was a pothole.
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,agency_responsible,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,agency_responsible&$having=count(*)%3E%3D10&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  id: sf311-pavement-defect-routed-to-other-sewer-queues
+  statement: 6,051 of the 100,314 pavement defect cases in agency groups of 10 or more are routed to other sewer-named
+    queues.
+  value: 6051
+  unit: cases
+  period: all cases through retrieval
+  kind: reported_demand
+  method: 'Portal query counting pavement_defect cases by agency_responsible (groups of 10 or more); cases summed
+    over the labels: PUC - Sewer - G; PUC - Sewer Ops; PUC Sewer Ops.'
+  confidence: provisional
+  caveats: The agency labels changed over time (67 distinct values) and the grouping below is mine, by matching
+    label text, not the city's. Groups under 10 cases are not returned. Routing says who handled a case, not whether
+    it was a pothole.
+- source_url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,agency_responsible,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,agency_responsible&$having=count(*)%3E%3D10&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  id: sf311-pavement-defect-agency-cells-total
+  statement: The agency breakdown of pavement defect cases covers 100,314 cases in groups of 10 or more.
+  value: 100314
+  unit: cases
+  period: all cases through retrieval
+  kind: reported_demand
+  method: Sum of the case counts over all agency_responsible groups returned by the portal query.
+  confidence: supported
+  caveats: The denominator for the two routing claims. It is smaller than the family total because groups under
+    10 cases are not returned.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2013
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,950 for calendar year 2013.
+  value: 1950
+  unit: service orders
+  period: 2013
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2013) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2014
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,634 for calendar year 2014.
+  value: 1634
+  unit: service orders
+  period: 2014
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2014) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2015
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,229 for calendar year 2015.
+  value: 1229
+  unit: service orders
+  period: 2015
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2015) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2016
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,275 for calendar year 2016.
+  value: 2275
+  unit: service orders
+  period: 2016
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2016) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2017
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,685 for calendar year 2017.
+  value: 2685
+  unit: service orders
+  period: 2017
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2017) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2018
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,034 for calendar year 2018.
+  value: 2034
+  unit: service orders
+  period: 2018
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2018) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2019
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,520 for calendar year 2019.
+  value: 2520
+  unit: service orders
+  period: 2019
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2019) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2020
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,293 for calendar year 2020.
+  value: 1293
+  unit: service orders
+  period: 2020
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2020) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2021
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,524 for calendar year 2021.
+  value: 1524
+  unit: service orders
+  period: 2021
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2021) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2022
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 1,868 for calendar year 2022.
+  value: 1868
+  unit: service orders
+  period: 2022
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2022) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2023
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,517 for calendar year 2023.
+  value: 2517
+  unit: service orders
+  period: 2023
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2023) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2024
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 2,071 for calendar year 2024.
+  value: 2071
+  unit: service orders
+  period: 2024
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2024) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-service-orders-2025
+  statement: The city performance scorecard measure 'Number of pothole service orders received', which it ties to
+    repair requests received through 311, totals 847 for calendar year 2025.
+  value: 847
+  unit: service orders
+  period: 2025
+  kind: reported_demand
+  method: Sum of the 12 monthly `actual` values (calendar_month in 2025) for measure_code 7075 in the Scorecard
+    Measures dataset; monthly values are stored as text and were converted to numbers.
+  confidence: supported
+  caveats: 'Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received
+    through 311, but the data does not say how an order is created or whether several requests are merged. The size
+    does not match the 311 pavement defect family, and no relationship should be assumed.'
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2013
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 96.6 percent for calendar year 2013.
+  value: 96.6
+  unit: percent
+  period: 2013
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2013) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2014
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 96.2 percent for calendar year 2014.
+  value: 96.2
+  unit: percent
+  period: 2014
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2014) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2015
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 93.8 percent for calendar year 2015.
+  value: 93.8
+  unit: percent
+  period: 2015
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2015) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2016
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 93.8 percent for calendar year 2016.
+  value: 93.8
+  unit: percent
+  period: 2016
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2016) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2017
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 91.3 percent for calendar year 2017.
+  value: 91.3
+  unit: percent
+  period: 2017
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2017) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2018
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 96.0 percent for calendar year 2018.
+  value: 96.0
+  unit: percent
+  period: 2018
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2018) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2019
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 92.3 percent for calendar year 2019.
+  value: 92.3
+  unit: percent
+  period: 2019
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2019) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2020
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 92.1 percent for calendar year 2020.
+  value: 92.1
+  unit: percent
+  period: 2020
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2020) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2021
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 92.8 percent for calendar year 2021.
+  value: 92.8
+  unit: percent
+  period: 2021
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2021) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2022
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 93.9 percent for calendar year 2022.
+  value: 93.9
+  unit: percent
+  period: 2022
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2022) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2023
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 89.3 percent for calendar year 2023.
+  value: 89.3
+  unit: percent
+  period: 2023
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2023) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2024
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 89.2 percent for calendar year 2024.
+  value: 89.2
+  unit: percent
+  period: 2024
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2024) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-mean-2025
+  statement: The mean of the monthly percentages of pothole service requests responded to within 72 hours on the
+    city performance scorecard is 87.3 percent for calendar year 2025.
+  value: 87.3
+  unit: percent
+  period: 2025
+  kind: response_time
+  method: Unweighted mean of the 12 monthly `actual` values (calendar_month in 2025) for measure_code 7072, times
+    100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.
+  confidence: supported
+  caveats: An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and
+    not necessarily the city's published figure. The measure page defines a month's value as requests responded
+    to within three business days divided by requests received that month, while its goal is stated as 72 hours.
+    The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-2026-07
+  statement: The city performance scorecard reports 39.0 percent of pothole service requests responded to within
+    72 hours for 2026-07.
+  value: 39.0
+  unit: percent
+  period: 2026-07
+  kind: response_time
+  method: The `actual` value for calendar_month 2026-07, measure_code 7072, times 100.
+  confidence: provisional
+  caveats: One of the two latest months in the data. The scorecard page states about a one-month data lag, so a
+    recent month may be provisional, but that is not established. The data's target value is 90 percent.
+- source_url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  id: sf-pothole-response-72h-2026-08
+  statement: The city performance scorecard reports 39.0 percent of pothole service requests responded to within
+    72 hours for 2026-08.
+  value: 39.0
+  unit: percent
+  period: 2026-08
+  kind: response_time
+  method: The `actual` value for calendar_month 2026-08, measure_code 7072, times 100.
+  confidence: provisional
+  caveats: One of the two latest months in the data. The scorecard page states about a one-month data lag, so a
+    recent month may be provisional, but that is not established. The data's target value is 90 percent.
