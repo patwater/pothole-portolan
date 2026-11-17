@@ -10,6 +10,7 @@ Outcomes per claim:
   re-derived  -> value, and period where checkable, reproduced by the second path
   partial     -> the stated figure is found but does not reproduce exactly from its parts
   failed      -> cannot be re-derived; the claim is demoted to `speculative`
+  pending     -> no derivation defined yet (a new claim); never attempted, so capped at `provisional`
 Confidence: `supported` only if re-derived, the mechanical checks pass, and the source leaves the
 claim's meaning clear. A meaning that the source leaves open keeps `provisional` (JUDGMENT below).
 
@@ -256,8 +257,10 @@ def main(argv=None):
     cache, report = {}, []
     for c in claims:
         if c["id"] not in DERIVE:
-            report.append((c["id"], c["confidence"], "failed", "no independent derivation defined"))
-            c["confidence"] = "speculative"
+            # Never attempted is not the same as failed. Cap at provisional so an unassessed claim cannot be supported.
+            before = c["confidence"]
+            c["confidence"] = "provisional" if before == "supported" else before
+            report.append((c["id"], before, c["confidence"], "PENDING: no independent derivation defined yet, so it has not been assessed"))
             continue
         ap_ = Path(root) / c["archive"]
         if not ap_.is_file():

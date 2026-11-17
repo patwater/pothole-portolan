@@ -79,6 +79,91 @@
     network_share_surveyed: not stated
     survey_method: PCI is a three-year moving average. Segment PCI is collected on a rolling basis and imputed for
       interim years from facility age and treatments using MTC StreetSaver.
+- source_url: https://sfpublicworks.org/node/35600
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  id: sf-pci-citywide-2025
+  statement: San Francisco's citywide Pavement Condition Index score rating for 2025, as stated in a Public Works
+    release dated January 2, 2026, was 75.
+  value: 75
+  unit: PCI points
+  period: '2025'
+  kind: measured_condition
+  method: 'Read from the first paragraph of the January 2, 2026 Public Works release: ''maintained a Pavement Condition
+    Index score rating of 75 in 2025''.'
+  confidence: provisional
+  caveats: A city press release, not the MTC data. The release says the annual evaluation looks at the condition
+    of each block and assigns a cumulative score, released December 31 of every year and tracked by MTC. It does
+    not say how many blocks were surveyed or how interim years are estimated.
+  condition_index:
+    name: Pavement Condition Index (PCI)
+    scale: 0-100, 0 a pothole-riddled crumbling street and 100 a freshly paved road
+    survey_year: 2025
+    network_share_surveyed: not stated
+    survey_method: annual evaluation of each block, assigned a cumulative score, tracked by MTC (per the release;
+      no further method stated)
+- source_url: https://sfpublicworks.org/node/35600
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  id: sf-blocks-paved-2025
+  statement: A Public Works release dated January 2, 2026 says crews paved 581 City-maintained blocks in 2025.
+  value: 581
+  unit: blocks
+  period: '2025'
+  kind: spending
+  method: 'Read from the January 2, 2026 release: ''crews paved 581 City-maintained blocks in 2025''.'
+  confidence: provisional
+  caveats: Program output, recorded as 'spending' only because the schema has no output kind. The release does not
+    say whether this counts blocks resurfaced, accepted or completed, and it does not say whether in-house and contractor
+    work are both included beyond saying both crews do the work.
+- source_url: https://sfpublicworks.org/node/35600
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  id: sf-resurfacing-investment-15-plus-years
+  statement: A Public Works release dated January 2, 2026 refers to a $979 million investment in roadway maintenance
+    over the last 15-plus years.
+  value: 979
+  unit: USD millions
+  period: 15-plus years to 2025
+  kind: spending
+  method: Read from the January 2, 2026 release, which describes the city's commitment to fund roadway maintenance
+    'over the last 15-plus years' and then 'the $979 million investment over that period'.
+  confidence: provisional
+  caveats: The start year, the funding sources and whether the figure is nominal dollars are not stated. The release
+    credits this spending with the rise in the score and with resurfacing more than 9,000 of nearly 13,000 blocks;
+    that is the department's framing, not a measured effect.
+- source_url: https://sfpublicworks.org/node/35600
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  id: sf-preservation-cost-per-good-block-min
+  statement: A Public Works release dated January 2, 2026 says extending the life of a block in good condition can
+    cost as little as $50,000.
+  value: 50000
+  unit: USD per block
+  period: as stated January 2026
+  kind: spending
+  method: 'Read from the January 2, 2026 release: ''Extending the life of a block in San Francisco that is in good
+    condition can cost as little as $50,000''.'
+  confidence: provisional
+  caveats: A floor ('as little as'), not an average. The release pairs it with a reconstruction cost for a block
+    in very poor condition whose figure is printed as '$500,00', which is ambiguous, so that cost was deliberately
+    not extracted. Do not compare with the average paving cost on the Commission slide without a caveat.
+- source_url: https://sfpublicworks.org/node/35600
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  id: sf-pci-annual-release-date
+  statement: Public Works says findings of the annual San Francisco PCI evaluation are released December 31 of every
+    year.
+  value: December 31
+  unit: annual release date
+  period: annual, as stated January 2026
+  kind: policy
+  method: 'Read from the January 2, 2026 release: ''Findings from the annual evaluation are released Dec. 31 of
+    every year''.'
+  confidence: provisional
+  caveats: A third statement about survey cadence, besides the two-year inspection cycle (Prop L document) and the
+    three-year MTC dataset update. It describes the evaluation's release, not necessarily how often each block is
+    physically inspected.
 - source_url: https://sfpublicworks.org/sites/default/files/Commissions/Nov%2013%202025/Item%205_PWC%20Street%20Resurfacing%20Capital%20Update%202025-11-13.pdf
   retrieved: '2026-11-16'
   archive: sources/54bedeaf1f9f0fa96e6c5f9203c084aab33d61833f2e10335ce7fef1d19e2a63.pdf

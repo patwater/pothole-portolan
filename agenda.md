@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `assessed` (partial): 18 claims, 15 supported and 3 provisional, covering condition, program output and policy only. No demand or response-time values yet, so no Draft. Blocked on proposal `queue/proposals/2026-11-17-001-san-francisco-fetch-followups.md` (data.sfgov.org, claim kind). The 2026 release was fetched on 2026-11-17 (10 of 14 sources archived); the DataSF FAQ is still blocked at the gateway. Next: Extract and Assess on the 2026 release, then the 311 work once `data.sfgov.org` is decided. See `cities/san-francisco/notes.md`.
+1. san-francisco: status `extracted` (partial): 23 claims, 15 supported and 8 provisional (5 new, pending Assess), covering condition, program output and policy only. No demand or response-time values yet, so no Draft. Blocked on proposal `queue/proposals/2026-11-17-001-san-francisco-fetch-followups.md` (data.sfgov.org, claim kind). The 2026 release was fetched on 2026-11-17 (10 of 14 sources archived); the DataSF FAQ is still blocked at the gateway. Next: Assess on the 5 new claims, then the 311 work once `data.sfgov.org` is decided. See `cities/san-francisco/notes.md`.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`

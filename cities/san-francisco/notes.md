@@ -154,6 +154,33 @@ I also checked the PDF figures by eye against rendered slides 5, 7, 8 and 10. Th
 
 **Still unresolved for 311.** The DataSF FAQ remains unreachable. If it stays blocked, the 311 dataset's own documentation on another DataSF host (a search result earlier showed `docs.datasf.org` and a gitbook explainer) could replace it, but that is a Discover decision and those hosts are not on the environment's allowlist.
 
+## Extract results, second run (2026-11-17)
+
+Five claims were added from the January 2, 2026 Public Works release, so `claims.yaml` now has 23 claims: 15 `supported` (Assess, first pass) and 8 `provisional`, of which these five are new and **pending Assess**.
+
+| Claim id | Value | Kind |
+|----------|-------|------|
+| sf-pci-citywide-2025 | 75 PCI points, 2025 | measured_condition |
+| sf-blocks-paved-2025 | 581 blocks, 2025 | spending (program output) |
+| sf-resurfacing-investment-15-plus-years | $979 million | spending |
+| sf-preservation-cost-per-good-block-min | $50,000 per block, a floor | spending |
+| sf-pci-annual-release-date | December 31 each year | policy |
+
+**Deliberately not extracted.**
+
+- The reconstruction cost for a very poor block is printed as "$500,00". It could be $500,000 or $50,000 and I will not guess. It is the other half of a comparison the release makes, so the $50,000 floor claim carries a caveat saying so. A person should check the original page or ask Public Works.
+- The regional average (67), San Jose (73) and Oakland (58). They are cross-city figures. MTC's own page is the better source for them, and the first is already a claim from there.
+- "Tops among big Bay Area cities" and the line that a dip in funding will likely worsen roads. The first is a ranking by someone else's method and the second is a projection.
+- The statement that more than 9,000 of nearly 13,000 blocks were resurfaced. It agrees with the Commission deck's 9,148 and roughly 13,000, so it needs no separate claim. It also does not resolve the deck's unstated period.
+
+**Observations.**
+
+- Three survey-cadence statements now exist in the ledger: two-year inspections (Prop L document), a three-year MTC dataset update, and an annual evaluation released each December 31 (this release). They may describe different things (physical inspection, dataset refresh, published score), but no document says so. Assess must not choose.
+- The city scorecard page, archived on 2026-11-16, says its latest PCI score is from December 2024, while this release reports the 2025 score. The scorecard appears not to have been updated for 2025 yet, which is a Monitor item.
+- $50,000 (this release, a floor for preserving a good block) and $260,000 (the Commission slide, an average for a full paving block) must not be set side by side without saying what each covers. Dividing $979 million by blocks to get a cost per block would mix those and is not done here.
+
+**Tooling change made during this run.** The new claims made the assessor demote them to `speculative` because it had no derivation for them, which also broke `tests/test_assess.py`. Never attempted is not failed, so the assessor now marks such claims `PENDING` and caps them at `provisional`, and a new test checks that a claim without a derivation can never become `supported`.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.

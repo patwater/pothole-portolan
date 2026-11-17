@@ -54,5 +54,16 @@ class AssessMutation(unittest.TestCase):
         self.assertEqual(demoted, DAMAGED)
 
 
+    def test_unassessed_claim_is_capped_at_provisional_not_demoted(self):
+        claims = yaml.safe_load(self.path.read_text())
+        extra = dict(next(c for c in claims if c["id"] == "sf-pci-citywide-2023"))
+        extra["id"] = "sf-new-claim-without-derivation"
+        extra["confidence"] = "supported"
+        claims.append(extra)
+        self.path.write_text(yaml.safe_dump(claims, sort_keys=False))
+        assess.main(["--root", str(self.root)])
+        self.assertEqual(self.confidence()["sf-new-claim-without-derivation"], "provisional")
+
+
 if __name__ == "__main__":
     unittest.main()

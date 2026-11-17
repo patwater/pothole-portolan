@@ -152,6 +152,64 @@ def build(root):
         caveats="Regional context for the San Francisco figures. Not a comparison between cities.",
         condition_index=dict(mtc_index)))
 
+    # ---- Public Works release, January 2, 2026 (the 2025 score) ---------------------------------
+    rel = arc("sf-publicworks-pci-release-2026-01")
+    rel.require(r"For immediate release: January 2, 2026", "2026 release date")
+    rel.require(r"scale from 0-100, with zero being a pothole-riddled, crumbling street and 100 signifying a freshly paved road", "2026 release scale")
+    rel.require(r"tracked by the regional Metropolitan Transportation Commission", "2026 release MTC tracking")
+    pci25 = to_number(rel.get(r"maintained a Pavement Condition Index score rating of (\d+) in (\d{4})", "2025 PCI"))
+    y25 = rel.get(r"maintained a Pavement Condition Index score rating of (\d+) in (\d{4})", "2025 PCI year", group=2)
+    claims.append(base(
+        "sf-publicworks-pci-release-2026-01", id="sf-pci-citywide-2025",
+        statement=f"San Francisco's citywide Pavement Condition Index score rating for {y25}, as stated in a Public Works release dated January 2, 2026, was {pci25}.",
+        value=pci25, unit="PCI points", period=y25, kind="measured_condition",
+        method=f"Read from the first paragraph of the January 2, 2026 Public Works release: 'maintained a Pavement Condition Index score rating of {pci25} in {y25}'.",
+        confidence="provisional",
+        caveats="A city press release, not the MTC data. The release says the annual evaluation looks at the condition of each block and assigns a cumulative score, "
+                "released December 31 of every year and tracked by MTC. It does not say how many blocks were surveyed or how interim years are estimated.",
+        condition_index={"name": "Pavement Condition Index (PCI)", "scale": "0-100, 0 a pothole-riddled crumbling street and 100 a freshly paved road",
+                         "survey_year": int(y25), "network_share_surveyed": NOT_STATED,
+                         "survey_method": "annual evaluation of each block, assigned a cumulative score, tracked by MTC (per the release; no further method stated)"}))
+    paved = to_number(rel.get(r"crews paved ([\d,]+) City-maintained blocks in (\d{4})", "blocks paved"))
+    paved_year = rel.get(r"crews paved ([\d,]+) City-maintained blocks in (\d{4})", "blocks paved year", group=2)
+    claims.append(base(
+        "sf-publicworks-pci-release-2026-01", id="sf-blocks-paved-2025",
+        statement=f"A Public Works release dated January 2, 2026 says crews paved {paved:,} City-maintained blocks in {paved_year}.",
+        value=paved, unit="blocks", period=paved_year, kind="spending",
+        method=f"Read from the January 2, 2026 release: 'crews paved {paved:,} City-maintained blocks in {paved_year}'.",
+        confidence="provisional",
+        caveats="Program output, recorded as 'spending' only because the schema has no output kind. The release does not say whether this counts blocks "
+                "resurfaced, accepted or completed, and it does not say whether in-house and contractor work are both included beyond saying both crews do the work."))
+    invest = to_number(rel.get(r"The \$(\d+) million investment over that period", "15-year investment"))
+    rel.require(r"over the last 15-plus years", "investment period")
+    claims.append(base(
+        "sf-publicworks-pci-release-2026-01", id="sf-resurfacing-investment-15-plus-years",
+        statement=f"A Public Works release dated January 2, 2026 refers to a ${invest} million investment in roadway maintenance over the last 15-plus years.",
+        value=invest, unit="USD millions", period="15-plus years to 2025", kind="spending",
+        method="Read from the January 2, 2026 release, which describes the city's commitment to fund roadway maintenance 'over the last 15-plus years' "
+               "and then 'the $979 million investment over that period'.",
+        confidence="provisional",
+        caveats="The start year, the funding sources and whether the figure is nominal dollars are not stated. The release credits this spending with the rise in the score "
+                "and with resurfacing more than 9,000 of nearly 13,000 blocks; that is the department's framing, not a measured effect."))
+    cheap = to_number(rel.get(r"in good condition can cost as little as \$([\d,]+)", "preservation cost"))
+    claims.append(base(
+        "sf-publicworks-pci-release-2026-01", id="sf-preservation-cost-per-good-block-min",
+        statement=f"A Public Works release dated January 2, 2026 says extending the life of a block in good condition can cost as little as ${cheap:,}.",
+        value=cheap, unit="USD per block", period="as stated January 2026", kind="spending",
+        method="Read from the January 2, 2026 release: 'Extending the life of a block in San Francisco that is in good condition can cost as little as $50,000'.",
+        confidence="provisional",
+        caveats="A floor ('as little as'), not an average. The release pairs it with a reconstruction cost for a block in very poor condition whose figure is printed as "
+                "'$500,00', which is ambiguous, so that cost was deliberately not extracted. Do not compare with the average paving cost on the Commission slide without a caveat."))
+    rel.require(r"Findings from the annual evaluation are released Dec\. 31 of every year", "annual release")
+    claims.append(base(
+        "sf-publicworks-pci-release-2026-01", id="sf-pci-annual-release-date",
+        statement="Public Works says findings of the annual San Francisco PCI evaluation are released December 31 of every year.",
+        value="December 31", unit="annual release date", period="annual, as stated January 2026", kind="policy",
+        method="Read from the January 2, 2026 release: 'Findings from the annual evaluation are released Dec. 31 of every year'.",
+        confidence="provisional",
+        caveats="A third statement about survey cadence, besides the two-year inspection cycle (Prop L document) and the three-year MTC dataset update. "
+                "It describes the evaluation's release, not necessarily how often each block is physically inspected."))
+
     # ---- Public Works Commission deck, November 13, 2025 -----------------------------------
     pw = arc("publicworks-commission-resurfacing-update-2025-11")
     pw.require(r"November 13, 2025", "deck date")

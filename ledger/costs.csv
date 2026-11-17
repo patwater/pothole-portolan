@@ -6,3 +6,4 @@ timestamp_utc,behavior,model_tier,input_tokens,output_tokens,usd,note
 2026-11-17T00:00:00Z,extract,n/a,,,,"San Francisco extract: 18 provisional claims from 9 archives. Token counts and spend not available."
 2026-11-17T00:00:00Z,assess,n/a,,,,"San Francisco assess: 18 claims re-derived, 15 supported, 3 provisional. Token counts and spend not available."
 2026-11-17T00:00:00Z,fetch,n/a,,,,"San Francisco fetch (second pass): 1 of 2 listed sources archived; 1 still blocked at gateway. Token counts and spend not available."
+2026-11-17T00:00:00Z,extract,n/a,,,,"San Francisco extract (second pass): 5 new provisional claims from the 2026 release; assessor tooling fix. Token counts and spend not available."
