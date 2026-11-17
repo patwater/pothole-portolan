@@ -30,3 +30,7 @@ The gateway returns 502 for `support.datasf.org` although the host is allowed. T
 ## 4. A supervisor-owned file to review
 
 `scripts/fetch_source.py` is new and sits in `scripts/`, which is agent territory, but it enforces rule 8 (robots.txt on every redirect hop, honest user agent, rate limit). A quick read from you is worthwhile before I run it on a second city.
+
+## 5. Added by Extract: a claim kind for program output
+
+The ledger's `kind` list has no home for program output such as "blocks resurfaced" or "blocks awarded". I recorded three such claims as `spending` with a caveat that says so. That risks readers taking a count of blocks for a dollar figure. **Ask:** add `program_output` to the `kind` enum in `schemas/claims.schema.json` and to the list in CLAUDE.md. I have not changed either; CLAUDE.md is yours, and I will move the three claims once the kind exists.

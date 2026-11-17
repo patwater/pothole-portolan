@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `fetched` (partial), 9 of 13 sources archived, 3 unavailable, 1 to retry; next behavior is Extract, after the proposal in `queue/proposals/2026-11-17-001-san-francisco-fetch-followups.md`. See `cities/san-francisco/notes.md`.
+1. san-francisco: status `extracted` (partial), 18 provisional claims on condition, program output and policy; no demand or response-time values yet. Blocked on proposal `queue/proposals/2026-11-17-001-san-francisco-fetch-followups.md` (data.sfgov.org, claim kind). Next behavior is Assess on the 18 claims, plus a Fetch run for the 2026 release. See `cities/san-francisco/notes.md`.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`

@@ -1,18 +1,28 @@
 # Maintained by scripts/fetch_source.py (Fetch) from Discover's list. Status values:
 # listed (not yet fetched), fetched (archived under sources/), unavailable (reason in notes).
-- id: sf-publicworks-pci-release-2026-01
-  name: San Francisco's road conditions improve, ranked highest among large Bay Area cities (annual roads
-    release)
-  publisher: San Francisco Public Works
+- id: sf-city-pci-release-2024-01
+  name: San Francisco's Road Conditions Improve, Ranked Highest For Large Bay Area Cities in Annual Roads
+    Assessment (release dated January 8, 2024)
+  publisher: Office of the Mayor and San Francisco Public Works
   source_type: agency_page
   url: https://www.sf.gov/news/san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads
   status: fetched
-  notes: 'City release dated 2026-01-02 on sf.gov. A Public Works copy appears at https://sfpublicworks.org/node/35600
-    and looks like the same release; Fetch should confirm and archive one. Fetch 2026-11-16: HTTP 200,
-    text/html, 212340 bytes, final URL https://www.sf.gov/news--san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads.'
+  notes: 'CORRECTION (Extract, 2026-11-17): Discover recorded this page as the 2026-01-02 release. The
+    archived text is dated January 8, 2024 and says the score of 75 ''covered calendar year 2023''. The
+    2026 release is a different page, listed separately below as sf-publicworks-pci-release-2026-01. Fetch
+    2026-11-16: HTTP 200, text/html, 212340 bytes, final URL https://www.sf.gov/news--san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads.'
   retrieved: '2026-11-16'
   archive: sources/0593bf62a458ed52071e435862d6990993c63c17e63f7fe55d8170bb5851fa09.html
   robots_checked: true
+- id: sf-publicworks-pci-release-2026-01
+  name: Public Works news release dated January 2, 2026 on the 2025 PCI score
+  publisher: San Francisco Public Works
+  source_type: agency_page
+  url: https://sfpublicworks.org/node/35600
+  status: listed
+  notes: Added by Extract on 2026-11-17 after finding that the page archived under the earlier id is the
+    2024 release. A search result described this page as the January 2, 2026 release reporting a score
+    of 75 in 2025 and a ranking among large Bay Area cities. Not yet fetched, so none of that is verified.
 - id: mtc-vital-signs-street-pavement
   name: 'Vital Signs: street pavement condition'
   publisher: Metropolitan Transportation Commission

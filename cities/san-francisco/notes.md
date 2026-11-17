@@ -36,8 +36,8 @@ Thirteen candidate sources are listed in `sources.yaml`, all with status `listed
 
 **Discrepancies for Assess to resolve from fetched text, not from search snippets:**
 
-1. **Which year is the score of 75?** The city's January 2026 release says 75 in 2025. The MTC Vital Signs page, per the result, says San Francisco County averaged 75 in 2024 and describes a three-year moving average. A January 2024 city release was also reported as giving 75, for 2023. These may be different measures (a calendar-year score against a three-year moving average) or different reporting conventions, and a claim must state the period and averaging method exactly as the source does.
-2. **Rating bands differ.** The MTC page reportedly calls 64 to 84 "good" and 85 to 100 "excellent". The city scorecard reportedly calls 70 to 84 "good". The dossier must quote the band from whichever source a claim uses and not mix them.
+1. **Which year is the score of 75?** (Partly corrected by Extract: the page archived as the 2026 release is the 2024 release; see the Extract section.) A city release dated January 2026 reportedly says 75 in 2025. The MTC Vital Signs page, per the result, says San Francisco County averaged 75 in 2024 and describes a three-year moving average. A January 2024 city release was also reported as giving 75, for 2023. These may be different measures (a calendar-year score against a three-year moving average) or different reporting conventions, and a claim must state the period and averaging method exactly as the source does.
+2. **Rating bands differ.** (Superseded by Extract: there are four band schemes in the archives, and the "64 to 84" snippet is not on MTC's page.) The MTC page reportedly calls 64 to 84 "good" and 85 to 100 "excellent". The city scorecard reportedly calls 70 to 84 "good". The dossier must quote the band from whichever source a claim uses and not mix them.
 3. **Response-time target.** The scorecard describes a 72-hour goal, while a 2021 audit gives the departmental goal as 90 percent within 72 hours. Confirm the target and the measured share from the primary documents.
 
 **Gaps:**
@@ -78,6 +78,41 @@ Of 13 listed sources, 9 are fetched and archived under `sources/`, 1 is still `l
 3. A 200 response was not treated as proof of the right document. Each archive was checked for expected text, which is what caught the wrong landing page.
 
 **Archive review.** The personal-data check warned on email addresses and phone numbers in five archived pages. All are generic agency contacts (city events inbox, Controller inbox, MTC info line, the 311 phone number, a placeholder address). The two PDFs were read as text and contain only agency contacts. No record-level data was archived.
+
+## Extract results (2026-11-17)
+
+Eighteen claims are in `claims.yaml`, all `provisional`: 10 `measured_condition`, 5 `spending`, 3 `policy`. They come from `scripts/extract_san_francisco.py`, which ties each value to anchor text in an archive and refuses to write if an anchor is missing. Assess has not yet re-derived them, so none is `supported`.
+
+**Corrections to my earlier notes.**
+
+- The page I archived as the "January 2026 release" is the January 8, 2024 release. Its 75 covers calendar year 2023. The 2026 release is a separate page, `https://sfpublicworks.org/node/35600`, now listed in `sources.yaml` and not yet fetched. Whether it reports 75 for 2025 is unverified.
+- The Discover snippet that MTC calls "good" 64 to 84 does not appear on MTC's Vital Signs page, which gives Good as 70 to 79.
+
+**Four incompatible band schemes in the archives.** Never merge categories across them.
+
+| Source | Bands |
+|--------|-------|
+| MTC Vital Signs | Failed 0-24, Poor 25-49, At Risk 50-59, Fair 60-69, Good 70-79, Very Good 80-89, Excellent 90-100 |
+| City scorecard | Very poor 0-24, Poor 25-49, At-risk 50-69, Good 70-84, Excellent 85-100 |
+| Public Works Commission deck | Very Poor 0-25, Poor 25-50, At-Risk 50-60, Good 60-80, Excellent 80-100 |
+| Prop L program document | Preservation 60-80, resurfacing 50-60, base repair or reconstruction 0-50 |
+
+**Unresolved conflicts (left for Assess, not settled here).**
+
+1. *How often is the network surveyed?* Public Works, via the Prop L document: every two years. MTC: its data set is updated every three years. The city scorecard: published once a year, latest December 2024. Both interval statements are claims in the ledger.
+2. *Share of good blocks.* The 2024 city release says MTC found two-thirds of San Francisco's blocks "good" or "excellent". The Public Works deck counts 11,171 of 12,982 blocks (about 86 percent, my arithmetic, not a claim) as good/excellent in 2023. The band definitions differ, which may explain it, but that is a guess.
+3. *Same number, different meanings.* 75 appears as a calendar-year 2023 city score, as MTC's 2024 three-year moving average for the county, and reportedly as the 2025 score. These are not obviously the same measurement.
+4. *72 hours versus three business days.* The pothole page states a 72-hour goal but defines the monthly figure as requests answered within three business days.
+
+**Not extracted, and why.**
+
+- No `reported_demand` claims. The 311 counts need the dataset, which needs `data.sfgov.org` (see proposal `2026-11-17-001`).
+- No measured pothole response percentage. The page text holds none; it sits in an embedded dashboard backed by the Scorecards dataset.
+- No value from the city PCI scorecard page, for the same reason.
+- No figures from the 2021 audit, the FY26-27 budget presentation or the Open311 endpoint (unavailable).
+- MTC's "Download Raw Data" files, which would give the exact annual series, have JavaScript-built links that are not in the archived page. Discover should look for them.
+
+**Method lessons.** The first extraction run picked up a slide-footer page number ("4") as the blocks-resurfaced figure; I noticed it in the printed summary, and the script now anchors on the whole slide sequence. The awards table rows sum to $132.9 million against a stated total of $133.0 million, so the script allows rounding and the claim's caveats say so. Block counts match exactly (805).
 
 ## Dead ends
 
