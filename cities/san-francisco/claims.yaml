@@ -123,7 +123,7 @@
   statement: A Public Works release dated January 2, 2026 refers to a $979 million investment in roadway maintenance
     over the last 15-plus years.
   value: 979
-  unit: USD millions
+  unit: million USD
   period: 15-plus years to 2025
   kind: spending
   method: Read from the January 2, 2026 release, which describes the city's commitment to fund roadway maintenance
@@ -342,7 +342,7 @@
   statement: Street resurfacing projects awarded by the Commission between 2023-07-21 and 2025-11-13 total $133.0
     million.
   value: 133.0
-  unit: USD millions
+  unit: million USD
   period: awards dated 2023-07-21 to 2025-11-13
   kind: spending
   method: Slide 10 table 'Projects Awarded by Commission the Last 2 Years', TOTAL row. The script also summed the
@@ -812,7 +812,7 @@
   statement: Within the pavement defect subtype, the SF311 Cases service_details field has 1 distinct non-empty
     value among groups of 10 or more cases, and it repeats the subtype name.
   value: 1
-  unit: distinct values
+  unit: distinct non-empty value
   period: all cases through retrieval
   kind: reported_demand
   method: Portal query grouping pavement_defect cases by service_name, service_subtype and service_details (groups

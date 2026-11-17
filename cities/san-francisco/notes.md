@@ -323,7 +323,33 @@ Fifty-five claims were added from the 311 aggregates and the scorecard rows, so 
 
 **Where the ledger stands for a dossier.** It now covers condition (PCI 2023, 2024, 2025 and block counts), program output and spending, pavement defect requests from 311 (with the no-pothole-category finding), pothole-specific service orders and response from the scorecard, and policy statements. What it cannot say is how many pothole reports residents made, because 311 does not isolate potholes. The dossier has to say that plainly.
 
+## Draft v1 (2026-11-17)
+
+`dossier.md` is written from the ledger, and a rendered copy for publishing by hand is at `queue/drafts/san-francisco-v1.md`. It uses 74 distinct claims, all supported or provisional, and every figure in it comes from a claim marker. The content check reports no failures. Its only warnings are 22 notices about years followed by a comma, plus the personal-data check's reminders to confirm agency contacts in archived pages by hand; the first is a flaw in the check (proposal 004).
+
+**Structure.** A summary, the data regime, what the pavement survey measures, what residents reported, spending and repair performance, what could not be found, the full source list (filled in by the renderer) and a version history. Reported demand and condition are in separate sections and separate paragraphs, with an explicit statement that request counts do not measure the state of the pavement.
+
+**Points the draft makes plainly.**
+
+- 311 has no pothole category, so potholes cannot be counted from it. The pavement defect family is the nearest category and is broader than road repair.
+- The Public Works scorecard gives pothole-specific figures, but they are a different measurement from the 311 count and the draft says so.
+- The calendar-year response means are calculated for the dossier and are not the city's published figures.
+- The sources disagree about how often the network is surveyed, and the draft shows all three statements without choosing.
+- Several things could not be found, each with its reason.
+
+**Wording fixes made while reading the rendered draft.** "Paved 581 blocks City-maintained blocks" repeated a word, "133.0 USD millions" and "1 distinct values" were clumsy, and "declined gradually" overstated a series that rose in 2018. Two claim units were changed (`million USD`, singular `distinct non-empty value`). That sent three claims back to provisional and Assess restored them, which is the intended process.
+
+**Renderer improvements made for this draft.** Footnotes now include each claim's caveats, repeated methods and caveats collapse to a pointer to the first note, the Sources section is generated from `sources.yaml`, and an unknown claim id stops the render. Five tests cover this.
+
+**Things I could not verify.**
+
+- Whether Blygger renders Markdown footnotes (`[^n]`) and tables. `docs/blygger.md` says nothing about the format. If it does not, the footnotes need another form.
+- The rendered draft is long (about 300 lines, with 74 footnotes), because every figure carries its own source, method and caveats. That is a deliberate choice for checkability.
+- The draft has had no review by anyone but me.
+
 ## Dead ends
+
+- The Board## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
 - The Open311 endpoint is closed to robots. Counts, if needed, must come from the bulk dataset route.

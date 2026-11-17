@@ -186,7 +186,7 @@ def build(root):
     claims.append(base(
         "sf-publicworks-pci-release-2026-01", id="sf-resurfacing-investment-15-plus-years",
         statement=f"A Public Works release dated January 2, 2026 refers to a ${invest} million investment in roadway maintenance over the last 15-plus years.",
-        value=invest, unit="USD millions", period="15-plus years to 2025", kind="spending",
+        value=invest, unit="million USD", period="15-plus years to 2025", kind="spending",
         method="Read from the January 2, 2026 release, which describes the city's commitment to fund roadway maintenance 'over the last 15-plus years' "
                "and then 'the $979 million investment over that period'.",
         confidence="provisional",
@@ -286,7 +286,7 @@ def build(root):
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-resurfacing-awards-amount-2023-2025",
         statement=f"Street resurfacing projects awarded by the Commission between {period[13:23]} and {period[27:]} total ${tot.group(1)} million.",
-        value=float(tot.group(1)), unit="USD millions", period=period, kind="spending",
+        value=float(tot.group(1)), unit="million USD", period=period, kind="spending",
         method=f"Slide 10 table 'Projects Awarded by Commission the Last 2 Years', TOTAL row. The script also summed the {len(amounts)} project rows as a cross-check.",
         confidence="provisional",
         caveats="Award amounts, not spending to date. The slide title says 'the last 2 years' while the dates span about two and a half years. " + rounding_note))
@@ -395,7 +395,7 @@ def build(root):
     claims.append(base(
         "sf311-pavement-defect-details-counts", id="sf311-pavement-defect-details-distinct-values",
         statement="Within the pavement defect subtype, the SF311 Cases service_details field has 1 distinct non-empty value among groups of 10 or more cases, and it repeats the subtype name.",
-        value=1, unit="distinct values", period="all cases through retrieval", kind="reported_demand",
+        value=1, unit="distinct non-empty value", period="all cases through retrieval", kind="reported_demand",
         method="Portal query grouping pavement_defect cases by service_name, service_subtype and service_details (groups of 10 or more); one group has a non-empty service_details, "
                f"equal to its subtype '{with_details[0]['service_subtype']}', and the other {len(det) - 1} groups have none.",
         confidence="provisional",

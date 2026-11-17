@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `assessed` (complete for Phase 1 evidence): 78 claims, 70 supported and 8 provisional, covering condition, program output, spending, 311 pavement defect requests, scorecard pothole service orders and response, and policy. 311 cannot isolate potholes (checked). Ready for Draft. Open: proposal 003 (branch history). See `cities/san-francisco/notes.md`.
+1. san-francisco: status `drafted` (v1, 2026-11-17). Dossier at `cities/san-francisco/dossier.md`, rendered copy at `queue/drafts/san-francisco-v1.md` awaiting the supervisor's review and hand publication. Open: proposal 003 (branch history), proposal 004 (check warning), and whether Blygger renders footnotes. See `cities/san-francisco/notes.md`.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`
