@@ -14,14 +14,21 @@ problem_relieved: Four San Francisco sources could not be archived, and Extract 
 
 **Options.** (a) Accept the gap and record both as unavailable in the dossier, which is the current state. (b) You download the audit by hand and add it to `sources/` with a retrieval note, since a human reading a public document is not a robot. (c) Ask the Board of Supervisors clerk whether a robot-friendly copy exists. I recommend (a) now and (b) if the audit's findings turn out to matter for the dossier. I will not work around robots.txt.
 
-## 2. Hosts needed for Extract (new outward-facing reach)
+## 2. Hosts and plan for the 311 and response-time data (revised 2026-11-17, after Assess)
 
-The environment `pothole-portolan` currently allows 12 hosts, all for fetching pages. Extracting a 311 count needs an aggregate query, and the official bulk route is on a host I have not requested:
+**Correction to my first version.** I asked for `data.sfgov.org` only. The archives show two hosts: the DataSF catalog record lists the 311 Cases dataset (id `vw6y-z8j6`) at `data.sf.gov`, including its metadata and column endpoints, and the city's own scorecard pages link the Scorecard Measures dataset (id `kc49-udxn`) on `data.sfgov.org`. **Ask: allow both `data.sf.gov` and `data.sfgov.org`.** No credential is needed to start.
 
-- `data.sfgov.org` for an aggregate (count by year and type) query against the 311 Cases dataset. Only aggregates would be archived (rule 7).
-- The data host for the Scorecards pothole-response dataset, which is probably the same host.
+**Plan, one behavior per run, each with a stopping point.**
 
-**Ask:** approve adding `data.sfgov.org`. I will request it through the environment prompt when Extract starts, unless you would rather decide here first.
+1. *Fetch, metadata only.* Read robots.txt on both hosts. If it disallows the API paths, stop and report. Otherwise archive the two datasets' metadata and column lists. No records are touched. This shows the real column names and how pothole cases are classified, which I have not seen and will not guess.
+2. *Fetch, aggregates only.* Ask the portal's own query interface for counts grouped by calendar year and case type (and by reporting channel, if the metadata supports it, since channel mix affects what a count means). Nothing that could identify a person or address is selected, so no record-level data reaches the repo (rule 7). Archive each response by hash and record the exact query URL in `sources.yaml`, so a reader can re-run it. Then fetch the pothole-response rows of the Scorecard Measures dataset, which are already aggregates. Fewer than ten requests, three seconds apart, with the honest user agent.
+3. *Extract.* `reported_demand` claims from the counts, each stating which case types were counted and the caveats the sources support (duplicates, channels, agencies not covered). `response_time` claims from the scorecard measure, noting that its method counts requests answered within three business days against a 72-hour headline.
+4. *Assess.* A real second derivation: re-run the counts with a different grouping (by month, summed to years) and require agreement. That is stronger independence than the sentence-level checks on the press-release claims.
+5. *Draft.* Only after step 4.
+
+**Stops.** If the only route to the data is a bulk record-level download, I stop and ask you before touching it. If the portal throttles anonymous requests and asks for an app token, I stop and request it through the credential prompt, since that would be a new credential.
+
+**If you would rather not allow the hosts.** Then San Francisco's dossier would have to leave out residents' reports and repair speed, and say that they were not retrieved because of this project's network limits, not that they do not exist. I would not recommend shipping it that way. The alternative is to park San Francisco and begin Chicago, which will raise the same question about its portal.
 
 ## 3. Gateway problem on support.datasf.org
 
@@ -33,4 +40,4 @@ The gateway returns 502 for `support.datasf.org` although the host is allowed. T
 
 ## 5. Added by Extract: a claim kind for program output
 
-The ledger's `kind` list has no home for program output such as "blocks resurfaced" or "blocks awarded". I recorded three such claims as `spending` with a caveat that says so. That risks readers taking a count of blocks for a dollar figure. **Ask:** add `program_output` to the `kind` enum in `schemas/claims.schema.json` and to the list in CLAUDE.md. I have not changed either; CLAUDE.md is yours, and I will move the three claims once the kind exists.
+The ledger's `kind` list has no home for program output such as "blocks resurfaced" or "blocks awarded". I recorded four such claims as `spending` with a caveat that says so: `sf-blocks-resurfaced-as-of-2025-11`, `sf-blocks-planned-as-of-2025-11`, `sf-resurfacing-awards-blocks-2023-2025` and `sf-blocks-paved-2025`. I will move all four once the kind exists. That risks readers taking a count of blocks for a dollar figure. **Ask:** add `program_output` to the `kind` enum in `schemas/claims.schema.json` and to the list in CLAUDE.md. I have not changed either; CLAUDE.md is yours.
