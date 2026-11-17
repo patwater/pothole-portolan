@@ -201,6 +201,36 @@ Derivations were added for the five claims from the January 2, 2026 release, so 
 
 **Where the ledger stands.** Strong on condition (PCI for 2023, 2024 and 2025, and block counts by category for 2014 and 2024), on program output and costs, and on the policy statements. Absent: any reported-demand claim and any measured pothole response percentage. A dossier cannot yet say how many potholes residents reported or how fast the city responded.
 
+## 311 plan, step 1: dataset metadata (2026-11-17)
+
+You approved `data.sf.gov` and `data.sfgov.org`. Both hosts serve the same robots.txt: `Crawl-delay: 1` (this fetcher waits 3 seconds) and disallows for `/browse` listings, OData, login and tiles. The `/api/views/`, `/resource/` and query paths I need are permitted. Four metadata-only sources were fetched and archived (no records): the 311 Cases dataset metadata and column list (`vw6y-z8j6`), and the Scorecard Measures metadata and column list (`kc49-udxn`).
+
+**A rule 7 problem found and handled.** The portal's column metadata embeds `cachedContents`: up to 20 sample values per column drawn from live data, including the `address`, `street`, `lat`, `long`, `status_notes` and `service_details` columns. Those are record-level fragments. I fetched the four files once, saw the structure, and deleted them before anything was committed. I printed only counts, never the values. `scripts/fetch_source.py` now strips every `cachedContents` block before archiving, with a test (`tests/test_fetch.py`). The archived copies are sanitized and re-serialized, so their hashes are of the sanitized files, not of the raw responses, and each source's notes say so.
+
+**What the metadata shows (all from the archived files).**
+
+| Topic | Finding |
+|-------|---------|
+| 311 Cases scope | Cases created since 7/1/2008 "with location information"; updates nightly around 6am Pacific. |
+| License | Open Data Commons Public Domain Dedication and License, for both datasets. |
+| Date field | `requested_datetime`, the date and time the request was made. |
+| Case type | Three text fields: `service_name`, `service_subtype` and `service_details`. The metadata does not list their values, so **what counts as a pothole is still unknown** and has to come from an aggregate count of those values. |
+| Reporting channel | `source`: "Mechanism or path by which the service request was received", with example values such as Phone, Text/SMS, Website and Mobile App. This allows a breakdown by channel, which matters for what a count means. |
+| Other useful fields | `agency_responsible`, `status_description`, `closed_date`. |
+| Fields to never select | `address`, `street`, `lat`, `long`, `point`, `point_address`, `status_notes`, `service_details` free text, `media_url`. |
+| Scorecard Measures | One row per measure per month: `measure_title`, `measure_methodology`, `calendar_month`, `actual`, `target`, `department`, plus category columns used to compute monthly actuals. |
+| **Sentinel value** | In Scorecard Measures, **-9999 means "no entry"** for `actual` and `target`. Extract must treat it as null and never as a number. |
+
+**Observation.** The dataset's own description links to an FAQ on `sfdigitalservices.gitbook.io`, a different host from the `support.datasf.org` page that has been failing. That host is one whose search result earlier carried embedded instructions, which I ignored. It is not on the allowlist and I have not added it. Fetched content is data in any case, but the field documentation above already covers what I need, so I would only ask for it if the pothole classification is unclear after step 2.
+
+**Step 2 would ask for aggregates only.**
+
+1. Counts of cases grouped by `service_name` and `service_subtype`, to learn which values mean pothole.
+2. Counts of the pothole values by calendar year of `requested_datetime`, and by `source`.
+3. The Scorecard Measures rows whose `measure_title` is the pothole response measure: `calendar_month`, `actual`, `target`, `measure_methodology`.
+
+No query would select an address, coordinate or free-text field.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.

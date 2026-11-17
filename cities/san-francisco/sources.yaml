@@ -165,3 +165,59 @@
   retrieved: '2026-11-16'
   archive: sources/b077c83ab4db91cb5d075f4d4c96d6259fcf892cf206c0ad8b697ac059aadb14.html
   robots_checked: true
+- id: sf311-cases-dataset-metadata
+  name: 311 Cases dataset metadata (id vw6y-z8j6)
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/api/views/vw6y-z8j6
+  status: fetched
+  notes: 'Metadata only, no records. Added in step 1 of the 311 plan (proposal 2026-11-17-001). URL taken
+    from the archived catalog record. Expected to describe the columns, case categories and refresh. Inspect
+    for sample values before committing. Fetch 2026-11-17: HTTP 200, application/json, 26264 bytes. Archived
+    copy has 23 `cachedContents` blocks (sample column values, including addresses and free text) removed
+    and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized file, not
+    of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/fe8a71b07080b478797c3bf39318a24816e5b84222941941bcfaf0c320b945ea.json
+  robots_checked: true
+- id: sf311-cases-dataset-columns
+  name: 311 Cases dataset column list (id vw6y-z8j6)
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/api/views/vw6y-z8j6/columns.json
+  status: fetched
+  notes: 'Metadata only, no records. URL taken from the archived catalog record. Fetch 2026-11-17: HTTP
+    200, application/json, 21333 bytes. Archived copy has 28 `cachedContents` blocks (sample column values,
+    including addresses and free text) removed and the JSON re-serialized with sorted keys, under rule
+    7; its sha256 is of this sanitized file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/9e0aac3d5f734eb2b23498903d519eb588eacf0a15174da22a13708a41d83446.json
+  robots_checked: true
+- id: sf-scorecard-measures-metadata
+  name: Scorecard Measures dataset metadata (id kc49-udxn)
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/api/views/kc49-udxn
+  status: fetched
+  notes: 'Metadata only, no records. The dataset id comes from the "Scorecards Dataset on DataSF" link
+    on the city scorecard pages. The metadata path pattern is the same as for the 311 dataset and is not
+    itself confirmed. Fetch 2026-11-17: HTTP 200, application/json, 9062 bytes, final URL https://data.sf.gov/api/views/kc49-udxn.
+    Archived copy has 18 `cachedContents` blocks (sample column values, including addresses and free text)
+    removed and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized
+    file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/e5cd5e0551734d77a94893138f0dded9c05eca57bf55aa8eda0e96e7698b24c1.json
+  robots_checked: true
+- id: sf-scorecard-measures-columns
+  name: Scorecard Measures dataset column list (id kc49-udxn)
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/api/views/kc49-udxn/columns.json
+  status: fetched
+  notes: 'Metadata only, no records. Fetch 2026-11-17: HTTP 200, application/json, 5268 bytes, final URL
+    https://data.sf.gov/api/views/kc49-udxn/columns.json. Archived copy has 18 `cachedContents` blocks
+    (sample column values, including addresses and free text) removed and the JSON re-serialized with
+    sorted keys, under rule 7; its sha256 is of this sanitized file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/6974551b96a68fbe217b20de809e6acc957458a6114a83216e3408314cc1c92f.json
+  robots_checked: true

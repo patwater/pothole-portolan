@@ -16,6 +16,7 @@ Usage: python3 -I scripts/fetch_source.py [--root DIR] [--id SOURCE_ID ...] [--d
 import argparse
 import datetime
 import hashlib
+import json
 import sys
 import time
 import urllib.error
@@ -110,6 +111,35 @@ def fetch(url):
         return body, resp.geturl(), resp.headers.get("Content-Type", ""), resp.status
 
 
+def sanitize(url, content_type, body):
+    """Remove sample values that open data portals embed in dataset metadata (rule 7).
+
+    Socrata /api/views/ JSON carries `cachedContents`: up to 20 sample values per column drawn from the
+    live data, which for a 311 dataset include addresses, coordinates and free-text notes. Those are
+    record-level fragments, so they are dropped before anything is archived. Returns (body, note or None).
+    """
+    if "/api/views/" not in urllib.parse.urlsplit(url).path or "json" not in (content_type or "").lower():
+        return body, None
+    removed = 0
+
+    def strip(node):
+        nonlocal removed
+        if isinstance(node, dict):
+            if "cachedContents" in node:
+                removed += 1
+                node = {k: v for k, v in node.items() if k != "cachedContents"}
+            return {k: strip(v) for k, v in node.items()}
+        if isinstance(node, list):
+            return [strip(v) for v in node]
+        return node
+
+    cleaned = strip(json.loads(body.decode("utf-8")))
+    out = json.dumps(cleaned, sort_keys=True, indent=1, ensure_ascii=False).encode("utf-8")
+    note = (f"Archived copy has {removed} `cachedContents` blocks (sample column values, including addresses and free text) removed "
+            "and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized file, not of the raw response.")
+    return out, note
+
+
 def append_note(entry, text):
     entry["notes"] = (entry.get("notes", "").rstrip() + " " if entry.get("notes") else "") + text
 
@@ -166,6 +196,14 @@ def run(root, slug, only_ids, delay):
             append_note(entry, f"Fetch {today}: {type(exc).__name__}: {exc}.")
             print(f"UNAVAILABLE {entry['id']}: {type(exc).__name__}")
             continue
+        try:
+            body, sanitize_note = sanitize(final_url, ctype, body)
+        except ValueError as exc:
+            entry["status"] = "unavailable"
+            entry["retrieved"] = today
+            append_note(entry, f"Fetch {today}: response could not be parsed for sanitizing ({type(exc).__name__}), so it was not archived.")
+            print(f"UNAVAILABLE {entry['id']}: could not sanitize")
+            continue
         digest = hashlib.sha256(body).hexdigest()
         ext = extension_for(ctype, final_url)
         rel = f"sources/{digest}{ext}"
@@ -179,7 +217,7 @@ def run(root, slug, only_ids, delay):
         detail = f"Fetch {today}: HTTP {status}, {ctype.split(';')[0] or 'unknown type'}, {len(body)} bytes"
         if final_url != url:
             detail += f", final URL {final_url}"
-        append_note(entry, detail + ".")
+        append_note(entry, detail + "." + (" " + sanitize_note if sanitize_note else ""))
         print(f"FETCHED     {entry['id']}: {rel} ({len(body)} bytes)")
     path.write_text(HEADER + yaml.safe_dump(sources, sort_keys=False, allow_unicode=True, width=100),
                     encoding="utf-8")
