@@ -11,7 +11,7 @@
   kind: measured_condition
   method: 'Read from the city''s January 8, 2024 release: ''score increased to 75'' and ''which covered calendar
     year 2023''.'
-  confidence: provisional
+  confidence: supported
   caveats: Stated in a city press release, not the MTC data. The release describes the score as rated independently
     and tracked by MTC. It says the 0-100 scale runs from 0 (worst) to 100 (freshly paved).
   condition_index:
@@ -30,7 +30,7 @@
   period: 2024
   kind: measured_condition
   method: Read from the MTC Vital Signs street pavement condition page, headline statement for 2024.
-  confidence: provisional
+  confidence: supported
   caveats: A three-year moving average, so it is not a single-year survey score. The page was last updated February
     2026. Whether it is directly comparable with the city's calendar-year score is unresolved.
   condition_index:
@@ -51,7 +51,7 @@
   kind: measured_condition
   method: Read from the page text 'gaining nine points', cross-checked against the '+9' headline figure on the same
     page.
-  confidence: provisional
+  confidence: supported
   caveats: Both end points are three-year moving averages. This is a change in an index, not in the number of potholes.
   condition_index:
     name: Pavement Condition Index (PCI), MTC Vital Signs
@@ -70,7 +70,7 @@
   period: 2024
   kind: measured_condition
   method: Read from the MTC Vital Signs page headline for the region.
-  confidence: provisional
+  confidence: supported
   caveats: Regional context for the San Francisco figures. Not a comparison between cities.
   condition_index:
     name: Pavement Condition Index (PCI), MTC Vital Signs
@@ -91,7 +91,7 @@
   kind: measured_condition
   method: Row '2024' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -113,7 +113,7 @@
   kind: measured_condition
   method: Row '2024' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -135,7 +135,7 @@
   kind: measured_condition
   method: Row '2024' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -157,7 +157,7 @@
   kind: measured_condition
   method: Row '2014' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -179,7 +179,7 @@
   kind: measured_condition
   method: Row '2014' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -201,7 +201,7 @@
   kind: measured_condition
   method: Row '2014' of the 'Annual Network Condition' slide (slide 7). Column order Very Poor, Poor/At-Risk, Good/Excellent
     was confirmed against the rendered slide, whose legend colors match the bars.
-  confidence: provisional
+  confidence: supported
   caveats: The deck's band edges differ from MTC's and from the city scorecard's, so these categories must not be
     merged with either. The slide does not say how many blocks were surveyed or how the grouping was made.
   condition_index:
@@ -246,7 +246,7 @@
   period: as of 2025-11-13
   kind: spending
   method: 'Read from the ''Funding: Average Cost for Block of Paving'' slide (slide 8).'
-  confidence: provisional
+  confidence: supported
   caveats: The slide's breakdown includes staff time, four curb ramps, localized base repair and other items, so
     it is the cost of a full paving project block and not of filling a pothole. The year of the cost basis is not
     stated.
@@ -276,7 +276,7 @@
   period: awards dated 2023-07-21 to 2025-11-13
   kind: spending
   method: Slide 10 table. The script summed the 21 block counts and confirmed they equal the TOTAL row.
-  confidence: provisional
+  confidence: supported
   caveats: Program output, recorded as 'spending' because the schema has no output kind. One 'as needed' preservation
     award covers 150 blocks.
 - source_url: https://www.sf.gov/data/pothole-response
@@ -289,7 +289,7 @@
   period: current as of retrieval
   kind: policy
   method: Read from the 'How performance is measured' text of the city's Pothole Response scorecard page.
-  confidence: provisional
+  confidence: supported
   caveats: The same page defines the monthly figure as requests responded to 'within three business days' divided
     by requests received, which is not identical to 72 hours. The page text holds no measured percentage; the values
     sit in an embedded dashboard backed by the Scorecards dataset, which has not been retrieved.
@@ -304,7 +304,7 @@
   period: as stated July 2023
   kind: policy
   method: Read from the Project Information Form text in the Prop L 5-Year Prioritization Program (approved 2023-07-25).
-  confidence: provisional
+  confidence: supported
   caveats: Conflicts with the MTC statement of a three-year survey update and the city scorecard's annual publication.
     Unresolved; Assess should not choose between them.
 - source_url: https://mtc.ca.gov/operations/programs-projects/streets-roads-arterials/pavement-condition-index
@@ -318,6 +318,6 @@
   period: current as of retrieval
   kind: policy
   method: Read from the MTC Pavement Conditions Index program page text.
-  confidence: provisional
+  confidence: supported
   caveats: Regional program statement, not specific to San Francisco. Conflicts with the Public Works statement
     of a two-year inspection cycle.

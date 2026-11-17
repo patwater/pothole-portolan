@@ -114,6 +114,31 @@ Eighteen claims are in `claims.yaml`, all `provisional`: 10 `measured_condition`
 
 **Method lessons.** The first extraction run picked up a slide-footer page number ("4") as the blocks-resurfaced figure; I noticed it in the printed summary, and the script now anchors on the whole slide sequence. The awards table rows sum to $132.9 million against a stated total of $133.0 million, so the script allows rounding and the claim's caveats say so. Block counts match exactly (805).
 
+## Assess results (2026-11-17)
+
+`scripts/assess_san_francisco.py` re-derived all 18 claims from their archives by a second path: html.parser instead of regex stripping for pages, `pdftotext -raw` (which emits tables column by column) instead of `-layout` for PDFs, and different anchor phrases. It also checked each claim mechanically: archive hash, source inventory match, retrieval date, that the value and period appear in the statement, and that every `measured_condition` claim has its index block. Result: **15 supported, 3 provisional, 0 demoted.**
+
+I also checked the PDF figures by eye against rendered slides 5, 7, 8 and 10. The slide 8 cost breakdown sums to its headline ($50,000 + $60,000 + $55,000 + $65,000 + $30,000 = $260,000), and the slide 10 block counts sum to the stated 805.
+
+**Still provisional, and why.**
+
+| Claim | Why it was not promoted |
+|-------|-------------------------|
+| sf-blocks-resurfaced-as-of-2025-11 (9,148) | The figure is reproduced, but the slide gives no start year or period, so whether it is cumulative, annual or since a program start is unknown. |
+| sf-blocks-planned-as-of-2025-11 (2,500+) | A lower bound with no planning horizon stated. |
+| sf-resurfacing-awards-amount-2023-2025 ($133.0M) | The stated total is reproduced, but the 21 rounded project amounts sum to $132.9M, so the total does not re-derive exactly from its parts. |
+
+**What "supported" does and does not mean here.** It means the figure is accurately reported from the archived source and its period and units are right. It does not mean the underlying fact is independently verified. Several supported claims are the city's own statements (for example the 75 in the 2024 release), and two supported claims, the two-year and three-year survey intervals, contradict each other as descriptions of how often the network is surveyed. Each is a true statement of what its document says. A dossier must show both and must not choose.
+
+**Limits of this assessment.**
+
+- The same author wrote Extract and Assess. The independence is in the method, not in a second reader. A human spot-check of a few claims against the source pages would add real independence.
+- Which table column is which category (very poor, poor/at-risk, good/excellent) rests on the slide's legend colors and bar order, which I read by eye. No script verifies it.
+- Nothing here resolves the four band schemes or the open conflicts listed under Extract results. Those are not numeric errors, they are scope questions.
+- Only 18 claims exist. No demand claims and no measured pothole response claim, so the ledger cannot yet support a dossier section on residents' reports or repair speed.
+
+**Defects in my own tooling found while testing.** A claim whose archive is missing crashed the assessor instead of demoting that claim. That is fixed, and `tests/test_assess.py` now damages three claims (wrong value, wrong period, missing archive) and checks that exactly those are demoted.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
