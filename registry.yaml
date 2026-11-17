@@ -1,44 +1,120 @@
-# Supervisor-owned. Behaviors, triggers, model tier, and permitted tools.
-# Scaffolded in Phase 0. Triggers are all "manual" until Phase 2.
-# model_tier values are placeholders (small | medium | large); the supervisor maps tiers to models.
-# Credentials are injected by the scheduler as environment variables. Names only here, never values.
+# Supervisor-owned. Behaviors, triggers, model tier, turn limits, and permitted tools.
+# Scaffolded in Phase 0, extended for the Phase 2 scheduled funnel (approval 2026-11-17-001).
+#
+# How scripts/funnel_loop.py reads this file, once per behavior invocation:
+#   tools        passed to `claude -p` as --allowedTools, with --permission-mode dontAsk, so a tool
+#                or Bash command that is not listed is denied, never prompted for.
+#   deny_tools   passed as --disallowedTools; a bare tool name removes the tool from the model.
+#   max_turns    passed as --max-turns.
+#   model_tier   mapped to a model by model_tiers below, passed as --model.
+#   credentials  names only. The loop passes the invocation exactly these environment variables,
+#                when the workflow has them, plus ANTHROPIC_API_KEY for the CLI itself.
+#   prompt       the behavior's instruction; the loop adds the city, stage and date.
+# Tool patterns use the documented prefix form, "Bash(command prefix *)" (Claude Code headless docs).
+
+# PLACEHOLDER for the supervisor to confirm: the tier-to-model mapping. These are the documented
+# model aliases (sonnet, opus, haiku), not pinned model ids.
+model_tiers:
+  small: haiku
+  medium: sonnet
+  large: opus
+
+funnel:
+  workflow: .github/workflows/funnel.yml
+  # Must match the cron lines in the workflow (tests/test_registry.py checks). UTC.
+  # Monday and Thursday, off the hour because GitHub delays scheduled runs at the top of the hour.
+  cron: ["17 10 * * 1", "17 10 * * 4"]
+  max_behaviors_per_run: 8
+  invocation_timeout_minutes: 30
+  # Stage names and the behavior each one triggers are in scripts/next_behavior.py.
+  stops_at: queue/drafts
 
 behaviors:
   scout:
-    trigger: manual
+    trigger: funnel
     model_tier: small
+    max_turns: 30
     tools: [Read, Write, Edit, Bash, WebFetch]
     credentials: []
+    prompt: >
+      Scout the city. Create cities/<slug>/ with notes.md describing the kind of data regime the city
+      appears to have, and a status.yaml with stage scouted, blocked_on null and last_run null.
+      Everything you write about the city is a hypothesis until a later behavior fetches a source.
   discover:
-    trigger: manual
+    trigger: funnel
     model_tier: medium
+    max_turns: 40
     tools: [Read, Write, Edit, Bash, WebFetch, WebSearch]
     credentials: []
+    prompt: >
+      Find candidate sources for the city and write them to cities/<slug>/sources.yaml with status
+      listed. Do not download anything for archiving; the Fetch behavior does that. When you are done
+      set stage to discovered in status.yaml.
   fetch:
-    trigger: manual
+    trigger: funnel
     model_tier: small
-    tools: [Read, Write, Bash, WebFetch]
+    max_turns: 15
+    # Runners have open egress, so this is the only network path. scripts/fetch_source.py is the
+    # robots.txt and rate-limit guard and, on the DataSF hosts, refuses anything but metadata and
+    # grouped aggregates. There is deliberately no web fetch tool and no file-writing tool here.
+    tools: [Read, "Bash(python3 -I scripts/fetch_source.py *)"]
+    deny_tools: [WebFetch, WebSearch, Write, Edit]
     credentials: []
+    prompt: >
+      Run exactly this one command, once: python3 -I scripts/fetch_source.py <slug>. Send it alone.
+      Anything before or after it (cd, ;, &&, a pipe, a redirect, an echo of the exit status) makes the
+      command not match the one allowed rule, and it is denied. Do not try other commands or other
+      ways to retrieve a page. The script prints a line per source, archives each listed source by
+      content hash, marks it fetched or unavailable, and sets stage to fetched when no listed source
+      remains. If its output ends with "left as listed", some sources were skipped because of a rate
+      limit, the request limit or network policy: do nothing further and say so.
   extract:
-    trigger: manual
+    trigger: funnel
     model_tier: medium
+    max_turns: 60
     tools: [Read, Write, Edit, Bash]
     credentials: []
+    prompt: >
+      Read the archived copies and write claims to cities/<slug>/claims.yaml, each with its method.
+      Put extraction code in scripts/ so the numbers can be reproduced. Numbers come from the archive,
+      never from memory. Use program_output for counts of what a program did (blocks resurfaced), and
+      never present reported demand as condition. If the data you need is in a source that is not yet
+      archived, add it to sources.yaml as listed and set stage to discovered. Otherwise set stage to
+      extracted.
   assess:
-    trigger: manual
+    trigger: funnel
     model_tier: large
+    max_turns: 60
     tools: [Read, Edit, Bash]
     credentials: []
+    prompt: >
+      Re-derive every claim from the archive, check units and periods, and set confidence. Demote
+      anything you cannot re-derive. Run the repo's assess script for the city if one exists. Set
+      stage to assessed when done.
   draft:
-    trigger: manual
+    trigger: funnel
     model_tier: large
+    max_turns: 40
     tools: [Read, Write, Edit]
     credentials: []
+    prompt: >
+      Write cities/<slug>/dossier.md from supported and provisional claims only, following
+      templates/dossier.md, with {{claim:id}} markers for every number. State plainly what could
+      not be found. A city whose demand or response-time side is missing says so; it does not wait
+      for a perfect dossier. Set stage to drafted.
   publish:
-    trigger: manual
+    # Phase 2: this behavior only queues a draft. Nothing is published, and the loop gives it no
+    # Blygger credential. At Phase 3 the supervisor revisits this entry and the workflow.
+    trigger: funnel
     model_tier: small
-    tools: [Read, Bash]
-    credentials: [BLYGGER_WRITE_TOKEN]   # PLACEHOLDER: no write operation is documented yet, see docs/blygger.md
+    max_turns: 15
+    tools: [Read, Write, "Bash(python3 -I checks/run_checks.py *)"]
+    credentials: []
+    prompt: >
+      Phase 2: do not publish. Run python3 -I checks/run_checks.py --content-only --city <slug>. If
+      every check passes, copy cities/<slug>/dossier.md to queue/drafts/<slug>-v<version>.md, where
+      version is the front matter version, and set stage to queued. If a check fails, change nothing
+      except status.yaml: set blocked_on to type run_failure with the failing check names in note.
   monitor:
     trigger: manual
     model_tier: small

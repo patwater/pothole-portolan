@@ -168,6 +168,9 @@ def aggregate_rows_exceeded(url, body):
 # A proxy refusal is the sandbox's network policy, not a fact about the source. Such sources
 # stay "listed" and are reported, never marked unavailable.
 BLOCKED = "blocked by the environment's network policy"
+# A network error, timeout or HTTP 5xx says nothing about the source either. Those sources also
+# stay "listed" and are retried on a later run; only a refusal (robots.txt, 4xx) is "unavailable".
+TRANSIENT = "temporary network failure"
 
 
 def robots_allows(url):
@@ -185,13 +188,15 @@ def robots_allows(url):
             if exc.code in (404, 410):
                 rp.parse([])
                 _robots[origin] = (rp, f"no robots.txt (HTTP {exc.code})")
+            elif exc.code >= 500:
+                _robots[origin] = (None, TRANSIENT)
             else:
                 _robots[origin] = (None, f"robots.txt returned HTTP {exc.code}")
         except Exception as exc:  # network failure: do not guess
             if "Tunnel connection failed" in str(exc):
                 _robots[origin] = (None, BLOCKED)
             else:
-                _robots[origin] = (None, f"robots.txt unreadable: {type(exc).__name__}")
+                _robots[origin] = (None, TRANSIENT)
     rp, detail = _robots[origin]
     if rp is None:
         return False, detail
@@ -236,6 +241,18 @@ def fetch(url):
         return body, resp.geturl(), resp.headers.get("Content-Type", ""), resp.status
 
 
+def advance_stage(root, slug):
+    """Fetch has no file-writing tool, so this script moves the city from discovered to fetched."""
+    path = Path(root) / "cities" / slug / "status.yaml"
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    if re.search(r"^stage: discovered\s*$", text, re.M):
+        path.write_text(re.sub(r"^stage: discovered\s*$", "stage: fetched", text, count=1, flags=re.M),
+                        encoding="utf-8")
+        print("STAGE       discovered -> fetched (no listed source remains)")
+
+
 def append_note(entry, text):
     entry["notes"] = (entry.get("notes", "").rstrip() + " " if entry.get("notes") else "") + text
 
@@ -275,8 +292,8 @@ def run(root, slug, only_ids, delay, limit=20):
             continue
         requests += 1
         allowed, robots_detail = robots_allows(url)
-        if robots_detail == BLOCKED:
-            print(f"BLOCKED     {entry['id']}: {BLOCKED}; left as listed")
+        if robots_detail in (BLOCKED, TRANSIENT):
+            print(f"BLOCKED     {entry['id']}: {robots_detail}; left as listed")
             blocked += 1
             continue
         if not allowed:
@@ -302,6 +319,11 @@ def run(root, slug, only_ids, delay, limit=20):
                 print(f"RATE-LIMITED {entry['id']}: HTTP 429 from {host}; left as listed")
                 blocked += 1
                 continue
+            if exc.code >= 500:
+                append_note(entry, f"Fetch {today}: HTTP {exc.code}; left listed to retry later.")
+                print(f"BLOCKED     {entry['id']}: HTTP {exc.code}, {TRANSIENT}; left as listed")
+                blocked += 1
+                continue
             entry["status"] = "unavailable"
             entry["retrieved"] = today
             append_note(entry, f"Fetch {today}: HTTP {exc.code} {exc.reason}.")
@@ -312,10 +334,8 @@ def run(root, slug, only_ids, delay, limit=20):
                 print(f"BLOCKED     {entry['id']}: {BLOCKED}; left as listed")
                 blocked += 1
                 continue
-            entry["status"] = "unavailable"
-            entry["retrieved"] = today
-            append_note(entry, f"Fetch {today}: {type(exc).__name__}: {exc}.")
-            print(f"UNAVAILABLE {entry['id']}: {type(exc).__name__}")
+            print(f"BLOCKED     {entry['id']}: {type(exc).__name__}, {TRANSIENT}; left as listed")
+            blocked += 1
             continue
         try:
             if aggregate_rows_exceeded(url, body):
@@ -347,6 +367,8 @@ def run(root, slug, only_ids, delay, limit=20):
     errors = validate.validate_file(path, "sources.schema.json")
     for line in errors:
         print("SCHEMA", line)
+    if not errors and not any(e.get("status") == "listed" for e in sources):
+        advance_stage(root, slug)
     if blocked:
         print(f"{blocked} source(s) left as listed (network policy, rate limit or request limit)")
     return 1 if errors else (2 if blocked else 0)

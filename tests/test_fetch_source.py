@@ -166,5 +166,49 @@ class RunTest(unittest.TestCase):
         self.assertNotIn("date.today()", Path(fs.__file__).read_text())
 
 
+    def test_stage_moves_to_fetched_only_when_no_source_is_left_listed(self):
+        status = self.root / "cities" / "t" / "status.yaml"
+        status.write_text("stage: discovered\nblocked_on: null\nlast_run: null\n")
+        urls = [f"https://data.sf.gov/api/views/aaa{i}-0000.json" for i in range(2)]
+        for u in urls:
+            self.responses[u] = b"{}"
+        self.write_sources(urls)
+        self.run_fetch(limit=1)
+        self.assertIn("stage: discovered", status.read_text())
+        self.run_fetch(limit=1)
+        self.assertIn("stage: fetched", status.read_text())
+
+    def test_stage_is_left_alone_when_it_is_not_discovered(self):
+        status = self.root / "cities" / "t" / "status.yaml"
+        status.write_text("stage: assessed\nblocked_on: null\nlast_run: null\n")
+        self.responses[META] = b"{}"
+        self.write_sources([META])
+        self.run_fetch()
+        self.assertIn("stage: assessed", status.read_text())
+
+
+    def test_a_network_error_or_a_5xx_leaves_the_source_listed_but_a_404_does_not(self):
+        urls = [f"https://www.sf.gov/p{i}" for i in range(3)]
+        self.responses[urls[0]] = urllib.error.URLError("temporary failure in name resolution")
+        self.responses[urls[1]] = urllib.error.HTTPError(urls[1], 502, "Bad Gateway", {}, None)
+        self.responses[urls[2]] = urllib.error.HTTPError(urls[2], 404, "Not Found", {}, None)
+        self.write_sources(urls)
+        self.assertEqual(self.run_fetch(), 2)
+        self.assertEqual([s["status"] for s in self.sources()], ["listed", "listed", "unavailable"])
+
+    def test_an_unreadable_robots_file_leaves_the_source_listed(self):
+        fs.robots_allows = lambda url: (False, fs.TRANSIENT)
+        self.write_sources(["https://www.sf.gov/p"])
+        self.assertEqual(self.run_fetch(), 2)
+        self.assertEqual(self.calls, [])
+        self.assertEqual(self.sources()[0]["status"], "listed")
+
+    def test_robots_disallow_is_still_unavailable(self):
+        fs.robots_allows = lambda url: (False, "robots.txt read")
+        self.write_sources(["https://www.sf.gov/p"])
+        self.run_fetch()
+        self.assertEqual(self.sources()[0]["status"], "unavailable")
+
+
 if __name__ == "__main__":
     unittest.main()

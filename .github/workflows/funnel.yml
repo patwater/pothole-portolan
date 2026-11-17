@@ -1,0 +1,151 @@
+# The Phase 2 funnel. Supervisor-owned (approval 2026-11-17-001); scheduled runs may not edit it.
+# Setup, secrets and what each step guards are in docs/automation.md.
+#
+# Why the Claude Code CLI and not anthropics/claude-code-action: a `uses:` step cannot sit inside a
+# loop, and the action's documentation lists no cost or usage output, while `claude -p
+# --output-format json` reports total_cost_usd and usage, which the ledger and the daily cap need.
+# The secret name ANTHROPIC_API_KEY is the one the Claude Code GitHub Actions documentation uses.
+name: funnel
+
+on:
+  schedule:
+    # Monday and Thursday, 10:17 UTC. Must match funnel.cron in registry.yaml (tests/test_registry.py).
+    - cron: "17 10 * * 1"
+    - cron: "17 10 * * 4"
+  workflow_dispatch:
+
+# One run at a time. A run that starts while another is going waits; it does not cancel it.
+concurrency:
+  group: funnel
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # push the run's commits
+  issues: write     # the one summary issue
+
+env:
+  CLAUDE_CODE_VERSION: "2.1.326"   # the version these flags were checked against; bump deliberately
+  TRUSTED: ${{ github.workspace }}/../trusted   # a copy of checks/, scripts/ and schemas/ taken before any agent runs
+
+jobs:
+  funnel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          lfs: true                    # archives are in Git LFS; the hash check needs their content
+          persist-credentials: false   # no token on disk while the agent runs
+
+      - name: Stop early if PAUSE exists
+        id: pause
+        run: |
+          if [ -f PAUSE ]; then
+            echo "paused=true" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Funnel paused::PAUSE exists at the repo root. No model calls, no pushes, no issue update (CLAUDE.md rule 6)."
+          else
+            echo "paused=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Snapshot the trusted tooling
+        if: steps.pause.outputs.paused == 'false'
+        run: |
+          mkdir -p "$TRUSTED"
+          cp -R checks scripts schemas "$TRUSTED/"
+          git lfs install --local
+
+      - uses: actions/setup-node@v7
+        if: steps.pause.outputs.paused == 'false'
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v7
+        if: steps.pause.outputs.paused == 'false'
+        with:
+          python-version: "3.13"
+
+      - name: Install the Claude Code CLI and the Python requirements
+        if: steps.pause.outputs.paused == 'false'
+        run: |
+          npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+          claude --version
+          python3 -m pip install -r scripts/requirements.txt
+
+      - name: Run the funnel loop
+        id: loop
+        if: steps.pause.outputs.paused == 'false'
+        continue-on-error: true   # the push and the issue update below still run after a failed behavior
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # The loop exits 0 with a clear message when daily_cap_usd is null, when the phase is not 2,
+          # and for every other orderly stop. It exits 1 only when a behavior failed.
+          python3 -I "$TRUSTED/scripts/funnel_loop.py" \
+            --root "$GITHUB_WORKSPACE" \
+            --guard "$TRUSTED/checks/check_ownership.py" \
+            --summary "$RUNNER_TEMP/summary.json" \
+            --patch-dir "$RUNNER_TEMP/patches"
+
+      - name: Guard file ownership, then push
+        id: push
+        if: always() && steps.pause.outputs.paused == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REF_NAME: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git fetch origin "$REF_NAME"
+          git rebase "origin/$REF_NAME"
+          # Fails the run, and nothing is pushed, if any commit touches CLAUDE.md, permissions.yaml,
+          # registry.yaml, checks/, schemas/ or .github/ (or the other protected paths listed in the guard).
+          python3 -I "$TRUSTED/checks/check_ownership.py" --root . --range "origin/$REF_NAME" HEAD
+          if [ "$(git rev-list --count "origin/$REF_NAME..HEAD")" = "0" ]; then
+            echo "Nothing to push."
+            exit 0
+          fi
+          git push origin "HEAD:$REF_NAME"
+
+      - name: Update the summary issue
+        if: always() && steps.pause.outputs.paused == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ ! -f "$RUNNER_TEMP/summary.json" ]; then
+            echo '{"outcome":"failed","message":"The loop wrote no summary; see the workflow log.","steps":[]}' > "$RUNNER_TEMP/summary.json"
+          fi
+          python3 -I "$TRUSTED/scripts/funnel_report.py" --root . --summary "$RUNNER_TEMP/summary.json" \
+            --body "$RUNNER_TEMP/issue-body.md" --comment "$RUNNER_TEMP/issue-comment.md"
+          gh label create funnel-summary --description "Funnel run summary" --color 0E8A16 2>/dev/null || true
+          number="$(gh issue list --label funnel-summary --state open --limit 1 --json number --jq '.[0].number // empty')"
+          if [ -z "$number" ]; then
+            url="$(gh issue create --label funnel-summary --title "Funnel summary: what is waiting on the supervisor" --body-file "$RUNNER_TEMP/issue-body.md")"
+            number="${url##*/}"
+          else
+            gh issue edit "$number" --body-file "$RUNNER_TEMP/issue-body.md"
+          fi
+          gh issue comment "$number" --body-file "$RUNNER_TEMP/issue-comment.md"
+
+      - name: Keep the diff of any discarded behavior
+        if: always() && steps.pause.outputs.paused == 'false'
+        uses: actions/upload-artifact@v7
+        with:
+          name: discarded-diffs
+          path: ${{ runner.temp }}/patches
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Fail the run if the loop failed
+        if: always() && steps.loop.outcome == 'failure'
+        run: |
+          echo "::error title=Funnel failed::A behavior failed and was discarded. See the issue comment and the discarded-diffs artifact."
+          exit 1

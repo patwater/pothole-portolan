@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `assessed` (partial): 23 claims, 19 supported and 4 provisional, covering condition, program output and policy only. No demand or response-time values yet, so no Draft. Blocked on proposal `queue/proposals/2026-11-17-001-san-francisco-fetch-followups.md` (data.sfgov.org, claim kind). The 2026 release was fetched on 2026-11-17 (10 of 14 sources archived); the DataSF FAQ is still blocked at the gateway. Next: the 311 and response-time work once `data.sfgov.org` is decided; Draft only after that. See `cities/san-francisco/notes.md`.
+1. san-francisco: status `discovered` (see `cities/san-francisco/status.yaml`). The phase is 2 and the supervisor's decisions on proposal `2026-11-17-001` are recorded in approval `2026-11-17-001`. The four block-count claims are now `program_output`. The two DataSF metadata sources are listed for the scheduled Fetch; the 311 and response-time work follows the plan in the proposal (aggregates only), and Draft waits for it.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`
