@@ -51,9 +51,38 @@ Thirteen candidate sources are listed in `sources.yaml`, all with status `listed
 
 **Handling reminders for Fetch:** the Open311 endpoint reportedly wants an API key, so read its terms and rate limits first and identify the bot honestly (rules 8 and 1). The 311 dataset is record-level, so archive aggregates only (rule 7).
 
+## Fetch results (run dated 2026-11-16 to 2026-11-17)
+
+Of 13 listed sources, 9 are fetched and archived under `sources/`, 1 is still `listed`, and 3 are `unavailable`. Nothing has been read for numbers yet; that is Extract.
+
+| Source id | Result | Detail |
+|-----------|--------|--------|
+| sf-publicworks-pci-release-2026-01 | fetched | HTML. Redirected within www.sf.gov to the `news--` path. |
+| mtc-vital-signs-street-pavement | fetched | HTML page. The raw-data download linked from it was not fetched; that is a separate file and needs its own source entry. |
+| mtc-pci-program-page | fetched | HTML. |
+| sf-scorecard-pci-data-story | fetched | HTML. Redirected within www.sf.gov. The text did not contain the word "inspected", so the search snippet's "more than 12,000 blocks inspected" is unconfirmed. |
+| datagov-311-cases | fetched | HTML catalog record only, not data. |
+| sf-pothole-response-measure | fetched | HTML. Redirected within www.sf.gov. |
+| publicworks-commission-resurfacing-update-2025-11 | fetched | PDF, about 22 pages, mentions PCI and blocks. |
+| sfcta-prop-l-resurfacing-5ypp-2023 | fetched | PDF, about 59 pages, mentions PCI and pavement condition many times. |
+| ca-statewide-local-streets-needs-assessment-2020 | fetched | HTML news article about the report, not the report itself. Weak as a source. |
+| datasf-311-cases-faq | **listed** | The environment's gateway returns 502 for support.datasf.org even though the host is allowed. This is a gateway problem, not a fact about the source. Retry later. |
+| sf311-open311-api | **unavailable** | `mobile311.sfgov.org/robots.txt` says `Disallow: /`. Honoured. |
+| bla-street-resurfacing-audit-2021 | **unavailable** | The URL moved to `sfbos.archive.sf.gov`, whose robots.txt disallows all agents except archive.org's bot. Honoured; see the proposal. |
+| publicworks-cpc-budget-fy2627 | **unavailable** | The URL redirected to a generic department landing page, not the presentation. The wrong page was archived, checked, and discarded. |
+
+**Errors made and fixed during this run.**
+
+1. The first fetch pass marked all 13 sources `unavailable` because the environment's network policy blocked the hosts. That was a fact about the sandbox, not the sources, so I reverted `sources.yaml`, asked for the hosts to be allowed, and changed the script to leave policy-blocked sources as `listed`.
+2. A redirect to a different host would have skipped the robots.txt check. The script now checks robots.txt on every redirect hop, and I re-checked all archived final URLs by hand.
+3. A 200 response was not treated as proof of the right document. Each archive was checked for expected text, which is what caught the wrong landing page.
+
+**Archive review.** The personal-data check warned on email addresses and phone numbers in five archived pages. All are generic agency contacts (city events inbox, Controller inbox, MTC info line, the 311 phone number, a placeholder address). The two PDFs were read as text and contain only agency contacts. No record-level data was archived.
+
 ## Dead ends
 
-None yet.
+- The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
+- The Open311 endpoint is closed to robots. Counts, if needed, must come from the bulk dataset route.
 
 ## Provenance of this note
 
