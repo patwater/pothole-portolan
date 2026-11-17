@@ -19,10 +19,14 @@
   publisher: San Francisco Public Works
   source_type: agency_page
   url: https://sfpublicworks.org/node/35600
-  status: listed
-  notes: Added by Extract on 2026-11-17 after finding that the page archived under the earlier id is the
-    2024 release. A search result described this page as the January 2, 2026 release reporting a score
+  status: fetched
+  notes: 'Added by Extract on 2026-11-17 after finding that the page archived under the earlier id is
+    the 2024 release. A search result described this page as the January 2, 2026 release reporting a score
     of 75 in 2025 and a ranking among large Bay Area cities. Not yet fetched, so none of that is verified.
+    Fetch 2026-11-17: HTTP 200, text/html, 51897 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  robots_checked: true
 - id: mtc-vital-signs-street-pavement
   name: 'Vital Signs: street pavement condition'
   publisher: Metropolitan Transportation Commission

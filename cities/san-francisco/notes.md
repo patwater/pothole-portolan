@@ -53,7 +53,7 @@ Thirteen candidate sources are listed in `sources.yaml`, all with status `listed
 
 ## Fetch results (run dated 2026-11-16 to 2026-11-17)
 
-Of 13 listed sources, 9 are fetched and archived under `sources/`, 1 is still `listed`, and 3 are `unavailable`. Nothing has been read for numbers yet; that is Extract.
+Of the 13 sources first listed, 9 were fetched. A second run on 2026-11-17 added the 2026 release (see below), so the inventory now has 14 sources: 10 fetched, 1 `listed` and 3 `unavailable`. Nothing has been read for numbers yet; that is Extract.
 
 | Source id | Result | Detail |
 |-----------|--------|--------|
@@ -138,6 +138,21 @@ I also checked the PDF figures by eye against rendered slides 5, 7, 8 and 10. Th
 - Only 18 claims exist. No demand claims and no measured pothole response claim, so the ledger cannot yet support a dossier section on residents' reports or repair speed.
 
 **Defects in my own tooling found while testing.** A claim whose archive is missing crashed the assessor instead of demoting that claim. That is fixed, and `tests/test_assess.py` now damages three claims (wrong value, wrong period, missing archive) and checks that exactly those are demoted.
+
+## Second Fetch run (2026-11-17)
+
+| Source id | Result | Detail |
+|-----------|--------|--------|
+| sf-publicworks-pci-release-2026-01 | fetched | HTML, 51,897 bytes, no redirect, robots.txt permits it. Content checked: it is the Public Works release dated January 2, 2026. |
+| datasf-311-cases-faq | still **listed** | `support.datasf.org` returns a gateway 502 ("host allowed, but the gateway could not connect to it") again. It has now failed in two runs. This describes the gateway's path to the host, not the source. |
+
+**Extract candidates from the 2026 release.** These are leads for the next Extract run, not claims, and the release text must be re-read then. It reports a PCI of 75 for 2025, 581 City-maintained blocks paved in 2025, and a $979 million investment over more than 15 years that resulted in more than 9,000 of nearly 13,000 blocks being resurfaced. It says the annual evaluation is released December 31 every year and tracked by MTC. It gives the regional average as 67, with San Jose at 73 and Oakland at 58. One dollar figure in the text has a typo ("$500,00"), so reconstruction cost must not be extracted from it without a caveat.
+
+**Effect on the open conflicts.** 75 is now reported by the city for calendar year 2023 and for 2025, and by MTC as a three-year moving average for 2024. These are consistent with a score that held at 75, so the earlier worry about three unrelated meanings is weaker. It is still not established that the city's calendar-year score and MTC's moving average measure the same thing, so the claim periods and methods must stay as the sources state them.
+
+**Handling note.** The archived release carries a named press contact and a work email address. It is a public press-office line, not record-level data, so the archive stays. The name and address must not be copied into claims, notes or a dossier.
+
+**Still unresolved for 311.** The DataSF FAQ remains unreachable. If it stays blocked, the 311 dataset's own documentation on another DataSF host (a search result earlier showed `docs.datasf.org` and a gitbook explainer) could replace it, but that is a Discover decision and those hosts are not on the environment's allowlist.
 
 ## Dead ends
 

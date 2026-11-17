@@ -25,7 +25,7 @@ The environment `pothole-portolan` currently allows 12 hosts, all for fetching p
 
 ## 3. Gateway problem on support.datasf.org
 
-The gateway returns 502 for `support.datasf.org` although the host is allowed. This looks like an upstream or gateway fault, not policy. I will retry in the next run. If it persists, the 311 FAQ is replaceable by the dataset's own documentation page on the open data portal.
+The gateway returns 502 for `support.datasf.org` although the host is allowed. This looks like an upstream or gateway fault, not policy. I retried in a second run on 2026-11-17 and it failed the same way, so it has now failed twice. If it persists, the 311 FAQ is replaceable by the dataset's own documentation page on the open data portal.
 
 ## 4. A supervisor-owned file to review
 
