@@ -82,6 +82,14 @@ class QueryPolicyTest(unittest.TestCase):
     def test_plain_filter_parameters_are_refused(self):
         self.assertIn("plain filter", self.refused("service_name=Pothole&$select=count(*)&$group=service_name&$having=count(*)>=10&$limit=5"))
 
+    def test_sensitive_word_inside_a_quoted_literal_is_allowed(self):
+        q = "$select=service_name,count(*)&$group=service_name&$having=count(*)>=10&$where=service_name in ('Street Defects','Sidewalk and Curb')&$limit=50"
+        self.assertIsNone(self.refused(q))
+
+    def test_sensitive_column_outside_a_literal_is_still_refused(self):
+        q = "$select=service_name,count(*)&$group=service_name&$having=count(*)>=10&$where=street='Street Defects'&$limit=50"
+        self.assertIn("sensitive", self.refused(q))
+
     def test_minimum_group_size_is_required(self):
         base = "$select=service_name,count(*)&$group=service_name&$limit=5000"
         self.assertIn("count(*) >=", self.refused(base))
@@ -94,6 +102,53 @@ class QueryPolicyTest(unittest.TestCase):
 
     def test_scorecard_dataset_allows_filtered_reads(self):
         self.assertIsNone(f.query_policy("https://data.example.org/resource/kc49-udxn.json?$select=calendar_month,actual&$where=measure_title like '%25othole%25'&$limit=500"))
+
+
+class TypedTextGuardTest(unittest.TestCase):
+    def body(self, rows):
+        return json.dumps(rows).encode()
+
+    def test_controlled_vocabulary_passes(self):
+        rows = [{"source": s, "cases": str(i + 10)} for i, s in enumerate(["Phone", "Web", "Mobile"])]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {})
+
+    def test_many_distinct_text_values_are_flagged(self):
+        rows = [{"service_subtype": f"Permits for Applicant {i}", "cases": "12"} for i in range(f.MAX_TEXT_DISTINCT + 1)]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {"service_subtype": f.MAX_TEXT_DISTINCT + 1})
+
+    def test_numeric_strings_are_not_text(self):
+        rows = [{"year": str(2000 + i), "cases": str(1000 + i)} for i in range(150)]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {})
+
+    def test_exactly_at_the_limit_passes(self):
+        rows = [{"agency": f"Queue {i}", "cases": "10"} for i in range(f.MAX_TEXT_DISTINCT)]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {})
+
+
+class StagedGateTest(unittest.TestCase):
+    def write(self, name, content):
+        import tempfile
+        d = Path(tempfile.mkdtemp())
+        p = d / name
+        p.write_text(content)
+        return p
+
+    def test_typed_text_response_blocks_the_commit(self):
+        import staged_gate
+        rows = [{"service_subtype": f"Permits for Applicant {i}", "cases": "12"} for i in range(f.MAX_TEXT_DISTINCT + 5)]
+        p = self.write("agg.json", json.dumps(rows))
+        self.assertTrue(any("typed text" in x for x in staged_gate.gate([p])))
+
+    def test_cached_contents_blocks_the_commit(self):
+        import staged_gate
+        p = self.write("meta.json", json.dumps({"columns": [{"cachedContents": {"top": []}}]}))
+        self.assertTrue(any("cachedContents" in x for x in staged_gate.gate([p])))
+
+    def test_clean_aggregate_passes_and_html_is_skipped(self):
+        import staged_gate
+        ok = self.write("ok.json", json.dumps([{"source": "Phone", "cases": "30"}, {"source": "Web", "cases": "20"}]))
+        html = self.write("page.html", "<p>write to a@b.org</p>")
+        self.assertEqual(staged_gate.gate([ok, html]), [])
 
 
 if __name__ == "__main__":

@@ -233,18 +233,6 @@
   retrieved: '2026-11-17'
   archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
   robots_checked: true
-- id: sf311-case-type-counts
-  name: '311 Cases: counts by service_name and service_subtype, groups of 10 or more cases'
-  publisher: DataSF
-  source_type: open_data_portal
-  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
-  status: fetched
-  notes: 'Aggregate query, no records. Purpose: Find which case-type values mean pothole. Only groups
-    of 10 or more cases are returned, because subtype values can hold typed text and a one-case group
-    can be a single record. Fetch 2026-11-17: HTTP 200, application/json, 125892 bytes.'
-  retrieved: '2026-11-17'
-  archive: sources/ea7ad512634f8515b459ba732044ee8738b298967f1a26a8f14d19e44dba95e2.json
-  robots_checked: true
 - id: sf311-all-cases-by-year
   name: '311 Cases: all cases by calendar year of requested_datetime'
   publisher: DataSF
@@ -292,4 +280,41 @@
     10661 bytes.'
   retrieved: '2026-11-17'
   archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  robots_checked: true
+- id: sf311-street-defect-subtype-counts
+  name: '311 Cases: subtype counts within the street defect service names, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=service_name%20in%20('Street%20Defects','Street%20Defect','Sidewalk%20and%20Curb')&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Subtypes of the street defect service names only, a bounded
+    vocabulary. Replaces an unrestricted taxonomy query whose subtype field returned hundreds of typed-text
+    values. Fetch 2026-11-17: HTTP 200, application/json, 2354 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/048e5c941187c0eca4eee4bf06786a2915f87ee87e8043d7d84d36a03d1cd121.json
+  robots_checked: true
+- id: sf311-pothole-label-search
+  name: '311 Cases: groups whose service name or subtype contains pothole, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=lower(service_name)%20like%20'%25pothole%25'%20or%20lower(service_subtype)%20like%20'%25pothole%25'%20or%20lower(service_name)%20like%20'%25pot%20hole%25'%20or%20lower(service_subtype)%20like%20'%25pot%20hole%25'&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Show whether any case type is labeled pothole. An empty
+    result is the finding, and it reveals no unrelated label. See sf311-label-search-control for the check
+    that the search method works. Fetch 2026-11-17: HTTP 200, application/json, 3 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570.json
+  robots_checked: true
+- id: sf311-label-search-control
+  name: '311 Cases: positive control for the label search, groups whose service name or subtype contains
+    pavement'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=lower(service_name)%20like%20'%25pavement%25'%20or%20lower(service_subtype)%20like%20'%25pavement%25'&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Positive control: the same search form with a word that
+    is known to occur, to show that an empty pothole result is not an artifact of the query. Fetch 2026-11-17:
+    HTTP 200, application/json, 346 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/56189250f9b4455ae99e4b25e1120fb4015bdb165cf163c27a9887044feab3e5.json
   robots_checked: true

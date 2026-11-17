@@ -141,7 +141,9 @@ def query_policy(url):
     unknown = [k for k in params if not k.startswith("$")]
     if unknown:
         return f"plain filter parameters are not allowed ({', '.join(unknown)}); use $where"
-    mentioned = set(re.findall(r"[a-z_][a-z0-9_]*", " ".join(soql.values()).lower()))
+    # Quoted literals are values, not columns: 'Street Defects' does not select the street column.
+    no_literals = re.sub(r"'(?:[^']|'')*'", "''", " ".join(soql.values()))
+    mentioned = set(re.findall(r"[a-z_][a-z0-9_]*", no_literals.lower()))
     banned = sorted(mentioned & SENSITIVE_FIELDS)
     if banned:
         return "query mentions sensitive field(s): " + ", ".join(banned)
@@ -159,6 +161,28 @@ def query_policy(url):
     if limit is None or not limit.isdigit() or int(limit) > rule["max_limit"]:
         return f"$limit must be given and at most {rule['max_limit']}"
     return None
+
+
+MAX_TEXT_DISTINCT = 100
+
+
+def typed_text_fields(body):
+    """Return {field: distinct_count} for text fields of an aggregate response with more than MAX_TEXT_DISTINCT values.
+
+    A grouped count is only safe to archive while the grouped fields are controlled vocabularies. A text
+    field with hundreds of distinct values is the signature of typed text (names, addresses), and a minimum
+    group size does not remove it: an applicant who files ten permits still appears by name.
+    """
+    rows = json.loads(body.decode("utf-8"))
+    if not isinstance(rows, list):
+        return {}
+    values = {}
+    for row in rows:
+        for k, v in row.items():
+            if isinstance(v, str):
+                values.setdefault(k, set()).add(v)
+    return {k: len(v) for k, v in values.items()
+            if len(v) > MAX_TEXT_DISTINCT and not all(x.lstrip("-").replace(".", "", 1).isdigit() for x in v)}
 
 
 def sanitize(url, content_type, body):
@@ -203,6 +227,7 @@ def run(root, slug, only_ids, delay):
     first = True
     blocked = 0
     refused = 0
+    held = 0
     for entry in sources:
         if entry.get("status") != "listed" or (only_ids and entry["id"] not in only_ids):
             continue
@@ -252,6 +277,17 @@ def run(root, slug, only_ids, delay):
             append_note(entry, f"Fetch {today}: {type(exc).__name__}: {exc}.")
             print(f"UNAVAILABLE {entry['id']}: {type(exc).__name__}")
             continue
+        rule = DATASET_POLICY.get((re.match(r"^/resource/([a-z0-9]{4}-[a-z0-9]{4})\.json$", urllib.parse.urlsplit(url).path) or [None, None])[1])
+        if rule and rule["aggregate_only"]:
+            try:
+                offenders = typed_text_fields(body)
+            except ValueError:
+                offenders = {"(response)": 0}
+            if offenders:
+                print(f"HELD        {entry['id']}: text field(s) with too many distinct values for a controlled vocabulary "
+                      f"({', '.join(f'{k}: {v}' for k, v in offenders.items())}); possible typed text, so nothing was archived; left as listed")
+                held += 1
+                continue
         try:
             body, sanitize_note = sanitize(final_url, ctype, body)
         except ValueError as exc:
@@ -284,7 +320,9 @@ def run(root, slug, only_ids, delay):
         print(f"{blocked} source(s) blocked by network policy and left as listed")
     if refused:
         print(f"{refused} source(s) refused by the query policy and left as listed")
-    return 1 if errors else (3 if refused else (2 if blocked else 0))
+    if held:
+        print(f"{held} source(s) held for review: possible typed text in a grouped field")
+    return 1 if errors else (4 if held else (3 if refused else (2 if blocked else 0)))
 
 
 def main(argv=None):
