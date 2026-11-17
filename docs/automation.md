@@ -47,7 +47,7 @@ A behavior may advance one stage, or send a city back to an earlier one, for exa
 2. **Settings, Actions, General, Workflow permissions:** "Read and write permissions", so the run may push commits and edit its issue.
 3. **Branch protection on the default branch,** if you have any, must let `github-actions[bot]` push, or the push step fails after the work is done. If you want every run reviewed instead, the push step can be changed to push a branch and open a pull request. Scheduled runs only ever run the workflow as it is on the default branch.
 4. **`spend.daily_cap_usd`** in `permissions.yaml`, and `identities.owner`. Until the cap is a number every run exits at once with "daily_cap_usd is null".
-5. **Git LFS.** The `sources/` archives are in LFS. Your GitHub plan has LFS storage and bandwidth quotas, and every run downloads all LFS objects at checkout, so bandwidth grows with the archive. The archive is about 18 MB now.
+5. **Git LFS is not applied yet.** See "Git LFS and the archive hash check" below for why and for the commands you run. Until then `sources/` stays in ordinary git, and `lfs: true` in the workflow's checkout does nothing.
 6. **Confirm the tier-to-model map** in `registry.yaml` (`model_tiers`: small haiku, medium sonnet, large opus). It is a placeholder, and the large tier is the expensive one.
 
 To stop everything, create a file named `PAUSE` at the repo root and push it.
@@ -74,7 +74,23 @@ Extraction and assessment scripts, other tests, `notes.md`, claims, sources, not
 
 ## Git LFS and the archive hash check
 
-LFS works with the hash check. Archives are named by the sha256 of their content, and an LFS pointer's `oid` is the sha256 of the same bytes, so the two agree. The working tree holds real content after checkout with `lfs: true`, which is what `run_checks.py` reads. A checkout without the LFS objects now fails the archives check with a message that says so, instead of a hash mismatch. The migration did not rewrite history: the ten existing archives became pointers in one commit, and earlier commits still contain the original blobs. If you want those out of the repository history, `git lfs migrate import --everything --include="sources/**"` plus a force-push does it, and I did not do that.
+**Status: not applied.** I prepared and tested the migration locally, but could not push it. This session's network policy answers Git LFS's `verify` calls with HTTP 403, so the LFS objects could not be uploaded, and GitHub rejects a push whose LFS pointers have no uploaded objects. I removed the migration from this branch rather than push pointers without content. The workflow still checks out with `lfs: true` and the archive check still understands pointers, so nothing else changes when you apply it.
+
+**LFS does work with the hash check.** Archives are named by the sha256 of their content, and an LFS pointer's `oid` is the sha256 of the same bytes. I confirmed all ten existing archives satisfy `oid == file name`. The working tree holds real content after a checkout that fetched the LFS objects, which is what `run_checks.py` reads. A checkout without them now fails the archives check with a message that says so, instead of a hash mismatch (`tests/test_checks.py` covers this).
+
+**To apply it, from a machine where LFS works, on this branch after merging:**
+
+```bash
+git lfs install
+printf '%s\n' 'sources/[0-9a-f]* filter=lfs diff=lfs merge=lfs -text' > .gitattributes
+git add .gitattributes && git add --renormalize sources
+git commit -m "lfs: store archived sources in Git LFS going forward"
+git push
+```
+
+This does not rewrite history: the existing blobs stay in earlier commits. `.gitattributes` is on the protected list, so scheduled runs cannot change it. Two costs to weigh first. Your GitHub plan has LFS storage and bandwidth quotas, and every run downloads all LFS objects at checkout, so bandwidth grows with the archive (about 18 MB now, mostly two PDFs). And only moving the existing blobs out of history, with `git lfs migrate import --everything --include="sources/**"` and a force-push, would shrink the repository itself.
+
+**If you would rather not use LFS,** the alternative is to keep archives in ordinary git and set a size ceiling in the fetcher. `scripts/fetch_source.py` already caps a download at 50 MB. The archive hash check needs no change either way.
 
 ## Verified, and not
 
@@ -82,7 +98,7 @@ Verified here, with Claude Code 2.1.326:
 
 - The CLI flags used (`-p`, `--output-format json`, `--max-turns`, `--model`, `--permission-mode dontAsk`, `--max-budget-usd`, `--allowedTools`, `--disallowedTools`, `--no-session-persistence`) are accepted, and the result is one JSON object with `result`, `is_error`, `subtype`, `num_turns`, `total_cost_usd`, `usage` and `session_id`.
 - A scoped `Bash(python3 -I scripts/… *)` rule allows that command and denies any command chained to it, including `&& curl`.
-- One real Fetch behavior, run through the loop on a scratch copy of the repository, fetched the two DataSF metadata endpoints (`data.sfgov.org` redirects to `data.sf.gov`), archived reduced copies as LFS pointers, advanced the stage, and committed with a ledger row. The same copy showed a row download refused without a request.
+- One real Fetch behavior, run through the loop on a scratch copy of the repository, fetched the two DataSF metadata endpoints (`data.sfgov.org` redirects to `data.sf.gov`), archived reduced copies, advanced the stage, and committed with a ledger row. The same copy showed a row download refused without a request.
 - 129 unit tests pass with the loop's own command.
 
 Not verified:
@@ -91,5 +107,5 @@ Not verified:
 - docs.github.com could not be fetched in this session. So the concurrency queue behavior (a third waiting run), the schedule rules beyond what the Claude Code docs state (default branch only, disabled after 60 days without activity in public repositories), the LFS quotas, and GitHub's refusal of a push that references missing LFS objects are unconfirmed.
 - Whether a `data.sf.gov` aggregate query is accepted without an app token. Only metadata endpoints were requested.
 - Only Fetch was run live. Scout, Discover, Extract, Assess, Draft and Publish prompts and their `max_turns` are untested with a model, and the turn limits and tier costs are guesses.
-- Pushing LFS objects from the workflow with the token embedded in the remote URL.
+- Pushing LFS objects at all: it failed from this session (HTTP 403 on the LFS verify call), so the migration is not applied and its push from the workflow is untested.
 - The other behaviors still have an unrestricted shell or web tools. See `queue/proposals/2026-11-17-002-narrow-network-and-shell-access.md`.

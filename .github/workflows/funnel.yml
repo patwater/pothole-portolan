@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          lfs: true                    # archives are in Git LFS; the hash check needs their content
+          lfs: true                    # no effect until sources/ is migrated to Git LFS (docs/automation.md); then the hash check needs the content
           persist-credentials: false   # no token on disk while the agent runs
 
       - name: Stop early if PAUSE exists
