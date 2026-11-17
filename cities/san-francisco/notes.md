@@ -235,7 +235,7 @@ No query would select an address, coordinate or free-text field.
 
 Eight aggregate sources are archived: seven queries on the 311 Cases dataset and one on Scorecard Measures. None selects an address, coordinate, free-text or record-id field, and the fetcher enforces that. Every 311 query requests only groups of 10 or more cases, and the fetcher holds any response whose text field has more than 100 distinct values. Every figure below comes from an archive in `sources/`.
 
-**Main finding: the 311 data has no pothole category.** The label search (`sf311-pothole-label-search`) returns no group of 10 or more cases whose service name or subtype contains "pothole" or "pot hole". A positive control with the same query form and the word "pavement" returns the four known groups (`sf311-label-search-control`), so the empty result is not an artifact of the query. Smaller groups are not returned, so the accurate statement is: no pothole-labeled type has 10 or more cases. Pothole reports must sit inside the pavement defect subtype, and any finer split would be in `service_details`, which the policy bars. **A 311 count here is a count of pavement defect requests, of which potholes are an unknown share, and must never be labeled as potholes.**
+**Main finding: the 311 data has no pothole category.** The label search (`sf311-pothole-label-search`) returns no group of 10 or more cases whose service name or subtype contains "pothole" or "pot hole". A positive control with the same query form and the word "pavement" returns the four known groups (`sf311-label-search-control`), so the empty result is not an artifact of the query. Smaller groups are not returned, so the accurate statement is: no pothole-labeled type has 10 or more cases. Pothole reports must sit inside the pavement defect subtype, and the third taxonomy level, `service_details`, does not split it (see the next section). **A 311 count here is a count of pavement defect requests, of which potholes are an unknown share, and must never be labeled as potholes.**
 
 **What the pavement defect family is.**
 
@@ -253,6 +253,12 @@ Eight aggregate sources are archived: seven queries on the 311 Cases dataset and
 
 **Consistency checks that passed.** The year-level pavement defect query and the label control agree on the family's main groups, and the 311 totals were identical in my first, unthresholded pass and in the final queries, so the data did not shift between runs. In the channel breakdown the suppressed amount is 0 to 28 cases per year, and 368 cases are missing from the agency breakdown.
 
+## Pothole split: `service_details` checked (2026-11-17)
+
+With your approval, the query policy now allows `service_details` only when the query pins the subtype to pavement defect, with the same minimum group size and the typed-text guard (a held response would never have been archived or read). The query returned three groups (`sf311-pavement-defect-details-counts`). For the main group, `Street Defects / Pavement_Defect` (86,753 cases), `service_details` is simply `Pavement_Defect` again. For the other two (6,965 and 6,960 cases) it is empty. So the third taxonomy level adds nothing, and groups of fewer than 10 cases are not returned.
+
+**Conclusion: the 311 category fields cannot separate potholes from other pavement defects.** A 311 count in the dossier can only be "pavement defect requests". The pothole-specific figures are the Public Works scorecard measures (service orders received, and the 72-hour response share), which are a different measurement and must be presented as such.
+
 ## Incident: typed text in a category field was committed, then removed (2026-11-17)
 
 This is a rule 7 failure that I caused, and the record should say so plainly.
@@ -268,7 +274,7 @@ This is a rule 7 failure that I caused, and the record should say so plainly.
 
 **Not retrieved and why.**
 
-- No count of pothole-specific 311 cases. It needs `service_details`, which the policy bars.
+- No count of pothole-specific 311 cases, because the 311 category fields cannot isolate them (see below).
 - No 311 response-time figures. Response time exists only through the scorecard measure 7072; the 311 `closed_date` was not queried.
 - No 311 counts by neighborhood or district, deliberately.
 

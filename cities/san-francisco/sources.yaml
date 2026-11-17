@@ -318,3 +318,15 @@
   retrieved: '2026-11-17'
   archive: sources/56189250f9b4455ae99e4b25e1120fb4015bdb165cf163c27a9887044feab3e5.json
   robots_checked: true
+- id: sf311-pavement-defect-details-counts
+  name: '311 Cases: service_details counts within pavement_defect, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,service_details,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,service_details&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Third taxonomy level within the pavement defect subtype,
+    to see whether potholes can be separated from other pavement defects. Held, not archived, if the field
+    has more than 100 distinct values. Fetch 2026-11-17: HTTP 200, application/json, 298 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/60ae4ea7161ba927deb17186f25c7c0cb33e58da40c2fc01c76f251d5a10ce11.json
+  robots_checked: true

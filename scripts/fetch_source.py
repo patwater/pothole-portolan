@@ -118,7 +118,14 @@ def fetch(url):
 # figures, not records about people, so ordinary filtered reads are allowed for it.
 SENSITIVE_FIELDS = {
     "address", "street", "lat", "long", "point", "point_address", "point_city", "point_geom", "point_state",
-    "point_zip", "status_notes", "service_details", "media_url", "service_request_id",
+    "point_zip", "status_notes", "media_url", "service_request_id",
+}
+# Fields that may appear only inside a narrowly scoped query. service_details is the third level of the 311
+# case taxonomy: it is needed to tell potholes from other pavement defects, but it can hold typed text, so it
+# is only allowed when the query is pinned to one subtype. Minimum group size and the response-side
+# typed-text guard still apply.
+SCOPED_FIELDS = {
+    "service_details": r"lower\(service_subtype\)\s*=\s*'pavement_defect'",
 }
 MIN_GROUP_SIZE = 10
 DATASET_POLICY = {
@@ -147,6 +154,9 @@ def query_policy(url):
     banned = sorted(mentioned & SENSITIVE_FIELDS)
     if banned:
         return "query mentions sensitive field(s): " + ", ".join(banned)
+    for field, scope in SCOPED_FIELDS.items():
+        if field in mentioned and not re.search(scope, soql.get("$where", "").lower()):
+            return f"{field} may only be queried when $where pins the subtype (matching {scope})"
     if rule["aggregate_only"]:
         if "$group" not in soql or "count(" not in soql.get("$select", "").lower():
             return "aggregate-only dataset: the query needs $group and a count() in $select"

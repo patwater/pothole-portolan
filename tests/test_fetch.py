@@ -67,9 +67,19 @@ class QueryPolicyTest(unittest.TestCase):
     def test_sensitive_fields_are_refused_anywhere_in_the_query(self):
         for q in ("$select=address,count(*)&$group=address&$having=count(*)>=10&$limit=10",
                   "$select=count(*)&$group=service_name&$having=count(*)>=10&$where=street='X'&$limit=10",
-                  "$select=service_details,count(*)&$group=service_details&$having=count(*)>=10&$limit=10",
                   "$select=lat,long,count(*)&$group=lat,long&$having=count(*)>=10&$limit=10"):
             self.assertIn("sensitive", self.refused(q), q)
+
+    def test_service_details_needs_the_subtype_scope(self):
+        base = "$select=service_details,count(*)&$group=service_details&$having=count(*)>=10&$limit=100"
+        self.assertIn("service_details may only", self.refused(base))
+        self.assertIn("service_details may only", self.refused(base + "&$where=service_name='Graffiti'"))
+        self.assertIn("service_details may only", self.refused(base + "&$where=lower(service_subtype)='other'"))
+        self.assertIsNone(self.refused(base + "&$where=lower(service_subtype)='pavement_defect'"))
+
+    def test_scoped_service_details_still_needs_the_group_size(self):
+        q = "$select=service_details,count(*)&$group=service_details&$where=lower(service_subtype)='pavement_defect'&$limit=100"
+        self.assertIn("count(*) >=", self.refused(q))
 
     def test_ungrouped_record_query_is_refused(self):
         self.assertIn("aggregate-only", self.refused("$select=service_name&$limit=10"))

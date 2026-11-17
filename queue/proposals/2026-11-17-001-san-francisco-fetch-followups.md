@@ -42,7 +42,7 @@ The gateway returns 502 for `support.datasf.org` although the host is allowed. T
 
 The ledger's `kind` list has no home for program output such as "blocks resurfaced" or "blocks awarded". I recorded four such claims as `spending` with a caveat that says so: `sf-blocks-resurfaced-as-of-2025-11`, `sf-blocks-planned-as-of-2025-11`, `sf-resurfacing-awards-blocks-2023-2025` and `sf-blocks-paved-2025`. I will move all four once the kind exists. That risks readers taking a count of blocks for a dollar figure. **Ask:** add `program_output` to the `kind` enum in `schemas/claims.schema.json` and to the list in CLAUDE.md. I have not changed either; CLAUDE.md is yours.
 
-## 6. Added after step 2: can I query `service_details` for the pothole split?
+## 6. Added after step 2: can I query `service_details` for the pothole split? (DONE 2026-11-17 under approval `2026-11-17-002`: it does not split potholes)
 
 The 311 case types have no "pothole" value, so I cannot separate potholes from other pavement defects without the third level of the taxonomy, `service_details`, which my query policy bars because I treated it as possible free text. The subtype field turned out to hold typed text in some records (one subtype label was a business name and address), so the caution was justified.
 
@@ -53,3 +53,5 @@ The 311 case types have no "pothole" value, so I cannot separate potholes from o
 I will not loosen the policy without your answer. Both options are workable; A gives a better answer if the field is clean.
 
 **Item 5 applied.** `program_output` is now a kind in CLAUDE.md's list, the schema enum and a template comment. The four block claims were moved to it with their caveats rewritten, and a new check (`kind_units`) enforces that `spending` claims have a currency unit and `program_output` claims do not. Tests added.
+
+**Item 6 done.** The query ran with the subtype scope, the group-size minimum and the typed-text guard. `service_details` repeats the subtype name for the main group and is empty for the other two, so it adds no finer level. The 311 data cannot isolate potholes. See `cities/san-francisco/notes.md`.
