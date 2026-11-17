@@ -62,7 +62,7 @@ Each entry in `cities/<slug>/claims.yaml` has this shape.
   value: N
   unit: requests
   period: 2025
-  kind: reported_demand        # reported_demand | measured_condition | spending | response_time | backlog | policy
+  kind: reported_demand        # reported_demand | measured_condition | spending | program_output | response_time | backlog | policy
   source_url: https://...
   retrieved: 2026-11-20
   archive: sources/<sha256>.csv

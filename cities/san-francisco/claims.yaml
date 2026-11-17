@@ -110,12 +110,12 @@
   value: 581
   unit: blocks
   period: '2025'
-  kind: spending
+  kind: program_output
   method: 'Read from the January 2, 2026 release: ''crews paved 581 City-maintained blocks in 2025''.'
   confidence: supported
-  caveats: Program output, recorded as 'spending' only because the schema has no output kind. The release does not
-    say whether this counts blocks resurfaced, accepted or completed, and it does not say whether in-house and contractor
-    work are both included beyond saying both crews do the work.
+  caveats: Program output (blocks of work), not a dollar figure. The release does not say whether this counts blocks
+    resurfaced, accepted or completed, and it does not say whether in-house and contractor work are both included
+    beyond saying both crews do the work.
 - source_url: https://sfpublicworks.org/node/35600
   retrieved: '2026-11-17'
   archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
@@ -304,11 +304,11 @@
   value: 9148
   unit: blocks
   period: as of 2025-11-13
-  kind: spending
+  kind: program_output
   method: Read from the 'Blocks Resurfaced and Planned' slide (slide 5).
   confidence: provisional
-  caveats: Program output, recorded as 'spending' only because the schema has no output kind. The slide gives no
-    start year, so the period is the deck date and the count is presumably cumulative.
+  caveats: Program output (blocks of work), not a dollar figure. The slide gives no start year, so the period is
+    the deck date and the count is presumably cumulative.
 - source_url: https://sfpublicworks.org/sites/default/files/Commissions/Nov%2013%202025/Item%205_PWC%20Street%20Resurfacing%20Capital%20Update%202025-11-13.pdf
   retrieved: '2026-11-16'
   archive: sources/54bedeaf1f9f0fa96e6c5f9203c084aab33d61833f2e10335ce7fef1d19e2a63.pdf
@@ -317,10 +317,10 @@
   value: 2500
   unit: blocks
   period: as of 2025-11-13
-  kind: spending
+  kind: program_output
   method: Read from the 'Blocks Resurfaced and Planned' slide (slide 5), where the figure appears as '2,500+'.
   confidence: provisional
-  caveats: A lower bound ('2,500+'). Program output, recorded as 'spending' because the schema has no output kind.
+  caveats: A lower bound ('2,500+'). Program output (blocks of work), not a dollar figure.
 - source_url: https://sfpublicworks.org/sites/default/files/Commissions/Nov%2013%202025/Item%205_PWC%20Street%20Resurfacing%20Capital%20Update%202025-11-13.pdf
   retrieved: '2026-11-16'
   archive: sources/54bedeaf1f9f0fa96e6c5f9203c084aab33d61833f2e10335ce7fef1d19e2a63.pdf
@@ -359,11 +359,10 @@
   value: 805
   unit: blocks
   period: awards dated 2023-07-21 to 2025-11-13
-  kind: spending
+  kind: program_output
   method: Slide 10 table. The script summed the 21 block counts and confirmed they equal the TOTAL row.
   confidence: supported
-  caveats: Program output, recorded as 'spending' because the schema has no output kind. One 'as needed' preservation
-    award covers 150 blocks.
+  caveats: Program output (blocks of work), not a dollar figure. One 'as needed' preservation award covers 150 blocks.
 - source_url: https://www.sf.gov/data/pothole-response
   retrieved: '2026-11-16'
   archive: sources/4a0755b1850b791e7e897288e497c64930482356fbef9227d7bcb9b36ec349b7.html

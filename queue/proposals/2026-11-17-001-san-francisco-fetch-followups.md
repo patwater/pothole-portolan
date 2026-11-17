@@ -38,7 +38,7 @@ The gateway returns 502 for `support.datasf.org` although the host is allowed. T
 
 `scripts/fetch_source.py` is new and sits in `scripts/`, which is agent territory, but it enforces rule 8 (robots.txt on every redirect hop, honest user agent, rate limit). A quick read from you is worthwhile before I run it on a second city.
 
-## 5. Added by Extract: a claim kind for program output
+## 5. Added by Extract: a claim kind for program output (APPLIED 2026-11-17 under approval `2026-11-17-002`)
 
 The ledger's `kind` list has no home for program output such as "blocks resurfaced" or "blocks awarded". I recorded four such claims as `spending` with a caveat that says so: `sf-blocks-resurfaced-as-of-2025-11`, `sf-blocks-planned-as-of-2025-11`, `sf-resurfacing-awards-blocks-2023-2025` and `sf-blocks-paved-2025`. I will move all four once the kind exists. That risks readers taking a count of blocks for a dollar figure. **Ask:** add `program_output` to the `kind` enum in `schemas/claims.schema.json` and to the list in CLAUDE.md. I have not changed either; CLAUDE.md is yours.
 
@@ -51,3 +51,5 @@ The 311 case types have no "pothole" value, so I cannot separate potholes from o
 **Option B.** Do not touch `service_details`. San Francisco's dossier then reports two things with their exact definitions: pavement defect requests from 311, and pothole service orders from the Public Works scorecard measure. It would say plainly that the 311 data does not isolate potholes.
 
 I will not loosen the policy without your answer. Both options are workable; A gives a better answer if the field is clean.
+
+**Item 5 applied.** `program_output` is now a kind in CLAUDE.md's list, the schema enum and a template comment. The four block claims were moved to it with their caveats rewritten, and a new check (`kind_units`) enforces that `spending` claims have a currency unit and `program_output` claims do not. Tests added.

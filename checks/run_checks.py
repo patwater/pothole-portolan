@@ -290,6 +290,25 @@ def check_personal_data(root, slug, rep):
             rep.warn("personal_data", slug, f"{ref}: binary or unscanned format, review by hand")
 
 
+# ---- check 4b: spending is dollars, program output is not --------------------------
+
+CURRENCY_UNIT = re.compile(r"(USD|\$|dollar)", re.I)
+
+
+def check_kind_units(root, slug, rep):
+    """A `spending` claim must have a currency unit, and a `program_output` claim must not.
+
+    The point is to keep counts of work done (blocks resurfaced) from being summed or read as money.
+    """
+    claims, _ = load_city(root, slug)
+    for c in claims:
+        unit = str(c.get("unit", ""))
+        if c.get("kind") == "spending" and not CURRENCY_UNIT.search(unit):
+            rep.fail("kind_units", slug, f"claim {c.get('id')}: kind spending but unit {unit!r} is not a currency; use program_output for counts of work")
+        if c.get("kind") == "program_output" and CURRENCY_UNIT.search(unit):
+            rep.fail("kind_units", slug, f"claim {c.get('id')}: kind program_output but unit {unit!r} is a currency; use spending")
+
+
 # ---- check 5: reported demand is never described as condition ---------------------
 
 def _strip_comments(text):
@@ -398,7 +417,7 @@ def check_dossier(root, slug, rep):
                 rep.warn("dossier", slug, f"under {heading!r}: number {tok!r} typed by hand; use a claim marker")
 
 
-CHECKS = [check_schema, check_provenance, check_archives, check_personal_data,
+CHECKS = [check_schema, check_provenance, check_archives, check_personal_data, check_kind_units,
           check_demand_vs_condition, check_dossier]
 
 

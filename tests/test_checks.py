@@ -196,6 +196,23 @@ class ChecksTest(unittest.TestCase):
         self.edit("dossier.md", "## What could not be found", "## Other notes")
         self.assertTrue(self.failed("dossier"))
 
+    def test_spending_claim_with_a_non_currency_unit_fails(self):
+        self.edit("claims.yaml", "kind: reported_demand", "kind: spending")
+        self.assertTrue(self.failed("kind_units"))
+
+    def test_program_output_claim_with_a_currency_unit_fails(self):
+        self.edit("claims.yaml", "kind: reported_demand", "kind: program_output")
+        self.edit("claims.yaml", "unit: requests", "unit: USD millions")
+        self.assertTrue(self.failed("kind_units"))
+
+    def test_spending_in_dollars_and_output_in_blocks_pass(self):
+        self.edit("claims.yaml", "kind: reported_demand", "kind: spending")
+        self.edit("claims.yaml", "unit: requests", "unit: USD per block")
+        self.assertEqual(self.failed("kind_units"), [])
+        self.edit("claims.yaml", "kind: spending", "kind: program_output")
+        self.edit("claims.yaml", "unit: USD per block", "unit: blocks")
+        self.assertEqual(self.failed("kind_units"), [])
+
     def test_phase_zero_blocks_publish(self):
         (self.root / "permissions.yaml").write_text(
             "phase: 0\npublish:\n  agent_may_publish_in_phases: [3, 4]\n")
