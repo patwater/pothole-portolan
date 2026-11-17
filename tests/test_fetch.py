@@ -50,5 +50,51 @@ class SanitizeTest(unittest.TestCase):
             f.sanitize(VIEWS, "application/json", b"not json")
 
 
+class QueryPolicyTest(unittest.TestCase):
+    base = "https://data.example.org/resource/vw6y-z8j6.json?"
+
+    def refused(self, query):
+        return f.query_policy(self.base + query)
+
+    def test_grouped_count_is_allowed(self):
+        q = "$select=service_name,count(*)&$group=service_name&$having=count(*)>=10&$limit=5000"
+        self.assertIsNone(self.refused(q))
+
+    def test_non_resource_urls_are_not_affected(self):
+        self.assertIsNone(f.query_policy("https://data.example.org/api/views/vw6y-z8j6"))
+        self.assertIsNone(f.query_policy("https://www.example.org/page?x=1"))
+
+    def test_sensitive_fields_are_refused_anywhere_in_the_query(self):
+        for q in ("$select=address,count(*)&$group=address&$having=count(*)>=10&$limit=10",
+                  "$select=count(*)&$group=service_name&$having=count(*)>=10&$where=street='X'&$limit=10",
+                  "$select=service_details,count(*)&$group=service_details&$having=count(*)>=10&$limit=10",
+                  "$select=lat,long,count(*)&$group=lat,long&$having=count(*)>=10&$limit=10"):
+            self.assertIn("sensitive", self.refused(q), q)
+
+    def test_ungrouped_record_query_is_refused(self):
+        self.assertIn("aggregate-only", self.refused("$select=service_name&$limit=10"))
+        self.assertIn("aggregate-only", self.refused("$select=service_name,count(*)&$limit=10"))
+
+    def test_limit_is_required_and_capped(self):
+        self.assertIn("$limit", self.refused("$select=service_name,count(*)&$group=service_name&$having=count(*)>=10"))
+        self.assertIn("$limit", self.refused("$select=service_name,count(*)&$group=service_name&$having=count(*)>=10&$limit=999999"))
+
+    def test_plain_filter_parameters_are_refused(self):
+        self.assertIn("plain filter", self.refused("service_name=Pothole&$select=count(*)&$group=service_name&$having=count(*)>=10&$limit=5"))
+
+    def test_minimum_group_size_is_required(self):
+        base = "$select=service_name,count(*)&$group=service_name&$limit=5000"
+        self.assertIn("count(*) >=", self.refused(base))
+        self.assertIn("count(*) >=", self.refused(base + "&$having=count(*)>=3"))
+        self.assertIsNone(self.refused(base + "&$having=count(*)>=10"))
+        self.assertIsNone(self.refused(base + "&$having=count(*) >= 25"))
+
+    def test_unknown_dataset_is_refused(self):
+        self.assertIn("no query policy", f.query_policy("https://data.example.org/resource/zzzz-9999.json?$limit=5"))
+
+    def test_scorecard_dataset_allows_filtered_reads(self):
+        self.assertIsNone(f.query_policy("https://data.example.org/resource/kc49-udxn.json?$select=calendar_month,actual&$where=measure_title like '%25othole%25'&$limit=500"))
+
+
 if __name__ == "__main__":
     unittest.main()

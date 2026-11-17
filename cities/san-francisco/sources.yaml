@@ -221,3 +221,75 @@
   retrieved: '2026-11-17'
   archive: sources/6974551b96a68fbe217b20de809e6acc957458a6114a83216e3408314cc1c92f.json
   robots_checked: true
+- id: sf-scorecard-pothole-measure-rows
+  name: 'Scorecard Measures: rows for the pothole measure'
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Monthly actual and target values for the pothole response
+    measure, with the measure''s own methodology text. -9999 means no entry and must be treated as null.
+    Fetch 2026-11-17: HTTP 200, application/json, 266046 bytes, final URL https://data.sf.gov/resource/kc49-udxn.json?%24limit=5000&%24order=calendar_month&%24select=measure_code%2Cmeasure_title%2Cmeasure_description%2Cmeasure_methodology%2Ccalendar_month%2Cactual%2Ctarget%2Cmeasure_data_type%2Ccategory_1%2Ccategory_2%2Ccategory_3%2Ccategory_4%2Cscorecard_update_frequency&%24where=lower%28measure_title%29%20like%20%27%25pothole%25%27%20or%20lower%28measure_description%29%20like%20%27%25pothole%25%27.'
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  robots_checked: true
+- id: sf311-case-type-counts
+  name: '311 Cases: counts by service_name and service_subtype, groups of 10 or more cases'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Find which case-type values mean pothole. Only groups
+    of 10 or more cases are returned, because subtype values can hold typed text and a one-case group
+    can be a single record. Fetch 2026-11-17: HTTP 200, application/json, 125892 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/ea7ad512634f8515b459ba732044ee8738b298967f1a26a8f14d19e44dba95e2.json
+  robots_checked: true
+- id: sf311-all-cases-by-year
+  name: '311 Cases: all cases by calendar year of requested_datetime'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Denominator for context: total 311 cases per year, all
+    types. Never to be read as pothole counts. Fetch 2026-11-17: HTTP 200, application/json, 646 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/3df0e4ac44798451a649996309e7dda9bffbfc3f537a7e4bcd272c015814e2f7.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-year
+  name: '311 Cases: pavement_defect family by calendar year'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Year totals for the pavement defect family without a channel
+    split, so the amount suppressed in the channel breakdown can be measured. Fetch 2026-11-17: HTTP 200,
+    application/json, 609 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-year-channel
+  name: '311 Cases: pavement_defect counts by calendar year, type and reporting channel, groups of 10
+    or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Reported-demand counts for the pavement defect family
+    by year and channel. Pothole is not a separate value, so these are pavement defect requests, not pothole
+    requests. Fetch 2026-11-17: HTTP 200, application/json, 10484 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-agency
+  name: '311 Cases: pavement_defect counts by responsible agency, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,agency_responsible,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,agency_responsible&$having=count(*)%3E%3D10&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Which agencies the pavement_defect cases are routed to,
+    to check the family is mostly the street repair function. Fetch 2026-11-17: HTTP 200, application/json,
+    10661 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  robots_checked: true

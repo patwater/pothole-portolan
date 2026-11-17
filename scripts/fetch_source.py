@@ -17,6 +17,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -111,6 +112,55 @@ def fetch(url):
         return body, resp.geturl(), resp.headers.get("Content-Type", ""), resp.status
 
 
+# Rule 7 for portal queries. The 311 dataset is record-level, so only grouped counts may be requested,
+# and no query may mention a field that can identify a person or a private address. A dataset id that is
+# not listed here is refused (fail closed). The Scorecard Measures dataset holds department performance
+# figures, not records about people, so ordinary filtered reads are allowed for it.
+SENSITIVE_FIELDS = {
+    "address", "street", "lat", "long", "point", "point_address", "point_city", "point_geom", "point_state",
+    "point_zip", "status_notes", "service_details", "media_url", "service_request_id",
+}
+MIN_GROUP_SIZE = 10
+DATASET_POLICY = {
+    "vw6y-z8j6": {"aggregate_only": True, "max_limit": 5000},   # SF 311 Cases (record-level)
+    "kc49-udxn": {"aggregate_only": False, "max_limit": 5000},  # SF Scorecard Measures (department measures)
+}
+
+
+def query_policy(url):
+    """Return None if the URL may be fetched, or a refusal reason. Applies to /resource/ query URLs only."""
+    parts = urllib.parse.urlsplit(url)
+    m = re.match(r"^/resource/([a-z0-9]{4}-[a-z0-9]{4})\.(json|csv)$", parts.path)
+    if not m:
+        return "a /resource/ URL must name a dataset id and end in .json or .csv" if parts.path.startswith("/resource/") else None
+    rule = DATASET_POLICY.get(m.group(1))
+    if rule is None:
+        return f"dataset {m.group(1)} has no query policy, so it is refused"
+    params = urllib.parse.parse_qs(parts.query, keep_blank_values=True)
+    soql = {k: " ".join(v) for k, v in params.items() if k.startswith("$")}
+    unknown = [k for k in params if not k.startswith("$")]
+    if unknown:
+        return f"plain filter parameters are not allowed ({', '.join(unknown)}); use $where"
+    mentioned = set(re.findall(r"[a-z_][a-z0-9_]*", " ".join(soql.values()).lower()))
+    banned = sorted(mentioned & SENSITIVE_FIELDS)
+    if banned:
+        return "query mentions sensitive field(s): " + ", ".join(banned)
+    if rule["aggregate_only"]:
+        if "$group" not in soql or "count(" not in soql.get("$select", "").lower():
+            return "aggregate-only dataset: the query needs $group and a count() in $select"
+        if "$query" in soql:
+            return "$query is not allowed on an aggregate-only dataset"
+        # Small groups can be single records: category fields in the 311 data hold typed text, so a one-case
+        # group may be a business name and address. Require a minimum group size, applied by the portal.
+        m2 = re.search(r"count\(\s*\*\s*\)\s*>=\s*(\d+)", soql.get("$having", ""))
+        if m2 is None or int(m2.group(1)) < MIN_GROUP_SIZE:
+            return f"aggregate-only dataset: $having count(*) >= {MIN_GROUP_SIZE} (or more) is required so small groups are never returned"
+    limit = soql.get("$limit")
+    if limit is None or not limit.isdigit() or int(limit) > rule["max_limit"]:
+        return f"$limit must be given and at most {rule['max_limit']}"
+    return None
+
+
 def sanitize(url, content_type, body):
     """Remove sample values that open data portals embed in dataset metadata (rule 7).
 
@@ -152,6 +202,7 @@ def run(root, slug, only_ids, delay):
     archive_dir.mkdir(exist_ok=True)
     first = True
     blocked = 0
+    refused = 0
     for entry in sources:
         if entry.get("status") != "listed" or (only_ids and entry["id"] not in only_ids):
             continue
@@ -159,6 +210,11 @@ def run(root, slug, only_ids, delay):
             time.sleep(delay)
         first = False
         url = entry["url"]
+        refusal = query_policy(url)
+        if refusal:
+            print(f"REFUSED     {entry['id']}: {refusal}; left as listed")
+            refused += 1
+            continue
         allowed, robots_detail = robots_allows(url)
         if robots_detail == BLOCKED:
             print(f"BLOCKED     {entry['id']}: {BLOCKED}; left as listed")
@@ -226,7 +282,9 @@ def run(root, slug, only_ids, delay):
         print("SCHEMA", line)
     if blocked:
         print(f"{blocked} source(s) blocked by network policy and left as listed")
-    return 1 if errors else (2 if blocked else 0)
+    if refused:
+        print(f"{refused} source(s) refused by the query policy and left as listed")
+    return 1 if errors else (3 if refused else (2 if blocked else 0))
 
 
 def main(argv=None):

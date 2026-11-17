@@ -1,0 +1,1200 @@
+[{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Bulky Items","cases":"1004147"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"General Cleaning","cases":"929020"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"garbage_and_debris","cases":"827616"}
+,{"service_name":"Encampments","service_subtype":"Encampment Reports","cases":"350620"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Human or Animal Waste","cases":"301299"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"City_garbage_can_overflowing","cases":"278119"}
+,{"service_name":"Graffiti Public","service_subtype":"not_offensive","cases":"154443"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"request_for_service","cases":"149719"}
+,{"service_name":"Parking Enforcement","service_subtype":"Other_Illegal_Parking","cases":"145021"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Other_enter_additional_details_below","cases":"140677"}
+,{"service_name":"Parking Enforcement","service_subtype":"other_illegal_parking","cases":"126389"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Building_commercial","cases":"126104"}
+,{"service_name":"Parking Enforcement","service_subtype":"Blocking_Driveway_Cite_Only","cases":"118578"}
+,{"service_name":"Parking Enforcement","service_subtype":"Parking_on_Sidewalk","cases":"109391"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicles","cases":"104627"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Hazardous Materials","cases":"94225"}
+,{"service_name":"Encampment","service_subtype":"encampment","cases":"92580"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Pole","cases":"90197"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","cases":"86753"}
+,{"service_name":"Parking Enforcement","service_subtype":"parking_on_sidewalk","cases":"85453"}
+,{"service_name":"Parking Enforcement","service_subtype":"blocking_driveway_cite_only","cases":"85023"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Parking_Meter","cases":"80825"}
+,{"service_name":"Parking Enforcement","service_subtype":"Blocking_Driveway_Cite_Tow","cases":"76122"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Building_other","cases":"74042"}
+,{"service_name":"Sewer Issues","service_subtype":"Sewage_back_up","cases":"73725"}
+,{"service_name":"General Request - MTA","service_subtype":"request_for_service","cases":"72707"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Signal_box","cases":"72465"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Affixed_Improperly","cases":"70341"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - Car4door","cases":"67505"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Sidewalk_Defect","cases":"58822"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Defaced","cases":"57585"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Sidewalk_in_front_of_property","cases":"57521"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Conduct_Inattentiveness_Negligence","cases":"54917"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Medical Waste","cases":"54524"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Damaged_Tree","cases":"53656"}
+,{"service_name":"Parking Enforcement","service_subtype":"abandoned_vehicle","cases":"51849"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_Burnt_Out","cases":"51722"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Mail_box","cases":"51026"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Building_residential","cases":"49651"}
+,{"service_name":"Graffiti Private","service_subtype":"not_offensive","cases":"48990"}
+,{"service_name":"Parking Enforcement","service_subtype":"blocking_driveway_cite_tow","cases":"47340"}
+,{"service_name":"Encampments","service_subtype":"Encampment items","cases":"43691"}
+,{"service_name":"Rec and Park Requests","service_subtype":"Park - Structural_Maintenance","cases":"40452"}
+,{"service_name":"General Request","service_subtype":"homelessness_and_supportive_housing","cases":"40009"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Services_Service_Delivery_Facilities","cases":"39044"}
+,{"service_name":"Blocked Street and Sidewalk","service_subtype":"blocked_sidewalk","cases":"37494"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - Other","cases":"37200"}
+,{"service_name":"General Request","service_subtype":"public_works","cases":"35466"}
+,{"service_name":"Litter Receptacles","service_subtype":"Toters_left_out_24x7","cases":"35225"}
+,{"service_name":"General Request - MTA","service_subtype":"complaint","cases":"35162"}
+,{"service_name":"SFHA Requests","service_subtype":"Plumbing","cases":"34927"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Overgrown_Tree","cases":"33211"}
+,{"service_name":"Rec and Park Requests","service_subtype":"Park - Neighborhood_Services_Area","cases":"30681"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Transit_Shelter_Platform","cases":"29961"}
+,{"service_name":"Parking Enforcement","service_subtype":"Blocking_Bicycle_Lane","cases":"29930"}
+,{"service_name":"Homeless Concerns","service_subtype":"Individual Concerns","cases":"29498"}
+,{"service_name":"Blocked Street or SideWalk","service_subtype":"Blocked_Sidewalk","cases":"29485"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - Car2door","cases":"28146"}
+,{"service_name":"Sewer Issues","service_subtype":"Flooding","cases":"27968"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on City_receptacle","cases":"27344"}
+,{"service_name":"General Request - PUC","service_subtype":"request_for_service","cases":"26745"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Parking_meter","cases":"25622"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Conduct_Discourteous_Insensitive_Inappropriate_Conduct","cases":"25590"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"complaint","cases":"25187"}
+,{"service_name":"Graffiti Public","service_subtype":"offensive","cases":"25099"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - PickupTruck","cases":"24375"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Sidewalk_structure","cases":"23966"}
+,{"service_name":"Rec and Park Requests","service_subtype":"Park - Park_Patrol","cases":"22532"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Damaging_Property","cases":"22499"}
+,{"service_name":"General Request","service_subtype":"municipal_transportation_agency","cases":"21816"}
+,{"service_name":"Sewer Issues","service_subtype":"Water_leak","cases":"21774"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Traffic_Signal","cases":"21520"}
+,{"service_name":"Noise","service_subtype":"other_excessive_noise","cases":"19174"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Landscaping","cases":"18366"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Street","cases":"18120"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Conduct_Unsafe_Operation","cases":"18072"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on News_rack","cases":"17645"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Transit_shelter_platform","cases":"17378"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - SUV","cases":"16867"}
+,{"service_name":"Encampment","cases":"16775"}
+,{"service_name":"Litter Receptacles","service_subtype":"Add_remove_garbage_can","cases":"16703"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Moving_residential_property","cases":"16496"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Fire_Police_Callbox","cases":"16216"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on ATT_Property","cases":"15747"}
+,{"service_name":"Litter Receptacles","service_subtype":"Cans_Left_Out_24x7","cases":"15545"}
+,{"service_name":"General Request - DPH","service_subtype":"request_for_service","cases":"15313"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"customer_callback","cases":"14933"}
+,{"service_name":"SFHA Requests","service_subtype":"Carpentery","cases":"14928"}
+,{"service_name":"Blocked Street or SideWalk","service_subtype":"Blocked_Parking_Space_or_Strip","cases":"14565"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Services_Miscellaneous","cases":"14283"}
+,{"service_name":"General Request - DPH","service_subtype":"complaint","cases":"14179"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_Flickering_On_Off","cases":"13481"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posted_on_Traffic_Light","cases":"13280"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"sidewalk_defect","cases":"13142"}
+,{"service_name":"SFHA Requests","service_subtype":"Electrical","cases":"12970"}
+,{"service_name":"311 External Request","service_subtype":"Graffiti","cases":"12957"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Missing_Side_Sewer_Vent_Cover","cases":"12956"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Christmas_tree","cases":"12776"}
+,{"service_name":"Tree Maintenance","service_subtype":"damaged_tree","cases":"12679"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Tree_Other","cases":"12590"}
+,{"service_name":"General Request - MTA","service_subtype":"customer_callback","cases":"12470"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Fire_hydrant","cases":"12396"}
+,{"service_name":"Sewer","service_subtype":"sewage_back-up_discharge","cases":"12086"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"Muni - Complaint_Pass_Ups_Denial_Inattention","cases":"12048"}
+,{"service_name":"Tree Maintenance","service_subtype":"overgrown_tree","cases":"11912"}
+,{"service_name":"Noise Report","service_subtype":"Noise Issue","cases":"11900"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Services_Service_Delivery_Facilities","cases":"11782"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Curb_or_Curb_Ramp_Defect","cases":"11633"}
+,{"service_name":"RPD General","service_subtype":"structural_maintenance","cases":"10988"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Conduct_Discourteous_Insensitive_Inappropriate_Conduct","cases":"10894"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Services_Service_Planning","cases":"10687"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Multiple_Postings","cases":"10149"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"other","cases":"10035"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Commendation","cases":"10008"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Overflowing_City_Receptacle_or_Dumpster","cases":"9742"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged other","cases":"9702"}
+,{"service_name":"Graffiti Private","service_subtype":"offensive","cases":"9223"}
+,{"service_name":"Street Defect","service_subtype":"sidewalk_defect","cases":"9203"}
+,{"service_name":"Litter Receptacles","service_subtype":"Other_garbage_can_repair","cases":"9198"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Other","cases":"9031"}
+,{"service_name":"Streetlights","service_subtype":"light","cases":"8672"}
+,{"service_name":"RPD General","service_subtype":"park_services_area","cases":"8652"}
+,{"service_name":"Noise Report","service_subtype":"entertainment","cases":"8613"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Transit_Shelter_Platform","cases":"8513"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"request_for_service","cases":"8428"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  -","cases":"8417"}
+,{"service_name":"Catch Basin Maintenance","service_subtype":"Maintenance","cases":"8356"}
+,{"service_name":"RPD General","service_subtype":"park_patrol","cases":"8327"}
+,{"service_name":"Parking Enforcement","service_subtype":"Double_Parking","cases":"8161"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Frequency_Reliability","cases":"8041"}
+,{"service_name":"Noise Report","service_subtype":"other_excessive_noise","cases":"7928"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"complaint","cases":"7715"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Affixed_Improperly","cases":"7689"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Automotive","cases":"7662"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Conduct_Inattentiveness_Negligence","cases":"7322"}
+,{"service_name":"Tree Maintenance","service_subtype":"landscaping","cases":"7293"}
+,{"service_name":"Illegal Postings","service_subtype":"affixed_improperly","cases":"7264"}
+,{"service_name":"General Request","service_subtype":"public_health","cases":"7188"}
+,{"service_name":"Noise Report","service_subtype":"construction_private_property","cases":"7173"}
+,{"service_name":"Sewer","service_subtype":"water_leak","cases":"7129"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Services_Miscellaneous","cases":"7110"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"request_for_service","cases":"7071"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","cases":"6965"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","cases":"6960"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Bike_rack","cases":"6937"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Missed_Route_Mechanical_Sweeping","cases":"6859"}
+,{"service_name":"General Request - DPH","service_subtype":"customer_callback","cases":"6785"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"other_including_abandoned_toter","cases":"6604"}
+,{"service_name":"Litter Receptacles","service_subtype":"Damaged_City_Can","cases":"6526"}
+,{"service_name":"Noise Report","service_subtype":"other_reallocate","cases":"6517"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"complaint_pass_ups_denial_inattention","cases":"6454"}
+,{"service_name":"Litter Receptacles","service_subtype":"Other_including_abandoned_toter","cases":"6413"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"toters_left_out_24x7","cases":"6385"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Sign","cases":"6377"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - No_Posting_Date","cases":"6235"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for","cases":"5941"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Other","cases":"5910"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle -","cases":"5875"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Services_Service_Planning","cases":"5866"}
+,{"service_name":"Sewer Issues","service_subtype":"Sewage_Back_Up","cases":"5581"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - Trailer","cases":"5554"}
+,{"service_name":"Street Defects","service_subtype":"Manhole_Cover_Off","cases":"5547"}
+,{"service_name":"Damage Property","service_subtype":"parking_meter","cases":"5451"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Missing","cases":"5370"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_frequency_reliability","cases":"5284"}
+,{"service_name":"General Request","service_subtype":"public_utilities_commission","cases":"5258"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Corporate_Events","cases":"5200"}
+,{"service_name":"Damage Property","service_subtype":"traffic_signal","cases":"5054"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_On_all_the_time","cases":"4993"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"other","cases":"4990"}
+,{"service_name":"Tree Maintenance","service_subtype":"damaging_property","cases":"4986"}
+,{"service_name":"311 External Request","service_subtype":"Damaged_Property","cases":"4950"}
+,{"service_name":"General Request - PUC","service_subtype":"customer_callback","cases":"4903"}
+,{"service_name":"Sewer Issues","service_subtype":"other","cases":"4900"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Transit_Shelter_Platform_Hazardous","cases":"4886"}
+,{"service_name":"Noise Report","service_subtype":"amplified_sound_electronics","cases":"4810"}
+,{"service_name":"Color Curb","service_subtype":"Red_Fee Color Curb Request","cases":"4767"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"complaint","cases":"4741"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Conduct_Unsafe_Operation","cases":"4726"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - Motorcycle","cases":"4718"}
+,{"service_name":"General Request - MTA","service_subtype":"other","cases":"4704"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"curb_or_curb_ramp_defect","cases":"4555"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"request_for_service","cases":"4454"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Maintenance_Repair","cases":"4442"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"Muni - Complaint_Discourteous_Unprofessional","cases":"4423"}
+,{"service_name":"Litter Receptacles","service_subtype":"Tipped_over","cases":"4413"}
+,{"service_name":"Rec and Park Requests","service_subtype":"Park - UrbanForestry","cases":"4321"}
+,{"service_name":"Sewer","service_subtype":"flooding","cases":"4156"}
+,{"service_name":"Noise Report","service_subtype":"construction_public","cases":"4107"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Infestation_Rodent_Insect","cases":"3956"}
+,{"service_name":"Sewer Issues","service_subtype":"Odor","cases":"3956"}
+,{"service_name":"SFHA Requests","service_subtype":"Steam Fitter","cases":"3898"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI - Services_Criminal_Activity","cases":"3896"}
+,{"service_name":"Parking Enforcement","service_subtype":"double_parking","cases":"3863"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posted_Over_70_Days","cases":"3811"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"complaint_discourteous_unprofessional","cases":"3761"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Other_Event_Type","cases":"3735"}
+,{"service_name":"Noise","service_subtype":"amplified_sound_electronics","cases":"3690"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pullbox_Wires_Exposed","cases":"3666"}
+,{"service_name":"Damage Property","service_subtype":"transit_shelter_platform","cases":"3633"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Bent","cases":"3429"}
+,{"service_name":"Parking Enforcement","service_subtype":"large_vehicle","cases":"3407"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesObstruction_Hazard","cases":"3364"}
+,{"service_name":"Noise Report","service_subtype":"mechanical_equipment","cases":"3360"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"other","cases":"3350"}
+,{"service_name":"SFHA Requests","service_subtype":"Glazier","cases":"3242"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Other","cases":"3231"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Faded","cases":"3221"}
+,{"service_name":"General Request - MTA","service_subtype":"followup_request","cases":"3147"}
+,{"service_name":"General Request - PUC","service_subtype":"complaint","cases":"3142"}
+,{"service_name":"Noise","service_subtype":"entertainment","cases":"3139"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Missing","cases":"3125"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_maintenance_repair","cases":"3117"}
+,{"service_name":"Street Defects","service_subtype":"Construction_Plate_Shifted","cases":"3072"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"customer_callback","cases":"3057"}
+,{"service_name":"General Request","service_subtype":"building_inspection","cases":"3019"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged News_Rack","cases":"2971"}
+,{"service_name":"Sewer Issues","service_subtype":"Side_Sewer_Issues","cases":"2967"}
+,{"service_name":"SFHA Requests","service_subtype":"Laborer","cases":"2930"}
+,{"service_name":"Parking Enforcement","service_subtype":"blocking_bicycle_lane","cases":"2895"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"Muni - Complaint_Unsafe_Operation","cases":"2863"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Comment_Question_Suggestion","cases":"2857"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"sidewalk\"","cases":"2788"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"missing_side_sewer_vent_cover","cases":"2755"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posted_on_Traffic_Light","cases":"2717"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - General_Maintenance_Not_in_List_Above","cases":"2585"}
+,{"service_name":"Noise Report","service_subtype":"garbage_recycling_collection","cases":"2538"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"other_garbage_can_repair","cases":"2532"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Street and Sidewalk Cleaning Request","cases":"2527"}
+,{"service_name":"General Request","service_subtype":"rent_board","cases":"2486"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - On_Ground","cases":"2425"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"other","cases":"2399"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Other","cases":"2398"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Mold_and_Mildew","cases":"2384"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Bent","cases":"2366"}
+,{"service_name":"Illegal Postings","service_subtype":"posted_on_traffic_light","cases":"2349"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - No_Posting_Date","cases":"2347"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesOther","cases":"2336"}
+,{"service_name":"Street Defects","service_subtype":"Utility_Excavation","cases":"2335"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"complaint_unsafe_operation","cases":"2264"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"Muni - Praise","cases":"2257"}
+,{"service_name":"Street Defect","service_subtype":"curb_or_curb_ramp_defect","cases":"2188"}
+,{"service_name":"Noise","service_subtype":"major_event_venue","cases":"2159"}
+,{"service_name":"Litter Receptacles","service_subtype":"Transit_shelter_platform","cases":"2149"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Other_Request_New_Streetlight","cases":"2139"}
+,{"service_name":"Street Defects","service_subtype":"other","cases":"2138"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"request_for_service","cases":"2138"}
+,{"service_name":"311 External Request","service_subtype":"Other","cases":"2129"}
+,{"service_name":"General Request","service_subtype":"animal_care_and_control","cases":"2103"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"praise_employee","cases":"2085"}
+,{"service_name":"Damage Property","service_subtype":"other","cases":"2028"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"remove_garbage_can","cases":"2006"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Damaged_Side_Sewer_Vent_Cover","cases":"1994"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Moving_commercial_property","cases":"1994"}
+,{"service_name":"Noise","service_subtype":"construction_private_property","cases":"1982"}
+,{"service_name":"Illegal Postings","service_subtype":"posted_over_70_days","cases":"1978"}
+,{"service_name":"Sewer","service_subtype":"other","cases":"1959"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Stickers","cases":"1881"}
+,{"service_name":"Streetlights","service_subtype":"pole","cases":"1853"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"other","cases":"1831"}
+,{"service_name":"Blocked Street and Sidewalk","service_subtype":"blocked_parking_space_or_strip","cases":"1829"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicle - DeliveryTruck","cases":"1808"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"door_lock_issue","cases":"1766"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_information_systems","cases":"1764"}
+,{"service_name":"Residential Building","service_subtype":"infestation_rodent_insect","cases":"1760"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"other","cases":"1754"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Information_Systems","cases":"1744"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Benches_on_Sidewalk","cases":"1724"}
+,{"service_name":"Street Defect","service_subtype":"other","cases":"1707"}
+,{"service_name":"General Request - SFPD","service_subtype":"request_for_service","cases":"1702"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesStructure_Barricade","cases":"1699"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Other","cases":"1690"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"customer_callback","cases":"1689"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_safety_security","cases":"1684"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Other_Misc_Feedback_Requests","cases":"1671"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"compliment","cases":"1666"}
+,{"service_name":"Sewer","service_subtype":"catch_basin","cases":"1655"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Fire_Police_Callbox","cases":"1649"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"request_for_service","cases":"1646"}
+,{"service_name":"Litter Receptacles","service_subtype":"Door_lock_issue","cases":"1642"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_Dim","cases":"1641"}
+,{"service_name":"Muni Service Feedback","service_subtype":"other_misc_feedback_requests","cases":"1617"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"add_garbage_can","cases":"1597"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"street_cleaning","cases":"1597"}
+,{"service_name":"Street Defect","service_subtype":"missing_side_sewer_vent_cover","cases":"1587"}
+,{"service_name":"General Request","service_subtype":"board_of_supervisors","cases":"1553"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Transit_Shelter_Platform_1","cases":"1542"}
+,{"service_name":"General Request - PLANNING","service_subtype":"complaint","cases":"1532"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - On_Ground","cases":"1529"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Signs_Maps","cases":"1504"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Plumbing_Broken_leaking","cases":"1501"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"stop","cases":"1491"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"followup_request","cases":"1483"}
+,{"service_name":"General Request - DTIS","service_subtype":"request_for_service","cases":"1431"}
+,{"service_name":"Illegal Postings","service_subtype":"multiple_postings","cases":"1420"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Incorrect_Signage","cases":"1412"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Safety_Security","cases":"1404"}
+,{"service_name":"Sewer","service_subtype":"sewer_odor","cases":"1399"}
+,{"service_name":"Litter Receptacles","service_subtype":"Liner_issue_damaged_missing","cases":"1394"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Other_Request_Light_Shield","cases":"1376"}
+,{"service_name":"Noise","service_subtype":"construction_public","cases":"1373"}
+,{"service_name":"General Request - MONS","service_subtype":"complaint","cases":"1361"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Infestation_Bed_Bugs","cases":"1347"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"followup_request","cases":"1346"}
+,{"service_name":"General Request - SFPD","service_subtype":"complaint","cases":"1333"}
+,{"service_name":"General Request - RPD","service_subtype":"request_for_service","cases":"1302"}
+,{"service_name":"General Request - DPH","service_subtype":"mailing_request","cases":"1298"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"liner_issue_damaged_missing","cases":"1294"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Fire_hydrant_puc","cases":"1287"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_signs_maps","cases":"1275"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Painted_Over","cases":"1274"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Private Property","cases":"1229"}
+,{"service_name":"Residential Building","service_subtype":"general_maintenance_not_in_list_above","cases":"1226"}
+,{"service_name":"General Request - RPD","service_subtype":"complaint","cases":"1226"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"damaged_side_sewer_vent_cover","cases":"1204"}
+,{"service_name":"Noise Report","service_subtype":"traffic","cases":"1198"}
+,{"service_name":"Noise","service_subtype":"mechanical_equipment","cases":"1190"}
+,{"service_name":"Litter Receptacles","service_subtype":"Litter_Receptacle_Request_New_Removal","cases":"1181"}
+,{"service_name":"Streetlights","service_subtype":"other","cases":"1164"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"mailing_request","cases":"1139"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"no_parking","cases":"1120"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Graffiti_Watch","cases":"1113"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Transit_Shelter_Ad_Kiosk","cases":"1112"}
+,{"service_name":"Residential Building","service_subtype":"mold_and_mildew","cases":"1109"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"transit_shelter_platform","cases":"1104"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Heat_Lack_of_Heat","cases":"1062"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"street_cleaning","cases":"1046"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posting_Too_Large_in_Size","cases":"1025"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"tipped_over","cases":"1018"}
+,{"service_name":"Catch Basin Maintenance","service_subtype":"Catch_Basin_Other","cases":"1017"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Bike_Rack","cases":"992"}
+,{"service_name":"Illegal Postings","service_subtype":"no_posting_date","cases":"990"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&amp;E","cases":"984"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Kiosk_Public_Toilet","cases":"979"}
+,{"service_name":"Litter Receptacles","service_subtype":"City_Can_Other","cases":"954"}
+,{"service_name":"311 External Request","service_subtype":"Garbage","cases":"948"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pole_Damaged","cases":"947"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"other","cases":"937"}
+,{"service_name":"General Request - PORT AUTHORITY","service_subtype":"request_for_service","cases":"930"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"other_parking_type","cases":"905"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Garbage_Receptacles","cases":"899"}
+,{"service_name":"Noise","service_subtype":"garbage_recycling_collection","cases":"892"}
+,{"service_name":"Damage Property","service_subtype":"benches_on_sidewalk","cases":"887"}
+,{"service_name":"Litter Receptacles","service_subtype":"Door_Lock_issues","cases":"884"}
+,{"service_name":"Noise Report","service_subtype":"delivery_service_business","cases":"877"}
+,{"service_name":"Autonomous Vehicle Complaints","service_subtype":"incident_report","cases":"874"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"Muni - Comment_Question_Suggestion","cases":"870"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Inadequately_Maintained_Building_Exterior","cases":"870"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Fire_call_box","cases":"867"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Transit Shelter/Platform","cases":"867"}
+,{"service_name":"General Request - MTA","service_subtype":"compliment","cases":"866"}
+,{"service_name":"MUNI Feedback","service_subtype":"MUNI  - Services_Criminal_Activity","cases":"856"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Elevators_Everthing_Else","cases":"848"}
+,{"service_name":"Color Curb","service_subtype":"Red_NoFee Color Curb Request","cases":"837"}
+,{"service_name":"311 External Request","service_subtype":"noise_dog_barking","cases":"835"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"warning","cases":"825"}
+,{"service_name":"General Request - HSH","service_subtype":"request_for_service","cases":"822"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Public_Stairway_Defect","cases":"817"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Hot_Water_Lack_of_Hot_Water","cases":"795"}
+,{"service_name":"Litter Receptacles","service_subtype":"New_Litter_Receptacle","cases":"793"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Adopt_A_Street","cases":"790"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Paint_Lead_Violating_Safe_Practices","cases":"788"}
+,{"service_name":"Color Curb","service_subtype":"White_Fee Color Curb Request","cases":"782"}
+,{"service_name":"Color Curb","service_subtype":"Yellow Color Curb Request","cases":"768"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posted_Over_70_Days","cases":"768"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"stop","cases":"768"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"no_parking","cases":"766"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Loose","cases":"764"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Bridge","cases":"758"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Bathroom","cases":"756"}
+,{"service_name":"SFHA Requests","service_subtype":"Custodian","cases":"756"}
+,{"service_name":"Parking Enforcement","service_subtype":"abandoned_vehicle_callback","cases":"755"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"street_name","cases":"731"}
+,{"service_name":"Litter Receptacles","service_subtype":"Removal_From_Location","cases":"730"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Missed_TrashRecycleCompost_Collection","cases":"730"}
+,{"service_name":"Noise Report","service_subtype":"major_event_venue","cases":"726"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"complaint","cases":"725"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posting_Too_High_on_Pole","cases":"724"}
+,{"service_name":"General Request - PLANNING","service_subtype":"request_for_service","cases":"718"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posted_on_Historic_Street_Light","cases":"718"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Doors_Windows_Broken_Defective","cases":"715"}
+,{"service_name":"RPD General","service_subtype":"urban_forestry","cases":"711"}
+,{"service_name":"Sewer Issues","service_subtype":"Water_Main_Break","cases":"711"}
+,{"service_name":"Damage Property","service_subtype":"transit_shelter_platform_hazardous","cases":"699"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"compliment","cases":"698"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Illegal_Construction_No_Permit_Exceeds_Permit_Scope","cases":"697"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"permit_parking","cases":"694"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Blocked_Exit_Common_Areas","cases":"689"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"roadway\"","cases":"682"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Paint_Peeling","cases":"678"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Tour_Buses","cases":"674"}
+,{"service_name":"Residential Building","service_subtype":"inadequately_maintained_building_exterior","cases":"670"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesHealth_Violation","cases":"669"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Pay_phone","cases":"663"}
+,{"service_name":"Noise","service_subtype":"other_reallocate","cases":"636"}
+,{"service_name":"General Request - RPD","service_subtype":"customer_callback","cases":"636"}
+,{"service_name":"Taxi Complaint","service_subtype":"taxi_complaint","cases":"636"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Fire_Hazard","cases":"636"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request","cases":"630"}
+,{"service_name":"General Request - MONS","service_subtype":"customer_callback","cases":"628"}
+,{"service_name":"Street Defect","service_subtype":"manhole_cover_off","cases":"626"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesSignage","cases":"618"}
+,{"service_name":"311 External Request","service_subtype":"Sidewalk_or_Curb_Issues","cases":"607"}
+,{"service_name":"Temporary Sign Applications","service_subtype":"moving_residential_property","cases":"595"}
+,{"service_name":"Residential Building","service_subtype":"plumbing_broken_leaking","cases":"590"}
+,{"service_name":"General Request - MONS","service_subtype":"request_for_service","cases":"586"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Turned","cases":"584"}
+,{"service_name":"General Request - PUC","service_subtype":"followup_request","cases":"580"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"customer_callback","cases":"576"}
+,{"service_name":"311 External Request","service_subtype":"Utility Lines/Wires","cases":"572"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Not_Visible","cases":"571"}
+,{"service_name":"Noise","service_subtype":"traffic","cases":"561"}
+,{"service_name":"Residential Building","service_subtype":"heat_lack_of_heat","cases":"548"}
+,{"service_name":"Residential Building","service_subtype":"paint_peeling","cases":"546"}
+,{"service_name":"General Request","service_subtype":"recreation_and_park_department","cases":"539"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"manhole_cover_off","cases":"537"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Clutter_Hoarder_Unit_Interior_Storage","cases":"533"}
+,{"service_name":"General Request - DPH","service_subtype":"followup_request","cases":"530"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"SSP Abandoned Vehicles","cases":"528"}
+,{"service_name":"Noise Report","service_subtype":"vehicle_car_alarm","cases":"525"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"private_lot\"","cases":"524"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pole_Wires_Exposed","cases":"520"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_Glass_Cover_Hanging","cases":"518"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"complaint","cases":"517"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shaw Pipeline","cases":"506"}
+,{"service_name":"Damage Property","service_subtype":"fire_police_callbox","cases":"498"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Loose","cases":"496"}
+,{"service_name":"General Request - MTA","service_subtype":"mailing_request","cases":"483"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"other_parking_type","cases":"481"}
+,{"service_name":"General Request - MOD","service_subtype":"complaint","cases":"477"}
+,{"service_name":"General Request - PUC","service_subtype":"other","cases":"476"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"trash_porta_potties_waste_management","cases":"474"}
+,{"service_name":"Litter Receptacles","service_subtype":"Other_enter_additional_details_below","cases":"472"}
+,{"service_name":"Residential Building","service_subtype":"illegal_construction_no_permit_exceeds_permit_scope","cases":"468"}
+,{"service_name":"Residential Building","service_subtype":"elevators_everthing_else","cases":"468"}
+,{"service_name":"General Request - HSH","service_subtype":"customer_callback","cases":"457"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Empire Engineering and Construction","cases":"449"}
+,{"service_name":"General Request - PLANNING","service_subtype":"customer_callback","cases":"443"}
+,{"service_name":"General Request - DPH","service_subtype":"other","cases":"441"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel","cases":"438"}
+,{"service_name":"Muni Service Feedback","service_subtype":"comment_question_suggestion_service","cases":"438"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"complaint","cases":"435"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"street_name","cases":"433"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Electrical_Non_Hazard","cases":"427"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Community_Clean_Team","cases":"426"}
+,{"service_name":"Litter Receptacles","service_subtype":"Debris_box_maintenance_overflowing","cases":"423"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"parking_lane\"","cases":"419"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Ventilation_Inadequate_or_None","cases":"410"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Second_Hand_Smoke","cases":"407"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"mailing_request","cases":"395"}
+,{"service_name":"Tree Maintenance","service_subtype":"other_enter_additional_details_below","cases":"394"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Electrical_Hazardous_Condition","cases":"393"}
+,{"service_name":"Damage Property","service_subtype":"kiosk_public_toilet","cases":"391"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"complaint","cases":"390"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW (Dept of Public Works)","cases":"387"}
+,{"service_name":"Citations Questions Comments","service_subtype":"citations_questions_comments","cases":"383"}
+,{"service_name":"SFHA Requests","service_subtype":"Tile Work","cases":"382"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_fare_payment_methods","cases":"380"}
+,{"service_name":"Water Quality","service_subtype":"discolored","cases":"377"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"sidewalk_other","cases":"377"}
+,{"service_name":"Color Curb","service_subtype":"Blue Color Curb Request","cases":"373"}
+,{"service_name":"Residential Building","service_subtype":"hot_water_lack_of_hot_water","cases":"369"}
+,{"service_name":"General Request - 311CUSTOMERSERVICECENTER","service_subtype":"mailing_request","cases":"368"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PUC Water Dept","cases":"367"}
+,{"service_name":"Color Curb","service_subtype":"SSP DPT Color Curb Red","cases":"366"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pole_Leaning","cases":"366"}
+,{"service_name":"Noise","service_subtype":"sirens","cases":"355"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Fare_Payment_Methods","cases":"355"}
+,{"service_name":"Damage Property","service_subtype":"bike_rack","cases":"354"}
+,{"service_name":"Streetlights","service_subtype":"pullbox","cases":"351"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posted_on_Directional_Sign","cases":"347"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pole_Knockdown","cases":"346"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"tow_away","cases":"345"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"utility_excavation","cases":"338"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Elevators_No_Working_Elevator_7_or_More_Stories","cases":"337"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Noise_Caused_by_Building_Systems","cases":"336"}
+,{"service_name":"General Request - ART COMMISSION","service_subtype":"request_for_service","cases":"336"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"request_for_service","cases":"335"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Light_Glass_Cover_Missing","cases":"331"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Parking Meter","cases":"323"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Defaced","cases":"318"}
+,{"service_name":"Muni Service Feedback","service_subtype":"comment_question_suggestion","cases":"316"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"complaint","cases":"313"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"public_works","cases":"312"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW","cases":"312"}
+,{"service_name":"311 External Request","service_subtype":"Human/Animal Waste","cases":"311"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"comment_question_suggestion_employee","cases":"310"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"Medical_waste","cases":"310"}
+,{"service_name":"General Request - DPT","service_subtype":"request_for_service","cases":"309"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shaw Pipeline Inc","cases":"308"}
+,{"service_name":"Litter Receptacles","service_subtype":"City_Can_Removed","cases":"308"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"public_stairway_defect","cases":"307"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"customer_callback","cases":"305"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Annuzzi Concrete","cases":"304"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"permit_parking","cases":"303"}
+,{"service_name":"Residential Building","service_subtype":"elevators_no_working_elevator_7_or_more_stories","cases":"296"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Fire_Alarm_System","cases":"293"}
+,{"service_name":"Street Defect","service_subtype":"construction_plate_shifted","cases":"287"}
+,{"service_name":"General Request","service_subtype":"fire_department","cases":"285"}
+,{"service_name":"General Request - RPD","service_subtype":"other","cases":"283"}
+,{"service_name":"Residential Building","service_subtype":"doors_windows_broken_defective","cases":"282"}
+,{"service_name":"Litter Receptacle Maintenance","service_subtype":"debris_box_maintenance_overflowing","cases":"280"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"customer_callback","cases":"278"}
+,{"service_name":"Color Curb","service_subtype":"Green_Fee Color Curb Request","cases":"277"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pole_Cover_Missing","cases":"275"}
+,{"service_name":"Noise","service_subtype":"delivery_service_vehicle","cases":"275"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Empire  Construction &  Engineering","cases":"273"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"customer_callback","cases":"272"}
+,{"service_name":"Noise","service_subtype":"vehicle_car_alarm","cases":"272"}
+,{"service_name":"Residential Building","service_subtype":"infestation_bed_bugs","cases":"269"}
+,{"service_name":"General Request","service_subtype":"planning","cases":"268"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"warning","cases":"267"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"request_for_service","cases":"266"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"no_left_turn","cases":"265"}
+,{"service_name":"General Request - MONS","service_subtype":"other","cases":"260"}
+,{"service_name":"Litter Receptacles","service_subtype":"Debris_Box","cases":"260"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Turned","cases":"260"}
+,{"service_name":"Rec and Park Requests","service_subtype":"Park - Urban_Forestry","cases":"260"}
+,{"service_name":"Street Defect","service_subtype":"damaged_side_sewer_vent_cover","cases":"256"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Faded","cases":"254"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"followup_request","cases":"253"}
+,{"service_name":"Noise Report","service_subtype":"home_improvement_maintenance","cases":"252"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"mailing_request","cases":"249"}
+,{"service_name":"General Request - HSH","service_subtype":"complaint","cases":"247"}
+,{"service_name":"SFHA Requests","service_subtype":"Painting","cases":"243"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"request_for_service","cases":"235"}
+,{"service_name":"Damage Property","service_subtype":"news_rack","cases":"232"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Special_Events","cases":"231"}
+,{"service_name":"Residential Building","service_subtype":"electrical_non_hazard","cases":"229"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SHAW PIPE LINE INC.","cases":"228"}
+,{"service_name":"Illegal Postings","service_subtype":"posting_too_large_in_size","cases":"225"}
+,{"service_name":"Tree Maintenance","service_subtype":"Trees - Damaging_Property_Roots","cases":"221"}
+,{"service_name":"Illegal Postings","service_subtype":"posted_on_directional_sign","cases":"219"}
+,{"service_name":"Litter Receptacles","service_subtype":"Liner_issues","cases":"218"}
+,{"service_name":"Noise Report","service_subtype":"public_speech","cases":"218"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"customer_callback","cases":"217"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"other","cases":"216"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for Other","cases":"215"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Public Property","cases":"215"}
+,{"service_name":"Noise","service_subtype":"delivery_service_business","cases":"213"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"do_not_enter","cases":"205"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"abandoned_parklet","cases":"205"}
+,{"service_name":"Noise Report","service_subtype":"protest_speech_bullhorns","cases":"205"}
+,{"service_name":"General Request - RPD","service_subtype":"compliment","cases":"205"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"customer_callback","cases":"203"}
+,{"service_name":"General Request - OCC","service_subtype":"complaint","cases":"203"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"followup_request","cases":"199"}
+,{"service_name":"Color Curb","service_subtype":"White_NoFee Color Curb Request","cases":"198"}
+,{"service_name":"Residential Building","service_subtype":"electrical_hazardous_condition","cases":"197"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"other","cases":"195"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"complaint","cases":"195"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Kitchen_Community","cases":"195"}
+,{"service_name":"General Request - DPH","service_subtype":"compliment","cases":"194"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW - Cement Shop","cases":"194"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"customer_callback","cases":"193"}
+,{"service_name":"Residential Building","service_subtype":"fire_hazard","cases":"192"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pinnacle Power Service Inc.","cases":"192"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Construction","cases":"191"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Praise","cases":"191"}
+,{"service_name":"Residential Building","service_subtype":"ventilation_inadequate_or_none","cases":"191"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Security_Inadequately_secured_perimeter","cases":"191"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"customer_callback","cases":"190"}
+,{"service_name":"Illegal Postings","service_subtype":"posting_too_high_on_pole","cases":"189"}
+,{"service_name":"Noise","service_subtype":"protest_speech_bullhorns","cases":"189"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"disruptive_levels_of_amplified_sound","cases":"186"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Illegal_Guest_Room_Conversions","cases":"184"}
+,{"service_name":"Residential Building","service_subtype":"garbage_receptacles","cases":"184"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"one_way","cases":"183"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Proven Managment","cases":"182"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"other","cases":"180"}
+,{"service_name":"Autonomous Vehicle Complaints","service_subtype":"other","cases":"180"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Deck_Stairs_Handrails","cases":"179"}
+,{"service_name":"Residential Building","service_subtype":"bathroom","cases":"177"}
+,{"service_name":"Residential Building","service_subtype":"fire_alarm_system","cases":"176"}
+,{"service_name":"Graffiti Private","service_subtype":"post_abatement_inspection","cases":"176"}
+,{"service_name":"Noise Report","service_subtype":"delivery_service_vehicle","cases":"175"}
+,{"service_name":"Citations Payment Status","service_subtype":"citations_payment_status","cases":"175"}
+,{"service_name":"Waste of Water","service_subtype":"leaks","cases":"174"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"customer_callback","cases":"174"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_construction","cases":"173"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Street_Parks","cases":"172"}
+,{"service_name":"Noise","service_subtype":"home_improvement_maintenance","cases":"172"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Dirty","cases":"172"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pullbox_Cover_Missing","cases":"170"}
+,{"service_name":"Residential Building","service_subtype":"clutter_hoarder_unit_interior_storage","cases":"170"}
+,{"service_name":"General Request - CITY HALL","service_subtype":"customer_callback","cases":"169"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"request_for_service","cases":"169"}
+,{"service_name":"Volunteer Programs","service_subtype":"public_works","cases":"167"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for NTK Construction","cases":"166"}
+,{"service_name":"General Request - MOH","service_subtype":"customer_callback","cases":"166"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"obstruction_crosswalk","cases":"165"}
+,{"service_name":"Citations Protest Status","service_subtype":"citations_protest_status","cases":"165"}
+,{"service_name":"Noise Report","service_subtype":"vehicle_repair","cases":"165"}
+,{"service_name":"Noise Report","service_subtype":"mobile_food_facility","cases":"163"}
+,{"service_name":"General Request - DTIS","service_subtype":"customer_callback","cases":"162"}
+,{"service_name":"General Request -","service_subtype":"complaint","cases":"161"}
+,{"service_name":"General Request","service_subtype":"port_authority","cases":"160"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW BSSR","cases":"160"}
+,{"service_name":"OOC Feedback","service_subtype":"complaint","cases":"158"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Not_Visible","cases":"158"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"speed_limit","cases":"156"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"construction_plate_shifted","cases":"155"}
+,{"service_name":"Residential Building","service_subtype":"blocked_exit_common_areas","cases":"154"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for AAA Construction Group Inc","cases":"152"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"other","cases":"149"}
+,{"service_name":"RPP Application Status","service_subtype":"rpp_application_status","cases":"148"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Precision Engineering","cases":"148"}
+,{"service_name":"General Request - PORT AUTHORITY","service_subtype":"complaint","cases":"147"}
+,{"service_name":"General Request - SFPD","service_subtype":"other","cases":"146"}
+,{"service_name":"General Request - CONTROLLER","service_subtype":"customer_callback","cases":"145"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Esquivel Grading &amp; Paving","cases":"143"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Visitor_Policy_Violations","cases":"141"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"tow_away","cases":"140"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"obstruction_roadway","cases":"140"}
+,{"service_name":"General Request - SFPD","service_subtype":"customer_callback","cases":"139"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for RUIZ CONSTRUCTION","cases":"137"}
+,{"service_name":"Noise","service_subtype":"mobile_food_facility","cases":"136"}
+,{"service_name":"General Request - CENTRAL SHOPS","service_subtype":"complaint","cases":"136"}
+,{"service_name":"Illegal Postings","service_subtype":"posted_on_historic_street_light","cases":"135"}
+,{"service_name":"Noise Report","service_subtype":"tour_bus","cases":"135"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW - BUF","cases":"134"}
+,{"service_name":"Noise Report","service_subtype":"emergency_equipment","cases":"134"}
+,{"service_name":"General Request - DTIS","service_subtype":"complaint","cases":"134"}
+,{"service_name":"General Request","service_subtype":"human_services_agency","cases":"133"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"complaint","cases":"133"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Precision Engineering Inc","cases":"133"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni - Overhead Lines","cases":"131"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd","cases":"130"}
+,{"service_name":"General Request - PUC","service_subtype":"compliment","cases":"129"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"request_for_service","cases":"128"}
+,{"service_name":"Street Defect","service_subtype":"public_stairway_defect","cases":"128"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"tripping_hazard","cases":"127"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Mail_Service_Delivery_problem","cases":"127"}
+,{"service_name":"General Request - TT COLLECTOR","service_subtype":"customer_callback","cases":"127"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Ghilotti Bros","cases":"124"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shimmick Construction","cases":"124"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for HotelApartment","cases":"124"}
+,{"service_name":"General Request - MOCD","service_subtype":"complaint","cases":"123"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW - Cement Shop (Kenny Simmons)","cases":"123"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Underground Construction Co Inc","cases":"123"}
+,{"service_name":"General Request - MOCD","service_subtype":"request_for_service","cases":"122"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for J Flores Construction","cases":"122"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"customer_callback","cases":"121"}
+,{"service_name":"MTA Parking Traffic Signs Normal Priority","service_subtype":"freeway_signs_on_street","cases":"121"}
+,{"service_name":"General Request - CITY HALL","service_subtype":"request_for_service","cases":"120"}
+,{"service_name":"General Request - ENVIRONMENT","service_subtype":"complaint","cases":"119"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"request_for_service","cases":"119"}
+,{"service_name":"General Request - SHORT TERM RENTALS","service_subtype":"customer_callback","cases":"118"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"customer_callback","cases":"116"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"do_not_enter","cases":"115"}
+,{"service_name":"General Request - MOD","service_subtype":"request_for_service","cases":"115"}
+,{"service_name":"General Request - PLANNING","service_subtype":"other","cases":"115"}
+,{"service_name":"General Request - SMALL BUSINESS","service_subtype":"customer_callback","cases":"113"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"no_left_turn","cases":"113"}
+,{"service_name":"311 External Request","service_subtype":"Trees","cases":"113"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"speed_limit","cases":"112"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Synergy Project Management","cases":"111"}
+,{"service_name":"Street Defect","service_subtype":"utility_excavation","cases":"110"}
+,{"service_name":"General Request - MOH","service_subtype":"complaint","cases":"109"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Multiple_Postings","cases":"109"}
+,{"service_name":"General Request -","service_subtype":"request_for_service","cases":"108"}
+,{"service_name":"Water Quality","service_subtype":"dirty_water","cases":"108"}
+,{"service_name":"General Request - DTIS","service_subtype":"other","cases":"107"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"one_way","cases":"106"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for P G &amp; E","cases":"105"}
+,{"service_name":"General Request - ECONOMICS AND WORKFORCE DEVELOPMENT","service_subtype":"customer_callback","cases":"105"}
+,{"service_name":"General Request - ENVIRONMENT","service_subtype":"request_for_service","cases":"104"}
+,{"service_name":"General Request - ENVIRONMENT","service_subtype":"customer_callback","cases":"104"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for HERNANDEZ ENGINEERING","cases":"103"}
+,{"service_name":"Noise Report","service_subtype":"sirens","cases":"103"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"customer_callback","cases":"103"}
+,{"service_name":"General Request - ASSESSOR RECORDER","service_subtype":"customer_callback","cases":"102"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"diverters","cases":"101"}
+,{"service_name":"Muni Service Feedback","service_subtype":"praise_service","cases":"99"}
+,{"service_name":"General Request - MOD","service_subtype":"customer_callback","cases":"99"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"customer_callback","cases":"98"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Other_for_Parks_ONLY","cases":"98"}
+,{"service_name":"Residential Building","service_subtype":"security_inadequately_secured_perimeter","cases":"98"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"request_for_service","cases":"97"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"other","cases":"97"}
+,{"service_name":"General Request","service_subtype":"technology","cases":"96"}
+,{"service_name":"General Request - CITYADMINISTRATOR GSA","service_subtype":"complaint","cases":"96"}
+,{"service_name":"General Request - MONS","service_subtype":"compliment","cases":"96"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Interstate Grading &amp; Paving","cases":"96"}
+,{"service_name":"Noise Report","service_subtype":"construction_emergency","cases":"95"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pinnacle Power Services","cases":"95"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Smoke_Detectors_Missing_Broken_Unit_Interior","cases":"94"}
+,{"service_name":"General Request - LIBRARY PUBLIC","service_subtype":"complaint","cases":"93"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW - Street and Sewer","cases":"92"}
+,{"service_name":"General Request - ART COMMISSION","service_subtype":"complaint","cases":"91"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Ranger Pipelines Inc","cases":"90"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Mitchell Engineering","cases":"90"}
+,{"service_name":"General Request - DPT","service_subtype":"customer_callback","cases":"90"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"compliment","cases":"90"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_special_events","cases":"89"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG &amp; E","cases":"88"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"other","cases":"88"}
+,{"service_name":"General Request - CITYADMINISTRATOR GSA","service_subtype":"request_for_service","cases":"88"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Water Department","cases":"87"}
+,{"service_name":"Waste of Water","service_subtype":"runoff_from_outdoor_washing","cases":"87"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"roadway\",\"sidewalk\"","cases":"87"}
+,{"service_name":"RPP Questions Comments","service_subtype":"rpp_questions_comments","cases":"86"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Incorrect_Signage","cases":"86"}
+,{"service_name":"Litter Receptacles","service_subtype":"Recycling_top_issues","cases":"84"}
+,{"service_name":"General Request - CITYADMINISTRATOR GSA","service_subtype":"other","cases":"82"}
+,{"service_name":"General Request - RPD","service_subtype":"followup_request","cases":"81"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posting_Too_Large_in_Size","cases":"81"}
+,{"service_name":"Residential Building","service_subtype":"paint_lead_violating_safe_practices","cases":"81"}
+,{"service_name":"Noise","service_subtype":"emergency_equipment","cases":"80"}
+,{"service_name":"Muni Employee Feedback","service_subtype":"comment_question_suggestion","cases":"80"}
+,{"service_name":"General Request - MOCD","service_subtype":"customer_callback","cases":"80"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Fire/Police Callbox","cases":"79"}
+,{"service_name":"Noise Report","service_subtype":"delivery_service_construction","cases":"79"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Street_Fairs","cases":"78"}
+,{"service_name":"General Request - RENT BOARD","service_subtype":"other","cases":"78"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Fire_Extinguishers_Missing_Expired","cases":"78"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Phase 3 Communications","cases":"77"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni-Cable Car Superintendent","cases":"77"}
+,{"service_name":"General Request - TT COLLECTOR","service_subtype":"other","cases":"77"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW BSES","cases":"76"}
+,{"service_name":"General Request - MONS","service_subtype":"followup_request","cases":"75"}
+,{"service_name":"Water Quality","service_subtype":"odor_water","cases":"74"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"other","cases":"74"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Maloney Construction","cases":"73"}
+,{"service_name":"Residential Building","service_subtype":"deck_stairs_handrails","cases":"73"}
+,{"service_name":"Color Curb","service_subtype":"White Color Curb Request","cases":"71"}
+,{"service_name":"General Request - MEDICAL EXAMINER","service_subtype":"customer_callback","cases":"71"}
+,{"service_name":"Water Quality","service_subtype":"other","cases":"71"}
+,{"service_name":"Streetlights","service_subtype":"Streetlight - Pullbox_Other","cases":"71"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"complaint","cases":"71"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Benches on Sidewalk","cases":"71"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"followup_request","cases":"70"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&amp;E - Ken Wyrsch","cases":"70"}
+,{"service_name":"General Request - REAL ESTATE DEPARTMENT","service_subtype":"request_for_service","cases":"70"}
+,{"service_name":"General Request - LIBRARY PUBLIC","service_subtype":"request_for_service","cases":"70"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"platform_structure","cases":"69"}
+,{"service_name":"General Request - TT COLLECTOR","service_subtype":"request_for_service","cases":"69"}
+,{"service_name":"General Request","service_subtype":"department_not_found","cases":"69"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for City_Sponsored_Celebrations","cases":"67"}
+,{"service_name":"General Request","service_subtype":"entertainment_commission","cases":"66"}
+,{"service_name":"311 External Request","service_subtype":"Sewer_Water_Storm_Conditions","cases":"66"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW CEMENT SHOP","cases":"66"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"trash_porta_potties_waste_management,other","cases":"65"}
+,{"service_name":"General Request - OCC","service_subtype":"request_for_service","cases":"65"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Hotel_Restaurant_Parking","cases":"63"}
+,{"service_name":"General Request - HUMAN RIGHTS COMMISSION","service_subtype":"complaint","cases":"63"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Nibbi Brothers","cases":"63"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged News Rack","cases":"63"}
+,{"service_name":"General Request - DPT","service_subtype":"complaint","cases":"62"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for BMS Communications","cases":"62"}
+,{"service_name":"General Request - AGING ADULT SERVICES","service_subtype":"request_for_service","cases":"62"}
+,{"service_name":"Waste of Water","service_subtype":"runoff_from_irrigation","cases":"62"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posted_on_Historic_Street_Light","cases":"61"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni Over Head Lines","cases":"61"}
+,{"service_name":"General Request - SHERIFF","service_subtype":"other","cases":"61"}
+,{"service_name":"General Request - OCC","service_subtype":"customer_callback","cases":"61"}
+,{"service_name":"Residential Building","service_subtype":"mail_service_delivery_problem","cases":"61"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"followup_request","cases":"60"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"graffiti_on_the_parklet","cases":"60"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for JMB Construction","cases":"60"}
+,{"service_name":"Noise","service_subtype":"public_speech","cases":"59"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"complaint","cases":"59"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"request_for_service","cases":"58"}
+,{"service_name":"General Request","service_subtype":"city_hall","cases":"57"}
+,{"service_name":"General Request - ASSESSOR RECORDER","service_subtype":"request_for_service","cases":"57"}
+,{"service_name":"Shared Spaces Request","service_subtype":"sidewalk","cases":"57"}
+,{"service_name":"General Request","service_subtype":"art_commission","cases":"57"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"space_heaters","cases":"56"}
+,{"service_name":"Temporary Sign Applications","service_subtype":"corporate_events","cases":"56"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Michael Heavey Construction","cases":"56"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Ranger Pipelines","cases":"56"}
+,{"service_name":"General Request - PORT AUTHORITY","service_subtype":"customer_callback","cases":"56"}
+,{"service_name":"Water Quality","service_subtype":"bad_taste","cases":"56"}
+,{"service_name":"Noise","service_subtype":"hospital","cases":"56"}
+,{"service_name":"General Request - SMALL BUSINESS","service_subtype":"request_for_service","cases":"55"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&E","cases":"55"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for West Valley Construction Co Inc","cases":"55"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"request_for_service","cases":"55"}
+,{"service_name":"Water Quality","service_subtype":"cloudy_milky_appearance","cases":"55"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for West Coast Cranes","cases":"55"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shaw Pipeline Inc./kc","cases":"55"}
+,{"service_name":"General Request","service_subtype":"environment","cases":"54"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PGE-Ken Wyrsch","cases":"54"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"curbramp","cases":"54"}
+,{"service_name":"General Request - PLANNING","service_subtype":"followup_request","cases":"53"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"complaint","cases":"53"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"barricades","cases":"53"}
+,{"service_name":"Residential Building","service_subtype":"illegal_guest_room_conversions","cases":"53"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"parking_lane\",\"roadway\"","cases":"52"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"structure_extends_onto_sidewalks","cases":"52"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Posted_on_Directional Sign","cases":"52"}
+,{"service_name":"General Request","service_subtype":"city_attorney","cases":"52"}
+,{"service_name":"Child Request","service_subtype":"Shared_SpacesADA","cases":"52"}
+,{"service_name":"Litter Receptacles","service_subtype":"Sensor_repair","cases":"51"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PUC","cases":"51"}
+,{"service_name":"Water Quality","service_subtype":"black_particles","cases":"51"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"flooding","cases":"51"}
+,{"service_name":"General Request - PUBLIC WORKS","service_subtype":"Request for City Services","cases":"51"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Hatton Crane and Rigging","cases":"50"}
+,{"service_name":"Parking Enforcement","service_subtype":"Parking Enforcement","cases":"50"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Cahill Contractors","cases":"50"}
+,{"service_name":"General Request - CONTROLLER","service_subtype":"request_for_service","cases":"50"}
+,{"service_name":"General Request - ART COMMISSION","service_subtype":"customer_callback","cases":"49"}
+,{"service_name":"General Request - MOH","service_subtype":"request_for_service","cases":"49"}
+,{"service_name":"Damaged Property","service_subtype":"Damaged Kiosk/Public Toilet","cases":"49"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"parking_lane\",\"sidewalk\"","cases":"49"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Ghilotti Brothers","cases":"49"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"compliment","cases":"48"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PHOENIX ELECTRIC","cases":"48"}
+,{"service_name":"Residential Building","service_subtype":"noise_caused_by_building_systems","cases":"48"}
+,{"service_name":"General Request - ECONOMICS AND WORKFORCE DEVELOPMENT","service_subtype":"request_for_service","cases":"47"}
+,{"service_name":"General Request - TIDA","service_subtype":"request_for_service","cases":"47"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Fire_Sprinkler_System","cases":"47"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Darcy and Harty Construction","cases":"47"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"other","cases":"46"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PGE","cases":"46"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Light_Wells_Dirty_Flooded","cases":"46"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for Office","cases":"45"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pinacle Power Services","cases":"45"}
+,{"service_name":"Noise","service_subtype":"vehicle_repair","cases":"45"}
+,{"service_name":"General Request - ECONOMICS AND WORKFORCE DEVELOPMENT","service_subtype":"other","cases":"44"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for CMC Construction","cases":"44"}
+,{"service_name":"General Request - HUMAN RIGHTS COMMISSION","service_subtype":"customer_callback","cases":"44"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"lack_of_address","cases":"44"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Precision Engineering Incorporated","cases":"43"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW  BSES","cases":"43"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for BAY AREA LIGHT WORKS","cases":"42"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"visibility_intersection","cases":"42"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Department of Public Works (DPW)","cases":"42"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for NTK construction","cases":"42"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Valley Slurry SEal Company","cases":"42"}
+,{"service_name":"General Request - CITY HALL","service_subtype":"other","cases":"42"}
+,{"service_name":"General Request - SMALL BUSINESS","service_subtype":"other","cases":"42"}
+,{"service_name":"Temporary Sign Applications","service_subtype":"other_event_type","cases":"41"}
+,{"service_name":"General Request","service_subtype":"mayors_office_of_housing","cases":"41"}
+,{"service_name":"Sign Repair","service_subtype":"Sign - Too_Low","cases":"41"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for pg&amp;e","cases":"41"}
+,{"service_name":"Residential Building Request","service_subtype":"Building - Smoke_Detectors_Missing_Broken_Common_Areas","cases":"41"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,other","cases":"41"}
+,{"service_name":"General Request","service_subtype":"controller","cases":"40"}
+,{"service_name":"General Request - CITYADMINISTRATOR GSA","service_subtype":"customer_callback","cases":"40"}
+,{"service_name":"General Request - SHERIFF","service_subtype":"request_for_service","cases":"40"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"complaint","cases":"40"}
+,{"service_name":"311 External Request","service_subtype":"Illegal_Posting","cases":"39"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW (kenny simmons)","cases":"39"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"complaint","cases":"39"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"required_signage","cases":"39"}
+,{"service_name":"Autonomous Vehicle Complaints","service_subtype":"general_complaint","cases":"39"}
+,{"service_name":"General Request - ENVIRONMENT","service_subtype":"other","cases":"39"}
+,{"service_name":"General Request - SHERIFF","service_subtype":"complaint","cases":"38"}
+,{"service_name":"General Request - CONTRACT ADMINISTRATION","service_subtype":"customer_callback","cases":"38"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Sign_other","cases":"38"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"overhead_obstruction","cases":"38"}
+,{"service_name":"General Request - SFPD","service_subtype":"followup_request","cases":"38"}
+,{"service_name":"General Request - SFPD","service_subtype":"compliment","cases":"38"}
+,{"service_name":"General Request - SHERIFF","service_subtype":"customer_callback","cases":"38"}
+,{"service_name":"General Request - AGING ADULT SERVICES","service_subtype":"complaint","cases":"38"}
+,{"service_name":"Abandoned Vehicle","service_subtype":"Abandoned Vehicles High","cases":"38"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Funerals","cases":"37"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni (Track)","cases":"37"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFMTA Cable Cars","cases":"37"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"disruptive_levels_ of_amplified_sound","cases":"37"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Golden Gate Tank Removal","cases":"37"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG &amp;E","cases":"37"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Esquivel Grading & Paving","cases":"37"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"sidewalk\",\"roadway\"","cases":"37"}
+,{"service_name":"Residential Building","service_subtype":"kitchen_community","cases":"37"}
+,{"service_name":"General Request","service_subtype":"central_shops","cases":"36"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"followup_request","cases":"36"}
+,{"service_name":"311 Complaints","service_subtype":"public_health","cases":"36"}
+,{"service_name":"MTA Parking Traffic Signs High Priority","service_subtype":"freeway_signs_on_street","cases":"36"}
+,{"service_name":"General Request - FILM COMMISSION","service_subtype":"complaint","cases":"36"}
+,{"service_name":"General Request - REAL ESTATE DEPARTMENT","service_subtype":"other","cases":"36"}
+,{"service_name":"Temporary Sign Applications","service_subtype":"moving_commercial_property","cases":"36"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"mailing_request","cases":"35"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posting_Too_High_on_Pole","cases":"35"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for INTERMOUNTAIN SLURRY SEAL","cases":"35"}
+,{"service_name":"General Request - PUC","service_subtype":"mailing_request","cases":"35"}
+,{"service_name":"General Request -","service_subtype":"other","cases":"35"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Zayo Group","cases":"35"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"structure_blocks_view_42_inches","cases":"34"}
+,{"service_name":"General Request - FILM COMMISSION","service_subtype":"request_for_service","cases":"34"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shaw Pipeline Inc.","cases":"34"}
+,{"service_name":"General Request","service_subtype":"police_accountability","cases":"34"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PUBLIC WORKS","cases":"34"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Hernandez Engineering","cases":"34"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Sporting_Events","cases":"33"}
+,{"service_name":"General Request - CENTRAL SHOPS","service_subtype":"request_for_service","cases":"33"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFMTA","cases":"33"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Black &amp; Veatch","cases":"33"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"request_for_service","cases":"32"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Par Electrical","cases":"32"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"abandoned_parklet,other","cases":"32"}
+,{"service_name":"Muni Service Feedback","service_subtype":"Muni - Complaint_Communications_Advertising_Marketing","cases":"32"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG and E","cases":"32"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"other","cases":"32"}
+,{"service_name":"General Request - DPT","service_subtype":"other","cases":"32"}
+,{"service_name":"General Request","service_subtype":"elections","cases":"31"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Shaw Pipeline INC","cases":"31"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"lack_of_address,other","cases":"31"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW-Cement Shop-Juvie Villarreal","cases":"31"}
+,{"service_name":"General Request - CHILDSUPPORTSERVICES","service_subtype":"request_for_service","cases":"31"}
+,{"service_name":"Muni Service Feedback","service_subtype":"complaint_communications_advertising_marketing","cases":"31"}
+,{"service_name":"General Request - CONTRACT ADMINISTRATION","service_subtype":"request_for_service","cases":"31"}
+,{"service_name":"General Request - AIRPORT SFO","service_subtype":"request_for_service","cases":"30"}
+,{"service_name":"Waste of Water","service_subtype":"other","cases":"30"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pennacle Power","cases":"30"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFPUC","cases":"30"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Too_Low","cases":"30"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for ARB Construction","cases":"30"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFMTA Track Dept","cases":"30"}
+,{"service_name":"General Request - CONTRACT ADMINISTRATION","service_subtype":"other","cases":"29"}
+,{"service_name":"General Request - SHORT TERM RENTALS","service_subtype":"complaint","cases":"29"}
+,{"service_name":"General Request - HUMAN RIGHTS COMMISSION","service_subtype":"other","cases":"29"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Advanced communications incorporated","cases":"29"}
+,{"service_name":"General Request - MOCD","service_subtype":"other","cases":"29"}
+,{"service_name":"General Request - CONTROLLER","service_subtype":"mailing_request","cases":"29"}
+,{"service_name":"Residential Building","service_subtype":"smoke_detectors_missing_broken_unit_interior","cases":"29"}
+,{"service_name":"General Request - REAL ESTATE DEPARTMENT","service_subtype":"customer_callback","cases":"29"}
+,{"service_name":"General Request - HSH","service_subtype":"followup_request","cases":"29"}
+,{"service_name":"General Request - PORT AUTHORITY","service_subtype":"other","cases":"29"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Darcy &amp; Hardy Construction","cases":"28"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"followup_request","cases":"28"}
+,{"service_name":"General Request - SHORT TERM RENTALS","service_subtype":"request_for_service","cases":"28"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for MH Construction Management","cases":"28"}
+,{"service_name":"Residential Building","service_subtype":"visitor_policy_violations","cases":"28"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for A Ruiz Construcion","cases":"28"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd,curbramp,abandoned_parklet,fire_hydrants,utility_access_points,disruptive_levels_of_amplified_sound,flooding,graffiti_on_the_parklet,lack_of_address,lack_of_ada_accessible_seating,required_signage,clear_path_of_travel,obstruction_crosswalk,obstruction_of_fire_escape,obstruction_roadway,overhead_obstruction,platform_structure,reflectors,roof_structure,diverters,space_heaters,structure_blocks_view_42_inches,structure_extends_onto_sidewalks,barricades,tripping_hazard,visibility_intersection,trash_porta_potties_waste_management,other","cases":"28"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for West Valley Construction","cases":"28"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni Overhead Lines","cases":"27"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"utility_access_points","cases":"27"}
+,{"service_name":"General Request - COUNTY CLERK","service_subtype":"complaint","cases":"27"}
+,{"service_name":"General Request - LIBRARY PUBLIC","service_subtype":"customer_callback","cases":"27"}
+,{"service_name":"General Request - ART COMMISSION","service_subtype":"other","cases":"27"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for A Ruiz Construction Co","cases":"26"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Underground Construction","cases":"26"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd,structure_blocks_view_42_inches","cases":"26"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"mailing_request","cases":"26"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Oliver &amp; Company","cases":"25"}
+,{"service_name":"Sign Repair","service_subtype":"Sign Repair - Painted_Over","cases":"25"}
+,{"service_name":"General Request - CHILDREN YOUTH FAMILIES","service_subtype":"other","cases":"25"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"followup_request","cases":"25"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"other","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for CF Contracting","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for INTERSTATE GRADING AND PAVING","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Vargas &amp; Esquivel Construction Inc","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for LC GENERAL ENGINEERING","cases":"25"}
+,{"service_name":"MUNI Feedback","service_subtype":"SFMTA Feedback","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for James E. Roberts  and Obayashi","cases":"25"}
+,{"service_name":"General Request - FIRE DEPARTMENT","service_subtype":"followup_request","cases":"25"}
+,{"service_name":"General Request - ETHICS COMMISSION","service_subtype":"complaint","cases":"25"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for St Francis Electric","cases":"24"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"mailing_request","cases":"24"}
+,{"service_name":"General Request - PLANNING","service_subtype":"compliment","cases":"24"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"other","cases":"24"}
+,{"service_name":"General Request - ASSESSOR RECORDER","service_subtype":"other","cases":"24"}
+,{"service_name":"General Request - AIRPORT SFO","service_subtype":"complaint","cases":"24"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for MUNI RAIL WAY","cases":"24"}
+,{"service_name":"311 Complaints","service_subtype":"structural_maintenance","cases":"24"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Conquest Constructor","cases":"23"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Azul Works","cases":"23"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Synergy Construction","cases":"23"}
+,{"service_name":"Taxi Compliment","service_subtype":"taxi_compliment","cases":"23"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"parking_lane\",\"roadway\",\"sidewalk\"","cases":"23"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for M Squared Construction","cases":"23"}
+,{"service_name":"General Request - SMALL BUSINESS","service_subtype":"followup_request","cases":"23"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Darcy & Harty Construction","cases":"23"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,diverters","cases":"23"}
+,{"service_name":"General Request - ASSESSOR RECORDER","service_subtype":"complaint","cases":"23"}
+,{"service_name":"General Request - HUMAN RIGHTS COMMISSION","service_subtype":"request_for_service","cases":"23"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for MP NEXT LEVEL","cases":"23"}
+,{"service_name":"General Request - CHILDREN YOUTH FAMILIES","service_subtype":"request_for_service","cases":"23"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for Retail","cases":"22"}
+,{"service_name":"General Request","service_subtype":"mayors_office_for_victim_rights","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Dept of Public Works (DPW)","cases":"22"}
+,{"service_name":"General Request - MOCJ","service_subtype":"request_for_service","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Golden State Utility Company","cases":"22"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Postings - Affixed Improperly","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Intermountain Slurry Seal","cases":"22"}
+,{"service_name":"General Request - CITY HALL","service_subtype":"complaint","cases":"22"}
+,{"service_name":"General Request","service_subtype":"short_term_rentals","cases":"22"}
+,{"service_name":"Sidewalk or Curb","service_subtype":"Sidewalk Curb Defects","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Hathaway Dinwiddie Construction","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for LC General Engineering & Construction INc","cases":"22"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Vulcan Construction","cases":"22"}
+,{"service_name":"General Request - SMALL BUSINESS","service_subtype":"complaint","cases":"22"}
+,{"service_name":"Noise","service_subtype":"tour_bus","cases":"21"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for HATHAWAY DINWIDDIE CONSTRUCION","cases":"21"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"other","cases":"21"}
+,{"service_name":"Color Curb","service_subtype":"Red Color Curb Request for WholesaleWarehouse","cases":"21"}
+,{"service_name":"General Request","service_subtype":"small_business","cases":"21"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for CAHILL CONTRACTORS","cases":"20"}
+,{"service_name":"General Request - AIRPORT SFO","service_subtype":"other","cases":"20"}
+,{"service_name":"General Request - DEM","service_subtype":"request_for_service","cases":"20"}
+,{"service_name":"General Request - CITY ATTORNEY","service_subtype":"followup_request","cases":"20"}
+,{"service_name":"General Request - ECONOMICS AND WORKFORCE DEVELOPMENT","service_subtype":"complaint","cases":"20"}
+,{"service_name":"Color Curb","service_subtype":"Green Color Curb Request","cases":"20"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Plant Construction Co","cases":"19"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"followup_request","cases":"19"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Demonstrations","cases":"19"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Film_Photo_Production","cases":"19"}
+,{"service_name":"Noise","service_subtype":"rv_oversize_vehicle","cases":"19"}
+,{"service_name":"Information Provided","service_subtype":"public_works","cases":"19"}
+,{"service_name":"311 External Request","service_subtype":"Blocked_Street_Sidewalk","cases":"19"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFMTA MUNI OVERHEAD LINES","cases":"19"}
+,{"service_name":"Noise Report","service_subtype":"hospital","cases":"19"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Darcy & Hardy Construction","cases":"19"}
+,{"service_name":"General Request","service_subtype":"county_clerk","cases":"19"}
+,{"service_name":"General Request - MOCJ","service_subtype":"complaint","cases":"18"}
+,{"service_name":"General Request - CHILDSUPPORTSERVICES","service_subtype":"customer_callback","cases":"18"}
+,{"service_name":"General Request - FILM COMMISSION","service_subtype":"customer_callback","cases":"18"}
+,{"service_name":"Street and Sidewalk Cleaning","service_subtype":"GarbageTransit","cases":"18"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pinnacle Power Services Inc","cases":"18"}
+,{"service_name":"General Request - MOCJ","service_subtype":"other","cases":"18"}
+,{"service_name":"Noise","service_subtype":"delivery_service_construction","cases":"18"}
+,{"service_name":"General Request - DPT","service_subtype":"followup_request","cases":"18"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Oliver and Company","cases":"18"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"obstruction_of_fire_escape","cases":"18"}
+,{"service_name":"General Request - MOD","service_subtype":"other","cases":"18"}
+,{"service_name":"General Request - AGING ADULT SERVICES","service_subtype":"other","cases":"18"}
+,{"service_name":"General Request - TIDA","service_subtype":"complaint","cases":"18"}
+,{"service_name":"General Request - CHILDREN YOUTH FAMILIES","service_subtype":"customer_callback","cases":"17"}
+,{"service_name":"General Request - SFPD","service_subtype":"mailing_request","cases":"17"}
+,{"service_name":"General Request - CITY HALL","service_subtype":"followup_request","cases":"17"}
+,{"service_name":"Residential Building","service_subtype":"fire_sprinkler_system","cases":"17"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,obstruction_crosswalk","cases":"17"}
+,{"service_name":"General Request - OCC","service_subtype":"other","cases":"17"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"obstruction_roadway,other","cases":"17"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"followup_request","cases":"17"}
+,{"service_name":"General Request - PUBLIC DEFENDER","service_subtype":"request_for_service","cases":"17"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Treadwell and Rollo","cases":"17"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"mailing_request","cases":"17"}
+,{"service_name":"General Request - DTIS","service_subtype":"mailing_request","cases":"17"}
+,{"service_name":"General Request - HUMAN SERVICES AGENCY","service_subtype":"compliment","cases":"17"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Mechael Heabey Construction","cases":"17"}
+,{"service_name":"Blocked Street or SideWalk","service_subtype":"Blocked Sidewalk and Parking","cases":"17"}
+,{"service_name":"Shared Spaces Request","service_subtype":"private_lot","cases":"17"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"obstruction_crosswalk,other","cases":"17"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd,space_heaters","cases":"17"}
+,{"service_name":"General Request - ADULT PROBATION","service_subtype":"other","cases":"16"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"mailing_request","cases":"16"}
+,{"service_name":"General Request - FILM COMMISSION","service_subtype":"other","cases":"16"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SYNERGY","cases":"16"}
+,{"service_name":"General Request - REAL ESTATE DEPARTMENT","service_subtype":"complaint","cases":"16"}
+,{"service_name":"General Request - DTIS","service_subtype":"followup_request","cases":"16"}
+,{"service_name":"General Request","service_subtype":"labor_standards_enforcement","cases":"16"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PACIFIC GAS AND ELECTRIC","cases":"16"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Build Group","cases":"16"}
+,{"service_name":"General Request - CONTROLLER","service_subtype":"complaint","cases":"16"}
+,{"service_name":"General Request - CHILDSUPPORTSERVICES","service_subtype":"complaint","cases":"16"}
+,{"service_name":"General Request - ELECTIONS","service_subtype":"followup_request","cases":"16"}
+,{"service_name":"General Request - TIDA","service_subtype":"customer_callback","cases":"16"}
+,{"service_name":"General Request","service_subtype":"treasure_island_development_authority","cases":"16"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for AT&amp;T","cases":"16"}
+,{"service_name":"General Request - BOARD OF SUPERVISORS","service_subtype":"compliment","cases":"16"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"tripping_hazard,other","cases":"16"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"private_lot\",\"sidewalk\"","cases":"16"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"lack_of_ada_accessible_seating","cases":"16"}
+,{"service_name":"Charging Station Site Nomination","service_subtype":"ev_site_nomination","cases":"16"}
+,{"service_name":"General Request","service_subtype":"mayors_office_of_community_development","cases":"16"}
+,{"service_name":"Color Curb","service_subtype":"Green_NoFee Color Curb Request","cases":"15"}
+,{"service_name":"General Request - AGING ADULT SERVICES","service_subtype":"customer_callback","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Yerba Buena Engineering","cases":"15"}
+,{"service_name":"Information Provided","service_subtype":"other","cases":"15"}
+,{"service_name":"General Request - BUILDING INSPECTION","service_subtype":"mailing_request","cases":"15"}
+,{"service_name":"Temporary Sign Applications","service_subtype":"tour_buses","cases":"15"}
+,{"service_name":"General Request -","service_subtype":"followup_request","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Muni","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for MUNI Truck","cases":"15"}
+,{"service_name":"General Request","service_subtype":"assessor-recorder","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Webcor Builders","cases":"15"}
+,{"service_name":"Residential Building","service_subtype":"fire_extinguishers_missing_expired","cases":"15"}
+,{"service_name":"General Request - CONTRACT ADMINISTRATION","service_subtype":"complaint","cases":"15"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"tripping_hazard,trash_porta_potties_waste_management","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for reliance engineering inc","cases":"15"}
+,{"service_name":"General Request - TT COLLECTOR","service_subtype":"followup_request","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&amp;E -Alison Nieve","cases":"15"}
+,{"service_name":"General Request - CITYADMINISTRATOR GSA","service_subtype":"followup_request","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for LC Engineering","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for San Francisco Public Utilities Commission (SFPUC)","cases":"15"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"platform_structure,other","cases":"15"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Adopt_A_Tree","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW-BUF","cases":"15"}
+,{"service_name":"Water Quality","service_subtype":"oily_greasy_water","cases":"15"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Hathaway Dinwiddie Construction Company","cases":"15"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,space_heaters","cases":"14"}
+,{"service_name":"General Request - CHILDSUPPORTSERVICES","service_subtype":"other","cases":"14"}
+,{"service_name":"311 Complaints","service_subtype":"other","cases":"14"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"abandoned_parklet,trash_porta_potties_waste_management","cases":"14"}
+,{"service_name":"General Request - HUMAN RESOURCES","service_subtype":"mailing_request","cases":"14"}
+,{"service_name":"311 Complaints","service_subtype":"park_patrol","cases":"14"}
+,{"service_name":"Encampment","service_subtype":"Encampment","cases":"14"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Film_Projects","cases":"14"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd,lack_of_address,overhead_obstruction,space_heaters","cases":"14"}
+,{"service_name":"General Request","service_subtype":"economic_and_workforce_development","cases":"14"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,tripping_hazard","cases":"14"}
+,{"service_name":"General Request - ASSESSOR RECORDER","service_subtype":"followup_request","cases":"14"}
+,{"service_name":"General Request - DISTRICT ATTORNEY","service_subtype":"followup_request","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DARCY AND HARDY CONSTRUCTION","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Walsh Construction","cases":"14"}
+,{"service_name":"MUNI Feedback","service_subtype":"SSP SFMTA Feedback","cases":"14"}
+,{"service_name":"General Request - MOH","service_subtype":"other","cases":"14"}
+,{"service_name":"311 Complaints","service_subtype":"public_utilities_commission","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for P&amp;J Utility","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for ARB Inc","cases":"14"}
+,{"service_name":"General Request -","service_subtype":"customer_callback","cases":"14"}
+,{"service_name":"General Request - PUBLIC DEFENDER","service_subtype":"other","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Cal State Constructors","cases":"14"}
+,{"service_name":"General Request","service_subtype":"human_resources","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Stacey &amp; Witbeck Inc","cases":"14"}
+,{"service_name":"General Request - RPD","service_subtype":"mailing_request","cases":"14"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Ashbury Homes Incorporated","cases":"14"}
+,{"service_name":"General Request - MOCD","service_subtype":"followup_request","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Plant Construction","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for precision engineering","cases":"13"}
+,{"service_name":"General Request - CENTRAL SHOPS","service_subtype":"customer_callback","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPR CONSTRUCTION","cases":"13"}
+,{"service_name":"General Request - TAXI COMMISSION","service_subtype":"followup_request","cases":"13"}
+,{"service_name":"Shared Spaces Request","service_subtype":"roadway","cases":"13"}
+,{"service_name":"General Request - STATUS OF WOMEN","service_subtype":"complaint","cases":"13"}
+,{"service_name":"General Request - ENTERTAINMENT COMMISSION","service_subtype":"compliment","cases":"13"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"disruptive_levels_of_amplified_sound,other","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for P&J Utility","cases":"13"}
+,{"service_name":"311 Complaints","service_subtype":"city_hall","cases":"13"}
+,{"service_name":"General Request - MOH","service_subtype":"followup_request","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Golden state Utility Company","cases":"13"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Pennacle Power Services","cases":"13"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"diverters,other","cases":"13"}
+,{"service_name":"311 Complaints","service_subtype":"garbage_and_debris","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for MUNI","cases":"12"}
+,{"service_name":"Shared Spaces Request","service_subtype":"\"sidewalk\",\"private_lot\"","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Bay Area Lightworks","cases":"12"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"mailing_request","cases":"12"}
+,{"service_name":"General Request","service_subtype":"city_administrator_general_services_agency","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Valletta Construction Inc","cases":"12"}
+,{"service_name":"General Request - LABOR STANDARDS ENFORCEMENT","service_subtype":"mailing_request","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Municipal Transportation Agency (MTA)","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for American Civil Constructors (ACC)","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Phoenix Electric Co","cases":"12"}
+,{"service_name":"General Request - SHORT TERM RENTALS","service_subtype":"followup_request","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for ASHBURY HOLMES INC.","cases":"12"}
+,{"service_name":"General Request","service_subtype":"medical_examiner","cases":"12"}
+,{"service_name":"Residential Building","service_subtype":"smoke_detectors_missing_broken_common_areas","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for winfield construction","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SF PUC","cases":"12"}
+,{"service_name":"General Request","service_subtype":"mayors_office_of_disability","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Cablecom","cases":"12"}
+,{"service_name":"Parking Enforcement","service_subtype":"mv_large_vehicle","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&E-Bill DelaTorre","cases":"12"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"no_access_sffd,clear_path_of_travel","cases":"12"}
+,{"service_name":"General Request - PUBLIC DEFENDER","service_subtype":"complaint","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Bragg Crane","cases":"12"}
+,{"service_name":"Information Provided","service_subtype":"garbage_and_debris","cases":"12"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFWD (Barbara Jean Hintermann)","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Roberts-Obayshi Construction","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Roberts Obayashi","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for A. Ruiz Contruction Co","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for DPW -Cement Shop-Kenny Simmons","cases":"11"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for Parades","cases":"11"}
+,{"service_name":"General Request - ETHICS COMMISSION","service_subtype":"request_for_service","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Herrero Boldt","cases":"11"}
+,{"service_name":"Illegal Postings","service_subtype":"not_offensive","cases":"11"}
+,{"service_name":"General Request - MOD","service_subtype":"followup_request","cases":"11"}
+,{"service_name":"General Request - ECONOMICS AND WORKFORCE DEVELOPMENT","service_subtype":"followup_request","cases":"11"}
+,{"service_name":"DPW Volunteer Programs","service_subtype":"Love_Our_City","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for McGuire and Hester Contruction Company","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Redgwick construction","cases":"11"}
+,{"service_name":"General Request - AGING ADULT SERVICES","service_subtype":"followup_request","cases":"11"}
+,{"service_name":"General Request - PORT AUTHORITY","service_subtype":"compliment","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for American Asphalt","cases":"11"}
+,{"service_name":"Temporary Sign Request","service_subtype":"Temporary Sign Request for","cases":"11"}
+,{"service_name":"Street Defects","service_subtype":"Pavement defect","cases":"11"}
+,{"service_name":"General Request - ETHICS COMMISSION","service_subtype":"other","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for JS Sullivan Construction","cases":"11"}
+,{"service_name":"General Request - TT COLLECTOR","service_subtype":"mailing_request","cases":"11"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SF Water Dept","cases":"11"}
+,{"service_name":"General Request - HSH","service_subtype":"other","cases":"11"}
+,{"service_name":"Illegal Postings","service_subtype":"Illegal Posting - Posted_on_Directional_Sign","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PJ Utility","cases":"10"}
+,{"service_name":"General Request - DEM","service_subtype":"customer_callback","cases":"10"}
+,{"service_name":"General Request - DTIS","service_subtype":"compliment","cases":"10"}
+,{"service_name":"General Request - ANIMAL CARE CONTROL","service_subtype":"compliment","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for J. Flores Construction","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Precission Engineering","cases":"10"}
+,{"service_name":"Noise","service_subtype":"construction_emergency","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Interstate Grading & Paving","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for ARB INC","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for CMC Traffic Control Specialists","cases":"10"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"clear_path_of_travel,obstruction_roadway","cases":"10"}
+,{"service_name":"311 Complaints","service_subtype":"labor_standards_enforcement","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for PG&amp;E - Lance Lott","cases":"10"}
+,{"service_name":"311 Complaints","service_subtype":"library","cases":"10"}
+,{"service_name":"Residential Building","service_subtype":"light_wells_dirty_flooded","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Lendlease","cases":"10"}
+,{"service_name":"311 External Request","service_subtype":"Street_Defect","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for SFPUC Street Lighting","cases":"10"}
+,{"service_name":"Construction Zone Permits","service_subtype":"Construction Zone Tow-away Permits for Extenet Systems","cases":"10"}
+,{"service_name":"Shared Spaces Violation","service_subtype":"roof_structure","cases":"10"}
+,{"service_name":"Graffiti","service_subtype":"Graffiti on Mail box","cases":"10"}
+,{"service_name":"Water Quality","service_subtype":"skin_rash","cases":"10"}]

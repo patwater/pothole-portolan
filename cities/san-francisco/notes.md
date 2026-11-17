@@ -231,6 +231,36 @@ You approved `data.sf.gov` and `data.sfgov.org`. Both hosts serve the same robot
 
 No query would select an address, coordinate or free-text field.
 
+## 311 plan, step 2: aggregate fetches (2026-11-17)
+
+Six aggregate sources are archived: five queries on the 311 Cases dataset and one on Scorecard Measures. None selects an address, coordinate, free-text or record-id field, and the fetcher enforces that (see below). Every 311 query requests only groups of 10 or more cases.
+
+**Main finding: the 311 data has no pothole category.** Across the 1,200 case-type groups with 10 or more cases, none has "pothole" in its service name or subtype. Pothole reports must sit inside the pavement defect subtype, and any finer split would be in `service_details`, which the policy bars. So **a 311 count here is a count of pavement defect requests, of which potholes are an unknown share, and it must never be labeled as potholes.**
+
+**What the pavement defect family is.**
+
+- 100,682 cases from July 2008 to November 2026, in five service-name variants. Three dominate: `Street Defects / Pavement_Defect` (86,753), `Street Defect / pavement_defect` (6,965) and `Sidewalk and Curb / pavement_defect` (6,960). Spelling and naming changed over time, and the sidewalk variant may not be roadway at all.
+- Routed to many places: about half to the street and sewer repair bureau queue, but also street-use and mapping, operations queues and sewer operations (5,658 cases in the first pass). Agency labels changed over time, with 177 distinct values.
+- Yearly totals (all of these include 2008 as a partial year starting July 1 and 2026 as a partial year): 1,523 (2008), 3,372 (2011), 8,570 (2017), 4,582 (2020), 7,538 (2023), 5,307 (2025), 6,321 (2026 so far). Calendar year comes from `requested_datetime`, a timestamp with no time zone stated.
+- Reporting channels include phone, web, a combined mobile and Open311 channel, a separate mobile channel, an "Integrated Agency" channel and a small "Test" channel. The mix changed over time, which affects what a count measures.
+
+**The city's own pothole measures (Scorecard Measures).** Two measures match, each with 167 monthly values from October 2012 to August 2026 and 14 empty future or missing months.
+
+- **7075, "Number of pothole service orders received".** About 1,200 to 2,700 per calendar year, with 2025 at 847 (twelve months) and 2026 at 471 for eight months. These are Public Works service orders, not 311 cases, so the magnitudes do not match the 311 family (for example 847 in 2025 here against 5,307 pavement defect cases) and no relationship should be assumed.
+- **7072, "Percentage of pothole service requests responded to within 72 hours".** Stored as fractions (0.91 means 91 percent). The latest two months, July and August 2026, are both 0.39 against a 0.9 target. The page states a one-month data lag, so these may be provisional, but that is not established.
+- Values arrive as text strings. The -9999 "no entry" marker documented in the metadata does not occur in these two measures, only missing values, but Extract must still treat it as null.
+- Neither measure carries a methodology text in the data. The methodology is on the city's scorecard page (72-hour goal, three business days in the definition).
+
+**Consistency checks that passed.** The two year-level queries and the type-group file all total 100,682 pavement defect cases and 9,074,553 cases overall, and the same totals appeared in my first, unthresholded pass, so the data did not shift between queries. In the thresholded files, 3,935 cases (0.04 percent) sit in groups smaller than 10 and were not returned. In the pavement defect channel breakdown the suppressed amount is 0 to 28 cases per year, and 368 cases are missing from the agency breakdown.
+
+**A rule 7 problem found and handled.** The first taxonomy query, which had no minimum group size, returned 3,303 groups, of which 1,451 were a single case. One subtype label contained a business name and street address typed into the field. The personal-data check flagged it, correctly. That file was untracked; I deleted it before committing anything, did not copy the label into any record, and re-fetched with a portal-side threshold. The fetcher's query policy now refuses any aggregate query on the 311 dataset that lacks `$having count(*) >= 10`, with 14 tests. The same threshold applies to all five 311 queries, including those that only group by year.
+
+**Not retrieved and why.**
+
+- No count of pothole-specific 311 cases. It needs `service_details`, which the policy bars.
+- No 311 response-time figures. Response time exists only through the scorecard measure 7072; the 311 `closed_date` was not queried.
+- No 311 counts by neighborhood or district, deliberately.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
