@@ -2,11 +2,14 @@
 """Deterministic publish gates for Pothole Portolan. See checks/publish.md.
 
 Usage:
-  python3 -I checks/run_checks.py [--root DIR] [--city SLUG ...] [--content-only]
+  python3 -I checks/run_checks.py [--root DIR] [--city SLUG ...] [--content-only] [--pre-draft]
 
 Exit status 0 only if every check passes. Warnings never fail a run but are printed.
 --content-only skips the phase and PAUSE gate, so drafts can be checked before the
 phase permits publishing. A real publish must run without it.
+--pre-draft (only with --content-only) lets a city with no dossier.md yet pass the schema and
+dossier checks, so the funnel can check Fetch, Extract and Assess output. It cannot be combined
+with a real publish.
 """
 import argparse
 import csv
@@ -46,6 +49,8 @@ SENSITIVE_COLUMN = re.compile(
 RECORD_FILE_SUFFIXES = {".csv", ".tsv", ".jsonl", ".geojson", ".parquet", ".xlsx", ".xls", ".sqlite", ".db"}
 TEXT_SUFFIXES = {".txt", ".md", ".html", ".htm", ".xml"}
 MAX_SCAN_BYTES = 5_000_000
+LFS_POINTER = re.compile(rb"\Aversion https://git-lfs\.github\.com/spec/v1\noid sha256:([0-9a-f]{64})\n")
+PRE_DRAFT = False  # set by main() for --pre-draft
 
 
 class Report:
@@ -58,6 +63,15 @@ class Report:
 
     def warn(self, check, city, msg):
         self.warnings.append((check, city, msg))
+
+
+def utc_now():
+    """Aware current time in UTC. Tests replace this; retrieval dates are UTC dates."""
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
+def utc_today():
+    return utc_now().astimezone(datetime.timezone.utc).date()
 
 
 def read_yaml(path):
@@ -112,6 +126,8 @@ def check_schema(root, slug, rep):
     d = city_dir(root, slug)
     for name in ("claims.yaml", "sources.yaml", "dossier.md"):
         if not (d / name).exists():
+            if name == "dossier.md" and PRE_DRAFT:
+                continue
             rep.fail("schema", slug, f"missing {name}")
     for err in validate.validate_city(root, slug):
         rep.fail("schema", slug, err)
@@ -122,7 +138,7 @@ def check_schema(root, slug, rep):
 def check_provenance(root, slug, rep):
     claims, sources = load_city(root, slug)
     fetched = {s.get("archive") for s in sources if s.get("status") == "fetched"}
-    today = datetime.date.today()
+    today = utc_today()
     for c in claims:
         cid = c.get("id", "(no id)")
         for field in ("source_url", "retrieved", "archive"):
@@ -150,6 +166,13 @@ def check_archives(root, slug, rep):
             rep.fail("archives", slug, f"archive {ref} does not exist")
             continue
         expected = Path(ref).stem
+        with open(path, "rb") as f:
+            pointer = LFS_POINTER.match(f.read(200))
+        if pointer:
+            rep.fail("archives", slug,
+                     f"archive {ref} is an unfetched Git LFS pointer (oid sha256:{pointer.group(1)}); "
+                     "its content cannot be checked. Fetch LFS objects (git lfs pull, or checkout with lfs: true)")
+            continue
         actual = sha256_of(path)
         if actual != expected:
             rep.fail("archives", slug, f"archive {ref} has sha256 {actual}, which does not match its name")
@@ -179,6 +202,21 @@ def _json_keys(node, limit=200):
         elif isinstance(cur, list):
             stack.extend(cur[:limit])
     return keys
+
+
+def _has_key(node, key):
+    if isinstance(node, dict):
+        return key in node or any(_has_key(v, key) for v in node.values())
+    if isinstance(node, list):
+        return any(_has_key(v, key) for v in node)
+    return False
+
+
+def _is_view_metadata(node):
+    """A Socrata view-metadata document: describes a dataset's columns, holds no rows."""
+    cols = node.get("columns") if isinstance(node, dict) else None
+    return (isinstance(cols, list) and bool(cols) and
+            all(isinstance(c, dict) and "fieldName" in c for c in cols))
 
 
 def check_personal_data(root, slug, rep):
@@ -224,7 +262,15 @@ def check_personal_data(root, slug, rep):
                         if line.strip():
                             columns |= _json_keys(json.loads(line))
                 else:
-                    columns = _json_keys(json.loads(text))
+                    doc = json.loads(text)
+                    if _is_view_metadata(doc):
+                        # Its keys describe the document, not data columns. What would be
+                        # personal data is the per-column value samples, so those must be absent.
+                        if _has_key(doc, "cachedContents"):
+                            rep.fail("personal_data", slug,
+                                     f"{ref}: metadata still holds cachedContents value samples; archive a reduced copy")
+                    else:
+                        columns = _json_keys(doc)
             except (ValueError, csv.Error):
                 rep.warn("personal_data", slug, f"{ref}: could not parse to inspect columns, review by hand")
             for col in sorted(columns):
@@ -366,7 +412,13 @@ def main(argv=None):
     ap.add_argument("--root", default=str(REPO))
     ap.add_argument("--city", action="append", default=[])
     ap.add_argument("--content-only", action="store_true")
+    ap.add_argument("--pre-draft", action="store_true",
+                    help="with --content-only, accept a city that has no dossier.md yet")
     args = ap.parse_args(argv)
+    if args.pre_draft and not args.content_only:
+        ap.error("--pre-draft only makes sense with --content-only; a real publish needs a dossier")
+    global PRE_DRAFT
+    PRE_DRAFT = args.pre_draft
     cities = args.city or validate.list_cities(args.root)
     rep = run(args.root, cities, args.content_only)
     for check, city, msg in rep.warnings:

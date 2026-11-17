@@ -92,7 +92,7 @@
   status: unavailable
   notes: 'GeoReport v2 style endpoint. The page reportedly asks for an API key request, so access terms
     and rate limits must be read before any call (rule 8). The bulk dataset is likely the better route
-    for counts. Fetch 2026-11-16: not retrieved, disallowed by robots.txt for this user agent.'
+    for counts. Fetch 2026-11-16: not retrieved, disallowed by robots.txt for this user agent. Supervisor decision 2026-11-17 (approval 2026-11-17-001, proposal option a): record as unavailable and do not work around robots.txt.'
   retrieved: '2026-11-16'
 - id: sf-pothole-response-measure
   name: Pothole response, city performance scorecard data story
@@ -117,7 +117,7 @@
   notes: 'File name dated June 2021. Reported to find that the program has a citywide PCI goal but no
     breakdown by supervisorial district or neighborhood. The URL as seen in results contained a raw space,
     encoded here as %20; Fetch should confirm. Fetch 2026-11-17: not retrieved, disallowed by robots.txt
-    for this user agent.'
+    for this user agent. Supervisor decision 2026-11-17 (approval 2026-11-17-001, proposal option a): record as unavailable and do not work around robots.txt.'
   retrieved: '2026-11-17'
 - id: publicworks-commission-resurfacing-update-2025-11
   name: Public Works Commission, street resurfacing capital update, Item 5, 2025-11-13
@@ -165,3 +165,21 @@
   retrieved: '2026-11-16'
   archive: sources/b077c83ab4db91cb5d075f4d4c96d6259fcf892cf206c0ad8b697ac059aadb14.html
   robots_checked: true
+- id: datasf-311-cases-metadata
+  name: 311 Cases, dataset and column metadata (id vw6y-z8j6)
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/api/views/vw6y-z8j6.json
+  status: listed
+  notes: 'Listed 2026-11-17 for proposal 2026-11-17-001 section 2, step 1 (supervisor approval 2026-11-17-001).
+    Metadata only: column names and types, and how case types are classified. No rows. The fetcher archives
+    a reduced copy without the per-column value samples. The aggregate query comes after this, in its own
+    listed source, once the real column names are known.'
+- id: datasf-scorecard-measures-metadata
+  name: Scorecard Measures, dataset and column metadata (id kc49-udxn)
+  publisher: San Francisco Controller's Office, via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/api/views/kc49-udxn.json
+  status: listed
+  notes: 'Listed 2026-11-17 for proposal 2026-11-17-001 section 2, step 1. The city scorecard pages link this
+    dataset on data.sfgov.org, which redirects to data.sf.gov. Metadata only, no rows.'

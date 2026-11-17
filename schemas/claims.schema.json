@@ -21,7 +21,7 @@
         "kind": {
           "enum": [
             "reported_demand", "measured_condition", "spending",
-            "response_time", "backlog", "policy"
+            "response_time", "backlog", "policy", "program_output"
           ]
         },
         "source_url": { "type": "string", "pattern": "^https?://[^\\s]+$" },

@@ -175,10 +175,10 @@ def build(root):
     claims.append(base(
         "sf-publicworks-pci-release-2026-01", id="sf-blocks-paved-2025",
         statement=f"A Public Works release dated January 2, 2026 says crews paved {paved:,} City-maintained blocks in {paved_year}.",
-        value=paved, unit="blocks", period=paved_year, kind="spending",
+        value=paved, unit="blocks", period=paved_year, kind="program_output",
         method=f"Read from the January 2, 2026 release: 'crews paved {paved:,} City-maintained blocks in {paved_year}'.",
         confidence="provisional",
-        caveats="Program output, recorded as 'spending' only because the schema has no output kind. The release does not say whether this counts blocks "
+        caveats="Program output, a count of blocks, not a dollar figure. The release does not say whether this counts blocks "
                 "resurfaced, accepted or completed, and it does not say whether in-house and contractor work are both included beyond saying both crews do the work."))
     invest = to_number(rel.get(r"The \$(\d+) million investment over that period", "15-year investment"))
     rel.require(r"over the last 15-plus years", "investment period")
@@ -245,18 +245,18 @@ def build(root):
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-blocks-resurfaced-as-of-2025-11",
         statement=f"A Public Works Commission slide dated November 13, 2025 reports {resurfaced:,} blocks resurfaced.",
-        value=resurfaced, unit="blocks", period="as of 2025-11-13", kind="spending",
+        value=resurfaced, unit="blocks", period="as of 2025-11-13", kind="program_output",
         method="Read from the 'Blocks Resurfaced and Planned' slide (slide 5).",
         confidence="provisional",
-        caveats="Program output, recorded as 'spending' only because the schema has no output kind. The slide gives no start year, "
+        caveats="Program output, a count of blocks, not a dollar figure. The slide gives no start year, "
                 "so the period is the deck date and the count is presumably cumulative."))
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-blocks-planned-as-of-2025-11",
         statement=f"A Public Works Commission slide dated November 13, 2025 reports more than {planned:,} blocks planned.",
-        value=planned, unit="blocks", period="as of 2025-11-13", kind="spending",
+        value=planned, unit="blocks", period="as of 2025-11-13", kind="program_output",
         method="Read from the 'Blocks Resurfaced and Planned' slide (slide 5), where the figure appears as '2,500+'.",
         confidence="provisional",
-        caveats="A lower bound ('2,500+'). Program output, recorded as 'spending' because the schema has no output kind."))
+        caveats="A lower bound ('2,500+'). Program output, a count of blocks, not a dollar figure."))
     cost = to_number(pw.get(r"Average Cost for Block of Paving\s+\$([\d,]+)(?:\.00)?", "average cost per block"))
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-avg-cost-per-paved-block-2025-11",
@@ -292,10 +292,10 @@ def build(root):
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-resurfacing-awards-blocks-2023-2025",
         statement=f"The same {len(amounts)} awarded projects cover {int(tot.group(2))} blocks.",
-        value=int(tot.group(2)), unit="blocks", period=period, kind="spending",
+        value=int(tot.group(2)), unit="blocks", period=period, kind="program_output",
         method=f"Slide 10 table. The script summed the {len(blocks)} block counts and confirmed they equal the TOTAL row.",
         confidence="provisional",
-        caveats="Program output, recorded as 'spending' because the schema has no output kind. One 'as needed' preservation award covers 150 blocks."))
+        caveats="Program output, a count of blocks, not a dollar figure. One 'as needed' preservation award covers 150 blocks."))
 
     # ---- Pothole response target (city scorecard) -------------------------------------------
     pot = arc("sf-pothole-response-measure")

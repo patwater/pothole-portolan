@@ -1,0 +1,11 @@
+# Backfilled 2026-11-17 for the Phase 2 automation (approval 2026-11-17-001).
+# stage is "discovered" on purpose: the last Assess (23 claims, 19 supported, 4 provisional) covers
+# condition, program output and policy only. The 311 and response-time work in proposal
+# 2026-11-17-001 section 2 needs the DataSF metadata and aggregate endpoints, which are listed in
+# sources.yaml and not yet fetched, so Fetch is pending again. Draft must wait for that work.
+stage: discovered
+blocked_on: null
+last_run:
+  behavior: assess
+  date: '2026-11-17'
+  workflow_run: null

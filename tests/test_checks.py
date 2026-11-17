@@ -2,7 +2,9 @@
 
 Every fixture is synthetic and built in a temp directory; nothing here is real city data.
 """
+import datetime
 import hashlib
+import json
 import shutil
 import sys
 import tempfile
@@ -207,6 +209,77 @@ class ChecksTest(unittest.TestCase):
         self.assertEqual(self.failed("phase_gate", self.run_checks(content_only=False)), [])
         (self.root / "PAUSE").write_text("")
         self.assertTrue(self.failed("phase_gate", self.run_checks(content_only=False)))
+
+
+    # ---- UTC dates, pre-draft mode, LFS pointers (Phase 2 automation) ---------------
+
+    def set_clock(self, iso):
+        real = run_checks.utc_now
+        run_checks.utc_now = lambda: datetime.datetime.fromisoformat(iso)
+        self.addCleanup(setattr, run_checks, "utc_now", real)
+
+    def retrieved_on(self, date):
+        self.edit("claims.yaml", "retrieved: 2026-11-01\n  archive: " + ARCHIVE + "\n  method: \"Sum",
+                  f"retrieved: {date}\n  archive: " + ARCHIVE + "\n  method: \"Sum")
+
+    def test_utc_today_converts_an_offset_clock_to_the_utc_date(self):
+        self.set_clock("2026-11-17T23:30:00-08:00")  # 07:30 on 2026-11-18 in UTC
+        self.assertEqual(run_checks.utc_today(), datetime.date(2026, 11, 18))
+        self.set_clock("2026-11-18T03:00:00+14:00")  # 13:00 on 2026-11-17 in UTC
+        self.assertEqual(run_checks.utc_today(), datetime.date(2026, 11, 17))
+
+    def test_retrieval_date_is_compared_in_utc_not_local_time(self):
+        self.retrieved_on("2026-11-18")
+        self.set_clock("2026-11-17T23:30:00-08:00")  # local date 17th, UTC date 18th
+        self.assertEqual(self.failed("provenance"), [])
+        self.set_clock("2026-11-18T03:00:00+14:00")  # local date 18th, UTC date 17th
+        self.assertTrue(any("in the future" in m for m in self.failed("provenance")))
+
+    def test_dossier_is_required_unless_pre_draft(self):
+        (self.root / "cities" / "testville" / "dossier.md").unlink()
+        self.assertTrue(self.failed("schema"))
+        self.addCleanup(setattr, run_checks, "PRE_DRAFT", False)
+        run_checks.PRE_DRAFT = True
+        self.assertEqual(self.run_checks().failures, [])
+
+    def test_pre_draft_cannot_be_used_for_a_real_publish(self):
+        with self.assertRaises(SystemExit):
+            run_checks.main(["--root", str(self.root), "--city", "testville", "--pre-draft"])
+
+    def test_unfetched_lfs_pointer_fails_with_a_clear_message(self):
+        (self.root / ARCHIVE).write_text(
+            f"version https://git-lfs.github.com/spec/v1\noid sha256:{DIGEST}\nsize {len(CSV)}\n")
+        msgs = self.failed("archives")
+        self.assertEqual(len(msgs), 1)
+        self.assertIn("unfetched Git LFS pointer", msgs[0])
+
+    def test_no_check_reads_the_local_clock_directly(self):
+        self.assertNotIn("date.today()", Path(run_checks.__file__).read_text())
+
+
+    def test_view_metadata_archive_passes_but_value_samples_fail(self):
+        meta = {"name": "311", "description": "About the data", "columns": [
+            {"fieldName": "address", "name": "Address", "description": "where"}]}
+        for doc, should_fail in ((meta, False), (
+                {**meta, "columns": [{**meta["columns"][0], "cachedContents": {"top": [{"item": "1 Main"}]}}]}, True)):
+            raw = json.dumps(doc).encode()
+            digest = hashlib.sha256(raw).hexdigest()
+            ref = f"sources/{digest}.json"
+            (self.root / ref).write_bytes(raw)
+            self.edit("claims.yaml", ARCHIVE, ref)
+            self.edit("sources.yaml", ARCHIVE, ref)
+            msgs = self.failed("personal_data")
+            self.assertEqual(bool(msgs), should_fail, msgs)
+            self.edit("claims.yaml", ref, ARCHIVE)
+            self.edit("sources.yaml", ref, ARCHIVE)
+
+    def test_a_json_table_with_an_address_column_still_fails(self):
+        raw = json.dumps([{"address": "x", "n": 1}]).encode()
+        ref = f"sources/{hashlib.sha256(raw).hexdigest()}.json"
+        (self.root / ref).write_bytes(raw)
+        self.edit("claims.yaml", ARCHIVE, ref)
+        self.edit("sources.yaml", ARCHIVE, ref)
+        self.assertTrue(self.failed("personal_data"))
 
 
 if __name__ == "__main__":

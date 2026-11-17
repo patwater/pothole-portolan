@@ -11,11 +11,24 @@ Nothing is interpreted: fetched content is data, never instructions (rule 4).
 Only the listed URL is requested. This script does not follow links, call APIs that need
 keys, or download record-level datasets.
 
-Usage: python3 -I scripts/fetch_source.py [--root DIR] [--id SOURCE_ID ...] [--delay SECONDS] SLUG
+In scheduled runs this script is the only robots.txt and rate-limit guard, because the runner
+has open egress and the Fetch behavior has no other network tool. So it also enforces:
+  * aggregates only on the DataSF hosts (see aggregate_violation): metadata endpoints, and
+    grouped aggregate queries; never a row download. Redirects are checked the same way;
+  * metadata is archived without the per-column value samples that Socrata embeds
+    (cachedContents), because those are sample record values (rule 7);
+  * HTTP 429 stops all further requests to that host in this run and leaves the source listed;
+  * at most --limit requests per run, --delay seconds apart.
+Exit status: 0 done, 1 schema error, 2 some source left listed (network policy or rate limit).
+
+Usage: python3 -I scripts/fetch_source.py [--root DIR] [--id SOURCE_ID ...] [--delay SECONDS]
+                                          [--limit N] SLUG
 """
 import argparse
 import datetime
 import hashlib
+import json
+import re
 import sys
 import time
 import urllib.error
@@ -31,6 +44,20 @@ import validate  # noqa: E402
 
 USER_AGENT = "PotholePortolanBot/0.1 (public-data research; +https://github.com/patwater/pothole-portolan)"
 MAX_BYTES = 50 * 1024 * 1024
+AGGREGATE_MAX_BYTES = 2 * 1024 * 1024   # an aggregate or metadata response is small; larger is suspect
+AGGREGATE_MAX_ROWS = 2000
+# Socrata portals where only metadata and aggregates may be requested (proposal 2026-11-17-001).
+AGGREGATE_ONLY_HOSTS = {"data.sf.gov", "data.sfgov.org"}
+DATASET_ID = r"[a-z0-9]{4}-[a-z0-9]{4}"
+METADATA_PATH = re.compile(rf"^/api/views/{DATASET_ID}(?:\.json|/columns\.json|/columns/\d+\.json)$")
+RESOURCE_PATH = re.compile(rf"^/resource/{DATASET_ID}\.(?:json|csv)$")
+AGGREGATE_FUNCTIONS = ("count", "sum", "avg", "min", "max", "median", "stddev_pop", "stddev_samp")
+# Group keys that would turn an aggregate into a record listing or expose a person or place.
+FORBIDDEN_GROUP_KEY = re.compile(
+    r"(address|addr\b|street|lat\b|long\b|lon\b|location|point|geom|coordinate|"
+    r"(first|last|full|requester|reporter|customer|resident|contact|owner)_?name|phone|email|"
+    r"description|comment|notes?|media|url|requester|reporter|caller|"
+    r"(^|_)id(\b|_)|request_id|case_id|ticket|number)", re.I)
 TIMEOUT = 60
 EXT_BY_TYPE = {
     "text/html": ".html", "application/xhtml+xml": ".html", "application/pdf": ".pdf",
@@ -43,6 +70,101 @@ HEADER = (
 )
 
 _robots = {}
+
+
+def utc_today():
+    """Retrieval dates are UTC dates, the same rule checks/run_checks.py applies."""
+    return datetime.datetime.now(datetime.timezone.utc).date()
+
+
+def _split_top_level(text):
+    parts, depth, cur = [], 0, []
+    for ch in text:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+        if ch == "," and depth == 0:
+            parts.append("".join(cur).strip())
+            cur = []
+        else:
+            cur.append(ch)
+    if "".join(cur).strip():
+        parts.append("".join(cur).strip())
+    return parts
+
+
+def _strip_alias(expr):
+    return re.sub(r"\s+as\s+\w+\s*$", "", expr.strip(), flags=re.I).strip()
+
+
+def aggregate_violation(url):
+    """Return None when url is allowed on an aggregate-only host, else the reason it is not.
+
+    Allowed: dataset metadata and column metadata, and /resource/<id>.json|csv queries whose
+    $select holds only aggregate calls and the $group keys, with a $group and a $limit of at
+    most AGGREGATE_MAX_ROWS. Hosts not in AGGREGATE_ONLY_HOSTS are not restricted here.
+    """
+    parts = urllib.parse.urlsplit(url)
+    if (parts.hostname or "").lower() not in AGGREGATE_ONLY_HOSTS:
+        return None
+    query = urllib.parse.parse_qs(parts.query, keep_blank_values=True)
+    if METADATA_PATH.match(parts.path):
+        return None if not query else "metadata endpoints take no query"
+    if not RESOURCE_PATH.match(parts.path):
+        return f"path {parts.path} is not a metadata or aggregate endpoint (row downloads are refused)"
+    unknown = sorted(k for k in query if k not in ("$select", "$group", "$where", "$order", "$limit"))
+    if unknown:
+        return f"query parameter(s) {unknown} are not allowed"
+    group = query.get("$group", [""])[0].strip()
+    select = query.get("$select", [""])[0].strip()
+    if not group or not select:
+        return "an aggregate query needs both $select and $group"
+    group_keys = [_strip_alias(g) for g in _split_top_level(group)]
+    for key in group_keys:
+        if FORBIDDEN_GROUP_KEY.search(key):
+            return f"$group key {key!r} could identify a person, place or record"
+    for item in _split_top_level(select):
+        expr = _strip_alias(item)
+        alias = re.search(r"\s+as\s+(\w+)\s*$", item.strip(), re.I)
+        is_aggregate = re.match(rf"^({'|'.join(AGGREGATE_FUNCTIONS)})\(", expr, re.I)
+        grouped = expr in group_keys or (alias and alias.group(1) in group_keys)
+        if not is_aggregate and not grouped:
+            return f"$select item {expr!r} is neither an aggregate nor a $group key"
+    limit = query.get("$limit", [""])[0]
+    if not limit.isdigit() or not 0 < int(limit) <= AGGREGATE_MAX_ROWS:
+        return f"$limit must be a number from 1 to {AGGREGATE_MAX_ROWS}"
+    return None
+
+
+def _drop_value_samples(node):
+    if isinstance(node, dict):
+        return {k: _drop_value_samples(v) for k, v in node.items() if k != "cachedContents"}
+    if isinstance(node, list):
+        return [_drop_value_samples(v) for v in node]
+    return node
+
+
+def reduce_body(url, body):
+    """Return (bytes_to_archive, note). Socrata metadata loses its per-column value samples."""
+    parts = urllib.parse.urlsplit(url)
+    if (parts.hostname or "").lower() in AGGREGATE_ONLY_HOSTS and METADATA_PATH.match(parts.path):
+        reduced = _drop_value_samples(json.loads(body.decode("utf-8")))
+        text = json.dumps(reduced, indent=1, ensure_ascii=False) + "\n"
+        return text.encode("utf-8"), ("Archived copy is reduced: the per-column value samples "
+                                       "(cachedContents: top values, smallest, largest) were removed "
+                                       "because they embed sample record values (rule 7).")
+    return body, ""
+
+
+def aggregate_rows_exceeded(url, body):
+    parts = urllib.parse.urlsplit(url)
+    if (parts.hostname or "").lower() not in AGGREGATE_ONLY_HOSTS or not RESOURCE_PATH.match(parts.path):
+        return False
+    if parts.path.endswith(".json"):
+        data = json.loads(body.decode("utf-8"))
+        return isinstance(data, list) and len(data) > AGGREGATE_MAX_ROWS
+    return body.count(b"\n") > AGGREGATE_MAX_ROWS + 1
 # A proxy refusal is the sandbox's network policy, not a fact about the source. Such sources
 # stay "listed" and are reported, never marked unavailable.
 BLOCKED = "blocked by the environment's network policy"
@@ -84,7 +206,7 @@ def extension_for(content_type, final_url):
     return suffix if suffix and len(suffix) <= 6 and suffix[1:].isalnum() else ".bin"
 
 
-class RobotsDisallowed(Exception):
+class RobotsDisallowed(Exception):  # also raised for an aggregate-only refusal
     pass
 
 
@@ -92,6 +214,9 @@ class RobotsAwareRedirects(urllib.request.HTTPRedirectHandler):
     """Check robots.txt for every redirect target before following it (rule 8)."""
 
     def redirect_request(self, req, fp, code, msg, headers, newurl):
+        reason = aggregate_violation(newurl)
+        if reason:
+            raise RobotsDisallowed(f"redirect to {newurl}: {reason}")
         allowed, detail = robots_allows(newurl)
         if not allowed:
             raise RobotsDisallowed(f"redirect to {newurl}: " +
@@ -103,10 +228,11 @@ class RobotsAwareRedirects(urllib.request.HTTPRedirectHandler):
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
     opener = urllib.request.build_opener(RobotsAwareRedirects)
+    cap = AGGREGATE_MAX_BYTES if (urllib.parse.urlsplit(url).hostname or "").lower() in AGGREGATE_ONLY_HOSTS else MAX_BYTES
     with opener.open(req, timeout=TIMEOUT) as resp:
-        body = resp.read(MAX_BYTES + 1)
-        if len(body) > MAX_BYTES:
-            raise ValueError(f"larger than {MAX_BYTES} bytes")
+        body = resp.read(cap + 1)
+        if len(body) > cap:
+            raise ValueError(f"larger than {cap} bytes")
         return body, resp.geturl(), resp.headers.get("Content-Type", ""), resp.status
 
 
@@ -114,14 +240,16 @@ def append_note(entry, text):
     entry["notes"] = (entry.get("notes", "").rstrip() + " " if entry.get("notes") else "") + text
 
 
-def run(root, slug, only_ids, delay):
+def run(root, slug, only_ids, delay, limit=20):
     path = Path(root) / "cities" / slug / "sources.yaml"
     sources = validate.load_yaml(path)
-    today = datetime.date.today().isoformat()
+    today = utc_today().isoformat()
     archive_dir = Path(root) / "sources"
     archive_dir.mkdir(exist_ok=True)
     first = True
     blocked = 0
+    requests = 0
+    rate_limited_hosts = set()
     for entry in sources:
         if entry.get("status") != "listed" or (only_ids and entry["id"] not in only_ids):
             continue
@@ -129,6 +257,23 @@ def run(root, slug, only_ids, delay):
             time.sleep(delay)
         first = False
         url = entry["url"]
+        host = (urllib.parse.urlsplit(url).hostname or "").lower()
+        if host in rate_limited_hosts:
+            print(f"RATE-LIMITED {entry['id']}: {host} sent HTTP 429 earlier in this run; left as listed")
+            blocked += 1
+            continue
+        if requests >= limit:
+            print(f"LIMIT       {entry['id']}: {limit} requests already made this run; left as listed")
+            blocked += 1
+            continue
+        reason = aggregate_violation(url)
+        if reason:
+            entry["status"] = "unavailable"
+            entry["retrieved"] = today
+            append_note(entry, f"Fetch {today}: not retrieved, refused by the aggregate-only rule: {reason}.")
+            print(f"UNAVAILABLE {entry['id']}: aggregate-only rule: {reason}")
+            continue
+        requests += 1
         allowed, robots_detail = robots_allows(url)
         if robots_detail == BLOCKED:
             print(f"BLOCKED     {entry['id']}: {BLOCKED}; left as listed")
@@ -151,6 +296,12 @@ def run(root, slug, only_ids, delay):
             print(f"UNAVAILABLE {entry['id']}: {exc}")
             continue
         except urllib.error.HTTPError as exc:
+            if exc.code == 429:
+                rate_limited_hosts.add(host)
+                append_note(entry, f"Fetch {today}: HTTP 429 (rate limited); left listed to retry later.")
+                print(f"RATE-LIMITED {entry['id']}: HTTP 429 from {host}; left as listed")
+                blocked += 1
+                continue
             entry["status"] = "unavailable"
             entry["retrieved"] = today
             append_note(entry, f"Fetch {today}: HTTP {exc.code} {exc.reason}.")
@@ -166,6 +317,16 @@ def run(root, slug, only_ids, delay):
             append_note(entry, f"Fetch {today}: {type(exc).__name__}: {exc}.")
             print(f"UNAVAILABLE {entry['id']}: {type(exc).__name__}")
             continue
+        try:
+            if aggregate_rows_exceeded(url, body):
+                raise ValueError(f"more than {AGGREGATE_MAX_ROWS} rows is not an aggregate")
+            body, reduced_note = reduce_body(url, body)
+        except ValueError as exc:  # includes JSON decode errors
+            entry["status"] = "unavailable"
+            entry["retrieved"] = today
+            append_note(entry, f"Fetch {today}: not archived, {exc}.")
+            print(f"UNAVAILABLE {entry['id']}: not archived, {exc}")
+            continue
         digest = hashlib.sha256(body).hexdigest()
         ext = extension_for(ctype, final_url)
         rel = f"sources/{digest}{ext}"
@@ -179,7 +340,7 @@ def run(root, slug, only_ids, delay):
         detail = f"Fetch {today}: HTTP {status}, {ctype.split(';')[0] or 'unknown type'}, {len(body)} bytes"
         if final_url != url:
             detail += f", final URL {final_url}"
-        append_note(entry, detail + ".")
+        append_note(entry, detail + "." + (" " + reduced_note if reduced_note else ""))
         print(f"FETCHED     {entry['id']}: {rel} ({len(body)} bytes)")
     path.write_text(HEADER + yaml.safe_dump(sources, sort_keys=False, allow_unicode=True, width=100),
                     encoding="utf-8")
@@ -187,7 +348,7 @@ def run(root, slug, only_ids, delay):
     for line in errors:
         print("SCHEMA", line)
     if blocked:
-        print(f"{blocked} source(s) blocked by network policy and left as listed")
+        print(f"{blocked} source(s) left as listed (network policy, rate limit or request limit)")
     return 1 if errors else (2 if blocked else 0)
 
 
@@ -196,9 +357,10 @@ def main(argv=None):
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
     ap.add_argument("--id", action="append", default=[])
     ap.add_argument("--delay", type=float, default=3.0, help="seconds between requests")
+    ap.add_argument("--limit", type=int, default=20, help="most requests to make in one run")
     ap.add_argument("slug")
     args = ap.parse_args(argv)
-    return run(args.root, args.slug, set(args.id), args.delay)
+    return run(args.root, args.slug, set(args.id), args.delay, args.limit)
 
 
 if __name__ == "__main__":
