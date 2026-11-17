@@ -32,3 +32,7 @@ A real publish runs this check without `--content-only`. As things stand, any ci
 The check did one thing very well in step 2: it flagged a street address inside a case-type label and led me to a real rule 7 problem (see the 311 notes). The cause was a record-level dataset returning groups of one. The fetcher now prevents this at the source, but the check could also confirm it. For archives whose source URL is a `/resource/` query on a record-level dataset, fail if any row has a count field (`cases`, `count`) below 10. That would catch an unthresholded query that reached the archive by another route.
 
 I did not change `checks/`.
+
+## Status: applied 2026-11-17 under approval `2026-11-17-002`
+
+Changes made in `checks/run_checks.py` and `checks/publish.md`: dataset descriptions skip the column-name test and fail only if `cachedContents` remains; responses from portal datasets registered in the fetcher's policy have its guards re-applied (no group under 10 cases, no text field over 100 distinct values); unregistered JSON keeps the old column-name test. The shared typed-text guard also now ignores ISO dates and numbers, which would otherwise have flagged the scorecard's month column. Eleven new tests cover both directions. San Francisco's content check now reports only the missing dossier.

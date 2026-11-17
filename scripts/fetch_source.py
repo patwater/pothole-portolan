@@ -181,8 +181,11 @@ def typed_text_fields(body):
         for k, v in row.items():
             if isinstance(v, str):
                 values.setdefault(k, set()).add(v)
-    return {k: len(v) for k, v in values.items()
-            if len(v) > MAX_TEXT_DISTINCT and not all(x.lstrip("-").replace(".", "", 1).isdigit() for x in v)}
+    def not_text(x):
+        # Numbers and ISO dates or timestamps are values of a structured field, not typed text.
+        return x.lstrip("-").replace(".", "", 1).isdigit() or re.match(r"^\d{4}-\d{2}-\d{2}([T ][\d:.+\-Z]*)?$", x) is not None
+
+    return {k: len(v) for k, v in values.items() if len(v) > MAX_TEXT_DISTINCT and not all(not_text(x) for x in v)}
 
 
 def sanitize(url, content_type, body):

@@ -21,6 +21,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 
+import fetch_source  # noqa: E402
 import validate  # noqa: E402
 import yaml  # noqa: E402
 
@@ -155,6 +156,44 @@ def check_archives(root, slug, rep):
             rep.fail("archives", slug, f"archive {ref} has sha256 {actual}, which does not match its name")
 
 
+def _is_schema_document(data):
+    """A dataset description: column definitions, not data. Its keys (description, fieldName...) name things."""
+    if isinstance(data, dict) and isinstance(data.get("columns"), list) and data["columns"]:
+        return all(isinstance(c, dict) and "fieldName" in c for c in data["columns"])
+    if isinstance(data, list) and data:
+        return all(isinstance(c, dict) and "fieldName" in c and "dataTypeName" in c for c in data)
+    return False
+
+
+def _portal_dataset(url):
+    m = re.match(r"^https?://[^/]+/resource/([a-z0-9]{4}-[a-z0-9]{4})\.json", url or "")
+    return m.group(1) if m else None
+
+
+def _portal_response_problems(raw, rule):
+    """Re-apply the fetcher's guards to an archived portal response."""
+    try:
+        rows = json.loads(raw.decode("utf-8"))
+    except ValueError:
+        return ["portal response is not valid JSON"]
+    if not isinstance(rows, list):
+        return ["portal response is not a list of rows"]
+    problems = [f"text field {k!r} has {n} distinct values (possible typed text)"
+                for k, n in fetch_source.typed_text_fields(raw).items()]
+    if rule["aggregate_only"] and rows:
+        counts = [r.get("cases", r.get("count")) for r in rows]
+        try:
+            if any(c is None for c in counts):
+                problems.append("aggregate response has a row without a count field named 'cases' or 'count'")
+            else:
+                small = sum(1 for c in counts if int(c) < fetch_source.MIN_GROUP_SIZE)
+                if small:
+                    problems.append(f"{small} group(s) smaller than {fetch_source.MIN_GROUP_SIZE} cases")
+        except (TypeError, ValueError):
+            problems.append("count field is not numeric")
+    return problems
+
+
 # ---- check 4: no record-level personal data ---------------------------------------
 
 def _scan_text(text, check_street=True):
@@ -206,6 +245,7 @@ def check_personal_data(root, slug, rep):
     # Archived copies this city depends on.
     claims, sources = load_city(root, slug)
     refs = {c.get("archive") for c in claims} | {s.get("archive") for s in sources if s.get("status") == "fetched"}
+    src_by_archive = {s.get("archive"): s for s in sources if s.get("archive")}
     for ref in sorted(r for r in refs if r):
         path = Path(root) / ref
         if not path.is_file():
@@ -224,7 +264,18 @@ def check_personal_data(root, slug, rep):
                         if line.strip():
                             columns |= _json_keys(json.loads(line))
                 else:
-                    columns = _json_keys(json.loads(text))
+                    data = json.loads(text)
+                    rule = fetch_source.DATASET_POLICY.get(_portal_dataset(src_by_archive.get(ref, {}).get("url")))
+                    if _is_schema_document(data):
+                        # Column definitions carry no data. The real risk is embedded sample values.
+                        if "cachedContents" in text:
+                            rep.fail("personal_data", slug, f"{ref}: dataset description still contains cachedContents sample values")
+                    elif rule is not None:
+                        # A registered portal dataset: its column names were vetted when the query was listed.
+                        for problem in _portal_response_problems(raw, rule):
+                            rep.fail("personal_data", slug, f"{ref}: {problem}")
+                    else:
+                        columns = _json_keys(data)
             except (ValueError, csv.Error):
                 rep.warn("personal_data", slug, f"{ref}: could not parse to inspect columns, review by hand")
             for col in sorted(columns):

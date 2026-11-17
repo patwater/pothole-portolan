@@ -120,6 +120,14 @@ class TypedTextGuardTest(unittest.TestCase):
         rows = [{"year": str(2000 + i), "cases": str(1000 + i)} for i in range(150)]
         self.assertEqual(f.typed_text_fields(self.body(rows)), {})
 
+    def test_iso_dates_are_not_text(self):
+        rows = [{"calendar_month": f"2012-{(i % 12) + 1:02d}-28T00:00:00.000" if i < 12 else f"20{i % 90 + 10}-01-31T00:00:00.000", "cases": "10"} for i in range(150)]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {})
+
+    def test_a_text_field_that_only_looks_partly_like_dates_is_still_flagged(self):
+        rows = [{"label": f"2024-01-01 permit for applicant {i}", "cases": "10"} for i in range(150)]
+        self.assertEqual(f.typed_text_fields(self.body(rows)), {"label": 150})
+
     def test_exactly_at_the_limit_passes(self):
         rows = [{"agency": f"Queue {i}", "cases": "10"} for i in range(f.MAX_TEXT_DISTINCT)]
         self.assertEqual(f.typed_text_fields(self.body(rows)), {})
