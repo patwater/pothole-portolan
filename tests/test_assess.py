@@ -16,7 +16,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 import assess_san_francisco as assess  # noqa: E402
 
-DAMAGED = {"sf-pci-citywide-2023", "sf-blocks-resurfaced-as-of-2025-11", "sf-avg-cost-per-paved-block-2025-11"}
+DAMAGED = {"sf-pci-citywide-2023", "sf-blocks-resurfaced-as-of-2025-11", "sf-avg-cost-per-paved-block-2025-11", "sf-blocks-paved-2025"}
 
 
 @unittest.skipUnless((REPO / "cities/san-francisco/claims.yaml").exists() and (REPO / "sources").is_dir(), "no San Francisco data")
@@ -46,6 +46,9 @@ class AssessMutation(unittest.TestCase):
                 c["statement"] = c["statement"].replace("9,148", "9,149")
             if c["id"] == "sf-pci-citywide-2023":
                 c["period"] = "2022"
+            if c["id"] == "sf-blocks-paved-2025":
+                c["value"] = 582
+                c["statement"] = c["statement"].replace("581", "582")
             if c["id"] == "sf-avg-cost-per-paved-block-2025-11":
                 c["archive"] = c["archive"].replace("5", "6", 1)
         self.path.write_text(yaml.safe_dump(claims, sort_keys=False))
@@ -53,6 +56,10 @@ class AssessMutation(unittest.TestCase):
         demoted = {k for k, v in self.confidence().items() if v == "speculative"}
         self.assertEqual(demoted, DAMAGED)
 
+
+    def test_every_claim_in_the_ledger_has_a_derivation(self):
+        ids = {c["id"] for c in yaml.safe_load(self.path.read_text())}
+        self.assertEqual(sorted(ids - set(assess.DERIVE)), [], "claims added without an Assess derivation")
 
     def test_unassessed_claim_is_capped_at_provisional_not_demoted(self):
         claims = yaml.safe_load(self.path.read_text())

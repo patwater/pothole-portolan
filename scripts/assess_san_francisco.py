@@ -41,6 +41,7 @@ WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven"
 JUDGMENT = {
     "sf-blocks-resurfaced-as-of-2025-11": "The slide gives no start year or period, so whether 9,148 is cumulative, annual or since a program start is unknown.",
     "sf-blocks-planned-as-of-2025-11": "A lower bound ('2,500+') with no planning horizon stated.",
+    "sf-resurfacing-investment-15-plus-years": "The period is only '15-plus years': no start year, funding sources or price basis is stated.",
 }
 
 
@@ -135,12 +136,12 @@ def make_rd_block(idx):
 
 def rd_resurfaced(c, t):
     a = m(t, r"\n([\d,]+)\nBlocks Resurfaced\n")
-    return ("re-derived", f"{a.group(1)} beside the label in the -raw text (confirmed by eye on rendered slide 5 during this run)") if a and num(a.group(1)) == c["value"] else ("failed", "not reproduced")
+    return ("re-derived", f"{a.group(1)} beside the label in the -raw text (confirmed by eye on rendered slide 5 in the first Assess run, 2026-11-17; not repeated)") if a and num(a.group(1)) == c["value"] else ("failed", "not reproduced")
 
 
 def rd_planned(c, t):
     a = m(t, r"\n([\d,]+)\+\nBlocks Planned")
-    return ("re-derived", f"{a.group(1)}+ beside the label in the -raw text (confirmed by eye on rendered slide 5 during this run)") if a and num(a.group(1)) == c["value"] else ("failed", "not reproduced")
+    return ("re-derived", f"{a.group(1)}+ beside the label in the -raw text (confirmed by eye on rendered slide 5 in the first Assess run, 2026-11-17; not repeated)") if a and num(a.group(1)) == c["value"] else ("failed", "not reproduced")
 
 
 def rd_cost(c, t):
@@ -194,6 +195,40 @@ def rd_three(c, t):
     return ("re-derived", f"text says 'updated every {a.group(1)} years'") if a and WORDS[a.group(1)] == c["value"] else ("failed", "not reproduced")
 
 
+def rd_pci_2025(c, t):
+    a = m(t, r"Pavement Condition Index score rating of (\d+) in (\d{4}), a standing deemed “good”")
+    d = m(t, r"Date Fri, 01/02/2026")
+    s = m(t, r"scale from 0-100, with zero being a pothole-riddled, crumbling street and 100 signifying a freshly paved road")
+    if a and d and s and int(a.group(1)) == c["value"] and a.group(2) == str(c["period"]):
+        return "re-derived", f"sentence gives {a.group(1)} in {a.group(2)}; page metadata dates the release 01/02/2026; scale text present"
+    return "failed", "score, year, date or scale not reproduced"
+
+
+def rd_paved_2025(c, t):
+    a = m(t, r"crews paved ([\d,]+) City-maintained blocks in (\d{4})")
+    return ("re-derived", f"text gives {a.group(1)} blocks in {a.group(2)}") if a and num(a.group(1)) == c["value"] and a.group(2) == str(c["period"]) else ("failed", "not reproduced")
+
+
+def rd_investment(c, t):
+    a = m(t, r"\$(\d+) million investment over that period")
+    b = m(t, r"over the last 15-plus years")
+    n = m(t, r"more than ([\d,]+) San Francisco’s nearly ([\d,]+) City-maintained blocks being resurfaced")
+    if a and b and int(a.group(1)) == c["value"]:
+        return "re-derived", f"'${a.group(1)} million investment over that period' follows 'over the last 15-plus years'" + (f"; the same sentence says more than {n.group(1)} of nearly {n.group(2)} blocks" if n else "")
+    return "failed", "amount or period phrase not reproduced"
+
+
+def rd_preservation(c, t):
+    a = m(t, r"as little as \$([\d,]+)")
+    g = m(t, r"block in San Francisco that is in good condition can cost as little as")
+    return ("re-derived", f"text gives 'as little as ${a.group(1)}' for a block in good condition") if a and g and num(a.group(1)) == c["value"] else ("failed", "not reproduced")
+
+
+def rd_dec31(c, t):
+    a = m(t, r"released Dec\. 31 of every year")
+    return ("re-derived", "text says the annual evaluation findings are 'released Dec. 31 of every year'") if a and c["value"] == "December 31" else ("failed", "not reproduced")
+
+
 DERIVE = {
     "sf-pci-citywide-2023": rd_release_2023,
     "sf-pci-county-2024-mtc": rd_mtc_county,
@@ -207,6 +242,11 @@ DERIVE = {
     "sf-pothole-response-target-72h": rd_72,
     "sf-publicworks-pci-interval-years": rd_two,
     "mtc-pavement-survey-update-interval-years": rd_three,
+    "sf-pci-citywide-2025": rd_pci_2025,
+    "sf-blocks-paved-2025": rd_paved_2025,
+    "sf-resurfacing-investment-15-plus-years": rd_investment,
+    "sf-preservation-cost-per-good-block-min": rd_preservation,
+    "sf-pci-annual-release-date": rd_dec31,
 }
 for _year in (2014, 2024):
     for _i, _slug in enumerate(("very-poor", "poor-atrisk", "good-excellent")):

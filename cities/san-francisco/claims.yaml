@@ -91,7 +91,7 @@
   kind: measured_condition
   method: 'Read from the first paragraph of the January 2, 2026 Public Works release: ''maintained a Pavement Condition
     Index score rating of 75 in 2025''.'
-  confidence: provisional
+  confidence: supported
   caveats: A city press release, not the MTC data. The release says the annual evaluation looks at the condition
     of each block and assigns a cumulative score, released December 31 of every year and tracked by MTC. It does
     not say how many blocks were surveyed or how interim years are estimated.
@@ -112,7 +112,7 @@
   period: '2025'
   kind: spending
   method: 'Read from the January 2, 2026 release: ''crews paved 581 City-maintained blocks in 2025''.'
-  confidence: provisional
+  confidence: supported
   caveats: Program output, recorded as 'spending' only because the schema has no output kind. The release does not
     say whether this counts blocks resurfaced, accepted or completed, and it does not say whether in-house and contractor
     work are both included beyond saying both crews do the work.
@@ -144,7 +144,7 @@
   kind: spending
   method: 'Read from the January 2, 2026 release: ''Extending the life of a block in San Francisco that is in good
     condition can cost as little as $50,000''.'
-  confidence: provisional
+  confidence: supported
   caveats: A floor ('as little as'), not an average. The release pairs it with a reconstruction cost for a block
     in very poor condition whose figure is printed as '$500,00', which is ambiguous, so that cost was deliberately
     not extracted. Do not compare with the average paving cost on the Commission slide without a caveat.
@@ -160,7 +160,7 @@
   kind: policy
   method: 'Read from the January 2, 2026 release: ''Findings from the annual evaluation are released Dec. 31 of
     every year''.'
-  confidence: provisional
+  confidence: supported
   caveats: A third statement about survey cadence, besides the two-year inspection cycle (Prop L document) and the
     three-year MTC dataset update. It describes the evaluation's release, not necessarily how often each block is
     physically inspected.

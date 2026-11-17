@@ -181,6 +181,26 @@ Five claims were added from the January 2, 2026 Public Works release, so `claims
 
 **Tooling change made during this run.** The new claims made the assessor demote them to `speculative` because it had no derivation for them, which also broke `tests/test_assess.py`. Never attempted is not failed, so the assessor now marks such claims `PENDING` and caps them at `provisional`, and a new test checks that a claim without a derivation can never become `supported`.
 
+## Assess results, second pass (2026-11-17)
+
+Derivations were added for the five claims from the January 2, 2026 release, so every claim in the ledger now has one (a test enforces this). Result across all 23 claims: **19 supported, 4 provisional, 0 demoted.**
+
+| New claim | Outcome | Basis |
+|-----------|---------|-------|
+| sf-pci-citywide-2025 (75) | supported | Sentence gives 75 in 2025; page metadata dates the release 01/02/2026; the 0-100 scale text is present. |
+| sf-blocks-paved-2025 (581) | supported | Text gives 581 City-maintained blocks in 2025; period and unit are clear. |
+| sf-preservation-cost-per-good-block-min ($50,000) | supported | Text gives "as little as $50,000" for a block in good condition. The claim's caveat about the garbled reconstruction cost must travel with it. |
+| sf-pci-annual-release-date (Dec. 31) | supported | Text says findings are released "Dec. 31 of every year". |
+| sf-resurfacing-investment-15-plus-years ($979M) | **provisional** | The figure is reproduced, but the period is only "15-plus years": no start year, funding sources or price basis. |
+
+**Provisional claims now: four.** The $979 million claim above, plus the three from the first pass (blocks resurfaced 9,148 and blocks planned 2,500+, both with no period or horizon, and the $133.0M award total that does not re-derive exactly from its rounded rows).
+
+**How much independence this pass has.** Less than the first pass. Those claims were tables and slide figures that I could rebuild a second way and check against rendered images. The new ones are single sentences in one HTML page, so the second derivation only confirms, through a different parser, that the sentence says what Extract recorded. No second source exists for the 581 blocks, the $50,000 floor or the Dec. 31 date. The $979 million figure's "more than 9,000 of nearly 13,000 blocks" is consistent with the Commission deck's 9,148 and roughly 13,000 but is not an independent check on the dollars.
+
+**What "supported" means for these.** The release reports the number, period and unit accurately. For the 2025 PCI, 581 blocks and $50,000, these are the department's own statements about itself.
+
+**Where the ledger stands.** Strong on condition (PCI for 2023, 2024 and 2025, and block counts by category for 2014 and 2024), on program output and costs, and on the policy statements. Absent: any reported-demand claim and any measured pothole response percentage. A dossier cannot yet say how many potholes residents reported or how fast the city responded.
+
 ## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
