@@ -9,5 +9,8 @@
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./site"
-  }
+  },
+  // Cloudflare builds pull request branches with `npx wrangler preview`, which refuses to run unless
+  // the config has a `previews` block. It may be empty. Without it every branch build fails.
+  "previews": {}
 }

@@ -8,6 +8,8 @@ A Cloudflare Workers Builds project is connected to this repository and runs `np
 
 `wrangler.jsonc` fixes that by telling Wrangler to serve the static files in `site/`. `site/index.html` is a placeholder holding page. It describes the project in two sentences and says that no dossiers have been published. It holds no research content on purpose.
 
+Cloudflare runs two different commands. A build of the production branch (`main`) runs `npx wrangler deploy`. A build of any other branch, such as a pull request, runs `npx wrangler preview`, which refuses to run unless the config has a `previews` block. `wrangler.jsonc` therefore carries `"previews": {}`, and without it every pull request build fails with `Your Wrangler configuration is missing a previews block`. The first pull request builds failed for exactly that reason, which was only visible in the dashboard's build log.
+
 Checked on 2026-11-19: `npx wrangler deploy --dry-run` with Wrangler 4.165.0, the version of the failed build, reads the one file in `site/` and exits cleanly. Not checked: the Cloudflare dashboard itself, which this repository cannot see. If a build still fails, look at these in the dashboard under the Worker's Settings, then Builds:
 
 - **Worker name.** `name` in `wrangler.jsonc` is `pothole-portolan`, the repository name and the dashboard default. It must match the Worker's name in the dashboard, or Workers Builds rejects the build. If the Worker has another name, change `name` here.
