@@ -1,0 +1,332 @@
+# Maintained by scripts/fetch_source.py (Fetch) from Discover's list. Status values:
+# listed (not yet fetched), fetched (archived under sources/), unavailable (reason in notes).
+- id: sf-city-pci-release-2024-01
+  name: San Francisco's Road Conditions Improve, Ranked Highest For Large Bay Area Cities in Annual Roads
+    Assessment (release dated January 8, 2024)
+  publisher: Office of the Mayor and San Francisco Public Works
+  source_type: agency_page
+  url: https://www.sf.gov/news/san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads
+  status: fetched
+  notes: 'CORRECTION (Extract, 2026-11-17): Discover recorded this page as the 2026-01-02 release. The
+    archived text is dated January 8, 2024 and says the score of 75 ''covered calendar year 2023''. The
+    2026 release is a different page, listed separately below as sf-publicworks-pci-release-2026-01. Fetch
+    2026-11-16: HTTP 200, text/html, 212340 bytes, final URL https://www.sf.gov/news--san-franciscos-road-conditions-improve-ranked-highest-large-bay-area-cities-annual-roads.'
+  retrieved: '2026-11-16'
+  archive: sources/0593bf62a458ed52071e435862d6990993c63c17e63f7fe55d8170bb5851fa09.html
+  robots_checked: true
+- id: sf-publicworks-pci-release-2026-01
+  name: Public Works news release dated January 2, 2026 on the 2025 PCI score
+  publisher: San Francisco Public Works
+  source_type: agency_page
+  url: https://sfpublicworks.org/node/35600
+  status: fetched
+  notes: 'Added by Extract on 2026-11-17 after finding that the page archived under the earlier id is
+    the 2024 release. A search result described this page as the January 2, 2026 release reporting a score
+    of 75 in 2025 and a ranking among large Bay Area cities. Not yet fetched, so none of that is verified.
+    Fetch 2026-11-17: HTTP 200, text/html, 51897 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/5525cb3d31687724ea1782cd56dc5196a12390965358202c88aa9ac9c816611f.html
+  robots_checked: true
+- id: mtc-vital-signs-street-pavement
+  name: 'Vital Signs: street pavement condition'
+  publisher: Metropolitan Transportation Commission
+  source_type: pavement_report
+  url: https://vitalsigns.mtc.ca.gov/indicators/street-pavement-condition
+  status: fetched
+  notes: 'Regional indicator page with, per the result, graph and raw-data downloads. Likely the primary
+    source for the county and city PCI series. The page says regional, county and city PCI use a three-year
+    moving average. Raw data file format and terms are unconfirmed. Fetch 2026-11-16: HTTP 200, text/html,
+    114005 bytes.'
+  retrieved: '2026-11-16'
+  archive: sources/23cda121dccd0789d74632080e35e6c8c0ba4a2f745716e898de837092703d60.html
+  robots_checked: true
+- id: mtc-pci-program-page
+  name: Pavement Condition Index (PCI), MTC streets and roads program
+  publisher: Metropolitan Transportation Commission
+  source_type: agency_page
+  url: https://mtc.ca.gov/operations/programs-projects/streets-roads-arterials/pavement-condition-index
+  status: fetched
+  notes: 'Expected to define the index, rating bands and the StreetSaver survey method. Needed for the
+    condition_index fields on any PCI claim. Fetch 2026-11-16: HTTP 200, text/html, 130147 bytes.'
+  retrieved: '2026-11-16'
+  archive: sources/1018365c816c70d8223b306f5c603cfbe6f237495c21f3b4738d4b4816b64e3d.html
+  robots_checked: true
+- id: sf-scorecard-pci-data-story
+  name: Pavement Condition Index (PCI), city performance scorecard data story
+  publisher: San Francisco Controller's Office
+  source_type: agency_page
+  url: https://www.sf.gov/data/pavement-condition-index-pci
+  status: fetched
+  notes: 'City''s own description of the measure, apparently covering more than 12,000 blocks and a 0
+    to 100 score. Its band thresholds differ from the MTC page; see notes.md. Fetch 2026-11-16: HTTP 200,
+    text/html, 216216 bytes, final URL https://www.sf.gov/data--pavement-condition-index-pci.'
+  retrieved: '2026-11-16'
+  archive: sources/d6a5351376b1a0fe9e01c28a4a9bf22c76d5efc738fb9f6cd7af94628019f7db.html
+  robots_checked: true
+- id: datasf-311-cases-faq
+  name: 311 case data FAQ
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://support.datasf.org/help/311-case-data-faq
+  status: listed
+  notes: Documents the 311 Cases dataset (id vw6y-z8j6 per search results), including known limits such
+    as non-unique reports and missing coordinates. The canonical dataset landing page on the city's open
+    data portal was not seen in results and must be resolved by Fetch.
+- id: datagov-311-cases
+  name: 311 Cases (catalog entry)
+  publisher: DataSF, via the federal catalog
+  source_type: open_data_portal
+  url: https://catalog.data.gov/dataset/311-cases
+  status: fetched
+  notes: 'Catalog mirror of the dataset record. Use to find the canonical download or API route; prefer
+    the city''s own portal for the archived copy. Record-level data: archive only aggregates (rule 7).
+    Fetch 2026-11-16: HTTP 200, text/html, 138412 bytes.'
+  retrieved: '2026-11-16'
+  archive: sources/5033a8a23e6e757dc037534cf069a746af744f575af6df91f769feaad959b642.html
+  robots_checked: true
+- id: sf311-open311-api
+  name: Open311 API for City and County of San Francisco (production)
+  publisher: San Francisco 311
+  source_type: open311
+  url: https://mobile311.sfgov.org/open311
+  status: unavailable
+  notes: 'GeoReport v2 style endpoint. The page reportedly asks for an API key request, so access terms
+    and rate limits must be read before any call (rule 8). The bulk dataset is likely the better route
+    for counts. Fetch 2026-11-16: not retrieved, disallowed by robots.txt for this user agent.'
+  retrieved: '2026-11-16'
+- id: sf-pothole-response-measure
+  name: Pothole response, city performance scorecard data story
+  publisher: San Francisco Controller's Office
+  source_type: agency_page
+  url: https://www.sf.gov/data/pothole-response
+  status: fetched
+  notes: 'Measure of the share of pothole requests addressed within 72 hours, sourced from the Scorecards
+    dataset on DataSF with about a one-month lag. The underlying dataset URL was not seen and must be
+    resolved. A 2021 audit gives the departmental goal as 90 percent within 72 hours; confirm the target
+    in the primary text. Fetch 2026-11-16: HTTP 200, text/html, 220528 bytes, final URL https://www.sf.gov/data--pothole-response.'
+  retrieved: '2026-11-16'
+  archive: sources/4a0755b1850b791e7e897288e497c64930482356fbef9227d7bcb9b36ec349b7.html
+  robots_checked: true
+- id: bla-street-resurfacing-audit-2021
+  name: Performance audit of the Department of Public Works Street Resurfacing Program and StreetTreeSF
+    Program
+  publisher: San Francisco Board of Supervisors, Budget and Legislative Analyst
+  source_type: audit
+  url: https://sfbos.org/sites/default/files/061421_PA_of_DPW_Street_Resurfacing_Prog_%26_StreetTreeSF%20Prog.pdf
+  status: unavailable
+  notes: 'File name dated June 2021. Reported to find that the program has a citywide PCI goal but no
+    breakdown by supervisorial district or neighborhood. The URL as seen in results contained a raw space,
+    encoded here as %20; Fetch should confirm. Fetch 2026-11-17: not retrieved, disallowed by robots.txt
+    for this user agent.'
+  retrieved: '2026-11-17'
+- id: publicworks-commission-resurfacing-update-2025-11
+  name: Public Works Commission, street resurfacing capital update, Item 5, 2025-11-13
+  publisher: San Francisco Public Works
+  source_type: council_document
+  url: https://sfpublicworks.org/sites/default/files/Commissions/Nov%2013%202025/Item%205_PWC%20Street%20Resurfacing%20Capital%20Update%202025-11-13.pdf
+  status: fetched
+  notes: 'Candidate for blocks resurfaced and program spending. Contents unread. Fetch 2026-11-16: HTTP
+    200, application/pdf, 12898491 bytes.'
+  retrieved: '2026-11-16'
+  archive: sources/54bedeaf1f9f0fa96e6c5f9203c084aab33d61833f2e10335ce7fef1d19e2a63.pdf
+  robots_checked: true
+- id: publicworks-cpc-budget-fy2627
+  name: Public Works Capital Planning Committee presentation, FY26-27
+  publisher: San Francisco Public Works, posted on onesanfrancisco.org
+  source_type: budget
+  url: https://onesanfrancisco.org/sites/default/files/2025-03/Item%205%20-%20Public%20Works%20CPC%20Presentation%20FY2627_final.pdf
+  status: unavailable
+  notes: 'Reported to state a PCI maintenance goal and a minimum blocks-per-year target for FY26 and FY27.
+    Contents unread. Fetch 2026-11-16: not retrieved. The URL redirected to https://www.sf.gov/department-office-of-resilience-and-capital-planning,
+    a generic department landing page with no pavement, PCI or resurfacing text, not the presentation.
+    That page was archived, found to be the wrong document, and discarded. The presentation PDF is not
+    retrievable at this URL; look for its current location in Discover.'
+  retrieved: '2026-11-16'
+- id: sfcta-prop-l-resurfacing-5ypp-2023
+  name: Street Resurfacing, Prop L 5-Year Prioritization Program, approved 2023-07-25
+  publisher: San Francisco County Transportation Authority
+  source_type: budget
+  url: https://www.sfcta.org/sites/default/files/2023-08/EP%2015%20Street%20Resurfacing%20Prop%20L%202023%205YPP%20Approved%207.25.23.pdf
+  status: fetched
+  notes: 'Dedicated sales tax funding program for resurfacing. Candidate for funding amounts; contents
+    unread. Fetch 2026-11-16: HTTP 200, application/pdf, 4017993 bytes.'
+  retrieved: '2026-11-16'
+  archive: sources/c51b3b6f27f6f01dc53b60e2f41f0fff6e313cbf671418c8af33f723833c62c6.pdf
+  robots_checked: true
+- id: ca-statewide-local-streets-needs-assessment-2020
+  name: 2020 California Statewide Local Streets and Roads Needs Assessment report
+  publisher: California State Association of Counties and partners
+  source_type: statistics_body
+  url: https://www.counties.org/?p=1527
+  status: fetched
+  notes: 'Statewide biennial study. A San Francisco figure was not seen in the results, and its index
+    and survey method may not match the MTC series. Low priority; do not compare across indices without
+    a published crosswalk. Fetch 2026-11-16: HTTP 200, text/html, 114280 bytes, final URL https://www.counties.org/news-and-media-article/2020-california-statewide-local-streets-and-roads-needs-assessment-report/.'
+  retrieved: '2026-11-16'
+  archive: sources/b077c83ab4db91cb5d075f4d4c96d6259fcf892cf206c0ad8b697ac059aadb14.html
+  robots_checked: true
+- id: sf311-cases-dataset-metadata
+  name: 311 Cases dataset metadata (id vw6y-z8j6)
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/api/views/vw6y-z8j6
+  status: fetched
+  notes: 'Metadata only, no records. Added in step 1 of the 311 plan (proposal 2026-11-17-001). URL taken
+    from the archived catalog record. Expected to describe the columns, case categories and refresh. Inspect
+    for sample values before committing. Fetch 2026-11-17: HTTP 200, application/json, 26264 bytes. Archived
+    copy has 23 `cachedContents` blocks (sample column values, including addresses and free text) removed
+    and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized file, not
+    of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/fe8a71b07080b478797c3bf39318a24816e5b84222941941bcfaf0c320b945ea.json
+  robots_checked: true
+- id: sf311-cases-dataset-columns
+  name: 311 Cases dataset column list (id vw6y-z8j6)
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/api/views/vw6y-z8j6/columns.json
+  status: fetched
+  notes: 'Metadata only, no records. URL taken from the archived catalog record. Fetch 2026-11-17: HTTP
+    200, application/json, 21333 bytes. Archived copy has 28 `cachedContents` blocks (sample column values,
+    including addresses and free text) removed and the JSON re-serialized with sorted keys, under rule
+    7; its sha256 is of this sanitized file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/9e0aac3d5f734eb2b23498903d519eb588eacf0a15174da22a13708a41d83446.json
+  robots_checked: true
+- id: sf-scorecard-measures-metadata
+  name: Scorecard Measures dataset metadata (id kc49-udxn)
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/api/views/kc49-udxn
+  status: fetched
+  notes: 'Metadata only, no records. The dataset id comes from the "Scorecards Dataset on DataSF" link
+    on the city scorecard pages. The metadata path pattern is the same as for the 311 dataset and is not
+    itself confirmed. Fetch 2026-11-17: HTTP 200, application/json, 9062 bytes, final URL https://data.sf.gov/api/views/kc49-udxn.
+    Archived copy has 18 `cachedContents` blocks (sample column values, including addresses and free text)
+    removed and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized
+    file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/e5cd5e0551734d77a94893138f0dded9c05eca57bf55aa8eda0e96e7698b24c1.json
+  robots_checked: true
+- id: sf-scorecard-measures-columns
+  name: Scorecard Measures dataset column list (id kc49-udxn)
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/api/views/kc49-udxn/columns.json
+  status: fetched
+  notes: 'Metadata only, no records. Fetch 2026-11-17: HTTP 200, application/json, 5268 bytes, final URL
+    https://data.sf.gov/api/views/kc49-udxn/columns.json. Archived copy has 18 `cachedContents` blocks
+    (sample column values, including addresses and free text) removed and the JSON re-serialized with
+    sorted keys, under rule 7; its sha256 is of this sanitized file, not of the raw response.'
+  retrieved: '2026-11-17'
+  archive: sources/6974551b96a68fbe217b20de809e6acc957458a6114a83216e3408314cc1c92f.json
+  robots_checked: true
+- id: sf-scorecard-pothole-measure-rows
+  name: 'Scorecard Measures: rows for the pothole measure'
+  publisher: San Francisco Controller via DataSF
+  source_type: open_data_portal
+  url: https://data.sfgov.org/resource/kc49-udxn.json?$select=measure_code,measure_title,measure_description,measure_methodology,calendar_month,actual,target,measure_data_type,category_1,category_2,category_3,category_4,scorecard_update_frequency&$where=lower(measure_title)%20like%20'%25pothole%25'%20or%20lower(measure_description)%20like%20'%25pothole%25'&$order=calendar_month&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Monthly actual and target values for the pothole response
+    measure, with the measure''s own methodology text. -9999 means no entry and must be treated as null.
+    Fetch 2026-11-17: HTTP 200, application/json, 266046 bytes, final URL https://data.sf.gov/resource/kc49-udxn.json?%24limit=5000&%24order=calendar_month&%24select=measure_code%2Cmeasure_title%2Cmeasure_description%2Cmeasure_methodology%2Ccalendar_month%2Cactual%2Ctarget%2Cmeasure_data_type%2Ccategory_1%2Ccategory_2%2Ccategory_3%2Ccategory_4%2Cscorecard_update_frequency&%24where=lower%28measure_title%29%20like%20%27%25pothole%25%27%20or%20lower%28measure_description%29%20like%20%27%25pothole%25%27.'
+  retrieved: '2026-11-17'
+  archive: sources/4a2144149cabbd758fe5d586b2fb3fa0e41c88919c43c6a4f801db1b89b21f39.json
+  robots_checked: true
+- id: sf311-all-cases-by-year
+  name: '311 Cases: all cases by calendar year of requested_datetime'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Denominator for context: total 311 cases per year, all
+    types. Never to be read as pothole counts. Fetch 2026-11-17: HTTP 200, application/json, 646 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/3df0e4ac44798451a649996309e7dda9bffbfc3f537a7e4bcd272c015814e2f7.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-year
+  name: '311 Cases: pavement_defect family by calendar year'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Year totals for the pavement defect family without a channel
+    split, so the amount suppressed in the channel breakdown can be measured. Fetch 2026-11-17: HTTP 200,
+    application/json, 609 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/c43877929917e3ee9fc61481f7002f740bb02fd7de62100dcb2952495f5d7703.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-year-channel
+  name: '311 Cases: pavement_defect counts by calendar year, type and reporting channel, groups of 10
+    or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=date_extract_y(requested_datetime)%20as%20year,service_name,service_subtype,source,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=year,service_name,service_subtype,source&$having=count(*)%3E%3D10&$order=year&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Reported-demand counts for the pavement defect family
+    by year and channel. Pothole is not a separate value, so these are pavement defect requests, not pothole
+    requests. Fetch 2026-11-17: HTTP 200, application/json, 10484 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/6fd671a4198644feff97da89b2808e2a048ea9203823a68a466e3288dd099da2.json
+  robots_checked: true
+- id: sf311-pavement-defect-by-agency
+  name: '311 Cases: pavement_defect counts by responsible agency, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,agency_responsible,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,agency_responsible&$having=count(*)%3E%3D10&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Which agencies the pavement_defect cases are routed to,
+    to check the family is mostly the street repair function. Fetch 2026-11-17: HTTP 200, application/json,
+    10661 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/853430573e4f768e74b2b470d262284f825fbcd1deb7c8d73ddeb2a8e151dd47.json
+  robots_checked: true
+- id: sf311-street-defect-subtype-counts
+  name: '311 Cases: subtype counts within the street defect service names, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=service_name%20in%20('Street%20Defects','Street%20Defect','Sidewalk%20and%20Curb')&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Subtypes of the street defect service names only, a bounded
+    vocabulary. Replaces an unrestricted taxonomy query whose subtype field returned hundreds of typed-text
+    values. Fetch 2026-11-17: HTTP 200, application/json, 2354 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/048e5c941187c0eca4eee4bf06786a2915f87ee87e8043d7d84d36a03d1cd121.json
+  robots_checked: true
+- id: sf311-pothole-label-search
+  name: '311 Cases: groups whose service name or subtype contains pothole, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=lower(service_name)%20like%20'%25pothole%25'%20or%20lower(service_subtype)%20like%20'%25pothole%25'%20or%20lower(service_name)%20like%20'%25pot%20hole%25'%20or%20lower(service_subtype)%20like%20'%25pot%20hole%25'&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Show whether any case type is labeled pothole. An empty
+    result is the finding, and it reveals no unrelated label. See sf311-label-search-control for the check
+    that the search method works. Fetch 2026-11-17: HTTP 200, application/json, 3 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570.json
+  robots_checked: true
+- id: sf311-label-search-control
+  name: '311 Cases: positive control for the label search, groups whose service name or subtype contains
+    pavement'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,count(*)%20as%20cases&$where=lower(service_name)%20like%20'%25pavement%25'%20or%20lower(service_subtype)%20like%20'%25pavement%25'&$group=service_name,service_subtype&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Positive control: the same search form with a word that
+    is known to occur, to show that an empty pothole result is not an artifact of the query. Fetch 2026-11-17:
+    HTTP 200, application/json, 346 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/56189250f9b4455ae99e4b25e1120fb4015bdb165cf163c27a9887044feab3e5.json
+  robots_checked: true
+- id: sf311-pavement-defect-details-counts
+  name: '311 Cases: service_details counts within pavement_defect, groups of 10 or more'
+  publisher: DataSF
+  source_type: open_data_portal
+  url: https://data.sf.gov/resource/vw6y-z8j6.json?$select=service_name,service_subtype,service_details,count(*)%20as%20cases&$where=lower(service_subtype)%3D'pavement_defect'&$group=service_name,service_subtype,service_details&$having=count(*)%3E%3D10&$order=cases%20DESC&$limit=5000
+  status: fetched
+  notes: 'Aggregate query, no records. Purpose: Third taxonomy level within the pavement defect subtype,
+    to see whether potholes can be separated from other pavement defects. Held, not archived, if the field
+    has more than 100 distinct values. Fetch 2026-11-17: HTTP 200, application/json, 298 bytes.'
+  retrieved: '2026-11-17'
+  archive: sources/60ae4ea7161ba927deb17186f25c7c0cb33e58da40c2fc01c76f251d5a10ce11.json
+  robots_checked: true

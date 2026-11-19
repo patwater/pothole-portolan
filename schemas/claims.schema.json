@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claims.schema.json",
+  "title": "Claim ledger (cities/<slug>/claims.yaml)",
+  "type": "array",
+  "items": { "$ref": "#/$defs/claim" },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "statement", "value", "unit", "period", "kind",
+        "source_url", "retrieved", "archive", "method", "confidence", "caveats"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "statement": { "type": "string", "minLength": 10 },
+        "value": { "type": ["number", "string"] },
+        "unit": { "type": "string", "minLength": 1 },
+        "period": { "type": ["string", "integer"], "minLength": 1 },
+        "kind": {
+          "enum": [
+            "reported_demand", "measured_condition", "spending", "program_output",
+            "response_time", "backlog", "policy"
+          ]
+        },
+        "source_url": { "type": "string", "pattern": "^https?://[^\\s]+$" },
+        "retrieved": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "archive": {
+          "type": "string",
+          "pattern": "^sources/[0-9a-f]{64}(\\.[A-Za-z0-9]+)?$"
+        },
+        "method": { "type": "string", "minLength": 10 },
+        "confidence": { "enum": ["speculative", "provisional", "supported"] },
+        "caveats": { "type": "string" },
+        "condition_index": { "$ref": "#/$defs/condition_index" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "measured_condition" } },
+            "required": ["kind"]
+          },
+          "then": { "required": ["condition_index"] }
+        }
+      ]
+    },
+    "condition_index": {
+      "description": "Required for measured_condition. Use \"not stated\" where the source does not say.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name", "scale", "survey_year", "network_share_surveyed", "survey_method"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "scale": { "type": "string", "minLength": 1 },
+        "survey_year": { "type": ["integer", "string"] },
+        "network_share_surveyed": {
+          "oneOf": [
+            { "type": "number", "minimum": 0, "maximum": 100 },
+            { "const": "not stated" }
+          ]
+        },
+        "survey_method": { "type": "string", "minLength": 1 },
+        "crosswalk_url": { "type": "string", "pattern": "^https?://[^\\s]+$" }
+      }
+    }
+  }
+}
