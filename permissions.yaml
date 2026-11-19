@@ -2,7 +2,7 @@
 # Created in the Phase 0 scaffold; every value below is a placeholder for the
 # supervisor to confirm or replace.
 
-phase: 1
+phase: 2
 
 spend:
   daily_cap_usd: null        # PLACEHOLDER: supervisor to set. Runs stop when this is reached (rule 9).

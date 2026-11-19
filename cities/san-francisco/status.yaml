@@ -1,0 +1,11 @@
+# Updated 2026-11-19 while merging the Phase 2 branch with the Phase 1 pilot work.
+# The pilot took San Francisco through Fetch, Extract, Assess and Draft by hand: 78 claims (70 supported,
+# 8 provisional), the 311 aggregates and the Public Works scorecard measures, and a draft at
+# queue/drafts/san-francisco-v1.md that passes the content checks. The draft is waiting for the supervisor,
+# which is what "queued" means. The earlier backfilled stage was "discovered", written before that work existed.
+stage: queued
+blocked_on: null
+last_run:
+  behavior: draft
+  date: '2026-11-17'
+  workflow_run: null

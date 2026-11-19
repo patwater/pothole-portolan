@@ -92,7 +92,9 @@
   status: unavailable
   notes: 'GeoReport v2 style endpoint. The page reportedly asks for an API key request, so access terms
     and rate limits must be read before any call (rule 8). The bulk dataset is likely the better route
-    for counts. Fetch 2026-11-16: not retrieved, disallowed by robots.txt for this user agent.'
+    for counts. Fetch 2026-11-16: not retrieved, disallowed by robots.txt for this user agent. Supervisor
+    decision 2026-11-17 (approval 2026-11-17-001, proposal option a): record as unavailable and do not
+    work around robots.txt.'
   retrieved: '2026-11-16'
 - id: sf-pothole-response-measure
   name: Pothole response, city performance scorecard data story
@@ -117,7 +119,8 @@
   notes: 'File name dated June 2021. Reported to find that the program has a citywide PCI goal but no
     breakdown by supervisorial district or neighborhood. The URL as seen in results contained a raw space,
     encoded here as %20; Fetch should confirm. Fetch 2026-11-17: not retrieved, disallowed by robots.txt
-    for this user agent.'
+    for this user agent. Supervisor decision 2026-11-17 (approval 2026-11-17-001, proposal option a):
+    record as unavailable and do not work around robots.txt.'
   retrieved: '2026-11-17'
 - id: publicworks-commission-resurfacing-update-2025-11
   name: Public Works Commission, street resurfacing capital update, Item 5, 2025-11-13
