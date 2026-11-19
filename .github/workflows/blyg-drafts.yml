@@ -1,0 +1,102 @@
+# Phase 2: put each queued dossier (queue/drafts/<slug>-v<n>.md) into the Pothole Portolan Studio
+# as a private draft. Never publishes: the supervisor reads the draft in the Studio and publishes it
+# there. See scripts/blygger_client/push_drafts.py and docs/blygger.md.
+#
+# Supervisor-owned. The funnel's agent never sees the token: it lives only in this workflow, which
+# runs no model.
+#
+# Triggers:
+#   - after each funnel run (its commits are pushed with GITHUB_TOKEN, which does not trigger
+#     push workflows, so workflow_run is the hook);
+#   - on a push to main that changes queue/drafts/ (the supervisor's own edits);
+#   - by hand, as a dry run by default.
+#
+# Setup (Settings, Secrets and variables, Actions):
+#   secret   BLYGGER_DRAFT_TOKEN   Studio REST token (Studio, More, Client access, REST API) with
+#                                  owner:read and owner:draft only. Expires after at most 30 days;
+#                                  a 401 or 403 fails this job with renewal instructions.
+#   variable BLYGGER_API_BASE      the Studio's API, for example https://pothole.example.org/api
+#   variable BLYGGER_ARCHIVE_BASE  optional: a URL prefix that makes archive paths links, for
+#                                  example https://github.com/patwater/pothole-portolan/blob/main/
+# Until the secret and BLYGGER_API_BASE exist, every run says so and exits successfully.
+name: blyg-drafts
+
+on:
+  workflow_run:
+    workflows: [funnel]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["queue/drafts/**"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Render and print the plan; send nothing to the Studio"
+        type: boolean
+        default: true
+
+concurrency:
+  group: blyg-drafts
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # commit ledger/blyg_items.yaml
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BLYGGER_DRAFT_TOKEN: ${{ secrets.BLYGGER_DRAFT_TOKEN }}
+      BLYGGER_API_BASE: ${{ vars.BLYGGER_API_BASE }}
+      BLYGGER_ARCHIVE_BASE: ${{ vars.BLYGGER_ARCHIVE_BASE }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: python3 -m pip install --quiet -r scripts/requirements.txt
+
+      - name: Push changed drafts to the Studio
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          if [ -z "$BLYGGER_API_BASE" ] || { [ "$DRY_RUN" != "true" ] && [ -z "$BLYGGER_DRAFT_TOKEN" ]; }; then
+            echo "::notice title=Studio not configured::Set the BLYGGER_DRAFT_TOKEN secret and the BLYGGER_API_BASE variable to send drafts to the Studio. Nothing was sent."
+            exit 0
+          fi
+          python3 -I -m unittest discover -s tests -p "test_blygger_client.py"
+          args=()
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          python3 -I scripts/blygger_client/push_drafts.py "${args[@]}"
+
+      - name: Commit the Studio item ledger
+        if: github.event_name != 'workflow_dispatch' || inputs.dry_run == false
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- ledger/blyg_items.yaml)" ]; then
+            echo "Ledger unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git add ledger/blyg_items.yaml
+          git commit -m "blyg-drafts: record Studio draft items" -m "Behavior: blyg-drafts workflow (no model). Sent changed queued drafts to the Studio as private drafts; nothing was published."
+          for i in 1 2 3 4; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done
+          echo "::error::could not push ledger/blyg_items.yaml"
+          exit 1
