@@ -69,3 +69,26 @@ The supervisor's own blyg is at https://blyg.pioneeringspirit.xyz, with the Stud
 ## Paging and cost
 
 `listItems` called without a limit returned about 194,000 characters in one response. Every client call must pass a limit and follow cursors where the operation supports them.
+
+## A working example: how the World Machines blyg is automated
+
+Researched on 2026-11-19 at the supervisor's request, from https://blyg.worldmachines.org/ (its `blyg.json`, `items/index.json` and 26 item documents) and from the public repository `worldmachines/worldmachines` on GitHub (files `blyg-shell/README.md`, `.github/workflows/blyg-sync.yml`, `.github/workflows/blyg-front.yml`, `website/scripts/blyg_sync.py`, `website/scripts/blyg_series.py`). Nothing was written to either site, and no code was copied, because that repository has no license file.
+
+**It is a stock Blygger Studio driven by GitHub Actions.** The manifest names `blygger-studio/0.64.1` as the generator and declares a `webmention` endpoint, `/studio` redirects to a sign-in, and `/api/capabilities` answers 401 without a token. The shell README says the Studio is deployed from a separate private checkout, unforked, and that a small second Worker sits in front of it only to add the site's navigation bar.
+
+**Publishing is a script, not a person.** Two scheduled workflows in the public repository run stdlib Python scripts that call the Studio REST API with a bearer token held as a GitHub Actions secret:
+
+- `blyg-sync.yml`, at 06:00 and 18:00 UTC, collects posts that members file into their own hoppers, files them into the World Machines `members` hopper, and publishes a digest of them.
+- `blyg-front.yml`, at 06:30 and 18:30 UTC, writes one series post a day (a weekday rotation of six formats) and republishes the front-page thread. Its only git write is `tools/blyg-front/history.json`, which records what was featured so that a subject is not reused within 90 days.
+
+Each post follows the same sequence of calls: `POST /items` with `kind: thread` and the Markdown creates a draft, `POST /items/{id}/generate` asks the Studio to fill each `[TK]` scope, and `POST /items/{id}/publish` publishes it, after which the item is filed into a hopper. Item writes carry `expectedRevision`, and a 409 revision conflict is re-read and retried once. The item documents agree with this: each recent post was created and then published about ten seconds later, as version 1.
+
+**The AI writes only inside marked scopes.** The script assembles everything deterministic itself: headings, links, the list of source posts, and quotes as partial transclusions whose text the Studio checks is a verbatim substring of the target. Only the `[TK]` scopes are written by a model, which is the Studio's own configured model (`@cf/google/gemma-4-26b-a4b-it` on Cloudflare Workers AI). Each published item then carries a `generated` field naming the model, the time, and every source item and version the scope drew on. The front-page thread is at version 26, and every version has a changelog note such as "minor: today's featured note is Legibility".
+
+**Operational limits the scripts work around:**
+
+- Studio REST tokens expire after at most 30 days, so a person has to mint a new one and update the secret each month. The scripts fail with renewal instructions on a 401 or 403.
+- Studio AI generation has a daily budget per grant (the scripts cite 10 calls a grant and 40 for the whole blyg, and 20 for the digest token). A 429 from `generate` is that budget, is never retried, and leaves the draft for the next run to resume.
+- The scripts say they speak Studio 0.51's private API (contract 5.2.0), while the live Studio reports 0.64.1, so the contract has moved under them and they still work. A client should be tested against the deployed version anyway.
+
+**What carries over to Pothole Portolan.** The pattern fits the existing funnel workflow: a protected script in `scripts/blygger_client/` that creates a draft, publishes it with a changelog note, files it into a hopper, and writes the item id, version and `content_hash` to a publish log in git, so git still records exactly what went public. The main difference is that Pothole Portolan's prose is written by Claude in the funnel, with numbers filled from the claim ledger, rather than by the Studio's model inside `[TK]` scopes. Whether the Studio lets a client record its own `generated` provenance for text it wrote outside a `generate` call is not yet verified; `docs/api.md` mentions "client-recorded generation provenance" without saying more here.
