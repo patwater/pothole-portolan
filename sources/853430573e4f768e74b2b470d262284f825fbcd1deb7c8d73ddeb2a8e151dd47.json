@@ -1,0 +1,81 @@
+[{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"311 - Service Request Hold","cases":"42"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"311 - Supervisor","cases":"160"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"MTA - Muni Feedback Received","cases":"118"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"MTA - Sign Shop","cases":"14"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PUC - Sewer Ops","cases":"137"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PUC - Water","cases":"38"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PW - Infrastructure Design and Construction","cases":"125"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PW - Street and Environmental Services","cases":"859"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PW - Street and Sewer Repair","cases":"4139"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PW - Street Use and Mapping","cases":"1036"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"PW - Urban Forestry","cases":"42"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"RPD - GGP","cases":"115"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"RPD - Park Service Area 3","cases":"29"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"RPD - PSA","cases":"21"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","agency_responsible":"RPD - TMA","cases":"22"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"311 - Service Request Hold","cases":"35"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"311 - Supervisor","cases":"226"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"Healthy Streets Operation Center","cases":"38"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"MTA - Muni Feedback Received","cases":"111"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"MTA - Paint Shop","cases":"71"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"MTA - Sign Shop","cases":"14"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"MTA - Transportation Engineering","cases":"28"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"Port Authority","cases":"10"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PUC - Sewer Ops","cases":"221"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PUC - Water","cases":"34"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PW - Infrastructure Design and Construction","cases":"200"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PW - Street and Environmental Services","cases":"878"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PW - Street and Sewer Repair","cases":"3890"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PW - Street Use and Mapping","cases":"1035"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"PW - Urban Forestry","cases":"30"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"RPD - GGP","cases":"55"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"RPD - Park Service Area 3","cases":"11"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","agency_responsible":"RPD - PSA","cases":"15"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"311 Service Request Queue","cases":"12"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"311 Service Request Queue - Hold","cases":"301"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"311 Supervisor Queue","cases":"1859"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Animal Care and Control - G","cases":"42"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Clear Channel - Transit Queue","cases":"22"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT - Color Curb - G","cases":"10"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT Meter_Bike Queue","cases":"18"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT - Other - G","cases":"33"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT Paint Shop Curb Queue","cases":"12"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT Paint Shop Queue","cases":"84"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT Signal Queue","cases":"66"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT SignShop Queue","cases":"137"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT SignShop Surveyed - Area 1 Queue","cases":"10"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPT - Traffic Signal - G","cases":"13"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW BSM Queue","cases":"7709"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW BSSR Queue","cases":"50725"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW BUF Queue","cases":"58"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW - Bureau of Street and Sewer Repair - G","cases":"113"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW - Bureau of Street Environmental Services - G","cases":"36"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW - Bureau of Street Use and Mapping - G","cases":"56"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW IDC Queue","cases":"736"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW Ops Queue","cases":"16909"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"DPW Other Queue","cases":"61"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Muni Feedback Received Queue","cases":"91"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"MUNI Work Queue","cases":"22"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"PG and E - Streetlights Queue","cases":"26"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Police - Homeless Concerns Queue","cases":"11"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Port Authority - G","cases":"93"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"PUC - Sewer - G","cases":"35"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"PUC Sewer Ops","cases":"5658"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"PUC Streetlights Queue","cases":"30"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"PUC - Water - G","cases":"397"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"Recology_Abandoned","cases":"68"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RecPark Work Queue","cases":"42"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD GGP Queue","cases":"357"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD NSA Queue","cases":"82"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD Park Service Area 1 Queue","cases":"11"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD Park Service Area 3 Queue","cases":"27"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD Park Service Area 4 Queue","cases":"11"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"RPD TMA Queue","cases":"34"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SF311 AI Routing Queue","cases":"19"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - G","cases":"17"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - Livable Streets Queue","cases":"122"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - Muni System Feedback Queue","cases":"63"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - OPS Received (Internal Use Only)","cases":"30"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - Parking Enforcement - G","cases":"63"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - Traffic Calming Queue","cases":"53"}
+,{"service_name":"Street Defects","service_subtype":"Pavement_Defect","agency_responsible":"SFMTA - Transportation Engineering Queue","cases":"131"}]

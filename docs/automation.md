@@ -109,3 +109,27 @@ Not verified:
 - Only Fetch was run live. Scout, Discover, Extract, Assess, Draft and Publish prompts and their `max_turns` are untested with a model, and the turn limits and tier costs are guesses.
 - Pushing LFS objects at all: it failed from this session (HTTP 403 on the LFS verify call), so the migration is not applied and its push from the workflow is untested.
 - The other behaviors still have an unrestricted shell or web tools. See `queue/proposals/2026-11-17-002-narrow-network-and-shell-access.md`.
+
+## Fetch guards after merging the pilot branch
+
+The Phase 1 pilot and this branch each built a guard for the DataSF portals, and `scripts/fetch_source.py` now applies both. A URL on a host in `AGGREGATE_ONLY_HOSTS` must pass `aggregate_violation` (host level: metadata or grouped aggregates, a `$group`, a row limit) and then `query_policy` (dataset level: a minimum group size of ten cases through `$having`, no identifying field, and `service_details` only when the query is pinned to one subtype). A refusal by either is recorded as `unavailable` with the reason, the same as the existing aggregate-only refusals.
+
+Responses are checked too, because a query can be allowed and still return something it should not:
+
+- A response that has more rows than `AGGREGATE_MAX_ROWS` is not archived.
+- On a registered aggregate-only dataset, a text field with more than `MAX_TEXT_DISTINCT` distinct values is held and never written to disk. This is the signature of typed text such as permit applicants' names, which repeats above any group-size minimum.
+- Metadata loses its per-column value samples (`cachedContents`) before archiving, on the restricted hosts through `reduce_body` and on any host through `sanitize`.
+
+Choices made in the merge, so they can be revisited:
+
+- A registered dataset may use the `$limit` of its own policy (5000), because it is held to the stricter policy as well. Unregistered datasets keep the 2000 cap. What is archived is capped at 2000 rows either way.
+- Dataset metadata is accepted with or without the `.json` suffix, since it is the same endpoint.
+- The Scorecard Measures dataset (`kc49-udxn`) may be read as rows, because it holds department performance figures and not records about people. Every other registered dataset is aggregate-only.
+- `check_personal_data` treats a dataset description as safe unless it still contains `cachedContents`, and re-applies the group-size and typed-text guards to archived responses from registered datasets.
+
+Known limits:
+
+- Hosts outside `AGGREGATE_ONLY_HOSTS` get neither guard, only robots.txt, the size cap and the redirect check. A new city's portal has to be added to that set, and each dataset registered in `DATASET_POLICY`, before it is queried; otherwise a Fetch run could archive row-level data before `check_personal_data` rejects it, and the loop would then discard the run.
+- The guards only cover Socrata-style endpoints. Other APIs need their own policy.
+
+The tests for the combination are in `tests/test_fetch_merged_guards.py`. Each protection was disabled in turn to confirm that a test catches it.

@@ -1,0 +1,219 @@
+[
+ {
+  "dataTypeName": "text",
+  "description": "",
+  "fieldName": "measure_code",
+  "format": {},
+  "id": 589300038,
+  "name": "Measure Code",
+  "position": 1,
+  "renderTypeName": "text",
+  "tableColumnId": 140777946
+ },
+ {
+  "dataTypeName": "text",
+  "description": "Department responsible for collecting and reporting the data",
+  "fieldName": "department",
+  "format": {
+   "align": "left"
+  },
+  "id": 589300039,
+  "name": "Department",
+  "position": 2,
+  "renderTypeName": "text",
+  "tableColumnId": 33928659,
+  "width": 220
+ },
+ {
+  "dataTypeName": "text",
+  "description": "The goal within the department that the measure is associated with",
+  "fieldName": "goal",
+  "format": {
+   "align": "left"
+  },
+  "id": 589300040,
+  "name": "Goal",
+  "position": 3,
+  "renderTypeName": "text",
+  "tableColumnId": 33928663,
+  "width": 148
+ },
+ {
+  "dataTypeName": "text",
+  "description": "The descriptive title of the measure",
+  "fieldName": "measure_title",
+  "format": {
+   "align": "left",
+   "displayStyle": "plain"
+  },
+  "id": 589300041,
+  "name": "Measure Title",
+  "position": 4,
+  "renderTypeName": "text",
+  "tableColumnId": 33928667,
+  "width": 244
+ },
+ {
+  "dataTypeName": "text",
+  "description": "",
+  "fieldName": "scorecard_update_frequency",
+  "format": {},
+  "id": 589300042,
+  "name": "Scorecard Update Frequency",
+  "position": 5,
+  "renderTypeName": "text",
+  "tableColumnId": 93555602,
+  "width": 283
+ },
+ {
+  "dataTypeName": "checkbox",
+  "description": "",
+  "fieldName": "monthly",
+  "format": {},
+  "id": 589300043,
+  "name": "Monthly",
+  "position": 6,
+  "renderTypeName": "checkbox",
+  "tableColumnId": 93555798
+ },
+ {
+  "dataTypeName": "calendar_date",
+  "description": "Calendar month representation using last day of each month",
+  "fieldName": "calendar_month",
+  "format": {
+   "align": "left",
+   "view": "date_ymd"
+  },
+  "id": 589300044,
+  "name": "Calendar Month",
+  "position": 7,
+  "renderTypeName": "calendar_date",
+  "tableColumnId": 33928681
+ },
+ {
+  "dataTypeName": "text",
+  "description": "",
+  "fieldName": "measure_description",
+  "format": {},
+  "id": 589300045,
+  "name": "Measure Description",
+  "position": 8,
+  "renderTypeName": "text",
+  "tableColumnId": 93555603
+ },
+ {
+  "dataTypeName": "text",
+  "description": "",
+  "fieldName": "measure_methodology",
+  "format": {},
+  "id": 589300046,
+  "name": "Measure Methodology",
+  "position": 9,
+  "renderTypeName": "text",
+  "tableColumnId": 93555604
+ },
+ {
+  "dataTypeName": "number",
+  "description": "The actual value of the measure for that time period. Note: -9999 used to indicate no entry for that record (null).",
+  "fieldName": "actual",
+  "format": {
+   "align": "right",
+   "noCommas": "false",
+   "precisionStyle": "standard"
+  },
+  "id": 589300048,
+  "name": "Actual",
+  "position": 10,
+  "renderTypeName": "number",
+  "tableColumnId": 33928683,
+  "width": 172
+ },
+ {
+  "dataTypeName": "text",
+  "description": "The target value of the measure for that time period. Note: -9999 used to indicate no entry for that record (null).",
+  "fieldName": "target",
+  "format": {},
+  "id": 589300057,
+  "name": "Target",
+  "position": 11,
+  "renderTypeName": "text",
+  "tableColumnId": 151309283
+ },
+ {
+  "dataTypeName": "text",
+  "description": "",
+  "fieldName": "measure_data_type",
+  "format": {},
+  "id": 589300049,
+  "name": "Measure Data Type",
+  "position": 12,
+  "renderTypeName": "text",
+  "tableColumnId": 140777945
+ },
+ {
+  "dataTypeName": "text",
+  "description": "This field contains additional details about certain measures and is used to calculate the monthly actuals.",
+  "fieldName": "category_1",
+  "format": {},
+  "id": 589300050,
+  "name": "Category 1",
+  "position": 13,
+  "renderTypeName": "text",
+  "tableColumnId": 150312151
+ },
+ {
+  "dataTypeName": "text",
+  "description": "This field contains additional details about certain measures and is used to calculate the monthly actuals.",
+  "fieldName": "category_2",
+  "format": {},
+  "id": 589300051,
+  "name": "Category 2",
+  "position": 14,
+  "renderTypeName": "text",
+  "tableColumnId": 150312150
+ },
+ {
+  "dataTypeName": "text",
+  "description": "This field contains additional details about certain measures and is used to calculate the monthly actuals.",
+  "fieldName": "category_3",
+  "format": {},
+  "id": 589300052,
+  "name": "Category 3",
+  "position": 15,
+  "renderTypeName": "text",
+  "tableColumnId": 150312149
+ },
+ {
+  "dataTypeName": "text",
+  "description": "This field contains additional details about certain measures and is used to calculate the monthly actuals.",
+  "fieldName": "category_4",
+  "format": {},
+  "id": 589300053,
+  "name": "Category 4",
+  "position": 16,
+  "renderTypeName": "text",
+  "tableColumnId": 150312148
+ },
+ {
+  "dataTypeName": "calendar_date",
+  "description": "",
+  "fieldName": "data_as_of",
+  "format": {},
+  "id": 589300056,
+  "name": "data_as_of",
+  "position": 17,
+  "renderTypeName": "calendar_date",
+  "tableColumnId": 151309282
+ },
+ {
+  "dataTypeName": "calendar_date",
+  "description": "The date the data was uploaded to the open data portal (here)",
+  "fieldName": "data_loaded_at",
+  "format": {},
+  "id": 589300054,
+  "name": "data_loaded_at",
+  "position": 18,
+  "renderTypeName": "calendar_date",
+  "tableColumnId": 140777944
+ }
+]

@@ -17,6 +17,10 @@ has open egress and the Fetch behavior has no other network tool. So it also enf
     grouped aggregate queries; never a row download. Redirects are checked the same way;
   * metadata is archived without the per-column value samples that Socrata embeds
     (cachedContents), because those are sample record values (rule 7);
+  * a registered dataset policy (query_policy): grouped counts of at least MIN_GROUP_SIZE cases only, no
+    identifying field, and service_details only when pinned to one subtype; a response whose text field
+    has more than MAX_TEXT_DISTINCT distinct values is held, because typed text repeats even above the
+    group-size minimum;
   * HTTP 429 stops all further requests to that host in this run and leaves the source listed;
   * at most --limit requests per run, --delay seconds apart.
 Exit status: 0 done, 1 schema error, 2 some source left listed (network policy or rate limit).
@@ -49,7 +53,7 @@ AGGREGATE_MAX_ROWS = 2000
 # Socrata portals where only metadata and aggregates may be requested (proposal 2026-11-17-001).
 AGGREGATE_ONLY_HOSTS = {"data.sf.gov", "data.sfgov.org"}
 DATASET_ID = r"[a-z0-9]{4}-[a-z0-9]{4}"
-METADATA_PATH = re.compile(rf"^/api/views/{DATASET_ID}(?:\.json|/columns\.json|/columns/\d+\.json)$")
+METADATA_PATH = re.compile(rf"^/api/views/{DATASET_ID}(?:\.json|/columns\.json|/columns/\d+\.json)?$")
 RESOURCE_PATH = re.compile(rf"^/resource/{DATASET_ID}\.(?:json|csv)$")
 AGGREGATE_FUNCTIONS = ("count", "sum", "avg", "min", "max", "median", "stddev_pop", "stddev_samp")
 # Group keys that would turn an aggregate into a record listing or expose a person or place.
@@ -113,27 +117,35 @@ def aggregate_violation(url):
         return None if not query else "metadata endpoints take no query"
     if not RESOURCE_PATH.match(parts.path):
         return f"path {parts.path} is not a metadata or aggregate endpoint (row downloads are refused)"
-    unknown = sorted(k for k in query if k not in ("$select", "$group", "$where", "$order", "$limit"))
+    unknown = sorted(k for k in query if k not in ("$select", "$group", "$having", "$where", "$order", "$limit"))
     if unknown:
         return f"query parameter(s) {unknown} are not allowed"
-    group = query.get("$group", [""])[0].strip()
-    select = query.get("$select", [""])[0].strip()
-    if not group or not select:
-        return "an aggregate query needs both $select and $group"
-    group_keys = [_strip_alias(g) for g in _split_top_level(group)]
-    for key in group_keys:
-        if FORBIDDEN_GROUP_KEY.search(key):
-            return f"$group key {key!r} could identify a person, place or record"
-    for item in _split_top_level(select):
-        expr = _strip_alias(item)
-        alias = re.search(r"\s+as\s+(\w+)\s*$", item.strip(), re.I)
-        is_aggregate = re.match(rf"^({'|'.join(AGGREGATE_FUNCTIONS)})\(", expr, re.I)
-        grouped = expr in group_keys or (alias and alias.group(1) in group_keys)
-        if not is_aggregate and not grouped:
-            return f"$select item {expr!r} is neither an aggregate nor a $group key"
+    dataset = re.match(rf"^/resource/({DATASET_ID})\.", parts.path).group(1)
+    rule = DATASET_POLICY.get(dataset)
+    # A registered dataset of department performance figures (not records about people) may be read as rows.
+    # Everything else on these hosts must be a grouped aggregate.
+    if not (rule is not None and not rule["aggregate_only"]):
+        group = query.get("$group", [""])[0].strip()
+        select = query.get("$select", [""])[0].strip()
+        if not group or not select:
+            return "an aggregate query needs both $select and $group"
+        group_keys = [_strip_alias(g) for g in _split_top_level(group)]
+        for key in group_keys:
+            if FORBIDDEN_GROUP_KEY.search(key):
+                return f"$group key {key!r} could identify a person, place or record"
+        for item in _split_top_level(select):
+            expr = _strip_alias(item)
+            alias = re.search(r"\s+as\s+(\w+)\s*$", item.strip(), re.I)
+            is_aggregate = re.match(rf"^({'|'.join(AGGREGATE_FUNCTIONS)})\(", expr, re.I)
+            grouped = expr in group_keys or (alias and alias.group(1) in group_keys)
+            if not is_aggregate and not grouped:
+                return f"$select item {expr!r} is neither an aggregate nor a $group key"
     limit = query.get("$limit", [""])[0]
-    if not limit.isdigit() or not 0 < int(limit) <= AGGREGATE_MAX_ROWS:
-        return f"$limit must be a number from 1 to {AGGREGATE_MAX_ROWS}"
+    # A registered dataset is also held to query_policy (minimum group size, typed-text guard), so it may use that
+    # policy's $limit. What gets archived is still capped at AGGREGATE_MAX_ROWS rows (aggregate_rows_exceeded).
+    cap = rule["max_limit"] if rule is not None else AGGREGATE_MAX_ROWS
+    if not limit.isdigit() or not 0 < int(limit) <= cap:
+        return f"$limit must be a number from 1 to {cap}"
     return None
 
 
@@ -165,6 +177,135 @@ def aggregate_rows_exceeded(url, body):
         data = json.loads(body.decode("utf-8"))
         return isinstance(data, list) and len(data) > AGGREGATE_MAX_ROWS
     return body.count(b"\n") > AGGREGATE_MAX_ROWS + 1
+# Rule 7 for portal queries. The 311 dataset is record-level, so only grouped counts may be requested,
+# and no query may mention a field that can identify a person or a private address. A dataset id that is
+# not listed here is refused (fail closed). The Scorecard Measures dataset holds department performance
+# figures, not records about people, so ordinary filtered reads are allowed for it.
+SENSITIVE_FIELDS = {
+    "address", "street", "lat", "long", "point", "point_address", "point_city", "point_geom", "point_state",
+    "point_zip", "status_notes", "media_url", "service_request_id",
+}
+# Fields that may appear only inside a narrowly scoped query. service_details is the third level of the 311
+# case taxonomy: it is needed to tell potholes from other pavement defects, but it can hold typed text, so it
+# is only allowed when the query is pinned to one subtype. Minimum group size and the response-side
+# typed-text guard still apply.
+SCOPED_FIELDS = {
+    "service_details": r"lower\(service_subtype\)\s*=\s*'pavement_defect'",
+}
+MIN_GROUP_SIZE = 10
+DATASET_POLICY = {
+    "vw6y-z8j6": {"aggregate_only": True, "max_limit": 5000},   # SF 311 Cases (record-level)
+    "kc49-udxn": {"aggregate_only": False, "max_limit": 5000},  # SF Scorecard Measures (department measures)
+}
+
+
+def query_policy(url):
+    """Return None if the URL may be fetched, or a refusal reason. Applies to /resource/ query URLs only."""
+    parts = urllib.parse.urlsplit(url)
+    m = re.match(r"^/resource/([a-z0-9]{4}-[a-z0-9]{4})\.(json|csv)$", parts.path)
+    if not m:
+        return "a /resource/ URL must name a dataset id and end in .json or .csv" if parts.path.startswith("/resource/") else None
+    rule = DATASET_POLICY.get(m.group(1))
+    if rule is None:
+        return f"dataset {m.group(1)} has no query policy, so it is refused"
+    params = urllib.parse.parse_qs(parts.query, keep_blank_values=True)
+    soql = {k: " ".join(v) for k, v in params.items() if k.startswith("$")}
+    unknown = [k for k in params if not k.startswith("$")]
+    if unknown:
+        return f"plain filter parameters are not allowed ({', '.join(unknown)}); use $where"
+    # Quoted literals are values, not columns: 'Street Defects' does not select the street column.
+    no_literals = re.sub(r"'(?:[^']|'')*'", "''", " ".join(soql.values()))
+    mentioned = set(re.findall(r"[a-z_][a-z0-9_]*", no_literals.lower()))
+    banned = sorted(mentioned & SENSITIVE_FIELDS)
+    if banned:
+        return "query mentions sensitive field(s): " + ", ".join(banned)
+    for field, scope in SCOPED_FIELDS.items():
+        if field in mentioned and not re.search(scope, soql.get("$where", "").lower()):
+            return f"{field} may only be queried when $where pins the subtype (matching {scope})"
+    if rule["aggregate_only"]:
+        if "$group" not in soql or "count(" not in soql.get("$select", "").lower():
+            return "aggregate-only dataset: the query needs $group and a count() in $select"
+        if "$query" in soql:
+            return "$query is not allowed on an aggregate-only dataset"
+        # Small groups can be single records: category fields in the 311 data hold typed text, so a one-case
+        # group may be a business name and address. Require a minimum group size, applied by the portal.
+        m2 = re.search(r"count\(\s*\*\s*\)\s*>=\s*(\d+)", soql.get("$having", ""))
+        if m2 is None or int(m2.group(1)) < MIN_GROUP_SIZE:
+            return f"aggregate-only dataset: $having count(*) >= {MIN_GROUP_SIZE} (or more) is required so small groups are never returned"
+    limit = soql.get("$limit")
+    if limit is None or not limit.isdigit() or int(limit) > rule["max_limit"]:
+        return f"$limit must be given and at most {rule['max_limit']}"
+    return None
+
+
+MAX_TEXT_DISTINCT = 100
+
+
+def typed_text_fields(body):
+    """Return {field: distinct_count} for text fields of an aggregate response with more than MAX_TEXT_DISTINCT values.
+
+    A grouped count is only safe to archive while the grouped fields are controlled vocabularies. A text
+    field with hundreds of distinct values is the signature of typed text (names, addresses), and a minimum
+    group size does not remove it: an applicant who files ten permits still appears by name.
+    """
+    rows = json.loads(body.decode("utf-8"))
+    if not isinstance(rows, list):
+        return {}
+    values = {}
+    for row in rows:
+        for k, v in row.items():
+            if isinstance(v, str):
+                values.setdefault(k, set()).add(v)
+    def not_text(x):
+        # Numbers and ISO dates or timestamps are values of a structured field, not typed text.
+        return x.lstrip("-").replace(".", "", 1).isdigit() or re.match(r"^\d{4}-\d{2}-\d{2}([T ][\d:.+\-Z]*)?$", x) is not None
+
+    return {k: len(v) for k, v in values.items() if len(v) > MAX_TEXT_DISTINCT and not all(not_text(x) for x in v)}
+
+
+def typed_text_in_response(url, body):
+    """Typed-text guard for responses from a registered aggregate-only dataset on a restricted host."""
+    parts = urllib.parse.urlsplit(url)
+    m = re.match(r"^/resource/([a-z0-9]{4}-[a-z0-9]{4})\.json$", parts.path)
+    rule = DATASET_POLICY.get(m.group(1)) if m else None
+    if (parts.hostname or "").lower() not in AGGREGATE_ONLY_HOSTS or not rule or not rule["aggregate_only"]:
+        return {}
+    return typed_text_fields(body)
+
+
+def sanitize(url, content_type, body):
+    """Remove sample values that open data portals embed in dataset metadata (rule 7).
+
+    Socrata /api/views/ JSON carries `cachedContents`: up to 20 sample values per column drawn from the
+    live data, which for a 311 dataset include addresses, coordinates and free-text notes. Those are
+    record-level fragments, so they are dropped before anything is archived. Returns (body, note or None).
+    """
+    if "/api/views/" not in urllib.parse.urlsplit(url).path or "json" not in (content_type or "").lower():
+        return body, None
+    removed = 0
+
+    def strip(node):
+        nonlocal removed
+        if isinstance(node, dict):
+            if "cachedContents" in node:
+                removed += 1
+                node = {k: v for k, v in node.items() if k != "cachedContents"}
+            return {k: strip(v) for k, v in node.items()}
+        if isinstance(node, list):
+            return [strip(v) for v in node]
+        return node
+
+    parsed = json.loads(body.decode("utf-8"))
+    cleaned = strip(parsed)
+    if removed == 0:
+        return body, None  # nothing left to remove, for example after reduce_body ran
+    out = json.dumps(cleaned, sort_keys=True, indent=1, ensure_ascii=False).encode("utf-8")
+    note = (f"Archived copy has {removed} `cachedContents` blocks (sample column values, including addresses and free text) removed "
+            "and the JSON re-serialized with sorted keys, under rule 7; its sha256 is of this sanitized file, not of the raw response.")
+    return out, note
+
+
+
 # A proxy refusal is the sandbox's network policy, not a fact about the source. Such sources
 # stay "listed" and are reported, never marked unavailable.
 BLOCKED = "blocked by the environment's network policy"
@@ -283,7 +424,7 @@ def run(root, slug, only_ids, delay, limit=20):
             print(f"LIMIT       {entry['id']}: {limit} requests already made this run; left as listed")
             blocked += 1
             continue
-        reason = aggregate_violation(url)
+        reason = aggregate_violation(url) or (query_policy(url) if host in AGGREGATE_ONLY_HOSTS else None)
         if reason:
             entry["status"] = "unavailable"
             entry["retrieved"] = today
@@ -340,7 +481,15 @@ def run(root, slug, only_ids, delay, limit=20):
         try:
             if aggregate_rows_exceeded(url, body):
                 raise ValueError(f"more than {AGGREGATE_MAX_ROWS} rows is not an aggregate")
+            offenders = typed_text_in_response(url, body)
+            if offenders:
+                raise ValueError("text field(s) with too many distinct values for a controlled vocabulary ("
+                                 + ", ".join(f"{k}: {v}" for k, v in offenders.items())
+                                 + "), which is the signature of typed text, so the response was held")
             body, reduced_note = reduce_body(url, body)
+            body, sanitize_note = sanitize(final_url, ctype, body)
+            if sanitize_note:
+                reduced_note = (reduced_note + " " + sanitize_note).strip()
         except ValueError as exc:  # includes JSON decode errors
             entry["status"] = "unavailable"
             entry["retrieved"] = today

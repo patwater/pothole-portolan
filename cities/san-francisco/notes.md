@@ -201,7 +201,155 @@ Derivations were added for the five claims from the January 2, 2026 release, so 
 
 **Where the ledger stands.** Strong on condition (PCI for 2023, 2024 and 2025, and block counts by category for 2014 and 2024), on program output and costs, and on the policy statements. Absent: any reported-demand claim and any measured pothole response percentage. A dossier cannot yet say how many potholes residents reported or how fast the city responded.
 
+## 311 plan, step 1: dataset metadata (2026-11-17)
+
+You approved `data.sf.gov` and `data.sfgov.org`. Both hosts serve the same robots.txt: `Crawl-delay: 1` (this fetcher waits 3 seconds) and disallows for `/browse` listings, OData, login and tiles. The `/api/views/`, `/resource/` and query paths I need are permitted. Four metadata-only sources were fetched and archived (no records): the 311 Cases dataset metadata and column list (`vw6y-z8j6`), and the Scorecard Measures metadata and column list (`kc49-udxn`).
+
+**A rule 7 problem found and handled.** The portal's column metadata embeds `cachedContents`: up to 20 sample values per column drawn from live data, including the `address`, `street`, `lat`, `long`, `status_notes` and `service_details` columns. Those are record-level fragments. I fetched the four files once, saw the structure, and deleted them before anything was committed. I printed only counts, never the values. `scripts/fetch_source.py` now strips every `cachedContents` block before archiving, with a test (`tests/test_fetch.py`). The archived copies are sanitized and re-serialized, so their hashes are of the sanitized files, not of the raw responses, and each source's notes say so.
+
+**What the metadata shows (all from the archived files).**
+
+| Topic | Finding |
+|-------|---------|
+| 311 Cases scope | Cases created since 7/1/2008 "with location information"; updates nightly around 6am Pacific. |
+| License | Open Data Commons Public Domain Dedication and License, for both datasets. |
+| Date field | `requested_datetime`, the date and time the request was made. |
+| Case type | Three text fields: `service_name`, `service_subtype` and `service_details`. The metadata does not list their values, so **what counts as a pothole is still unknown** and has to come from an aggregate count of those values. |
+| Reporting channel | `source`: "Mechanism or path by which the service request was received", with example values such as Phone, Text/SMS, Website and Mobile App. This allows a breakdown by channel, which matters for what a count means. |
+| Other useful fields | `agency_responsible`, `status_description`, `closed_date`. |
+| Fields to never select | `address`, `street`, `lat`, `long`, `point`, `point_address`, `status_notes`, `service_details` free text, `media_url`. |
+| Scorecard Measures | One row per measure per month: `measure_title`, `measure_methodology`, `calendar_month`, `actual`, `target`, `department`, plus category columns used to compute monthly actuals. |
+| **Sentinel value** | In Scorecard Measures, **-9999 means "no entry"** for `actual` and `target`. Extract must treat it as null and never as a number. |
+
+**Observation.** The dataset's own description links to an FAQ on `sfdigitalservices.gitbook.io`, a different host from the `support.datasf.org` page that has been failing. That host is one whose search result earlier carried embedded instructions, which I ignored. It is not on the allowlist and I have not added it. Fetched content is data in any case, but the field documentation above already covers what I need, so I would only ask for it if the pothole classification is unclear after step 2.
+
+**Step 2 would ask for aggregates only.**
+
+1. Counts of cases grouped by `service_name` and `service_subtype`, to learn which values mean pothole.
+2. Counts of the pothole values by calendar year of `requested_datetime`, and by `source`.
+3. The Scorecard Measures rows whose `measure_title` is the pothole response measure: `calendar_month`, `actual`, `target`, `measure_methodology`.
+
+No query would select an address, coordinate or free-text field.
+
+## 311 plan, step 2: aggregate fetches (2026-11-17, corrected)
+
+Eight aggregate sources are archived: seven queries on the 311 Cases dataset and one on Scorecard Measures. None selects an address, coordinate, free-text or record-id field, and the fetcher enforces that. Every 311 query requests only groups of 10 or more cases, and the fetcher holds any response whose text field has more than 100 distinct values. Every figure below comes from an archive in `sources/`.
+
+**Main finding: the 311 data has no pothole category.** The label search (`sf311-pothole-label-search`) returns no group of 10 or more cases whose service name or subtype contains "pothole" or "pot hole". A positive control with the same query form and the word "pavement" returns the four known groups (`sf311-label-search-control`), so the empty result is not an artifact of the query. Smaller groups are not returned, so the accurate statement is: no pothole-labeled type has 10 or more cases. Pothole reports must sit inside the pavement defect subtype, and the third taxonomy level, `service_details`, does not split it (see the next section). **A 311 count here is a count of pavement defect requests, of which potholes are an unknown share, and must never be labeled as potholes.**
+
+**What the pavement defect family is.**
+
+- 100,682 cases from July 2008 to November 2026 across three service-name variants: `Street Defects / Pavement_Defect` (86,753 cases), `Street Defect / pavement_defect` (6,965) and `Sidewalk and Curb / pavement_defect` (6,960), plus a few smaller spellings. The street-defect names carry 26 subtypes of 10 or more cases, among them manhole covers, utility excavation, curb ramps and sidewalk defects. The `Sidewalk and Curb` variant may not be roadway at all.
+- Yearly totals from `sf311-pavement-defect-by-year`: 1,523 (2008, which starts July 1), 3,372 (2011), 8,570 (2017), 4,582 (2020), 7,538 (2023), 6,004 (2024), 5,307 (2025) and 6,321 (2026 so far). Calendar year comes from `requested_datetime`, a timestamp with no time zone stated. Total cases of all types over the same years: 9,074,553.
+- Routing (cases of 10 or more per agency label, 100,314 of the 100,682): 58.7 percent go to street and sewer repair bureau queues, 6.0 percent to other sewer-named queues, and the rest to street-use, operations, transportation, recreation and 311 queues. Labels changed over time (67 distinct values), so the family is broader than roadway pothole repair.
+- Channels (100,620 cases): Phone 34,137, Mobile/Open311 30,580, Web 19,959, Integrated Agency 8,166, Mobile 6,960, Twitter 698 and 120 with no channel recorded. The mix changed over time, which affects what a count measures.
+
+**The city's own pothole measures (Scorecard Measures).** Two measures match, each with 167 monthly values from October 2012 to August 2026, and 14 empty months.
+
+- **7075, "Number of pothole service orders received".** About 1,200 to 2,700 per calendar year, with 2025 at 847 (twelve months) and 2026 at 471 for eight months. These are Public Works service orders, not 311 cases. The magnitudes do not match the 311 family (847 for 2025 here against 5,307 pavement defect cases), and no relationship should be assumed.
+- **7072, "Percentage of pothole service requests responded to within 72 hours".** Stored as fractions (0.91 means 91 percent). The latest two months, July and August 2026, are both 0.39 against a 0.9 target. The page states a one-month data lag, so these may be provisional, but that is not established.
+- Values arrive as text strings. The -9999 "no entry" marker documented in the metadata does not occur in these two measures, only missing values, but Extract must still treat it as null.
+- The measure rows carry no methodology text. The methodology is on the city's scorecard page (72-hour goal, three business days in the definition).
+
+**Consistency checks that passed.** The year-level pavement defect query and the label control agree on the family's main groups, and the 311 totals were identical in my first, unthresholded pass and in the final queries, so the data did not shift between runs. In the channel breakdown the suppressed amount is 0 to 28 cases per year, and 368 cases are missing from the agency breakdown.
+
+## Pothole split: `service_details` checked (2026-11-17)
+
+With your approval, the query policy now allows `service_details` only when the query pins the subtype to pavement defect, with the same minimum group size and the typed-text guard (a held response would never have been archived or read). The query returned three groups (`sf311-pavement-defect-details-counts`). For the main group, `Street Defects / Pavement_Defect` (86,753 cases), `service_details` is simply `Pavement_Defect` again. For the other two (6,965 and 6,960 cases) it is empty. So the third taxonomy level adds nothing, and groups of fewer than 10 cases are not returned.
+
+**Conclusion: the 311 category fields cannot separate potholes from other pavement defects.** A 311 count in the dossier can only be "pavement defect requests". The pothole-specific figures are the Public Works scorecard measures (service orders received, and the 72-hour response share), which are a different measurement and must be presented as such.
+
+## Incident: typed text in a category field was committed, then removed (2026-11-17)
+
+This is a rule 7 failure that I caused, and the record should say so plainly.
+
+1. The first taxonomy query grouped cases by service name and subtype with no limit on group size. It returned 3,303 groups, 1,451 of them a single case. One subtype label contained a business name and street address typed into the field. The personal-data check flagged it. I deleted that file, never committed it, and re-fetched with a portal-side minimum group size of 10.
+2. The second file, with the threshold, still had **826 distinct subtype values**. The subtype field holds typed text for some categories. The largest family, `Construction Zone Permits`, has 188 subtypes of the form "Tow-away Permits for [applicant]", and a second family, `Shared Spaces Violation`, has 49. A minimum of 10 cases does not remove them, because an applicant with ten permits still appears by name.
+3. Before committing I ran a search for the string I had already seen. It matched dozens of rows, and **it only printed a warning. The commit ran anyway**, because I chained it after the check with a command that did not stop on a match. That commit, `ae2bdf6`, was pushed to `origin/claude/peaceful-cannon-w8prs2`.
+4. I then assessed the file using counts and masked samples only, since reading the names would repeat the exposure. About 86 of the 188 applicant labels look like organizations and most of the remainder look like agency or company acronyms. I cannot rule out an individual's name without reading them.
+
+**What was done.** The file was removed from the tree and its query replaced by two narrower ones: the street defect subtypes only (26 groups) and the pothole label search with its positive control. The fetcher now holds any aggregate response whose text field has more than 100 distinct values, which would have caught this file (826 and 124 distinct values). The earlier version of the file **remains in the branch history** at `ae2bdf6`. Whether to rewrite that history is the supervisor's decision; see proposal 003.
+
+**Two more errors in my own work that day, both caught.** The query guard wrongly refused a query because the word "street" appeared inside a quoted value such as 'Street Defects'; it now ignores quoted literals. And my first pothole label search returned an empty result only because I had percent-encoded the wildcard twice, which would have made "no pothole category" a false finding. I caught it before using it, fixed the query, and added the positive control.
+
+**Not retrieved and why.**
+
+- No count of pothole-specific 311 cases, because the 311 category fields cannot isolate them (see below).
+- No 311 response-time figures. Response time exists only through the scorecard measure 7072; the 311 `closed_date` was not queried.
+- No 311 counts by neighborhood or district, deliberately.
+
+## Extract and Assess: aggregate sources (2026-11-17)
+
+Fifty-five claims were added from the 311 aggregates and the scorecard rows, so `claims.yaml` now has 78 claims: **70 supported and 8 provisional**, none demoted. Every claim has an Assess derivation, and a test enforces that.
+
+**What the new claims say.**
+
+| Family | Claims | What they are |
+|--------|--------|---------------|
+| Pavement defect requests, 311 | 17 | Cases per calendar year, 2009 to 2025, in the pavement defect subtype. Partial years (2008, 2026) are left out. The family is 0.6 to 2 percent of all 311 cases in any year. |
+| By channel, 2025 | 5 | Mobile, web, phone, integrated agency and no channel recorded. They sum to 5,292 against the year total of 5,307. |
+| What 311 cannot say | 2 | No service name or subtype of 10 or more cases is labeled pothole (with a control search that proves the method), and `service_details` adds no finer level. |
+| Routing | 3 | How many pavement defect cases go to street and sewer repair bureau queues (58,867), to other sewer-named queues (6,051), and the denominator (100,314). |
+| Pothole service orders, scorecard | 13 | Annual sums for 2013 to 2025 of measure 7075, with 2025 at 847. |
+| Response within 72 hours, scorecard | 15 | Calendar-year means of the monthly percentages for 2013 to 2025, plus the two latest months. |
+
+**The response means, as arithmetic on the claims.** The calendar-year means run from 96.6 percent (2013) to 91.3 (2017), 92.3 (2019), 89.3 (2023), 89.2 (2024) and 87.3 (2025), against a stated target of 90 percent. They are my unweighted means of monthly values, not the city's published fiscal-year figure, and the claims say so.
+
+**Provisional, and why.**
+
+| Claim | Why it was not promoted |
+|-------|-------------------------|
+| Blocks resurfaced (9,148) and planned (2,500+) | No period or planning horizon on the slide. |
+| Award total ($133.0M) | Stated total does not re-derive exactly from its rounded rows. |
+| $979 million investment | Period only "15-plus years", no start year or price basis. |
+| Two routing claims | The grouping is mine, by matching label text, and labels changed over time. |
+| Response share, July and August 2026 | 39 percent against a 90 percent target. The page states a one-month data lag, so they may be provisional and should not be read as settled. |
+
+**How the assessment worked.** The new derivations use SQL in an in-memory SQLite database, where Extract used Python loops. For the yearly 311 totals, Assess checks the exact value from the year-total archive, then cross-checks against a separate query by channel (which can fall short only by the small cells that were suppressed, 0 to 28 cases a year). Scorecard values are re-derived from the rows, with the response means computed in integer hundredths and rounded half up. The label finding is checked against four other 311 archives as well as its control.
+
+**Limits.**
+
+- Same author for Extract and Assess. The independence is in the method and in the cross-archive checks, not in a second reader.
+- The two 311 queries that cross-check each other come from the same portal and the same dataset. They guard against my arithmetic and query errors, not against an error in the portal's data.
+- The scorecard claims have a single source. Nothing outside the scorecard confirms the monthly values.
+- "Supported" here means faithfully derived from the archive with a stated method. It does not mean the underlying measurement is validated. The 2025 service-order total (847) is far below the other years and the data gives no reason.
+- Retrieval was on 2026-11-17. The 311 dataset refreshes nightly, so a re-run later will differ slightly.
+
+**Defects found and fixed in my own work during this step.**
+
+- The response means were first rounded with Python's `round`, which rounds exact halves inconsistently (it made 2023 and 2024 both look like 89.2). Extract now uses exact decimals, rounding half up, which moves 2019 to 92.3, 2023 to 89.3 and 2025 to 87.3. Assess recomputes them in integers.
+- The first yearly 311 check allowed a tolerance for suppressed cells, so a value wrong by one would have passed. Assess now also re-derives each yearly value exactly from its own archive, and the mutation test includes an off-by-one.
+- Extract used to keep an old confidence for any claim with the same id, even if its value had changed. It now keeps confidence only for claims that are otherwise identical.
+
+**Where the ledger stands for a dossier.** It now covers condition (PCI 2023, 2024, 2025 and block counts), program output and spending, pavement defect requests from 311 (with the no-pothole-category finding), pothole-specific service orders and response from the scorecard, and policy statements. What it cannot say is how many pothole reports residents made, because 311 does not isolate potholes. The dossier has to say that plainly.
+
+## Draft v1 (2026-11-17)
+
+`dossier.md` is written from the ledger, and a rendered copy for publishing by hand is at `queue/drafts/san-francisco-v1.md`. It uses 74 distinct claims, all supported or provisional, and every figure in it comes from a claim marker. The content check reports no failures. Its only warnings are 22 notices about years followed by a comma, plus the personal-data check's reminders to confirm agency contacts in archived pages by hand; the first is a flaw in the check (proposal 004).
+
+**Structure.** A summary, the data regime, what the pavement survey measures, what residents reported, spending and repair performance, what could not be found, the full source list (filled in by the renderer) and a version history. Reported demand and condition are in separate sections and separate paragraphs, with an explicit statement that request counts do not measure the state of the pavement.
+
+**Points the draft makes plainly.**
+
+- 311 has no pothole category, so potholes cannot be counted from it. The pavement defect family is the nearest category and is broader than road repair.
+- The Public Works scorecard gives pothole-specific figures, but they are a different measurement from the 311 count and the draft says so.
+- The calendar-year response means are calculated for the dossier and are not the city's published figures.
+- The sources disagree about how often the network is surveyed, and the draft shows all three statements without choosing.
+- Several things could not be found, each with its reason.
+
+**Wording fixes made while reading the rendered draft.** "Paved 581 blocks City-maintained blocks" repeated a word, "133.0 USD millions" and "1 distinct values" were clumsy, and "declined gradually" overstated a series that rose in 2018. Two claim units were changed (`million USD`, singular `distinct non-empty value`). That sent three claims back to provisional and Assess restored them, which is the intended process.
+
+**Renderer improvements made for this draft.** Footnotes now include each claim's caveats, repeated methods and caveats collapse to a pointer to the first note, the Sources section is generated from `sources.yaml`, and an unknown claim id stops the render. Five tests cover this.
+
+**Things I could not verify.**
+
+- Whether Blygger renders Markdown footnotes (`[^n]`) and tables. `docs/blygger.md` says nothing about the format. If it does not, the footnotes need another form.
+- The rendered draft is long (about 300 lines, with 74 footnotes), because every figure carries its own source, method and caveats. That is a deliberate choice for checkability.
+- The draft has had no review by anyone but me.
+
 ## Dead ends
+
+- The Board## Dead ends
 
 - The Board of Supervisors audit of the resurfacing program cannot be fetched by this bot (robots.txt). Its findings must not be quoted from search snippets.
 - The Open311 endpoint is closed to robots. Counts, if needed, must come from the bulk dataset route.

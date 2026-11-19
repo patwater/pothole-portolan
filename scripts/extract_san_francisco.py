@@ -11,10 +11,11 @@ never through a shell. Run with: python3 -I scripts/extract_san_francisco.py [--
 """
 import argparse
 import html
+import json
 import re
 import subprocess
 import sys
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 import yaml
@@ -178,14 +179,14 @@ def build(root):
         value=paved, unit="blocks", period=paved_year, kind="program_output",
         method=f"Read from the January 2, 2026 release: 'crews paved {paved:,} City-maintained blocks in {paved_year}'.",
         confidence="provisional",
-        caveats="Program output, a count of blocks, not a dollar figure. The release does not say whether this counts blocks "
+        caveats="Program output (blocks of work), not a dollar figure. The release does not say whether this counts blocks "
                 "resurfaced, accepted or completed, and it does not say whether in-house and contractor work are both included beyond saying both crews do the work."))
     invest = to_number(rel.get(r"The \$(\d+) million investment over that period", "15-year investment"))
     rel.require(r"over the last 15-plus years", "investment period")
     claims.append(base(
         "sf-publicworks-pci-release-2026-01", id="sf-resurfacing-investment-15-plus-years",
         statement=f"A Public Works release dated January 2, 2026 refers to a ${invest} million investment in roadway maintenance over the last 15-plus years.",
-        value=invest, unit="USD millions", period="15-plus years to 2025", kind="spending",
+        value=invest, unit="million USD", period="15-plus years to 2025", kind="spending",
         method="Read from the January 2, 2026 release, which describes the city's commitment to fund roadway maintenance 'over the last 15-plus years' "
                "and then 'the $979 million investment over that period'.",
         confidence="provisional",
@@ -248,7 +249,7 @@ def build(root):
         value=resurfaced, unit="blocks", period="as of 2025-11-13", kind="program_output",
         method="Read from the 'Blocks Resurfaced and Planned' slide (slide 5).",
         confidence="provisional",
-        caveats="Program output, a count of blocks, not a dollar figure. The slide gives no start year, "
+        caveats="Program output (blocks of work), not a dollar figure. The slide gives no start year, "
                 "so the period is the deck date and the count is presumably cumulative."))
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-blocks-planned-as-of-2025-11",
@@ -256,7 +257,7 @@ def build(root):
         value=planned, unit="blocks", period="as of 2025-11-13", kind="program_output",
         method="Read from the 'Blocks Resurfaced and Planned' slide (slide 5), where the figure appears as '2,500+'.",
         confidence="provisional",
-        caveats="A lower bound ('2,500+'). Program output, a count of blocks, not a dollar figure."))
+        caveats="A lower bound ('2,500+'). Program output (blocks of work), not a dollar figure."))
     cost = to_number(pw.get(r"Average Cost for Block of Paving\s+\$([\d,]+)(?:\.00)?", "average cost per block"))
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-avg-cost-per-paved-block-2025-11",
@@ -285,7 +286,7 @@ def build(root):
     claims.append(base(
         "publicworks-commission-resurfacing-update-2025-11", id="sf-resurfacing-awards-amount-2023-2025",
         statement=f"Street resurfacing projects awarded by the Commission between {period[13:23]} and {period[27:]} total ${tot.group(1)} million.",
-        value=float(tot.group(1)), unit="USD millions", period=period, kind="spending",
+        value=float(tot.group(1)), unit="million USD", period=period, kind="spending",
         method=f"Slide 10 table 'Projects Awarded by Commission the Last 2 Years', TOTAL row. The script also summed the {len(amounts)} project rows as a cross-check.",
         confidence="provisional",
         caveats="Award amounts, not spending to date. The slide title says 'the last 2 years' while the dates span about two and a half years. " + rounding_note))
@@ -295,7 +296,7 @@ def build(root):
         value=int(tot.group(2)), unit="blocks", period=period, kind="program_output",
         method=f"Slide 10 table. The script summed the {len(blocks)} block counts and confirmed they equal the TOTAL row.",
         confidence="provisional",
-        caveats="Program output, a count of blocks, not a dollar figure. One 'as needed' preservation award covers 150 blocks."))
+        caveats="Program output (blocks of work), not a dollar figure. One 'as needed' preservation award covers 150 blocks."))
 
     # ---- Pothole response target (city scorecard) -------------------------------------------
     pot = arc("sf-pothole-response-measure")
@@ -331,6 +332,152 @@ def build(root):
         method="Read from the MTC Pavement Conditions Index program page text.",
         confidence="provisional",
         caveats="Regional program statement, not specific to San Francisco. Conflicts with the Public Works statement of a two-year inspection cycle."))
+    # ---- Aggregate portal data: 311 Cases queries and Scorecard Measures rows ---------------------
+    def rows_of(source_id):
+        s = sources[source_id]
+        if s.get("status") != "fetched":
+            raise ExtractError(f"source {source_id} is not fetched")
+        return json.loads((Path(root) / s["archive"]).read_text(encoding="utf-8"))
+
+    DEMAND_CAVEATS = ("Counts reported requests in the pavement defect subtype, not potholes and not road condition: the 311 case types have no pothole value. "
+                      "The family spans three service-name spellings, including a sidewalk-and-curb variant, is routed to many agencies, and is not de-duplicated. "
+                      "Groups under 10 cases are not returned by the query. The dataset refreshes nightly, so a later retrieval may differ slightly.")
+    by_year = {int(r["year"]): int(r["cases"]) for r in rows_of("sf311-pavement-defect-by-year")}
+    for y in range(2009, 2026):  # 2008 starts July 1 and 2026 is not over, so neither is a full calendar year
+        if y not in by_year:
+            raise ExtractError(f"pavement defect year totals: {y} missing")
+        claims.append(base(
+            "sf311-pavement-defect-by-year", id=f"sf311-pavement-defect-cases-{y}",
+            statement=f"The SF311 Cases dataset records {by_year[y]:,} cases in the pavement defect subtype with a requested date in calendar year {y}.",
+            value=by_year[y], unit="cases", period=y, kind="reported_demand",
+            method="Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime, from the "
+                   "aggregate portal query archived as this source (groups of 10 or more cases only).",
+            confidence="provisional", caveats=DEMAND_CAVEATS))
+
+    chan = rows_of("sf311-pavement-defect-by-year-channel")
+    per_channel = {}
+    for r in chan:
+        if r["year"] == "2025":
+            per_channel[r.get("source", "no channel recorded")] = per_channel.get(r.get("source", "no channel recorded"), 0) + int(r["cases"])
+    if not per_channel:
+        raise ExtractError("channel breakdown: no 2025 rows")
+    shown, full = sum(per_channel.values()), by_year[2025]
+    for ch, n in sorted(per_channel.items(), key=lambda kv: -kv[1]):
+        slug = re.sub(r"[^a-z0-9]+", "-", ch.lower()).strip("-")
+        claims.append(base(
+            "sf311-pavement-defect-by-year-channel", id=f"sf311-pavement-defect-cases-2025-{slug}",
+            statement=f"In calendar year 2025 the SF311 Cases dataset records {n:,} pavement defect cases whose reporting channel is '{ch}'.",
+            value=n, unit="cases", period=2025, kind="reported_demand",
+            method="Count of SF311 cases where lower(service_subtype) = 'pavement_defect', grouped by calendar year of requested_datetime and by the source field, "
+                   "summed across the service-name spellings; groups of 10 or more cases only.",
+            confidence="provisional",
+            caveats=DEMAND_CAVEATS + f" The channels listed for 2025 sum to {shown:,} against a year total of {full:,}, the difference being cells under 10 cases. "
+                    "The channel mix has changed over time, so channel shares are not comparable across years without checking."))
+
+    pot, ctl = rows_of("sf311-pothole-label-search"), rows_of("sf311-label-search-control")
+    if pot:
+        raise ExtractError("the pothole label search returned groups: the finding changed and needs a person to review it")
+    if not ctl:
+        raise ExtractError("the control search returned nothing, so an empty pothole result would prove nothing")
+    claims.append(base(
+        "sf311-pothole-label-search", id="sf311-pothole-labeled-case-type-groups",
+        statement="The SF311 Cases dataset has no service name or subtype group of 10 or more cases whose label contains 'pothole' or 'pot hole'.",
+        value=0, unit="case-type groups", period="all cases through retrieval", kind="reported_demand",
+        method=f"Portal query for groups of cases whose lower-cased service_name or service_subtype contains 'pothole' or 'pot hole', groups of 10 or more only; it returned 0 groups. "
+               f"A control query of the same form with 'pavement' returned {len(ctl)} groups (source sf311-label-search-control), so the empty result is not an artifact of the query form.",
+        confidence="provisional",
+        caveats="Groups smaller than 10 cases are not returned, so this says no pothole-labeled type has 10 or more cases, not that none exists. "
+                "It is a statement about the dataset's labels. It does not say potholes were not reported."))
+    det = rows_of("sf311-pavement-defect-details-counts")
+    with_details = [r for r in det if r.get("service_details")]
+    if len(with_details) != 1 or with_details[0]["service_details"] != with_details[0]["service_subtype"]:
+        raise ExtractError("service_details within pavement_defect no longer repeats the subtype; review before extracting")
+    claims.append(base(
+        "sf311-pavement-defect-details-counts", id="sf311-pavement-defect-details-distinct-values",
+        statement="Within the pavement defect subtype, the SF311 Cases service_details field has 1 distinct non-empty value among groups of 10 or more cases, and it repeats the subtype name.",
+        value=1, unit="distinct non-empty value", period="all cases through retrieval", kind="reported_demand",
+        method="Portal query grouping pavement_defect cases by service_name, service_subtype and service_details (groups of 10 or more); one group has a non-empty service_details, "
+               f"equal to its subtype '{with_details[0]['service_subtype']}', and the other {len(det) - 1} groups have none.",
+        confidence="provisional",
+        caveats="So the third taxonomy level cannot separate potholes from other pavement defects. Groups smaller than 10 cases are not returned."))
+
+    ag = rows_of("sf311-pavement-defect-by-agency")
+    ag_total = sum(int(r["cases"]) for r in ag)
+    repair_labels = sorted({r.get("agency_responsible", "") for r in ag if re.search(r"BSSR|Street and Sewer Repair", r.get("agency_responsible", ""))})
+    sewer_labels = sorted({r.get("agency_responsible", "") for r in ag if re.search(r"Sewer", r.get("agency_responsible", "")) and r.get("agency_responsible", "") not in repair_labels})
+    ag_caveat = ("The agency labels changed over time (67 distinct values) and the grouping below is mine, by matching label text, not the city's. "
+                 "Groups under 10 cases are not returned. Routing says who handled a case, not whether it was a pothole.")
+    for cid, label, labels in (("sf311-pavement-defect-routed-to-street-sewer-repair", "street and sewer repair bureau", repair_labels),
+                               ("sf311-pavement-defect-routed-to-other-sewer-queues", "other sewer-named", sewer_labels)):
+        n = sum(int(r["cases"]) for r in ag if r.get("agency_responsible", "") in labels)
+        claims.append(base(
+            "sf311-pavement-defect-by-agency", id=cid,
+            statement=f"{n:,} of the {ag_total:,} pavement defect cases in agency groups of 10 or more are routed to {label} queues.",
+            value=n, unit="cases", period="all cases through retrieval", kind="reported_demand",
+            method="Portal query counting pavement_defect cases by agency_responsible (groups of 10 or more); cases summed over the labels: " + "; ".join(labels) + ".",
+            confidence="provisional", caveats=ag_caveat))
+    claims.append(base(
+        "sf311-pavement-defect-by-agency", id="sf311-pavement-defect-agency-cells-total",
+        statement=f"The agency breakdown of pavement defect cases covers {ag_total:,} cases in groups of 10 or more.",
+        value=ag_total, unit="cases", period="all cases through retrieval", kind="reported_demand",
+        method="Sum of the case counts over all agency_responsible groups returned by the portal query.",
+        confidence="provisional", caveats="The denominator for the two routing claims. It is smaller than the family total because groups under 10 cases are not returned."))
+
+    # Scorecard Measures: the data holds text numbers, a documented -9999 null marker, and empty future months.
+    sc = rows_of("sf-scorecard-pothole-measure-rows")
+
+    def monthly(code):
+        # Decimal, not float: the values are two-decimal text, and a mean of exact halves must round the same way every time.
+        out = {}
+        for r in sc:
+            if r.get("measure_code") == code and r.get("actual") is not None and Decimal(r["actual"]) != -9999:
+                out[r["calendar_month"][:7]] = Decimal(r["actual"])
+        return out
+    orders, share = monthly("7075"), monthly("7072")
+
+    def full_year(series, y):
+        vals = [series.get(f"{y}-{m:02d}") for m in range(1, 13)]
+        return None if any(v is None for v in vals) else vals
+
+    sc_caveat = ("Service orders recorded by Public Works, not 311 cases: the scorecard ties them to repair requests received through 311, but the data does not say how an order is created "
+                 "or whether several requests are merged. The size does not match the 311 pavement defect family, and no relationship should be assumed.")
+    for y in range(2013, 2026):
+        vals = full_year(orders, y)
+        if vals is None:
+            raise ExtractError(f"pothole service orders: {y} does not have 12 monthly values")
+        n = int(sum(vals))
+        claims.append(base(
+            "sf-scorecard-pothole-measure-rows", id=f"sf-pothole-service-orders-{y}",
+            statement=f"The city performance scorecard measure 'Number of pothole service orders received', which it ties to repair requests received through 311, totals {n:,} for calendar year {y}.",
+            value=n, unit="service orders", period=y, kind="reported_demand",
+            method=f"Sum of the 12 monthly `actual` values (calendar_month in {y}) for measure_code 7075 in the Scorecard Measures dataset; monthly values are stored as text and were converted to numbers.",
+            confidence="provisional", caveats=sc_caveat))
+    resp_caveat = ("An unweighted mean of monthly percentages, computed here, not the share of all requests in the year and not necessarily the city's published figure. "
+                   "The measure page defines a month's value as requests responded to within three business days divided by requests received that month, while its goal is stated as 72 hours. "
+                   "The data's target value is 90 percent.")
+    for y in range(2013, 2026):
+        vals = full_year(share, y)
+        if vals is None:
+            raise ExtractError(f"pothole response share: {y} does not have 12 monthly values")
+        v = float((sum(vals) / Decimal(12) * 100).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+        claims.append(base(
+            "sf-scorecard-pothole-measure-rows", id=f"sf-pothole-response-72h-mean-{y}",
+            statement=f"The mean of the monthly percentages of pothole service requests responded to within 72 hours on the city performance scorecard is {v} percent for calendar year {y}.",
+            value=v, unit="percent", period=y, kind="response_time",
+            method=f"Unweighted mean of the 12 monthly `actual` values (calendar_month in {y}) for measure_code 7072, times 100, rounded half up to one decimal using exact decimal arithmetic; the data stores fractions as text.",
+            confidence="provisional", caveats=resp_caveat))
+    for ym in ("2026-07", "2026-08"):
+        if ym not in share:
+            raise ExtractError(f"pothole response share: {ym} missing")
+        v = float((share[ym] * 100).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+        claims.append(base(
+            "sf-scorecard-pothole-measure-rows", id=f"sf-pothole-response-72h-{ym}",
+            statement=f"The city performance scorecard reports {v} percent of pothole service requests responded to within 72 hours for {ym}.",
+            value=v, unit="percent", period=ym, kind="response_time",
+            method=f"The `actual` value for calendar_month {ym}, measure_code 7072, times 100.",
+            confidence="provisional",
+            caveats="One of the two latest months in the data. The scorecard page states about a one-month data lag, so a recent month may be provisional, but that is not established. "
+                    "The data's target value is 90 percent."))
     return claims
 
 
@@ -346,8 +493,11 @@ def main(argv=None):
     out = Path(args.root) / "cities" / SLUG / "claims.yaml"
     prior = {c["id"]: c for c in validate.load_yaml(out)} if out.exists() else {}
     for c in claims:
-        if c["id"] in prior:
-            c["confidence"] = prior[c["id"]]["confidence"]
+        # Keep Assess's confidence only if the claim is otherwise identical. A changed value or method must be re-assessed,
+        # so it keeps the extractor's own `provisional`.
+        old = prior.get(c["id"])
+        if old and {k: v for k, v in old.items() if k != "confidence"} == {k: v for k, v in c.items() if k != "confidence"}:
+            c["confidence"] = old["confidence"]
     out.write_text(HEADER + yaml.safe_dump(claims, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
     errors = validate.validate_file(out, "claims.schema.json")
     for line in errors:

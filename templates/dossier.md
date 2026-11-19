@@ -42,7 +42,7 @@ Drafting rules (comments are stripped by the checks and the renderer):
 
 ## Spending and repair performance
 
-<!-- Spending, response times and backlog claims, each as a {{claim:<id>}} marker. -->
+<!-- Spending (dollars), program output (such as blocks resurfaced, which is not a dollar figure), response times and backlog claims, each as a {{claim:<id>}} marker. -->
 
 ## What could not be found
 

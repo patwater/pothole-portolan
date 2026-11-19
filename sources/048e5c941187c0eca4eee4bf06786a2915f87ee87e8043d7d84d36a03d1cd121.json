@@ -1,0 +1,26 @@
+[{"service_name":"Street Defects","service_subtype":"Pavement_Defect","cases":"86753"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"sidewalk_defect","cases":"13142"}
+,{"service_name":"Street Defect","service_subtype":"sidewalk_defect","cases":"9203"}
+,{"service_name":"Street Defect","service_subtype":"pavement_defect","cases":"6965"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"pavement_defect","cases":"6960"}
+,{"service_name":"Street Defects","service_subtype":"Manhole_Cover_Off","cases":"5547"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"curb_or_curb_ramp_defect","cases":"4555"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"other","cases":"3350"}
+,{"service_name":"Street Defects","service_subtype":"Construction_Plate_Shifted","cases":"3072"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"missing_side_sewer_vent_cover","cases":"2755"}
+,{"service_name":"Street Defects","service_subtype":"Utility_Excavation","cases":"2335"}
+,{"service_name":"Street Defect","service_subtype":"curb_or_curb_ramp_defect","cases":"2188"}
+,{"service_name":"Street Defects","service_subtype":"other","cases":"2138"}
+,{"service_name":"Street Defect","service_subtype":"other","cases":"1707"}
+,{"service_name":"Street Defect","service_subtype":"missing_side_sewer_vent_cover","cases":"1587"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"damaged_side_sewer_vent_cover","cases":"1204"}
+,{"service_name":"Street Defect","service_subtype":"manhole_cover_off","cases":"626"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"manhole_cover_off","cases":"537"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"utility_excavation","cases":"338"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"public_stairway_defect","cases":"307"}
+,{"service_name":"Street Defect","service_subtype":"construction_plate_shifted","cases":"287"}
+,{"service_name":"Street Defect","service_subtype":"damaged_side_sewer_vent_cover","cases":"256"}
+,{"service_name":"Sidewalk and Curb","service_subtype":"construction_plate_shifted","cases":"155"}
+,{"service_name":"Street Defect","service_subtype":"public_stairway_defect","cases":"128"}
+,{"service_name":"Street Defect","service_subtype":"utility_excavation","cases":"110"}
+,{"service_name":"Street Defects","service_subtype":"Pavement defect","cases":"11"}]

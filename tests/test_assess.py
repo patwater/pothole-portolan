@@ -16,7 +16,8 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 import assess_san_francisco as assess  # noqa: E402
 
-DAMAGED = {"sf-pci-citywide-2023", "sf-blocks-resurfaced-as-of-2025-11", "sf-avg-cost-per-paved-block-2025-11", "sf-blocks-paved-2025"}
+DAMAGED = {"sf-pci-citywide-2023", "sf-blocks-resurfaced-as-of-2025-11", "sf-avg-cost-per-paved-block-2025-11", "sf-blocks-paved-2025",
+           "sf311-pavement-defect-cases-2020", "sf-pothole-service-orders-2025", "sf-pothole-response-72h-mean-2023"}
 
 
 @unittest.skipUnless((REPO / "cities/san-francisco/claims.yaml").exists() and (REPO / "sources").is_dir(), "no San Francisco data")
@@ -49,6 +50,15 @@ class AssessMutation(unittest.TestCase):
             if c["id"] == "sf-blocks-paved-2025":
                 c["value"] = 582
                 c["statement"] = c["statement"].replace("581", "582")
+            if c["id"] == "sf311-pavement-defect-cases-2020":  # off by one: inside the suppression tolerance, caught by the exact path
+                c["value"] = 4583
+                c["statement"] = c["statement"].replace("4,582", "4,583")
+            if c["id"] == "sf-pothole-service-orders-2025":
+                c["value"] = 848
+                c["statement"] = c["statement"].replace("847", "848")
+            if c["id"] == "sf-pothole-response-72h-mean-2023":  # the old float rounding answer
+                c["value"] = 89.2
+                c["statement"] = c["statement"].replace("89.3", "89.2")
             if c["id"] == "sf-avg-cost-per-paved-block-2025-11":
                 c["archive"] = c["archive"].replace("5", "6", 1)
         self.path.write_text(yaml.safe_dump(claims, sort_keys=False))

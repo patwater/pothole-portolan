@@ -1,11 +1,11 @@
-# Backfilled 2026-11-17 for the Phase 2 automation (approval 2026-11-17-001).
-# stage is "discovered" on purpose: the last Assess (23 claims, 19 supported, 4 provisional) covers
-# condition, program output and policy only. The 311 and response-time work in proposal
-# 2026-11-17-001 section 2 needs the DataSF metadata and aggregate endpoints, which are listed in
-# sources.yaml and not yet fetched, so Fetch is pending again. Draft must wait for that work.
-stage: discovered
+# Updated 2026-11-19 while merging the Phase 2 branch with the Phase 1 pilot work.
+# The pilot took San Francisco through Fetch, Extract, Assess and Draft by hand: 78 claims (70 supported,
+# 8 provisional), the 311 aggregates and the Public Works scorecard measures, and a draft at
+# queue/drafts/san-francisco-v1.md that passes the content checks. The draft is waiting for the supervisor,
+# which is what "queued" means. The earlier backfilled stage was "discovered", written before that work existed.
+stage: queued
 blocked_on: null
 last_run:
-  behavior: assess
+  behavior: draft
   date: '2026-11-17'
   workflow_run: null

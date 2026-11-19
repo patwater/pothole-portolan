@@ -1,0 +1,1117 @@
+{
+ "approvals": [
+  {
+   "reviewedAt": 1709067872,
+   "reviewedAutomatically": false,
+   "reviewer": {
+    "displayName": "Dan Tonkovich",
+    "id": "7zrh-3i2w"
+   },
+   "state": "approved",
+   "submissionDetails": {
+    "permissionType": "read"
+   },
+   "submissionId": 6548372,
+   "submissionObject": "public_audience_request",
+   "submissionOutcome": "change_audience",
+   "submissionOutcomeApplication": {
+    "endedAt": 1709067872,
+    "failureCount": 0,
+    "startedAt": 1709067872,
+    "status": "success"
+   },
+   "submittedAt": 1709067861,
+   "submitter": {
+    "displayName": "Dan Tonkovich",
+    "id": "7zrh-3i2w"
+   },
+   "targetAudience": "public",
+   "workflowId": 2546
+  },
+  {
+   "message": "The `strict_permissions` flag must be on to enable internal approvals.",
+   "state": "unsubmittable",
+   "targetAudience": "internal",
+   "workflowId": 5264
+  }
+ ],
+ "assetType": "dataset",
+ "attribution": "San Francisco 311",
+ "attributionLink": "http://www.sf311.org",
+ "averageRating": 0,
+ "category": "City Infrastructure",
+ "clientContext": {
+  "clientContextVariables": [],
+  "inheritedVariables": {}
+ },
+ "columns": [
+  {
+   "dataTypeName": "number",
+   "description": "The unique ID of the service request created.",
+   "fieldName": "service_request_id",
+   "format": {
+    "align": "right",
+    "noCommas": "true",
+    "precisionStyle": "standard"
+   },
+   "id": 599267137,
+   "name": "CaseID",
+   "position": 1,
+   "renderTypeName": "number",
+   "tableColumnId": 1563799,
+   "width": 134
+  },
+  {
+   "dataTypeName": "calendar_date",
+   "description": "The date and time when the service request was made",
+   "fieldName": "requested_datetime",
+   "format": {
+    "align": "left",
+    "view": "date_time"
+   },
+   "id": 599267138,
+   "name": "Opened",
+   "position": 2,
+   "renderTypeName": "calendar_date",
+   "tableColumnId": 1563800,
+   "width": 149
+  },
+  {
+   "dataTypeName": "calendar_date",
+   "description": "The date and time when the service request was closed",
+   "fieldName": "closed_date",
+   "format": {
+    "align": "left",
+    "view": "date_time"
+   },
+   "id": 599267139,
+   "name": "Closed",
+   "position": 3,
+   "renderTypeName": "calendar_date",
+   "tableColumnId": 1563801,
+   "width": 143
+  },
+  {
+   "dataTypeName": "calendar_date",
+   "description": "The date and time when the service request was last modified. For requests with status=closed, this will be the date the request was closed",
+   "fieldName": "updated_datetime",
+   "format": {
+    "align": "left",
+    "view": "date_time"
+   },
+   "id": 599267140,
+   "name": "Updated",
+   "position": 4,
+   "renderTypeName": "calendar_date",
+   "tableColumnId": 4311794,
+   "width": 138
+  },
+  {
+   "dataTypeName": "text",
+   "description": "A single-word indicator of the current state of the service request. (Note: GeoReport V2 only permits ‘open’ and ‘closed’)",
+   "fieldName": "status_description",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267141,
+   "name": "Status",
+   "position": 5,
+   "renderTypeName": "text",
+   "tableColumnId": 1563802,
+   "width": 85
+  },
+  {
+   "dataTypeName": "text",
+   "description": " Explanation of why status was changed to current state or more details on current status than conveyed with status alone ",
+   "fieldName": "status_notes",
+   "format": {
+    "align": "left"
+   },
+   "id": 599267142,
+   "name": "Status Notes",
+   "position": 6,
+   "renderTypeName": "text",
+   "tableColumnId": 31922986,
+   "width": 164
+  },
+  {
+   "dataTypeName": "text",
+   "description": "The agency responsible for fulfilling or otherwise addressing the service request.",
+   "fieldName": "agency_responsible",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267143,
+   "name": "Responsible Agency",
+   "position": 7,
+   "renderTypeName": "text",
+   "tableColumnId": 4311793,
+   "width": 137
+  },
+  {
+   "dataTypeName": "text",
+   "description": "The human readable name of the service request type",
+   "fieldName": "service_name",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267144,
+   "name": "Category",
+   "position": 8,
+   "renderTypeName": "text",
+   "tableColumnId": 1563804,
+   "width": 196
+  },
+  {
+   "dataTypeName": "text",
+   "description": "The human readable name of the service request subtype",
+   "fieldName": "service_subtype",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267145,
+   "name": "Request Type",
+   "position": 9,
+   "renderTypeName": "text",
+   "tableColumnId": 1563805,
+   "width": 244
+  },
+  {
+   "dataTypeName": "text",
+   "description": "The human readable name of the service request details",
+   "fieldName": "service_details",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267146,
+   "name": "Request Details",
+   "position": 10,
+   "renderTypeName": "text",
+   "tableColumnId": 1563806,
+   "width": 280
+  },
+  {
+   "dataTypeName": "text",
+   "description": "Human readable address or description of location",
+   "fieldName": "address",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267147,
+   "name": "Address",
+   "position": 11,
+   "renderTypeName": "text",
+   "tableColumnId": 1563803,
+   "width": 184
+  },
+  {
+   "dataTypeName": "text",
+   "description": "Primary Street of the associated address. Parks may have a park name instead of a street name. Requests not associated with an address will be blank.",
+   "fieldName": "street",
+   "format": {},
+   "id": 599267148,
+   "name": "Street",
+   "position": 12,
+   "renderTypeName": "text",
+   "tableColumnId": 77354810
+  },
+  {
+   "dataTypeName": "number",
+   "description": "San Francisco Supervisor District as defined in 'Supervisor Districts as of 2022'",
+   "fieldName": "supervisor_district",
+   "format": {
+    "align": "right",
+    "noCommas": "false",
+    "precisionStyle": "standard"
+   },
+   "id": 599267149,
+   "name": "Supervisor District",
+   "position": 13,
+   "renderTypeName": "number",
+   "tableColumnId": 1563807,
+   "width": 123
+  },
+  {
+   "dataTypeName": "text",
+   "description": "San Francisco Neighborhood as defined in 'SF Find Neighborhoods'",
+   "fieldName": "neighborhoods_sffind_boundaries",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267150,
+   "name": "Neighborhood",
+   "position": 14,
+   "renderTypeName": "text",
+   "tableColumnId": 1563808,
+   "width": 186
+  },
+  {
+   "dataTypeName": "text",
+   "description": "San Francisco Analysis Neighborhood as defined in 'Analysis Neighborhoods'",
+   "fieldName": "analysis_neighborhood",
+   "format": {},
+   "id": 599267192,
+   "name": "Analysis Neighborhood",
+   "position": 15,
+   "renderTypeName": "text",
+   "tableColumnId": 154824978
+  },
+  {
+   "dataTypeName": "text",
+   "description": "San Francisco Police District as defined in 'Current Police Districts'",
+   "fieldName": "police_district",
+   "format": {},
+   "id": 599267151,
+   "name": "Police District",
+   "position": 16,
+   "renderTypeName": "text",
+   "tableColumnId": 46388094,
+   "width": 100
+  },
+  {
+   "dataTypeName": "number",
+   "description": "Latitude of the location, using the WGS84 projection",
+   "fieldName": "lat",
+   "format": {
+    "align": "right",
+    "noCommas": "false",
+    "precisionStyle": "standard"
+   },
+   "id": 599267152,
+   "name": "Latitude",
+   "position": 17,
+   "renderTypeName": "number",
+   "tableColumnId": 46388130,
+   "width": 100
+  },
+  {
+   "dataTypeName": "number",
+   "description": "Longitude of the location, using the WGS84 projection",
+   "fieldName": "long",
+   "format": {
+    "align": "right",
+    "noCommas": "false",
+    "precisionStyle": "standard"
+   },
+   "id": 599267153,
+   "name": "Longitude",
+   "position": 18,
+   "renderTypeName": "number",
+   "tableColumnId": 46388162,
+   "width": 100
+  },
+  {
+   "dataTypeName": "location",
+   "description": "Combination of Latitude and Longitude for Socrata native maps",
+   "fieldName": "point",
+   "format": {
+    "align": "left",
+    "view": "address_coords"
+   },
+   "id": 599267154,
+   "name": "Point",
+   "position": 19,
+   "renderTypeName": "location",
+   "tableColumnId": 1563809,
+   "width": 211
+  },
+  {
+   "dataTypeName": "point",
+   "description": "Combination of Latitude and Longitude in Point format",
+   "fieldName": "point_geom",
+   "format": {},
+   "id": 599267155,
+   "name": "point_geom",
+   "position": 20,
+   "renderTypeName": "point",
+   "tableColumnId": 151477381
+  },
+  {
+   "dataTypeName": "text",
+   "description": "Mechanism or path by which the service request was received; typically ‘Phone’, ‘Text/SMS’, ‘Website’, ‘Mobile App’, ‘Twitter’, etc but terms may vary by system.",
+   "fieldName": "source",
+   "format": {
+    "align": "left",
+    "displayStyle": "plain"
+   },
+   "id": 599267157,
+   "name": "Source",
+   "position": 21,
+   "renderTypeName": "text",
+   "tableColumnId": 9597122,
+   "width": 100
+  },
+  {
+   "dataTypeName": "url",
+   "description": "A URL to media associated with the request, e.g. an image.",
+   "fieldName": "media_url",
+   "format": {
+    "align": "left"
+   },
+   "id": 599267159,
+   "name": "Media URL",
+   "position": 22,
+   "renderTypeName": "url",
+   "subColumnTypes": [
+    "url",
+    "description"
+   ],
+   "tableColumnId": 18849526,
+   "width": 100
+  },
+  {
+   "dataTypeName": "number",
+   "description": "San Francisco Supervisor District as defined in 'Supervisor Districts as of 2012'",
+   "fieldName": "bos_2012",
+   "format": {},
+   "id": 599267162,
+   "name": "BOS_2012",
+   "position": 23,
+   "renderTypeName": "number",
+   "tableColumnId": 146612509
+  },
+  {
+   "dataTypeName": "calendar_date",
+   "description": "Timestamp the row was updated in the source system",
+   "fieldName": "data_as_of",
+   "format": {
+    "view": "date_ymd_time"
+   },
+   "id": 599267163,
+   "name": "data_as_of",
+   "position": 24,
+   "renderTypeName": "calendar_date",
+   "tableColumnId": 151477383
+  },
+  {
+   "dataTypeName": "calendar_date",
+   "description": "Timestamp the row was uploaded to the open data portal",
+   "fieldName": "data_loaded_at",
+   "format": {
+    "align": "left",
+    "view": "date_ymd_time"
+   },
+   "id": 599267164,
+   "name": "data_loaded_at",
+   "position": 25,
+   "renderTypeName": "calendar_date",
+   "tableColumnId": 151477382
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_qgnn-b9vv"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_qgnn_b9vv",
+   "format": {},
+   "id": 599267166,
+   "name": "Current Police Districts",
+   "position": 26,
+   "renderTypeName": "number",
+   "tableColumnId": 82221025
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_26cr-cadq"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_26cr_cadq",
+   "format": {},
+   "id": 599267167,
+   "name": "Current Supervisor Districts",
+   "position": 27,
+   "renderTypeName": "number",
+   "tableColumnId": 82221026
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_ajp5-b2md"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_ajp5_b2md",
+   "format": {},
+   "id": 599267168,
+   "name": "Analysis Neighborhoods",
+   "position": 28,
+   "renderTypeName": "number",
+   "tableColumnId": 82221027
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_rxqg-mtj9"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_rxqg_mtj9",
+   "format": {},
+   "id": 599267169,
+   "name": "DELETE - Supervisor Districts",
+   "position": 29,
+   "renderTypeName": "number",
+   "tableColumnId": 82221028
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_yftq-j783"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_yftq_j783",
+   "format": {},
+   "id": 599267170,
+   "name": "DELETE - Fire Prevention Districts",
+   "position": 30,
+   "renderTypeName": "number",
+   "tableColumnId": 82221029
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_jx4q-fizf"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_jx4q_fizf",
+   "format": {},
+   "id": 599267171,
+   "name": "DELETE - Current Police Districts",
+   "position": 31,
+   "renderTypeName": "number",
+   "tableColumnId": 82221030
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_bh8s-q3mv"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_bh8s_q3mv",
+   "format": {},
+   "id": 599267172,
+   "name": "DELETE - Zip Codes",
+   "position": 32,
+   "renderTypeName": "number",
+   "tableColumnId": 82221057
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_p5aj-wyqh"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_p5aj_wyqh",
+   "format": {},
+   "id": 599267173,
+   "name": "DELETE - Police Districts",
+   "position": 33,
+   "renderTypeName": "number",
+   "tableColumnId": 82221058
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_fyvs-ahh9"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_fyvs_ahh9",
+   "format": {},
+   "id": 599267174,
+   "name": "DELETE - Neighborhoods",
+   "position": 34,
+   "renderTypeName": "number",
+   "tableColumnId": 82221059
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_f58d-8dbm"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_f58d_8dbm",
+   "format": {},
+   "id": 599267175,
+   "name": "DELETE - Neighborhoods_from_fyvs_ahh9",
+   "position": 35,
+   "renderTypeName": "number",
+   "tableColumnId": 82221060
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_9dfj-4gjx"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_9dfj_4gjx",
+   "format": {},
+   "id": 599267176,
+   "name": "DELETE - 2017 Fix It Zones",
+   "position": 36,
+   "renderTypeName": "number",
+   "tableColumnId": 82221061
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_vtsz-7cme"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_vtsz_7cme",
+   "format": {},
+   "id": 599267177,
+   "name": "DELETE - SF Find Neighborhoods",
+   "position": 37,
+   "renderTypeName": "number",
+   "tableColumnId": 82221062
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_n4xg-c4py"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_n4xg_c4py",
+   "format": {},
+   "id": 599267178,
+   "name": "Civic Center Harm Reduction Project Boundary",
+   "position": 38,
+   "renderTypeName": "number",
+   "tableColumnId": 82221063
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_sruu-94in"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_sruu_94in",
+   "format": {},
+   "id": 599267179,
+   "name": "DELETE - Current Supervisor Districts",
+   "position": 39,
+   "renderTypeName": "number",
+   "tableColumnId": 82221064
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_4isq-27mq"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_4isq_27mq",
+   "format": {},
+   "id": 599267180,
+   "name": "Fix It Zones as of 2017-11-06 ",
+   "position": 40,
+   "renderTypeName": "number",
+   "tableColumnId": 82221065
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_viu7-rrfi"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_viu7_rrfi",
+   "format": {},
+   "id": 599267181,
+   "name": "Invest In Neighborhoods (IIN) Areas",
+   "position": 41,
+   "renderTypeName": "number",
+   "tableColumnId": 82221066
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_fcz8-est8"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_fcz8_est8",
+   "format": {},
+   "id": 599267182,
+   "name": "DELETE - HSOC Zones",
+   "position": 42,
+   "renderTypeName": "number",
+   "tableColumnId": 82221067
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_pigm-ib2e"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_pigm_ib2e",
+   "format": {},
+   "id": 599267183,
+   "name": "Fix It Zones as of 2018-02-07",
+   "position": 43,
+   "renderTypeName": "number",
+   "tableColumnId": 82221068
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_9jxd-iqea"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_9jxd_iqea",
+   "format": {},
+   "id": 599267184,
+   "name": "CBD, BID and GBD Boundaries as of 2017",
+   "position": 44,
+   "renderTypeName": "number",
+   "tableColumnId": 82221069
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_6ezc-tdp2"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_6ezc_tdp2",
+   "format": {},
+   "id": 599267185,
+   "name": "Central Market/Tenderloin Boundary",
+   "position": 45,
+   "renderTypeName": "number",
+   "tableColumnId": 82221070
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_6pnf-4xz7"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_6pnf_4xz7",
+   "format": {},
+   "id": 599267186,
+   "name": "Areas of Vulnerability, 2016",
+   "position": 46,
+   "renderTypeName": "number",
+   "tableColumnId": 82221071
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_h4ep-8xdi"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_h4ep_8xdi",
+   "format": {},
+   "id": 599267187,
+   "name": "Central Market/Tenderloin Boundary Polygon - Updated",
+   "position": 47,
+   "renderTypeName": "number",
+   "tableColumnId": 82221072
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_nqbw-i6c3"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_nqbw_i6c3",
+   "format": {},
+   "id": 599267188,
+   "name": "HSOC Zones as of 2018-06-05",
+   "position": 48,
+   "renderTypeName": "number",
+   "tableColumnId": 82221073
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_2dwj-jsy4"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_2dwj_jsy4",
+   "format": {},
+   "id": 599267189,
+   "name": "OWED Public Spaces",
+   "position": 49,
+   "renderTypeName": "number",
+   "tableColumnId": 82221074
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_y6ts-4iup"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_y6ts_4iup",
+   "format": {},
+   "id": 599267190,
+   "name": "Parks Alliance CPSI (27+TL sites)",
+   "position": 50,
+   "renderTypeName": "number",
+   "tableColumnId": 82221075
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_jwn9-ihcz"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_jwn9_ihcz",
+   "format": {},
+   "id": 599267191,
+   "name": "Neighborhoods",
+   "position": 51,
+   "renderTypeName": "number",
+   "tableColumnId": 88648739
+  },
+  {
+   "computationStrategy": {
+    "parameters": {
+     "primary_key": "_feature_id",
+     "region": "_6qbp-sg9q"
+    },
+    "source_columns": [
+     "point"
+    ],
+    "type": "georegion_match_on_point"
+   },
+   "dataTypeName": "number",
+   "fieldName": ":@computed_region_6qbp_sg9q",
+   "format": {},
+   "id": 599267165,
+   "name": "SF Find Neighborhoods",
+   "position": 52,
+   "renderTypeName": "number",
+   "tableColumnId": 82221024
+  }
+ ],
+ "createdAt": 1318104077,
+ "description": "<strong>SUMMARY</strong>\nDataset contains SF311 cases created since 7/1/2008 with location information. \n\n<strong>UPDATE PROCESS</strong>\nThis dataset updates nightly. New data is added around 6am pacific time. \n\n<strong>HOW TO USE THIS DATASET</strong>\nDownload data using 'export' button to the right. For more information on this dataset, visit the <u><a href=\"https://sfdigitalservices.gitbook.io/dataset-explainers/311-cases\">FAQ page</a></u>.",
+ "diciBackend": false,
+ "displayType": "table",
+ "domainCName": "data.sf.gov",
+ "downloadCount": 70422,
+ "flags": [
+  "default",
+  "federated",
+  "internalToPublicFederatedView",
+  "ownerMayBeContacted",
+  "restorable",
+  "restorePossibleForType"
+ ],
+ "grants": [
+  {
+   "flags": [
+    "public"
+   ],
+   "inherited": false,
+   "type": "viewer"
+  }
+ ],
+ "hideFromCatalog": false,
+ "hideFromDataJson": false,
+ "id": "vw6y-z8j6",
+ "license": {
+  "name": "Open Data Commons Public Domain Dedication and License",
+  "termsLink": "http://opendatacommons.org/licenses/pddl/1.0/"
+ },
+ "licenseId": "PDDL",
+ "locked": false,
+ "metadata": {
+  "attachments": [
+   {
+    "assetId": "618a6a4e-52df-4c38-9815-e37dd84a3f62",
+    "filename": "Open Data Changes January 2020.pdf",
+    "name": "Open Data Changes January 2020.pdf"
+   }
+  ],
+  "availableDisplayTypes": [
+   "table",
+   "fatrow",
+   "page"
+  ],
+  "custom_fields": {
+   "Department Metrics": {
+    "Publishing Department": "311"
+   },
+   "Detailed Descriptive": {
+    "Geographic unit": "Latitude/longitude"
+   },
+   "Internal Management": {
+    "Inventory ID": "ADM-0076"
+   },
+   "Publishing Details": {
+    "Data change frequency": "Multiple times per hour",
+    "Geographic unit": "",
+    "Program link": "",
+    "Publishing frequency": "Daily"
+   }
+  },
+  "filterCondition": {
+   "children": [
+    {
+     "metadata": {
+      "operator": "BETWEEN",
+      "tableColumnId": {
+       "244069": 1563800
+      }
+     },
+     "type": "operator",
+     "value": "OR"
+    },
+    {
+     "metadata": {
+      "customValues": [
+       [
+        "Open"
+       ],
+       [
+        "Closed"
+       ]
+      ],
+      "operator": "EQUALS",
+      "tableColumnId": {
+       "244069": 1563802
+      }
+     },
+     "type": "operator",
+     "value": "OR"
+    }
+   ],
+   "metadata": {
+    "advanced": true,
+    "unifiedVersion": 2
+   },
+   "type": "operator",
+   "value": "AND"
+  },
+  "rdfSubject": "0",
+  "renderTypeConfig": {
+   "visible": {
+    "table": true
+   }
+  },
+  "rowIdentifier": 599267137,
+  "rowLabel": "311 case",
+  "thumbnail": {
+   "page": {
+    "created": true,
+    "filename": "page.png-762.406.47.4.png",
+    "selection": {
+     "height": 406,
+     "width": 762,
+     "x1": 47,
+     "x2": 809,
+     "y1": 4,
+     "y2": 410
+    }
+   }
+  }
+ },
+ "name": "311 Cases",
+ "newBackend": true,
+ "numberOfComments": 16,
+ "oid": 40859565,
+ "owner": {
+  "displayName": "OpenData",
+  "flags": [
+   "acceptedEula"
+  ],
+  "id": "dbag-6qd9",
+  "screenName": "OpenData",
+  "type": "interactive"
+ },
+ "provenance": "official",
+ "publicationAppendEnabled": false,
+ "publicationDate": 1726119053,
+ "publicationGroup": 244069,
+ "publicationStage": "published",
+ "query": {},
+ "rights": [
+  "read"
+ ],
+ "rowIdentifierColumnId": 599267137,
+ "rowsUpdatedAt": 1794828042,
+ "rowsUpdatedBy": "dbag-6qd9",
+ "tableAuthor": {
+  "displayName": "OpenData",
+  "flags": [
+   "acceptedEula"
+  ],
+  "id": "dbag-6qd9",
+  "screenName": "OpenData",
+  "type": "interactive"
+ },
+ "tableId": 19649695,
+ "tags": [
+  "311",
+  "case",
+  "cases",
+  "customer service",
+  "calls"
+ ],
+ "totalTimesRated": 0,
+ "viewCount": 199792,
+ "viewLastModified": 1794828005,
+ "viewType": "tabular"
+}
