@@ -36,6 +36,12 @@ A city moves through a funnel, one behavior at a time, with its position recorde
 
 Reader feedback, quotes and mentions will come back in through a separate read-only intake job once there is a blyg to receive them. State lives in files in git, so the history is the audit trail and the undo.
 
+## The thicket
+
+![An illustrated antique chart titled "Portolan of the Thicket". A winding road runs past the Old Oak, the Mushroom Ferry, Thicket Market, the Badger Workshops, Beaver Pond, the Rabbit Warrens and Bramble Gate, with numbered road-marker posts, compass roses, a legend and a scale in bramble leagues, and small animals at work along the way.](docs/images/portolan-of-the-thicket.webp)
+
+In Blygger's vocabulary, the web of quotes and replies that grows among blygs is called the thicket. The dossiers are meant to be published to a blyg, and readers' responses are meant to come back through it, so the thicket is where this project's work will meet its readers.
+
 ## Repository layout
 
 | Path | Contents |
