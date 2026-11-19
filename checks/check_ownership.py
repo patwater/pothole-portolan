@@ -8,6 +8,8 @@ Also protected, because the loop runs them or they decide what the loop trusts. 
 deliberate addition to the supervisor's list, and the reason is in docs/automation.md:
   templates/ (changing the dossier template needs the supervisor, CLAUDE.md),
   queue/approvals/ (supervisor decisions; a forged one could unblock a city), PAUSE,
+  wrangler.jsonc and site/ (the Cloudflare deploy: whatever is in site/ goes live on every build,
+  so changing it is publishing, CLAUDE.md rule 3; see docs/cloudflare.md),
   .gitattributes (Git LFS rules), the fetcher, selector, validator, loop, report and
   Blygger client, scripts/requirements.txt, and the tests for all of those.
 
@@ -32,6 +34,7 @@ SUPERVISOR_OWNED = [
 ]
 ALSO_PROTECTED = [
     "templates/", "queue/approvals/", "PAUSE", ".gitattributes",
+    "wrangler.jsonc", "wrangler.json", "wrangler.toml", "site/",
     "scripts/fetch_source.py", "scripts/next_behavior.py", "scripts/validate.py",
     "scripts/funnel_loop.py", "scripts/funnel_report.py", "scripts/requirements.txt",
     "scripts/blygger_client/",

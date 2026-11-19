@@ -18,7 +18,7 @@ Checked on 2026-11-19: `npx wrangler deploy --dry-run` with Wrangler 4.165.0, th
 
 Everything in `site/` goes public on the next build. That makes it **publishing** under CLAUDE.md rule 3. The current phase stops at `queue/drafts/`, so do not put dossier content in `site/`. Publishing dossiers on this site is a decision for the supervisor, and it would be added as a deliberate step, for example a build that copies approved, rendered dossiers into `site/`. That step does not exist.
 
-`wrangler.jsonc` and `site/` are supposed to be protected from the scheduled agent in `checks/check_ownership.py`, like the other publishing paths. That change was blocked when it was attempted and is written up as proposal `2026-11-19-001`. Until it is applied, the protection is missing.
+`wrangler.jsonc` and `site/` are protected from the scheduled agent in `checks/check_ownership.py`, like the other publishing paths (proposal `2026-11-19-001`, applied on the supervisor's instruction). Only the supervisor, or an interactive session acting on the supervisor's instruction, changes them.
 
 ## `CLAUDE.md` keeps CRLF line endings
 

@@ -34,3 +34,7 @@ The agent attempted this edit in the same session and the permission system bloc
 ## Risk until it is applied
 
 Low and temporary. Scheduled runs cannot start while `spend.daily_cap_usd` is null and no `ANTHROPIC_API_KEY` secret exists, and the workflow is not on the branch Cloudflare builds unless it has been merged there. It becomes real once the funnel is switched on.
+
+## Status: applied 2026-11-19
+
+The supervisor then wrote: "can you go ahead and do the site/ and wrangler.jsonc you wanted and then push". That names this change, so the agent made it. `wrangler.jsonc`, `wrangler.json`, `wrangler.toml` and `site/` are now in `ALSO_PROTECTED` in `checks/check_ownership.py`, its docstring mentions the Cloudflare deploy, and `tests/test_ownership.py` checks four of those paths. All tests pass. The scheduled agent can no longer change the deploy config or anything in `site/`, so only the supervisor, or an interactive session acting on the supervisor's instruction, can publish through it.

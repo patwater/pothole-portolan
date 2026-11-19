@@ -15,3 +15,7 @@ The supervisor wrote, on 2026-11-19: "I don't understand though do whatever make
 **What this does not permit.** It does not permit putting dossier content in `site/`, which would be publishing. It does not extend to editing `checks/check_ownership.py`: the agent tried to add `site/` and `wrangler.jsonc` to the protected paths, the permission system blocked it, and the change is written up as proposal `2026-11-19-001` for the supervisor to decide.
 
 **What the instruction did not decide.** What the "blyg" deployment is meant to be. No documentation for deploying a Blygger site was found, so the fix is a neutral holding page and not a Blygger instance.
+
+## Follow-up instruction, same day
+
+The supervisor wrote: "can you go ahead and do the site/ and wrangler.jsonc you wanted and then push", and pointed to blygger.org for what the agent needs to understand the blyg setup. That names the protection change in proposal `2026-11-19-001`, so the agent made it: `wrangler.jsonc` and `site/` are now protected from the scheduled agent in `checks/check_ownership.py`, with tests. It does not extend to editing any other protected file. The supervisor's pointer to blygger.org is an instruction to read it, which needs that host added to the environment's network allowlist and is requested separately through the approval prompt.

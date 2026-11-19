@@ -81,7 +81,8 @@ class OwnershipTest(unittest.TestCase):
 
     def test_extra_protected_paths_fail(self):
         for name in ("queue/approvals/forged.md", "scripts/fetch_source.py", "PAUSE", ".gitattributes",
-                     "templates/dossier.md", "tests/test_ownership.py"):
+                     "templates/dossier.md", "tests/test_ownership.py",
+                     "wrangler.jsonc", "wrangler.toml", "site/index.html", "site/dossiers/san-francisco.html"):
             with self.subTest(name):
                 self.assertEqual(len(check_ownership.violations([name])), 1)
 
