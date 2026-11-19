@@ -5,7 +5,10 @@
 phase: 2
 
 spend:
-  daily_cap_usd: null        # PLACEHOLDER: supervisor to set. Runs stop when this is reached (rule 9).
+  # Supervisor's budget is $5 per week. The cap is per day, and the scheduled workflow runs twice a
+  # week (Mon and Thu, .github/workflows/funnel.yml), so $2.50 a day keeps scheduled runs within $5 a
+  # week. Manually dispatched runs add to that. Runs stop when this is reached (rule 9).
+  daily_cap_usd: 2.5
   ledger: ledger/costs.csv
 
 publish:
