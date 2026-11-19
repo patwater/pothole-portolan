@@ -14,6 +14,10 @@ Checked on 2026-11-19: `npx wrangler deploy --dry-run` with Wrangler 4.165.0, th
 - **Branch.** Builds run for the branch the project is set to track, normally `main`. Changes on another branch do not affect it until they reach that branch.
 - **Root directory.** It should be the repository root, where `wrangler.jsonc` is.
 
+## This repository is not a Blygger Studio
+
+A Blygger Studio is its own Cloudflare Worker application, with a D1 database and an R2 bucket, installed from a clone of the Studio's repository (https://blygger.org/start/). It cannot be deployed from this repository, and `site/` is not one. A blyg is, at the protocol level, only static files plus RSS, so a static blyg could in principle be served from `site/`; whether the project's blyg will be a static export or a Studio is proposal `2026-11-19-002`. See `docs/blygger.md`.
+
 ## Publishing rule
 
 Everything in `site/` goes public on the next build. That makes it **publishing** under CLAUDE.md rule 3. The current phase stops at `queue/drafts/`, so do not put dossier content in `site/`. Publishing dossiers on this site is a decision for the supervisor, and it would be added as a deliberate step, for example a build that copies approved, rendered dossiers into `site/`. That step does not exist.

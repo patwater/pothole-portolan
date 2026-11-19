@@ -16,3 +16,4 @@ timestamp_utc,behavior,model_tier,input_tokens,output_tokens,usd,note
 2026-11-17T00:00:00Z,assess,n/a,,,,"San Francisco extract and assess: 55 new claims, 78 total (70 supported, 8 provisional); checks fix; program_output kind; service_details check. Token counts and spend not available."
 2026-11-17T00:00:00Z,draft,n/a,,,,"San Francisco dossier v1 drafted and rendered; renderer improved. Token counts and spend not available."
 2026-11-19T00:00:00Z,deploy-fix,n/a,,,,"Cloudflare build fix (wrangler.jsonc, placeholder site), CLAUDE.md line-ending test, docs. Token counts and spend not available."
+2026-11-19T00:00:00Z,research,n/a,,,,"Read blygger.org and the Studio docs; rewrote docs/blygger.md, corrected the Phase 0 write-path conclusion, wrote proposal 2026-11-19-002. Token counts and spend not available."
