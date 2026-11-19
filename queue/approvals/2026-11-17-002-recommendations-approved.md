@@ -11,7 +11,7 @@ The agent listed four open decisions and what it could do without them, and aske
 
 | Item | Recommended option taken | Files touched |
 |------|--------------------------|---------------|
-| Proposal 002, personal-data check fix | Apply the change proposed there | `checks/run_checks.py`, `checks/publish.md`, tests |
+| Proposal 005 (originally numbered 002), personal-data check fix | Apply the change proposed there | `checks/run_checks.py`, `checks/publish.md`, tests |
 | Proposal 001 item 5, `program_output` kind | Add the kind | `CLAUDE.md` (one list), `schemas/claims.schema.json`, `templates/dossier.md` (one comment), `checks/run_checks.py` (a kind and unit check) |
 | Proposal 001 item 6, `service_details` | Allow grouped counts within the pavement defect subtype, minimum group size 10, typed-text guard on the response | `scripts/fetch_source.py` |
 | Extract and Assess on the new sources | Proceed | `scripts/`, `cities/san-francisco/` |

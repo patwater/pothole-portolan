@@ -1,0 +1,16 @@
+{
+  // What `npx wrangler deploy` (Cloudflare Workers Builds) deploys: the static files in ./site.
+  // Supervisor-owned and protected by checks/check_ownership.py. Whatever is in ./site goes live on
+  // every build, so changing it is publishing (CLAUDE.md rule 3). See docs/cloudflare.md.
+  //
+  // "name" must match the Worker's name in the Cloudflare dashboard, or Workers Builds rejects the
+  // build. "pothole-portolan" is the repository name, which is the dashboard default.
+  "name": "pothole-portolan",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./site"
+  },
+  // Cloudflare builds pull request branches with `npx wrangler preview`, which refuses to run unless
+  // the config has a `previews` block. It may be empty. Without it every branch build fails.
+  "previews": {}
+}

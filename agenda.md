@@ -16,7 +16,7 @@ These five are a proposal for the supervisor to confirm. The one-line regime des
 
 ## Queue
 
-1. san-francisco: status `drafted` (v1, 2026-11-17). Dossier at `cities/san-francisco/dossier.md`, rendered copy at `queue/drafts/san-francisco-v1.md` awaiting the supervisor's review and hand publication. Open: proposal 003 (branch history), proposal 004 (check warning), and whether Blygger renders footnotes. See `cities/san-francisco/notes.md`.
+1. san-francisco: status `queued` (see `cities/san-francisco/status.yaml`). Draft v1 was written on 2026-11-17 and rendered at `queue/drafts/san-francisco-v1.md`, where it waits for the supervisor's review and hand publication. The ledger has 78 claims (70 supported, 8 provisional), including the 311 aggregates and the Public Works scorecard measures, which were fetched, extracted and assessed; the four block-count claims are `program_output`, and the Open311 endpoint and the Board of Supervisors audit are recorded as unavailable by supervisor decision (approval `2026-11-17-001`). Open: proposals 003 (branch history) and 004 (a check warning), and whether Blygger renders footnotes. See `cities/san-francisco/notes.md`.
 2. chicago: status `proposed`
 3. london: status `proposed`
 4. bogota: status `proposed`

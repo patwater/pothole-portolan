@@ -20,8 +20,8 @@
         "period": { "type": ["string", "integer"], "minLength": 1 },
         "kind": {
           "enum": [
-            "reported_demand", "measured_condition", "spending", "program_output",
-            "response_time", "backlog", "policy"
+            "reported_demand", "measured_condition", "spending",
+            "response_time", "backlog", "policy", "program_output"
           ]
         },
         "source_url": { "type": "string", "pattern": "^https?://[^\\s]+$" },

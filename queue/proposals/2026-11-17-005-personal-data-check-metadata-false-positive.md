@@ -1,11 +1,13 @@
 ---
-id: 2026-11-17-002
+id: 2026-11-17-005
 from: agent (Fetch, san-francisco, 311 plan step 1)
 needs: supervisor decision (checks/ is supervisor-owned)
 problem_relieved: The personal-data check fails on harmless dataset metadata, which would block every dataset-backed dossier at publish time.
 ---
 
 # The personal-data check misreads dataset metadata as record-level data
+
+_Renumbered from 2026-11-17-002 to 2026-11-17-005 on 2026-11-19 while merging the Phase 2 branch, which created a different open proposal 2026-11-17-002 (narrow network and shell access). This proposal is already applied._
 
 ## What happened
 

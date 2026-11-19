@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Validate cities/<slug>/claims.yaml and sources.yaml against schemas/.
 
-Usage: python3 -I scripts/validate.py [--root DIR] [city-slug ...]
+Usage: python3 -I scripts/validate.py [--root DIR] [--city SLUG ...] [city-slug ...]
+--city matches checks/run_checks.py and checks/publish.md; bare slugs still work.
 Exit status 0 when every present file is valid, 1 otherwise.
 """
 import argparse
@@ -14,7 +15,8 @@ from jsonschema import Draft202012Validator
 
 REPO = Path(__file__).resolve().parent.parent
 SCHEMA_DIR = REPO / "schemas"
-FILES = {"claims.yaml": "claims.schema.json", "sources.yaml": "sources.schema.json"}
+FILES = {"claims.yaml": "claims.schema.json", "sources.yaml": "sources.schema.json",
+         "status.yaml": "status.schema.json"}
 
 
 def load_yaml(path):
@@ -68,9 +70,10 @@ def validate_city(root, slug):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--root", default=str(REPO))
-    ap.add_argument("cities", nargs="*")
+    ap.add_argument("--city", action="append", default=[], help="city slug; repeatable")
+    ap.add_argument("cities", nargs="*", help="city slugs (same as --city)")
     args = ap.parse_args(argv)
-    cities = args.cities or list_cities(args.root)
+    cities = args.city + args.cities or list_cities(args.root)
     errors = []
     for slug in cities:
         errors.extend(validate_city(args.root, slug))

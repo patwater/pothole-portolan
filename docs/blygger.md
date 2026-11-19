@@ -1,64 +1,71 @@
-# Blygger Studio: what the write path looks like today
+# Blygger: how a blyg is hosted, and how this project writes to one
 
-Investigated in Phase 0 on 2026-11-16. Nothing was written or published during this investigation.
+Researched on 2026-11-19 from blygger.org and the Blygger Studio repository's own documentation. Nothing was written or published during the research.
 
-## Where this came from
+**This replaces the Phase 0 version of this page, which said no write operation exists. That was wrong.** The Phase 0 conclusion came from a connector whose grant could only read, so it listed only reads. The Studio has a documented API for creating drafts, publishing and versioning, with separate scopes for each (below).
 
-The only contract available to this project is the one the session's Blyg connector exposes. No Studio repository or written API specification was found in this repo. The facts below come from two calls the connector allows: `getCapabilities` and `getSettings`. Anything not listed there is unknown, not absent from Blygger.
+Sources read:
 
-## Endpoints
+- https://blygger.org/start/ (how to host a blyg)
+- https://blygger.org/spec/0.4/ (the protocol; the "living spec" is the highest-numbered version)
+- https://raw.githubusercontent.com/blygger/blygger-studio/main/README.md (the reference client)
+- https://raw.githubusercontent.com/blygger/blygger-studio/main/docs/client-access.md (tokens and scopes)
+- https://raw.githubusercontent.com/blygger/blygger-studio/main/docs/api.md (the owner API)
+- https://raw.githubusercontent.com/blygger/blygger-studio/main/docs/auth-deployment-hardening.md (limits)
 
-| Role | URL |
-|------|-----|
-| Public base | https://blyg.pioneeringspirit.xyz |
-| Studio | https://blyg.pioneeringspirit.xyz/studio |
-| API | https://blyg.pioneeringspirit.xyz/api |
-| Auth issuer | https://blyg.pioneeringspirit.xyz/studio/auth |
-| MCP | https://blyg.pioneeringspirit.xyz/studio/mcp |
-| Media | https://blyg.pioneeringspirit.xyz/media |
+## Two layers
 
-Contract version reported: `5.10.0`.
+**The protocol** is a set of static files plus RSS. The spec requires that "the entire surface MUST be servable as plain static files", so a blyg can live on a plain file host. The required files, relative to the blyg's origin, are `blyg.json` (manifest), `feed.xml` (RSS 2.0), `items/index.json` (archive index), `items/{id}.json` (one document per item, with `content_md`, `content_html`, `content_hash` and a version number), `items/{id}/v{n}.json` (pinned versions) and `media/…`. Item ids are 128 random bits written as 26 lowercase Crockford base32 characters. `content_md` must not contain control characters other than tab, line feed and carriage return, and should be in Unicode Normalization Form C. The spec says nothing about which Markdown features are supported (footnotes, tables), because the publisher renders `content_html` itself.
 
-## Operations in the contract
+**Blygger Studio** is the reference client: a Cloudflare Worker that publishes, subscribes and receives mentions, while its published output stays static files. Its install is `git clone` of the Studio repository, then `npm ci`, `npx wrangler login`, `npm run init` and `npm run deploy`. `init` asks for a Cloudflare account and domain, creates a D1 database (binding `DB`) and an R2 bucket (binding `MEDIA`), applies migrations and sets the secrets `OWNER_PASSWORD` and `COOKIE_SECRET`. The blyg is then at a subdomain such as `https://blyg.example.com/`, with the Studio at `/studio`. **A Studio is its own application with its own `wrangler.jsonc`, installed from a clone of the Studio repository. It cannot be deployed from this repository.**
 
-`getCapabilities` lists 39 operations. All of them are reads:
+## The write path
 
-`batchRead`, `classifyLinks`, `getAiModels`, `getCapabilities`, `getChanges`, `getForkOptions`, `getHopper`, `getImportedHistory`, `getImportedItem`, `getImportedVersion`, `getItem`, `getItemFreshness`, `getItemSummary`, `getMentionSource`, `getMentionSummary`, `getReadingSummary`, `getSettings`, `getShelf`, `getSignalSummary`, `getSubscription`, `getUpdateState`, `getVersion`, `listBrowse`, `listContacts`, `listHopperMemberships`, `listHoppers`, `listImportedReading`, `listInteractions`, `listItemVersions`, `listItems`, `listMentionGroups`, `listMentions`, `listReading`, `listSignals`, `listStaleThreads`, `listSubscriptions`, `listThumbs`, `peekItem`, `search`.
+Authentication is a bearer token. A Studio owner creates manual tokens, or approves OAuth grants, on the Studio's access page, and each token carries explicit scopes. Scopes do not imply each other.
 
-## Scopes seen
+| Scope | Allows |
+|-------|--------|
+| `owner:read` | Private reads: drafts, reading material, media, settings and history |
+| `owner:draft` | Creating, editing, restoring and deleting drafts, media uploads, preview and configured AI generation |
+| `owner:publish` | Publication, withdrawal, refresh, permanent pins, public response display and media deletion |
+| `owner:manage` | Settings, subscriptions, signals, collections and response moderation |
+| `reading:state` | Marking reading entries read or unread |
 
-Only two scope labels appear in the connector's descriptions.
+The REST routes below are under `{mount}/api`, and the same operations are available over MCP at `{mount}/studio/mcp`. A call without the needed scope gets an HTTP 403 scope challenge. The owner can download the deployed OpenAPI contract at `{mount}/api/openapi.json`.
 
-- `any authenticated identity`: `getCapabilities`.
-- `owner:read`: every other operation that was inspected (`getSettings`, `listMentions`, `listInteractions`, `listItemVersions`, `listThumbs`, and `listItems` by behavior).
+| Need | Route | Scope |
+|------|-------|-------|
+| Create a draft | `POST /items` | `owner:draft` |
+| Edit a draft | `PATCH /items/{id}` | `owner:draft` |
+| Publish (a new version of the same item each time) | `POST /items/{id}/publish`, with an optional publication note | `owner:publish` |
+| Withdraw | `POST /items/{id}/withdraw` | `owner:publish` |
+| Pin a version permanently | `PUT /items/{id}/versions/{version}/pin` | `owner:publish` |
+| Read items and versions | `GET /items`, `GET /items/{id}`, `GET /items/{id}/versions` | `owner:read` |
+| Read mentions | `GET /mentions?direction=inbound` or `outbound` | `owner:read` |
+| Read capabilities | `GET /capabilities` | any valid grant |
 
-No write scope, such as `owner:write` or `items:publish`, is named anywhere.
+The spec says a publish event increases an item's `version` by exactly one, and that ids never change across versions, which is what makes "publish a new version that says what changed" possible. Writes are rate limited (the hardening document lists defaults such as 120 owner writes and 60 delegated writes per minute).
 
-## What each project need maps to
+## What this project's supervisor already has
 
-| Need | Operation(s) available | Status |
-|------|------------------------|--------|
-| Create a draft | none | **Missing** |
-| Publish | none | **Missing** |
-| Publish a new version of an item | none; `listItemVersions` and `getVersion` read versions only | **Missing** |
-| Retract or delete | none | Missing, and needs supervisor approval anyway |
-| Read mentions | `listMentions`, `listMentionGroups`, `getMentionSummary`, `getMentionSource` | Available, scope `owner:read` |
-| Read quotes, forks, stubs | `listInteractions` with `kind` of `quote`, `fork` or `stub` | Available, scope `owner:read` |
-| Read thumbs | `listThumbs`, `listInteractions` with `kind` of `thumb_up`, `thumb_down`, `thumb_clear` | Available, scope `owner:read` |
-| Read a published item or its versions | `getItem`, `peekItem`, `listItemVersions`, `getVersion` | Available, scope `owner:read` |
+The supervisor's own blyg is at https://blyg.pioneeringspirit.xyz, with the Studio at `/studio`, the API at `/api`, the MCP endpoint at `/studio/mcp` and the auth issuer at `/studio/auth`. The connector used in Phase 0 reported contract version 5.10.0 with 39 operations, all of them reads. That is what a read-scoped grant shows, and it is not evidence that the write operations are missing. The project's own blyg for Pothole Portolan does not exist yet: nothing in this repository is a Studio, and whether it will be one is the open decision in proposal `2026-11-19-002`.
 
-## Problems for the design
+## How the scopes fit the project
 
-1. **There is no documented write path.** Phase 2 and Phase 3 both depend on creating drafts and publishing. `scripts/blygger_client` is a stub that refuses to run until a contract exists. It does not guess an endpoint.
-2. **A read-only token is not narrow.** Reader intake needs mentions, interactions and thumbs, and those require `owner:read`. The same scope also reads settings, subscriptions, contacts and the whole item list, which is more than intake needs. CLAUDE.md asks for a read-only token with no publish credential; `owner:read` satisfies the second half but not the spirit of the first. A narrower scope, for example mentions and interactions only, would fit better.
-3. **No separate publish credential is visible.** The contract does not say whether publishing is a distinct scope from drafting, which the Phase 3 gating relies on.
-4. **Paging matters.** `listItems` called without a limit returned about 194,000 characters in one response. Every client call must pass `limit` and follow `cursor` where the operation supports them.
-5. **Mentions mix trust tiers.** `listMentions` returns receipts with `direction` of inbound or outbound and a `verifiedAt` field. Whether `verifiedAt` establishes identity strongly enough to map a mention to the owner, trusted or public tier is not documented, and the tier rules in `permissions.yaml` depend on it.
-6. **The connector in this session is not a scheduler credential.** CLAUDE.md says credentials are injected as environment variables. This session reached Blygger through an attached connector, so how a scheduled headless run authenticates is undecided. The `registry.yaml` placeholders `BLYGGER_READ_TOKEN` and `BLYGGER_WRITE_TOKEN` assume a token model that has not been confirmed.
+- **Reader intake** needs mentions and interactions, which need `owner:read`. That scope also reads drafts, settings and history, which is broader than intake needs, but it has no write power. It satisfies "read-only token, no publish credential".
+- **Phase 2** (drafts only) could use an `owner:draft` token to put a draft in the Studio without making it public. It does not need `owner:publish`.
+- **Phase 3** (gated publishing) is the first phase that needs `owner:publish`, and it should be a separate token from the draft token, so that a run that only drafts cannot publish.
+- `registry.yaml` currently names two credentials, `BLYGGER_READ_TOKEN` and `BLYGGER_WRITE_TOKEN`. A cleaner split is `BLYGGER_READ_TOKEN`, `BLYGGER_DRAFT_TOKEN` and `BLYGGER_PUBLISH_TOKEN`. `registry.yaml` is supervisor-owned, so that change is in the proposal and not made.
 
-## What is needed from the supervisor
+## Still unknown or unverified
 
-- The Studio repository, or the API contract document, that defines draft creation, publishing and versioning.
-- The intended scope names for a read-only intake token and a publish token.
-- Whether `verifiedAt` on a mention can be treated as an identity check for tiering.
-- How scheduled runs should authenticate.
+- The exact request body for `POST /items` (see "Create an item" in `docs/api.md`) and the content limits.
+- Whether the Studio's Markdown renderer supports footnotes and tables. The rendered Pothole Portolan drafts use both.
+- Whether a token can be restricted to one resource beyond its scopes (the client-access document mentions "resource-bound" tokens).
+- Whether `verifiedAt` on a mention is strong enough to map a mention to the owner, trusted or public tier in `permissions.yaml`.
+- How a scheduled run authenticates in practice: tokens would be stored as GitHub Actions secrets, which the supervisor must create.
+- The Studio API is called private and its contract changes with releases (the project's own blyg announced contract 5.13.0 on 2026-11-19, while the supervisor's Studio reported 5.10.0). A client has to be tested against the supervisor's deployed version.
+
+## Paging and cost
+
+`listItems` called without a limit returned about 194,000 characters in one response. Every client call must pass a limit and follow cursors where the operation supports them.

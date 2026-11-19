@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "status.schema.json",
+  "title": "City funnel status (cities/<slug>/status.yaml)",
+  "description": "Stage names the last behavior whose output is still current. A behavior that lists a new source sets stage back to discovered, because Fetch is pending again. A city with no status.yaml and no folder is treated as proposed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stage", "blocked_on", "last_run"],
+  "properties": {
+    "stage": {
+      "enum": ["proposed", "scouted", "discovered", "fetched", "extracted", "assessed", "drafted", "queued", "published"]
+    },
+    "blocked_on": {
+      "description": "null when the city can proceed. A proposal block clears when queue/approvals/ holds a file whose front matter lists the proposal id under resolves. Every other type clears only when the supervisor edits this file.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "ref", "note"],
+          "properties": {
+            "type": { "enum": ["proposal", "supervisor", "external", "run_failure"] },
+            "ref": { "type": "string", "minLength": 1 },
+            "note": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "last_run": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["behavior", "date", "workflow_run"],
+          "properties": {
+            "behavior": { "type": "string", "minLength": 1 },
+            "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "workflow_run": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    }
+  }
+}
