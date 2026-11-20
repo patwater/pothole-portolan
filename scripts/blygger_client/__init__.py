@@ -1,19 +1,22 @@
-"""Blygger client. A stub on purpose: nothing here talks to the network, and nothing may publish.
+"""Blygger Studio client for Pothole Portolan.
 
-The Studio's owner API does have the write operations (POST /items to create a draft, PATCH
-/items/{id} to edit it, POST /items/{id}/publish to publish a new version), each behind its own
-scope (owner:draft, owner:publish). They are written up in docs/blygger.md. publish() still
-refuses, for two reasons that are decisions and not missing information: this project has no
-blyg to write to yet (proposal 2026-11-19-002 asks how it will be hosted), and publishing is
-irreversible, so it stays off until the supervisor enables it (CLAUDE.md rule 3 and the phases).
+- client.py: the owner API calls (read, draft, and a phase-gated publish). See docs/blygger.md.
+- render.py: queued dossier draft to Studio-ready Markdown (footnotes become numbered notes).
+- push_drafts.py: the Phase 2 job. It puts each queued dossier into the Studio as a private draft
+  and never publishes; the supervisor publishes in the Studio.
+
+Supervisor-owned and protected from the scheduled agent (checks/check_ownership.py). The token
+comes from the environment of the workflow that runs push_drafts.py, never from a file.
 """
-
-
-class WritePathUnavailable(RuntimeError):
-    pass
+from .client import (  # noqa: F401
+    USER_AGENT, StudioClient, StudioError, WritePathUnavailable, load_permissions, publish_allowed,
+)
+from .render import RenderError, to_blyg_markdown  # noqa: F401
 
 
 def publish(*_args, **_kwargs):
+    """Kept for older callers: there is no publish path outside StudioClient.publish, which checks
+    the phase. Phase 2 never publishes from this repository."""
     raise WritePathUnavailable(
-        "Publishing is not enabled. The Studio API has the operations (see docs/blygger.md), but this "
-        "project has no blyg to write to yet (proposal 2026-11-19-002) and the phase does not permit it.")
+        "Publishing is not enabled from this repository in Phase 2. The supervisor publishes Studio "
+        "drafts by hand; see docs/blygger.md.")

@@ -69,3 +69,62 @@ The supervisor's own blyg is at https://blyg.pioneeringspirit.xyz, with the Stud
 ## Paging and cost
 
 `listItems` called without a limit returned about 194,000 characters in one response. Every client call must pass a limit and follow cursors where the operation supports them.
+
+## A working example: how the World Machines blyg is automated
+
+Researched on 2026-11-19 at the supervisor's request, from https://blyg.worldmachines.org/ (its `blyg.json`, `items/index.json` and 26 item documents) and from the public repository `worldmachines/worldmachines` on GitHub (files `blyg-shell/README.md`, `.github/workflows/blyg-sync.yml`, `.github/workflows/blyg-front.yml`, `website/scripts/blyg_sync.py`, `website/scripts/blyg_series.py`). Nothing was written to either site, and no code was copied, because that repository has no license file.
+
+**It is a stock Blygger Studio driven by GitHub Actions.** The manifest names `blygger-studio/0.64.1` as the generator and declares a `webmention` endpoint, `/studio` redirects to a sign-in, and `/api/capabilities` answers 401 without a token. The shell README says the Studio is deployed from a separate private checkout, unforked, and that a small second Worker sits in front of it only to add the site's navigation bar.
+
+**Publishing is a script, not a person.** Two scheduled workflows in the public repository run stdlib Python scripts that call the Studio REST API with a bearer token held as a GitHub Actions secret:
+
+- `blyg-sync.yml`, at 06:00 and 18:00 UTC, collects posts that members file into their own hoppers, files them into the World Machines `members` hopper, and publishes a digest of them.
+- `blyg-front.yml`, at 06:30 and 18:30 UTC, writes one series post a day (a weekday rotation of six formats) and republishes the front-page thread. Its only git write is `tools/blyg-front/history.json`, which records what was featured so that a subject is not reused within 90 days.
+
+Each post follows the same sequence of calls: `POST /items` with `kind: thread` and the Markdown creates a draft, `POST /items/{id}/generate` asks the Studio to fill each `[TK]` scope, and `POST /items/{id}/publish` publishes it, after which the item is filed into a hopper. Item writes carry `expectedRevision`, and a 409 revision conflict is re-read and retried once. The item documents agree with this: each recent post was created and then published about ten seconds later, as version 1.
+
+**The AI writes only inside marked scopes.** The script assembles everything deterministic itself: headings, links, the list of source posts, and quotes as partial transclusions whose text the Studio checks is a verbatim substring of the target. Only the `[TK]` scopes are written by a model, which is the Studio's own configured model (`@cf/google/gemma-4-26b-a4b-it` on Cloudflare Workers AI). Each published item then carries a `generated` field naming the model, the time, and every source item and version the scope drew on. The front-page thread is at version 26, and every version has a changelog note such as "minor: today's featured note is Legibility".
+
+**Operational limits the scripts work around:**
+
+- Studio REST tokens expire after at most 30 days, so a person has to mint a new one and update the secret each month. The scripts fail with renewal instructions on a 401 or 403.
+- Studio AI generation has a daily budget per grant (the scripts cite 10 calls a grant and 40 for the whole blyg, and 20 for the digest token). A 429 from `generate` is that budget, is never retried, and leaves the draft for the next run to resume.
+- The scripts say they speak Studio 0.51's private API (contract 5.2.0), while the live Studio reports 0.64.1, so the contract has moved under them and they still work. A client should be tested against the deployed version anyway.
+
+**What carries over to Pothole Portolan.** The pattern fits the existing funnel workflow: a protected script in `scripts/blygger_client/` that creates a draft, publishes it with a changelog note, files it into a hopper, and writes the item id, version and `content_hash` to a publish log in git, so git still records exactly what went public. The main difference is that Pothole Portolan's prose is written by Claude in the funnel, with numbers filled from the claim ledger, rather than by the Studio's model inside `[TK]` scopes. Whether the Studio lets a client record its own `generated` provenance for text it wrote outside a `generate` call is not yet verified; `docs/api.md` mentions "client-recorded generation provenance" without saying more here.
+
+## The Phase 2 draft path (built 2026-11-19)
+
+The supervisor chose a Studio of its own (Option B of proposal `2026-11-19-002`). The client is in `scripts/blygger_client/`, written against the Studio repository's `openapi.json` (contract 5.14.0, Studio 0.65.0):
+
+- `client.py` holds the owner API calls: capabilities, item reads, mention reads, draft create and edit, and a `publish()` that refuses unless `permissions.yaml` lists the current phase in `publish.agent_may_publish_in_phases`. Every list call passes a limit, edits carry `expectedRevision`, and the token appears only in the Authorization header, never in an error or a log line.
+- `render.py` turns a queued draft into Markdown the Studio renders. The Studio uses markdown-it with raw HTML off, no footnote plugin and a `$...$` math plugin (`src/markdown.ts`, `src/math.ts`). Tables therefore render, footnotes become `[n]` with a numbered "Notes" section at the end, and dollar signs in prose are escaped while dollars inside URLs and code stay as written. The San Francisco draft was rendered with the Studio's own `renderMarkdown` on 2026-11-19: three tables, no formulas, and every source link intact.
+- `push_drafts.py` is the Phase 2 job. For each city's highest-numbered draft in `queue/drafts/`, it creates a private Studio draft or edits the existing item's working copy, and records the item id, revision and the sha256 of the Markdown sent in `ledger/blyg_items.yaml`. It never publishes. It refuses to run when `PAUSE` exists, below Phase 2, or when the ledger names a different Studio.
+- `.github/workflows/blyg-drafts.yml` runs it after each funnel run, on a supervisor push to `queue/drafts/`, and by hand (dry run by default). It runs no model, so the funnel's agent never holds the Studio token.
+
+**How a dossier goes public in Phase 2.** The funnel queues a draft, and the workflow puts it in the Studio as a private draft. The supervisor reads it in the Studio and presses Publish there. A later version of the same dossier edits that item's working copy, so the supervisor's next publish becomes version 2 of the same item, with a changelog note.
+
+**Not decided here.** `[TK]` provenance does not fit: the Studio's client-recorded provenance names blyg items as sources, and this project's sources are government documents. AI authorship is disclosed in the dossier text instead, as the template does now.
+
+## Setting up the Pothole Portolan Studio (supervisor steps)
+
+These steps run on your own machine, because they use your Cloudflare login and ask for your owner password. The domain you plan to use must already be a zone on the Cloudflare account.
+
+```bash
+git clone https://github.com/blygger/blygger-studio pothole-studio
+cd pothole-studio
+npm ci
+npx wrangler login
+npm run init
+```
+
+`npm run init` asks which account to use, the zone (for example `pioneeringspirit.xyz`) and the subdomain label (for example `potholes`). It then creates the D1 database and R2 bucket, applies the migrations, has Wrangler prompt for `OWNER_PASSWORD`, generates `COOKIE_SECRET` itself, writes `site_url`, and deploys with the custom domain attached, so no DNS record has to be made by hand. It names the Worker after the host (`blyg-<host-with-dashes>`). Do not name it `pothole-portolan`, because that Worker is rebuilt from this repository's placeholder site on every push.
+
+Then, in the Studio at `https://<host>/studio`:
+
+1. Sign in, and set the title (for example "Pothole Portolan") and the author in Settings.
+2. Under More, Client access, create a REST API token with **owner:read and owner:draft only**, and copy it before closing the dialog. It expires after 30 days.
+3. In this repository's GitHub settings (Secrets and variables, Actions), add the secret `BLYGGER_DRAFT_TOKEN` with that token, and the variable `BLYGGER_API_BASE` set to `https://<host>/api`. If the repository is public, also set `BLYGGER_ARCHIVE_BASE` to `https://github.com/patwater/pothole-portolan/blob/main/` so archive paths become links.
+4. Run the `blyg-drafts` workflow by hand with the dry run on, and read the plan in the log. Then run it with the dry run off. The San Francisco dossier should appear as a draft in the Studio.
+
+Keep the Studio checkout: upgrades run from it (`npm run upgrade`).
